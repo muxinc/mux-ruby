@@ -1,40 +1,66 @@
 #!/usr/bin/env ruby
 
-# To use without building and installing the gem: ruby -Iruby-sdk/lib ruby-demo.rb
-# To ingest a new video use "ingest" as the first argument
-
 require 'mux_ruby'
 
-# Auth Setup
+# Authentication Setup
 openapi = MuxRuby.configure do |config|
   config.username = ENV['MUX_TOKEN_ID']
   config.password = ENV['MUX_TOKEN_SECRET']
-  # Uncomment for very verbose debugging.
-  # config.debugging = true
 end
 
-# API Client Init
-api_instance = MuxRuby::AssetsApi.new
+# API Client Initialization
+assets_api = MuxRuby::AssetsApi.new
 
-# Ingest a new Asset via a string input. Set a public playback policy.
-if ARGV.first.eql? 'ingest'
-  puts "Ingesting new asset...\n"
-  car = MuxRuby::CreateAssetRequest.new
-  car.input = 'http://movietrailers.apple.com/movies/wb/the-lego-ninjago-movie/the-lego-ninjago-movie-trailer-2_h720p.mov'
-  car.playback_policy = ['public']
-  create_response = api_instance.create_asset(:create_asset_request => car)
-  puts "Ingested new Asset ID #{create_response.data.id}\n"
-end
+# ========== create-asset ==========
+car = MuxRuby::CreateAssetRequest.new
+car.input = 'https://storage.googleapis.com/muxdemofiles/mux-video-intro.mp4'
+create_response = assets_api.create_asset(:create_asset_request => car)
+puts "create-asset OK ✅"
 
-# List Assets
-puts "Listing Assets in account:\n\n"
-begin
-  result = api_instance.list_assets()
-  result.data.each do | asset |
-    puts "Asset ID: #{asset.id}"
-    puts "Status: #{asset.status}"
-    puts "Duration: #{asset.duration.to_s}\n\n"
+# ========== list-assets ==========
+assets = assets_api.list_assets()
+puts "list-assets OK ✅"
+
+# Wait for the asset to become ready...
+if create_response.data.status != 'ready'
+  puts "    waiting for asset to become ready..."
+  while true do
+    # ========== get-asset ==========
+    asset = assets_api.get_asset(create_response.data.id)
+    if asset.data.status != 'ready'
+      puts "Asset not ready yet, sleeping..."
+      sleep(1)
+    else
+      puts "Asset ready checking input info."
+      # ========== get-asset-input-info ==========
+      input_info = assets_api.get_asset_input_info(asset.data.id)
+      break
+    end
   end
-rescue MuxRuby::ApiError => e
-  puts "Exception when calling AssetsApi->list_assets: #{e}"
 end
+puts "get-asset OK ✅"
+puts "get-asset-input-info OK ✅"
+
+# ========== create-asset-playback-id ==========
+cpbr = MuxRuby::CreatePlaybackIDRequest.new
+cpbr.policy = MuxRuby::PlaybackPolicy::PUBLIC
+pb_id_c = assets_api.create_asset_playback_id(create_response.data.id, {:create_playback_id_request => cpbr})
+puts "create-asset-playback-id OK ✅"
+
+# ========== get-asset-playback-id ==========
+pb_id = assets_api.get_asset_playback_id(create_response.data.id, pb_id_c.data.id)
+puts "get-asset-playback-id OK ✅"
+
+# ========== update-asset-mp4-support ==========
+mp4_req = MuxRuby::UpdateAssetMP4SupportRequest.new
+mp4_req.mp4_support = 'standard'
+mp4_asset = assets_api.update_asset_mp4_support(create_response.data.id, mp4_req)
+puts "update-asset-mp4-support OK ✅"
+
+# ========== delete-asset-playback-id ==========
+assets_api.delete_asset_playback_id(create_response.data.id, pb_id_c.data.id)
+puts "delete-asset-playback-id OK ✅"
+
+# ========== delete-asset ==========
+assets_api.delete_asset(create_response.data.id)
+puts "delete-asset OK ✅"
