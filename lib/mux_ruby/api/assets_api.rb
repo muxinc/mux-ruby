@@ -14,22 +14,26 @@ module MuxRuby
     end
     # Create an asset
     # Create a new Mux Video asset. 
+    # @param create_asset_request 
     # @param [Hash] opts the optional parameters
-    # @option opts [CreateAssetRequest] :create_asset_request 
     # @return [AssetResponse]
-    def create_asset(opts = {})
-      data, _status_code, _headers = create_asset_with_http_info(opts)
+    def create_asset(create_asset_request, opts = {})
+      data, _status_code, _headers = create_asset_with_http_info(create_asset_request, opts)
       data
     end
 
     # Create an asset
     # Create a new Mux Video asset. 
+    # @param create_asset_request 
     # @param [Hash] opts the optional parameters
-    # @option opts [CreateAssetRequest] :create_asset_request 
     # @return [Array<(AssetResponse, Fixnum, Hash)>] AssetResponse data, response status code and response headers
-    def create_asset_with_http_info(opts = {})
+    def create_asset_with_http_info(create_asset_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AssetsApi.create_asset ...'
+      end
+      # verify the required parameter 'create_asset_request' is set
+      if @api_client.config.client_side_validation && create_asset_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_asset_request' when calling AssetsApi.create_asset"
       end
       # resource path
       local_var_path = '/video/v1/assets'
@@ -48,7 +52,7 @@ module MuxRuby
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(opts[:'create_asset_request'])
+      post_body = @api_client.object_to_http_body(create_asset_request)
       auth_names = ['accessToken']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
@@ -65,26 +69,30 @@ module MuxRuby
 
     # Create a playback ID
     # @param asset_id The asset ID.
+    # @param create_playback_id_request 
     # @param [Hash] opts the optional parameters
-    # @option opts [CreatePlaybackIDRequest] :create_playback_id_request 
     # @return [CreatePlaybackIDResponse]
-    def create_asset_playback_id(asset_id, opts = {})
-      data, _status_code, _headers = create_asset_playback_id_with_http_info(asset_id, opts)
+    def create_asset_playback_id(asset_id, create_playback_id_request, opts = {})
+      data, _status_code, _headers = create_asset_playback_id_with_http_info(asset_id, create_playback_id_request, opts)
       data
     end
 
     # Create a playback ID
     # @param asset_id The asset ID.
+    # @param create_playback_id_request 
     # @param [Hash] opts the optional parameters
-    # @option opts [CreatePlaybackIDRequest] :create_playback_id_request 
     # @return [Array<(CreatePlaybackIDResponse, Fixnum, Hash)>] CreatePlaybackIDResponse data, response status code and response headers
-    def create_asset_playback_id_with_http_info(asset_id, opts = {})
+    def create_asset_playback_id_with_http_info(asset_id, create_playback_id_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AssetsApi.create_asset_playback_id ...'
       end
       # verify the required parameter 'asset_id' is set
       if @api_client.config.client_side_validation && asset_id.nil?
         fail ArgumentError, "Missing the required parameter 'asset_id' when calling AssetsApi.create_asset_playback_id"
+      end
+      # verify the required parameter 'create_playback_id_request' is set
+      if @api_client.config.client_side_validation && create_playback_id_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_playback_id_request' when calling AssetsApi.create_asset_playback_id"
       end
       # resource path
       local_var_path = '/video/v1/assets/{ASSET_ID}/playback-ids'.sub('{' + 'ASSET_ID' + '}', asset_id.to_s)
@@ -103,7 +111,7 @@ module MuxRuby
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(opts[:'create_playback_id_request'])
+      post_body = @api_client.object_to_http_body(create_playback_id_request)
       auth_names = ['accessToken']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,

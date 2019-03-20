@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 # **create_asset**
-> AssetResponse create_asset(opts)
+> AssetResponse create_asset(create_asset_request)
 
 Create an asset
 
@@ -34,13 +34,11 @@ MuxRuby.configure do |config|
 end
 
 api_instance = MuxRuby::AssetsApi.new
-opts = {
-  create_asset_request: MuxRuby::CreateAssetRequest.new # CreateAssetRequest | 
-}
+create_asset_request = MuxRuby::CreateAssetRequest.new # CreateAssetRequest | 
 
 begin
   #Create an asset
-  result = api_instance.create_asset(opts)
+  result = api_instance.create_asset(create_asset_request)
   p result
 rescue MuxRuby::ApiError => e
   puts "Exception when calling AssetsApi->create_asset: #{e}"
@@ -51,7 +49,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_asset_request** | [**CreateAssetRequest**](CreateAssetRequest.md)|  | [optional] 
+ **create_asset_request** | [**CreateAssetRequest**](CreateAssetRequest.md)|  | 
 
 ### Return type
 
@@ -69,7 +67,7 @@ Name | Type | Description  | Notes
 
 
 # **create_asset_playback_id**
-> CreatePlaybackIDResponse create_asset_playback_id(asset_id, opts)
+> CreatePlaybackIDResponse create_asset_playback_id(asset_id, create_playback_id_request)
 
 Create a playback ID
 
@@ -86,13 +84,11 @@ end
 
 api_instance = MuxRuby::AssetsApi.new
 asset_id = 'asset_id_example' # String | The asset ID.
-opts = {
-  create_playback_id_request: MuxRuby::CreatePlaybackIDRequest.new # CreatePlaybackIDRequest | 
-}
+create_playback_id_request = MuxRuby::CreatePlaybackIDRequest.new # CreatePlaybackIDRequest | 
 
 begin
   #Create a playback ID
-  result = api_instance.create_asset_playback_id(asset_id, opts)
+  result = api_instance.create_asset_playback_id(asset_id, create_playback_id_request)
   p result
 rescue MuxRuby::ApiError => e
   puts "Exception when calling AssetsApi->create_asset_playback_id: #{e}"
@@ -104,7 +100,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **asset_id** | **String**| The asset ID. | 
- **create_playback_id_request** | [**CreatePlaybackIDRequest**](CreatePlaybackIDRequest.md)|  | [optional] 
+ **create_playback_id_request** | [**CreatePlaybackIDRequest**](CreatePlaybackIDRequest.md)|  | 
 
 ### Return type
 

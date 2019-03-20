@@ -28,8 +28,8 @@ describe 'AssetsApi' do
   # unit tests for create_asset
   # Create an asset
   # Create a new Mux Video asset. 
+  # @param create_asset_request 
   # @param [Hash] opts the optional parameters
-  # @option opts [CreateAssetRequest] :create_asset_request 
   # @return [AssetResponse]
   describe 'create_asset test' do
     it 'should work' do
@@ -40,8 +40,8 @@ describe 'AssetsApi' do
   # unit tests for create_asset_playback_id
   # Create a playback ID
   # @param asset_id The asset ID.
+  # @param create_playback_id_request 
   # @param [Hash] opts the optional parameters
-  # @option opts [CreatePlaybackIDRequest] :create_playback_id_request 
   # @return [CreatePlaybackIDResponse]
   describe 'create_asset_playback_id test' do
     it 'should work' do

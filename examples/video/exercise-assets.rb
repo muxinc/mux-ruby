@@ -14,7 +14,7 @@ assets_api = MuxRuby::AssetsApi.new
 # ========== create-asset ==========
 car = MuxRuby::CreateAssetRequest.new
 car.input = 'https://storage.googleapis.com/muxdemofiles/mux-video-intro.mp4'
-create_response = assets_api.create_asset(:create_asset_request => car)
+create_response = assets_api.create_asset(car)
 puts "create-asset OK ✅"
 
 # ========== list-assets ==========
@@ -44,7 +44,7 @@ puts "get-asset-input-info OK ✅"
 # ========== create-asset-playback-id ==========
 cpbr = MuxRuby::CreatePlaybackIDRequest.new
 cpbr.policy = MuxRuby::PlaybackPolicy::PUBLIC
-pb_id_c = assets_api.create_asset_playback_id(create_response.data.id, {:create_playback_id_request => cpbr})
+pb_id_c = assets_api.create_asset_playback_id(create_response.data.id, cpbr)
 puts "create-asset-playback-id OK ✅"
 
 # ========== get-asset-playback-id ==========
