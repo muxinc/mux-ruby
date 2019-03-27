@@ -13,21 +13,25 @@ module MuxRuby
       @api_client = api_client
     end
     # Create a live stream
+    # @param create_live_stream_request 
     # @param [Hash] opts the optional parameters
-    # @option opts [CreateLiveStreamRequest] :create_live_stream_request 
     # @return [LiveStreamResponse]
-    def create_live_stream(opts = {})
-      data, _status_code, _headers = create_live_stream_with_http_info(opts)
+    def create_live_stream(create_live_stream_request, opts = {})
+      data, _status_code, _headers = create_live_stream_with_http_info(create_live_stream_request, opts)
       data
     end
 
     # Create a live stream
+    # @param create_live_stream_request 
     # @param [Hash] opts the optional parameters
-    # @option opts [CreateLiveStreamRequest] :create_live_stream_request 
     # @return [Array<(LiveStreamResponse, Fixnum, Hash)>] LiveStreamResponse data, response status code and response headers
-    def create_live_stream_with_http_info(opts = {})
+    def create_live_stream_with_http_info(create_live_stream_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LiveStreamsApi.create_live_stream ...'
+      end
+      # verify the required parameter 'create_live_stream_request' is set
+      if @api_client.config.client_side_validation && create_live_stream_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_live_stream_request' when calling LiveStreamsApi.create_live_stream"
       end
       # resource path
       local_var_path = '/video/v1/live-streams'
@@ -46,7 +50,7 @@ module MuxRuby
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(opts[:'create_live_stream_request'])
+      post_body = @api_client.object_to_http_body(create_live_stream_request)
       auth_names = ['accessToken']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
@@ -63,26 +67,30 @@ module MuxRuby
 
     # Create a live stream playback ID
     # @param live_stream_id The live stream ID
+    # @param create_playback_id_request 
     # @param [Hash] opts the optional parameters
-    # @option opts [CreatePlaybackIDRequest] :create_playback_id_request 
     # @return [CreatePlaybackIDResponse]
-    def create_live_stream_playback_id(live_stream_id, opts = {})
-      data, _status_code, _headers = create_live_stream_playback_id_with_http_info(live_stream_id, opts)
+    def create_live_stream_playback_id(live_stream_id, create_playback_id_request, opts = {})
+      data, _status_code, _headers = create_live_stream_playback_id_with_http_info(live_stream_id, create_playback_id_request, opts)
       data
     end
 
     # Create a live stream playback ID
     # @param live_stream_id The live stream ID
+    # @param create_playback_id_request 
     # @param [Hash] opts the optional parameters
-    # @option opts [CreatePlaybackIDRequest] :create_playback_id_request 
     # @return [Array<(CreatePlaybackIDResponse, Fixnum, Hash)>] CreatePlaybackIDResponse data, response status code and response headers
-    def create_live_stream_playback_id_with_http_info(live_stream_id, opts = {})
+    def create_live_stream_playback_id_with_http_info(live_stream_id, create_playback_id_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LiveStreamsApi.create_live_stream_playback_id ...'
       end
       # verify the required parameter 'live_stream_id' is set
       if @api_client.config.client_side_validation && live_stream_id.nil?
         fail ArgumentError, "Missing the required parameter 'live_stream_id' when calling LiveStreamsApi.create_live_stream_playback_id"
+      end
+      # verify the required parameter 'create_playback_id_request' is set
+      if @api_client.config.client_side_validation && create_playback_id_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_playback_id_request' when calling LiveStreamsApi.create_live_stream_playback_id"
       end
       # resource path
       local_var_path = '/video/v1/live-streams/{LIVE_STREAM_ID}/playback-ids'.sub('{' + 'LIVE_STREAM_ID' + '}', live_stream_id.to_s)
@@ -101,7 +109,7 @@ module MuxRuby
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(opts[:'create_playback_id_request'])
+      post_body = @api_client.object_to_http_body(create_playback_id_request)
       auth_names = ['accessToken']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,

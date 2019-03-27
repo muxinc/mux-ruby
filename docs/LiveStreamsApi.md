@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 
 # **create_live_stream**
-> LiveStreamResponse create_live_stream(opts)
+> LiveStreamResponse create_live_stream(create_live_stream_request)
 
 Create a live stream
 
@@ -31,13 +31,11 @@ MuxRuby.configure do |config|
 end
 
 api_instance = MuxRuby::LiveStreamsApi.new
-opts = {
-  create_live_stream_request: MuxRuby::CreateLiveStreamRequest.new # CreateLiveStreamRequest | 
-}
+create_live_stream_request = MuxRuby::CreateLiveStreamRequest.new # CreateLiveStreamRequest | 
 
 begin
   #Create a live stream
-  result = api_instance.create_live_stream(opts)
+  result = api_instance.create_live_stream(create_live_stream_request)
   p result
 rescue MuxRuby::ApiError => e
   puts "Exception when calling LiveStreamsApi->create_live_stream: #{e}"
@@ -48,7 +46,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_live_stream_request** | [**CreateLiveStreamRequest**](CreateLiveStreamRequest.md)|  | [optional] 
+ **create_live_stream_request** | [**CreateLiveStreamRequest**](CreateLiveStreamRequest.md)|  | 
 
 ### Return type
 
@@ -66,7 +64,7 @@ Name | Type | Description  | Notes
 
 
 # **create_live_stream_playback_id**
-> CreatePlaybackIDResponse create_live_stream_playback_id(live_stream_id, opts)
+> CreatePlaybackIDResponse create_live_stream_playback_id(live_stream_id, create_playback_id_request)
 
 Create a live stream playback ID
 
@@ -83,13 +81,11 @@ end
 
 api_instance = MuxRuby::LiveStreamsApi.new
 live_stream_id = 'live_stream_id_example' # String | The live stream ID
-opts = {
-  create_playback_id_request: MuxRuby::CreatePlaybackIDRequest.new # CreatePlaybackIDRequest | 
-}
+create_playback_id_request = MuxRuby::CreatePlaybackIDRequest.new # CreatePlaybackIDRequest | 
 
 begin
   #Create a live stream playback ID
-  result = api_instance.create_live_stream_playback_id(live_stream_id, opts)
+  result = api_instance.create_live_stream_playback_id(live_stream_id, create_playback_id_request)
   p result
 rescue MuxRuby::ApiError => e
   puts "Exception when calling LiveStreamsApi->create_live_stream_playback_id: #{e}"
@@ -101,7 +97,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **live_stream_id** | **String**| The live stream ID | 
- **create_playback_id_request** | [**CreatePlaybackIDRequest**](CreatePlaybackIDRequest.md)|  | [optional] 
+ **create_playback_id_request** | [**CreatePlaybackIDRequest**](CreatePlaybackIDRequest.md)|  | 
 
 ### Return type
 

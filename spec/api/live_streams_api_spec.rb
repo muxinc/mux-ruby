@@ -27,8 +27,8 @@ describe 'LiveStreamsApi' do
 
   # unit tests for create_live_stream
   # Create a live stream
+  # @param create_live_stream_request 
   # @param [Hash] opts the optional parameters
-  # @option opts [CreateLiveStreamRequest] :create_live_stream_request 
   # @return [LiveStreamResponse]
   describe 'create_live_stream test' do
     it 'should work' do
@@ -39,8 +39,8 @@ describe 'LiveStreamsApi' do
   # unit tests for create_live_stream_playback_id
   # Create a live stream playback ID
   # @param live_stream_id The live stream ID
+  # @param create_playback_id_request 
   # @param [Hash] opts the optional parameters
-  # @option opts [CreatePlaybackIDRequest] :create_playback_id_request 
   # @return [CreatePlaybackIDResponse]
   describe 'create_live_stream_playback_id test' do
     it 'should work' do
