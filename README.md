@@ -10,11 +10,23 @@ Not familiar with Mux? Check out https://mux.com/ for more information.
 
 ## Requirements.
 
-TODO
+Ruby 1.9.
+
+Use `bundle install` to install dependencies if you're developing locally.
 
 ## Installation
 
-TODO
+### Adding to your Gemfile
+```
+gem 'mux_ruby', :git => 'git://github.com/muxinc/mux-ruby.git'
+```
+
+### Clone and install locally
+```
+git clone https://github.com/muxinc/mux-ruby.git && cd mux-ruby
+gem build mux_ruby.gemspec
+gem install mux_ruby.gem
+```
 
 ## Getting Started
 
@@ -41,9 +53,16 @@ Be sure to also checkout the [exmples directory](examples/):
 
 There's also example usage of every API call (also used for testing):
 * [Video](examples/video/)
-  * TODO
+  * [Assets API](examples/video/exercise-assets.rb)
+  * [Live Streams API](examples/video/exercise-live-streams.rb)
+  * [Signing Keys API](examples/video/exercise-signing-keys.rb)
+  * [Uploads API](examples/video/exercise-uploads.rb)
 * [Data](examples/data/)
-  * TODO
+  * [Errors](examples/data/exercise-errors.rb)
+  * [Exports](examples/data/exercise-exports.rb)
+  * [Filters](examples/data/exercise-filters.rb)
+  * [Metrics](examples/data/exercise-metrics.rb)
+  * [Video Views](examples/data/exercise-video-views.rb)
 
 ```ruby
 #!/usr/bin/env ruby
