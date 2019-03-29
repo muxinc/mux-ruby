@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://mux.com"
   s.summary     = "Ruby API wrapper for Mux"
   s.description = "Ruby API wrapper for Mux"
-  s.license     = "MIT License"
+  s.license     = "MIT"
   s.required_ruby_version = ">= 1.9"
 
   s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
