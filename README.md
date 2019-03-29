@@ -47,16 +47,14 @@ Its up to you to manage your token and secret. In our examples, we read them fro
 Below is a quick example of using Mux Ruby to list the Video assets stored in your Mux account.
 
 Be sure to also checkout the [exmples directory](examples/):
-* TODO
-* TODO
-* TODO
+* [List Assets, Live Streams, Signing Keys, and Uploads.](examples/video/list-everything.rb)
 
 There's also example usage of every API call (also used for testing):
 * [Video](examples/video/)
-  * [Assets API](examples/video/exercise-assets.rb)
-  * [Live Streams API](examples/video/exercise-live-streams.rb)
-  * [Signing Keys API](examples/video/exercise-signing-keys.rb)
-  * [Uploads API](examples/video/exercise-uploads.rb)
+  * [Assets](examples/video/exercise-assets.rb)
+  * [Live Streams](examples/video/exercise-live-streams.rb)
+  * [Signing Keys](examples/video/exercise-signing-keys.rb)
+  * [Uploads](examples/video/exercise-uploads.rb)
 * [Data](examples/data/)
   * [Errors](examples/data/exercise-errors.rb)
   * [Exports](examples/data/exercise-exports.rb)
@@ -91,7 +89,7 @@ end
 
 ## Exceptions & Error Handling
 
-TODO
+Currently, all errors (Non-2XX HTTP responses) result in a `MuxRuby::ApiError` being raised. We plan on improving this soon.
 
 ## Documentation
 
