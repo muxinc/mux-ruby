@@ -96,7 +96,7 @@ module MuxRuby
         :method => http_method,
         :headers => header_params,
         :params => query_params,
-        :params_encoding => @config.params_encoding,
+        :params_encoding => :multi,
         :timeout => @config.timeout,
         :ssl_verifypeer => @config.verify_ssl,
         :ssl_verifyhost => _verify_ssl_host,
