@@ -10,7 +10,7 @@ Official Mux API wrapper for ruby projects, supporting both Mux Data and Mux Vid
 
 Not familiar with Mux? Check out https://mux.com/ for more information.
 
-## Requirements.
+## Requirements
 
 Ruby 1.9.
 
