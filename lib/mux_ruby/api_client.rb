@@ -54,11 +54,31 @@ module MuxRuby
           # Errors from libcurl will be made visible here
           fail ApiError.new(:code => 0,
                             :message => response.return_message)
+        elsif response.code == 401
+          fail UnauthorizedError.new(:code => response.code,
+                                     :response_headers => response.headers,
+                                    :response_body => response.body),
+            response.status_message
+        elsif response.code == 403
+          fail ForbiddenError.new(:code => response.code,
+                                  :response_headers => response.headers,
+                                  :response_body => response.body),
+            response.status_message
+        elsif response.code == 404
+          fail NotFoundError.new(:code => response.code,
+                                 :response_headers => response.headers,
+                                 :response_body => response.body),
+            response.status_message
+        elsif 500 <= response.code <= 599
+          fail ServiceError.new(:code => response.code,
+                                :response_headers => response.headers,
+                                :response_body => response.body),
+            response.status_message
         else
           fail ApiError.new(:code => response.code,
                             :response_headers => response.headers,
                             :response_body => response.body),
-               response.status_message
+            response.status_message
         end
       end
 

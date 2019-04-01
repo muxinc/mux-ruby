@@ -83,7 +83,7 @@ begin
   live_api.get_live_stream(stream.data.id)
   puts 'Should have errored here.'
   exit 255
-rescue MuxRuby::ApiError => e
+rescue MuxRuby::NotFoundError => e
   assert e != nil
 end
 puts "delete-live-stream OK ✅"

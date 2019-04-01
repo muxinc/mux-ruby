@@ -91,7 +91,19 @@ end
 
 ## Exceptions & Error Handling
 
-Currently, all errors (Non-2XX HTTP responses) result in a `MuxRuby::ApiError` being raised. We plan on improving this soon.
+All errors inherit from `ApiError`, you can catch it or you can catch one of the more specific Errors below.
+
+### NotFoundError
+
+`NotFoundError` is thrown when a resource is not found. This is useful when trying to get an entity by its ID, for example `get_asset("some-id-here")` in the AssetsApi.
+
+### UnauthorizedError
+
+`UnauthorizedError` is thrown when Mux cannot authenticate your request. [You should check you have configured your credentials correctly.](#authentication)
+
+### ServiceError
+
+`ServiceError` is thrown when Mux returns a HTTP 5XX Status Code. If you encounter this reproducibly, please get in touch with [support@mux.com](mailto:support@mux.com).
 
 ## Documentation
 

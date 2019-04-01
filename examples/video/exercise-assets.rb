@@ -89,7 +89,7 @@ begin
   assets_api.get_asset(create_response.data.id)
   puts 'Should have errored here.'
   exit 255
-rescue MuxRuby::ApiError => e
+rescue MuxRuby::NotFoundError => e
   assert e != nil
 end
 puts "delete-asset OK ✅"

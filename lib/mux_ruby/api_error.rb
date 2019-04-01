@@ -28,4 +28,17 @@ module MuxRuby
       end
     end
   end
+
+  class NotFoundError < ApiError
+  end
+
+  class UnauthorizedError < ApiError
+  end
+
+  class ForbiddenError < ApiError
+  end
+
+  class ServiceError < ApiError
+  end
+
 end
