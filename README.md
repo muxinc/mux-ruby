@@ -48,6 +48,8 @@ Below is a quick example of using Mux Ruby to list the Video assets stored in yo
 
 Be sure to also checkout the [exmples directory](examples/):
 * [List Assets, Live Streams, Signing Keys, and Uploads.](examples/video/list-everything.rb)
+* [Create an Asset, wait for it to become availiable, and print its playback URL](examples/video/ingest.rb)
+* [Create a new Live Stream and retrieve its Stream key.](examples/video/create-live-stream.rb)
 
 There's also example usage of every API call (also used for testing):
 * [Video](examples/video/)
