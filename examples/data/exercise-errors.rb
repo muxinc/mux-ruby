@@ -15,7 +15,7 @@ end
 errors_api = MuxRuby::ErrorsApi.new
 
 # ========== list-errors ==========
-errors = errors_api.list_errors(:filters => ['browser:Firefox'], :timeframe => ['7:days'])
+errors = errors_api.list_errors(:filters => ['browser:Chrome'], :timeframe => ['7:days'])
 assert errors != nil
 assert errors.data != nil
 assert errors.data.length > 0
