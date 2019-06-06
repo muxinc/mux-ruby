@@ -69,7 +69,7 @@ module MuxRuby
                                  :response_headers => response.headers,
                                  :response_body => response.body),
             response.status_message
-        elsif 500 <= response.code <= 599
+        elsif response.code.between?(500, 599)
           fail ServiceError.new(:code => response.code,
                                 :response_headers => response.headers,
                                 :response_body => response.body),
