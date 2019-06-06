@@ -23,7 +23,7 @@ module MuxRuby
     def self.openapi_types
       {
         :'data' => :'VideoView',
-        :'timeframe' => :'Array<String>'
+        :'timeframe' => :'Array<Integer>'
       }
     end
 

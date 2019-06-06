@@ -36,8 +36,8 @@ module MuxRuby
       {
         :'total_watch_time' => :'Integer',
         :'total_views' => :'Integer',
-        :'negative_impact_score' => :'Integer',
-        :'metric' => :'Integer',
+        :'negative_impact_score' => :'Float',
+        :'metric' => :'Float',
         :'filter_value' => :'String',
         :'filter_column' => :'String'
       }

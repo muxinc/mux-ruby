@@ -27,7 +27,7 @@ module MuxRuby
       {
         :'data' => :'OverallValues',
         :'total_row_count' => :'Integer',
-        :'timeframe' => :'Array<String>'
+        :'timeframe' => :'Array<Integer>'
       }
     end
 

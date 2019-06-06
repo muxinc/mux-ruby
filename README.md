@@ -10,7 +10,7 @@ Official Mux API wrapper for ruby projects, supporting both Mux Data and Mux Vid
 
 Not familiar with Mux? Check out https://mux.com/ for more information.
 
-## Requirements
+## Requirements.
 
 Ruby 1.9.
 
@@ -112,10 +112,13 @@ All errors inherit from `ApiError`, you can catch it or you can catch one of the
 [Be sure to check out the documentation in the `docs` directory.](docs/)
 
 ## Issues
+
 If you run into problems, [please raise a GitHub issue,](https://github.com/muxinc/mux-ruby/issues) filling in the issue template. We'll take a look as soon as possible.
 
 ## Contributing
+
 Please do not submit PRs against this package. It is generated from our OpenAPI definitions - [Please open an issue instead!](https://github.com/muxinc/mux-ruby/issues)
 
 ## License
+
 [MIT License.](LICENSE) Copyright 2019 Mux, Inc.
