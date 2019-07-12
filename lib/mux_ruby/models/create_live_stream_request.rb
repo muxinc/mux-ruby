@@ -11,11 +11,18 @@ module MuxRuby
 
     attr_accessor :new_asset_settings
 
+    # When live streaming software disconnects from Mux, either intentionally or due to a drop in the network, the Reconnect Window is the time in seconds that Mux should wait for the streaming software to reconnect before considering the live stream finished and completing the recorded asset. Default: 60 seconds
+    attr_accessor :reconnect_window
+
+    attr_accessor :passthrough
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'playback_policy' => :'playback_policy',
-        :'new_asset_settings' => :'new_asset_settings'
+        :'new_asset_settings' => :'new_asset_settings',
+        :'reconnect_window' => :'reconnect_window',
+        :'passthrough' => :'passthrough'
       }
     end
 
@@ -23,7 +30,9 @@ module MuxRuby
     def self.openapi_types
       {
         :'playback_policy' => :'Array<PlaybackPolicy>',
-        :'new_asset_settings' => :'CreateAssetRequest'
+        :'new_asset_settings' => :'CreateAssetRequest',
+        :'reconnect_window' => :'Float',
+        :'passthrough' => :'String'
       }
     end
 
@@ -44,19 +53,53 @@ module MuxRuby
       if attributes.has_key?(:'new_asset_settings')
         self.new_asset_settings = attributes[:'new_asset_settings']
       end
+
+      if attributes.has_key?(:'reconnect_window')
+        self.reconnect_window = attributes[:'reconnect_window']
+      else
+        self.reconnect_window = 60
+      end
+
+      if attributes.has_key?(:'passthrough')
+        self.passthrough = attributes[:'passthrough']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@reconnect_window.nil? && @reconnect_window > 300
+        invalid_properties.push('invalid value for "reconnect_window", must be smaller than or equal to 300.')
+      end
+
+      if !@reconnect_window.nil? && @reconnect_window < 0.1
+        invalid_properties.push('invalid value for "reconnect_window", must be greater than or equal to 0.1.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@reconnect_window.nil? && @reconnect_window > 300
+      return false if !@reconnect_window.nil? && @reconnect_window < 0.1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] reconnect_window Value to be assigned
+    def reconnect_window=(reconnect_window)
+      if !reconnect_window.nil? && reconnect_window > 300
+        fail ArgumentError, 'invalid value for "reconnect_window", must be smaller than or equal to 300.'
+      end
+
+      if !reconnect_window.nil? && reconnect_window < 0.1
+        fail ArgumentError, 'invalid value for "reconnect_window", must be greater than or equal to 0.1.'
+      end
+
+      @reconnect_window = reconnect_window
     end
 
     # Checks equality by comparing each attribute.
@@ -65,7 +108,9 @@ module MuxRuby
       return true if self.equal?(o)
       self.class == o.class &&
           playback_policy == o.playback_policy &&
-          new_asset_settings == o.new_asset_settings
+          new_asset_settings == o.new_asset_settings &&
+          reconnect_window == o.reconnect_window &&
+          passthrough == o.passthrough
     end
 
     # @see the `==` method
@@ -77,7 +122,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [playback_policy, new_asset_settings].hash
+      [playback_policy, new_asset_settings, reconnect_window, passthrough].hash
     end
 
     # Builds the object from hash
