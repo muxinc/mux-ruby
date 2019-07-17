@@ -27,6 +27,8 @@ module MuxRuby
 
     attr_accessor :reconnect_window
 
+    attr_accessor :reduced_latency
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -39,7 +41,8 @@ module MuxRuby
         :'playback_ids' => :'playback_ids',
         :'new_asset_settings' => :'new_asset_settings',
         :'passthrough' => :'passthrough',
-        :'reconnect_window' => :'reconnect_window'
+        :'reconnect_window' => :'reconnect_window',
+        :'reduced_latency' => :'reduced_latency'
       }
     end
 
@@ -55,7 +58,8 @@ module MuxRuby
         :'playback_ids' => :'Array<PlaybackID>',
         :'new_asset_settings' => :'Asset',
         :'passthrough' => :'String',
-        :'reconnect_window' => :'Float'
+        :'reconnect_window' => :'Float',
+        :'reduced_latency' => :'BOOLEAN'
       }
     end
 
@@ -110,6 +114,10 @@ module MuxRuby
       if attributes.has_key?(:'reconnect_window')
         self.reconnect_window = attributes[:'reconnect_window']
       end
+
+      if attributes.has_key?(:'reduced_latency')
+        self.reduced_latency = attributes[:'reduced_latency']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -139,7 +147,8 @@ module MuxRuby
           playback_ids == o.playback_ids &&
           new_asset_settings == o.new_asset_settings &&
           passthrough == o.passthrough &&
-          reconnect_window == o.reconnect_window
+          reconnect_window == o.reconnect_window &&
+          reduced_latency == o.reduced_latency
     end
 
     # @see the `==` method
@@ -151,7 +160,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created_at, stream_key, active_asset_id, recent_asset_ids, status, playback_ids, new_asset_settings, passthrough, reconnect_window].hash
+      [id, created_at, stream_key, active_asset_id, recent_asset_ids, status, playback_ids, new_asset_settings, passthrough, reconnect_window, reduced_latency].hash
     end
 
     # Builds the object from hash
