@@ -124,7 +124,7 @@ Name | Type | Description  | Notes
 
 
 # **list_related_incidents**
-> ListRelatedIncidentsResponse list_related_incidents(incident_id)
+> ListRelatedIncidentsResponse list_related_incidents(incident_id, opts)
 
 List Related Incidents
 
@@ -143,10 +143,16 @@ end
 
 api_instance = MuxRuby::IncidentsApi.new
 incident_id = 'abcd1234' # String | ID of the Incident
+opts = {
+  limit: 25, # Integer | Number of items to include in the response
+  page: 1, # Integer | Offset by this many pages, of the size of `limit`
+  order_by: 'order_by_example', # String | Value to order the results by
+  order_direction: 'order_direction_example' # String | Sort order.
+}
 
 begin
   #List Related Incidents
-  result = api_instance.list_related_incidents(incident_id)
+  result = api_instance.list_related_incidents(incident_id, opts)
   p result
 rescue MuxRuby::ApiError => e
   puts "Exception when calling IncidentsApi->list_related_incidents: #{e}"
@@ -158,6 +164,10 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **incident_id** | **String**| ID of the Incident | 
+ **limit** | **Integer**| Number of items to include in the response | [optional] [default to 25]
+ **page** | **Integer**| Offset by this many pages, of the size of &#x60;limit&#x60; | [optional] [default to 1]
+ **order_by** | **String**| Value to order the results by | [optional] 
+ **order_direction** | **String**| Sort order. | [optional] 
 
 ### Return type
 

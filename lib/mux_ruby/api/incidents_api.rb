@@ -146,6 +146,10 @@ module MuxRuby
     # Returns all the incidents that seem related to a specific incident 
     # @param incident_id ID of the Incident
     # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Number of items to include in the response (default to 25)
+    # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60; (default to 1)
+    # @option opts [String] :order_by Value to order the results by
+    # @option opts [String] :order_direction Sort order.
     # @return [ListRelatedIncidentsResponse]
     def list_related_incidents(incident_id, opts = {})
       data, _status_code, _headers = list_related_incidents_with_http_info(incident_id, opts)
@@ -156,6 +160,10 @@ module MuxRuby
     # Returns all the incidents that seem related to a specific incident 
     # @param incident_id ID of the Incident
     # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Number of items to include in the response
+    # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60;
+    # @option opts [String] :order_by Value to order the results by
+    # @option opts [String] :order_direction Sort order.
     # @return [Array<(ListRelatedIncidentsResponse, Fixnum, Hash)>] ListRelatedIncidentsResponse data, response status code and response headers
     def list_related_incidents_with_http_info(incident_id, opts = {})
       if @api_client.config.debugging
@@ -165,11 +173,21 @@ module MuxRuby
       if @api_client.config.client_side_validation && incident_id.nil?
         fail ArgumentError, "Missing the required parameter 'incident_id' when calling IncidentsApi.list_related_incidents"
       end
+      if @api_client.config.client_side_validation && opts[:'order_by'] && !['negative_impact', 'value', 'views', 'field'].include?(opts[:'order_by'])
+        fail ArgumentError, 'invalid value for "order_by", must be one of negative_impact, value, views, field'
+      end
+      if @api_client.config.client_side_validation && opts[:'order_direction'] && !['asc', 'desc'].include?(opts[:'order_direction'])
+        fail ArgumentError, 'invalid value for "order_direction", must be one of asc, desc'
+      end
       # resource path
       local_var_path = '/data/v1/incidents/{INCIDENT_ID}/related'.sub('{' + 'INCIDENT_ID' + '}', incident_id.to_s)
 
       # query parameters
       query_params = {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
+      query_params[:'order_by'] = opts[:'order_by'] if !opts[:'order_by'].nil?
+      query_params[:'order_direction'] = opts[:'order_direction'] if !opts[:'order_direction'].nil?
 
       # header parameters
       header_params = {}

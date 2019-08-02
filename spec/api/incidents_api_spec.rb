@@ -59,6 +59,10 @@ describe 'IncidentsApi' do
   # Returns all the incidents that seem related to a specific incident 
   # @param incident_id ID of the Incident
   # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :limit Number of items to include in the response
+  # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60;
+  # @option opts [String] :order_by Value to order the results by
+  # @option opts [String] :order_direction Sort order.
   # @return [ListRelatedIncidentsResponse]
   describe 'list_related_incidents test' do
     it 'should work' do
