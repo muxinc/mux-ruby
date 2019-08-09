@@ -66,6 +66,7 @@ require 'mux_ruby/models/upload_response'
 require 'mux_ruby/models/video_view'
 require 'mux_ruby/models/video_view_event'
 require 'mux_ruby/models/video_view_response'
+require 'mux_ruby/models/webhook'
 
 # APIs
 require 'mux_ruby/api/assets_api'

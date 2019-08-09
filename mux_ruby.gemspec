@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
   s.add_runtime_dependency 'json', '~> 2.1', '>= 2.1.0'
+  s.add_runtime_dependency 'openssl', '~> 2.1', '>= 2.1.0'
 
   s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
   s.add_development_dependency 'vcr', '~> 3.0', '>= 3.0.1'
