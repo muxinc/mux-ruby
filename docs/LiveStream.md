@@ -14,5 +14,6 @@ Name | Type | Description | Notes
 **passthrough** | **String** |  | [optional] 
 **reconnect_window** | **Float** |  | [optional] 
 **reduced_latency** | **BOOLEAN** |  | [optional] 
+**simulcast_targets** | [**Array&lt;SimulcastTarget&gt;**](SimulcastTarget.md) |  | [optional] 
 
 

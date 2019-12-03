@@ -1,8 +1,8 @@
-# MuxRuby::SigningKeyResponse
+# MuxRuby::SimulcastTargetResponse
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**SigningKey**](.md) |  | [optional] 
+**data** | [**SimulcastTarget**](.md) |  | [optional] 
 
 

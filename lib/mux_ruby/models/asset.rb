@@ -45,6 +45,8 @@ module MuxRuby
 
     attr_accessor :mp4_support
 
+    attr_accessor :normalize_audio
+
     attr_accessor :static_renditions
 
     class EnumAttributeValidator
@@ -91,6 +93,7 @@ module MuxRuby
         :'master' => :'master',
         :'master_access' => :'master_access',
         :'mp4_support' => :'mp4_support',
+        :'normalize_audio' => :'normalize_audio',
         :'static_renditions' => :'static_renditions'
       }
     end
@@ -117,6 +120,7 @@ module MuxRuby
         :'master' => :'AssetMaster',
         :'master_access' => :'String',
         :'mp4_support' => :'String',
+        :'normalize_audio' => :'BOOLEAN',
         :'static_renditions' => :'AssetStaticRenditions'
       }
     end
@@ -213,6 +217,12 @@ module MuxRuby
         self.mp4_support = 'none'
       end
 
+      if attributes.has_key?(:'normalize_audio')
+        self.normalize_audio = attributes[:'normalize_audio']
+      else
+        self.normalize_audio = false
+      end
+
       if attributes.has_key?(:'static_renditions')
         self.static_renditions = attributes[:'static_renditions']
       end
@@ -279,6 +289,7 @@ module MuxRuby
           master == o.master &&
           master_access == o.master_access &&
           mp4_support == o.mp4_support &&
+          normalize_audio == o.normalize_audio &&
           static_renditions == o.static_renditions
     end
 
@@ -291,7 +302,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created_at, deleted_at, status, duration, max_stored_resolution, max_stored_frame_rate, aspect_ratio, playback_ids, tracks, demo, errors, per_title_encode, is_live, passthrough, live_stream_id, master, master_access, mp4_support, static_renditions].hash
+      [id, created_at, deleted_at, status, duration, max_stored_resolution, max_stored_frame_rate, aspect_ratio, playback_ids, tracks, demo, errors, per_title_encode, is_live, passthrough, live_stream_id, master, master_access, mp4_support, normalize_audio, static_renditions].hash
     end
 
     # Builds the object from hash

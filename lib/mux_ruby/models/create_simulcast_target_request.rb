@@ -6,67 +6,31 @@
 require 'date'
 
 module MuxRuby
-  class CreateAssetRequest
-    attr_accessor :input
-
-    attr_accessor :playback_policy
-
-    attr_accessor :demo
-
-    attr_accessor :per_title_encode
-
+  class CreateSimulcastTargetRequest
+    # Arbitrary metadata set by you when creating a simulcast target.
     attr_accessor :passthrough
 
-    attr_accessor :mp4_support
+    # Stream Key represents a stream identifier on the third party live streaming service to send the parent live stream to.
+    attr_accessor :stream_key
 
-    # Normalize the audio track loudness level. This parameter is only applicable to on-demand (not live) assets.
-    attr_accessor :normalize_audio
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # RTMP hostname including application name for the third party live streaming service. Example: 'rtmp://live.example.com/app'.
+    attr_accessor :url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'input' => :'input',
-        :'playback_policy' => :'playback_policy',
-        :'demo' => :'demo',
-        :'per_title_encode' => :'per_title_encode',
         :'passthrough' => :'passthrough',
-        :'mp4_support' => :'mp4_support',
-        :'normalize_audio' => :'normalize_audio'
+        :'stream_key' => :'stream_key',
+        :'url' => :'url'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'input' => :'Array<InputSettings>',
-        :'playback_policy' => :'Array<PlaybackPolicy>',
-        :'demo' => :'BOOLEAN',
-        :'per_title_encode' => :'BOOLEAN',
         :'passthrough' => :'String',
-        :'mp4_support' => :'String',
-        :'normalize_audio' => :'BOOLEAN'
+        :'stream_key' => :'String',
+        :'url' => :'String'
       }
     end
 
@@ -78,38 +42,16 @@ module MuxRuby
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'input')
-        if (value = attributes[:'input']).is_a?(Array)
-          self.input = value
-        end
-      end
-
-      if attributes.has_key?(:'playback_policy')
-        if (value = attributes[:'playback_policy']).is_a?(Array)
-          self.playback_policy = value
-        end
-      end
-
-      if attributes.has_key?(:'demo')
-        self.demo = attributes[:'demo']
-      end
-
-      if attributes.has_key?(:'per_title_encode')
-        self.per_title_encode = attributes[:'per_title_encode']
-      end
-
       if attributes.has_key?(:'passthrough')
         self.passthrough = attributes[:'passthrough']
       end
 
-      if attributes.has_key?(:'mp4_support')
-        self.mp4_support = attributes[:'mp4_support']
+      if attributes.has_key?(:'stream_key')
+        self.stream_key = attributes[:'stream_key']
       end
 
-      if attributes.has_key?(:'normalize_audio')
-        self.normalize_audio = attributes[:'normalize_audio']
-      else
-        self.normalize_audio = false
+      if attributes.has_key?(:'url')
+        self.url = attributes[:'url']
       end
     end
 
@@ -117,25 +59,18 @@ module MuxRuby
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @url.nil?
+        invalid_properties.push('invalid value for "url", url cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      mp4_support_validator = EnumAttributeValidator.new('String', ['none', 'standard'])
-      return false unless mp4_support_validator.valid?(@mp4_support)
+      return false if @url.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] mp4_support Object to be assigned
-    def mp4_support=(mp4_support)
-      validator = EnumAttributeValidator.new('String', ['none', 'standard'])
-      unless validator.valid?(mp4_support)
-        fail ArgumentError, 'invalid value for "mp4_support", must be one of #{validator.allowable_values}.'
-      end
-      @mp4_support = mp4_support
     end
 
     # Checks equality by comparing each attribute.
@@ -143,13 +78,9 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          input == o.input &&
-          playback_policy == o.playback_policy &&
-          demo == o.demo &&
-          per_title_encode == o.per_title_encode &&
           passthrough == o.passthrough &&
-          mp4_support == o.mp4_support &&
-          normalize_audio == o.normalize_audio
+          stream_key == o.stream_key &&
+          url == o.url
     end
 
     # @see the `==` method
@@ -161,7 +92,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [input, playback_policy, demo, per_title_encode, passthrough, mp4_support, normalize_audio].hash
+      [passthrough, stream_key, url].hash
     end
 
     # Builds the object from hash

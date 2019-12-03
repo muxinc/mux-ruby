@@ -6,67 +6,44 @@
 require 'date'
 
 module MuxRuby
-  class CreateAssetRequest
-    attr_accessor :input
+  class DeliveryReport
+    attr_accessor :live_stream_id
 
-    attr_accessor :playback_policy
-
-    attr_accessor :demo
-
-    attr_accessor :per_title_encode
+    attr_accessor :asset_id
 
     attr_accessor :passthrough
 
-    attr_accessor :mp4_support
+    attr_accessor :created_at
 
-    # Normalize the audio track loudness level. This parameter is only applicable to on-demand (not live) assets.
-    attr_accessor :normalize_audio
+    attr_accessor :asset_state
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
+    attr_accessor :asset_duration
 
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    attr_accessor :delivered_seconds
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'input' => :'input',
-        :'playback_policy' => :'playback_policy',
-        :'demo' => :'demo',
-        :'per_title_encode' => :'per_title_encode',
+        :'live_stream_id' => :'live_stream_id',
+        :'asset_id' => :'asset_id',
         :'passthrough' => :'passthrough',
-        :'mp4_support' => :'mp4_support',
-        :'normalize_audio' => :'normalize_audio'
+        :'created_at' => :'created_at',
+        :'asset_state' => :'asset_state',
+        :'asset_duration' => :'asset_duration',
+        :'delivered_seconds' => :'delivered_seconds'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'input' => :'Array<InputSettings>',
-        :'playback_policy' => :'Array<PlaybackPolicy>',
-        :'demo' => :'BOOLEAN',
-        :'per_title_encode' => :'BOOLEAN',
+        :'live_stream_id' => :'String',
+        :'asset_id' => :'String',
         :'passthrough' => :'String',
-        :'mp4_support' => :'String',
-        :'normalize_audio' => :'BOOLEAN'
+        :'created_at' => :'String',
+        :'asset_state' => :'String',
+        :'asset_duration' => :'Float',
+        :'delivered_seconds' => :'Float'
       }
     end
 
@@ -78,38 +55,32 @@ module MuxRuby
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'input')
-        if (value = attributes[:'input']).is_a?(Array)
-          self.input = value
-        end
+      if attributes.has_key?(:'live_stream_id')
+        self.live_stream_id = attributes[:'live_stream_id']
       end
 
-      if attributes.has_key?(:'playback_policy')
-        if (value = attributes[:'playback_policy']).is_a?(Array)
-          self.playback_policy = value
-        end
-      end
-
-      if attributes.has_key?(:'demo')
-        self.demo = attributes[:'demo']
-      end
-
-      if attributes.has_key?(:'per_title_encode')
-        self.per_title_encode = attributes[:'per_title_encode']
+      if attributes.has_key?(:'asset_id')
+        self.asset_id = attributes[:'asset_id']
       end
 
       if attributes.has_key?(:'passthrough')
         self.passthrough = attributes[:'passthrough']
       end
 
-      if attributes.has_key?(:'mp4_support')
-        self.mp4_support = attributes[:'mp4_support']
+      if attributes.has_key?(:'created_at')
+        self.created_at = attributes[:'created_at']
       end
 
-      if attributes.has_key?(:'normalize_audio')
-        self.normalize_audio = attributes[:'normalize_audio']
-      else
-        self.normalize_audio = false
+      if attributes.has_key?(:'asset_state')
+        self.asset_state = attributes[:'asset_state']
+      end
+
+      if attributes.has_key?(:'asset_duration')
+        self.asset_duration = attributes[:'asset_duration']
+      end
+
+      if attributes.has_key?(:'delivered_seconds')
+        self.delivered_seconds = attributes[:'delivered_seconds']
       end
     end
 
@@ -123,19 +94,7 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      mp4_support_validator = EnumAttributeValidator.new('String', ['none', 'standard'])
-      return false unless mp4_support_validator.valid?(@mp4_support)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] mp4_support Object to be assigned
-    def mp4_support=(mp4_support)
-      validator = EnumAttributeValidator.new('String', ['none', 'standard'])
-      unless validator.valid?(mp4_support)
-        fail ArgumentError, 'invalid value for "mp4_support", must be one of #{validator.allowable_values}.'
-      end
-      @mp4_support = mp4_support
     end
 
     # Checks equality by comparing each attribute.
@@ -143,13 +102,13 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          input == o.input &&
-          playback_policy == o.playback_policy &&
-          demo == o.demo &&
-          per_title_encode == o.per_title_encode &&
+          live_stream_id == o.live_stream_id &&
+          asset_id == o.asset_id &&
           passthrough == o.passthrough &&
-          mp4_support == o.mp4_support &&
-          normalize_audio == o.normalize_audio
+          created_at == o.created_at &&
+          asset_state == o.asset_state &&
+          asset_duration == o.asset_duration &&
+          delivered_seconds == o.delivered_seconds
     end
 
     # @see the `==` method
@@ -161,7 +120,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [input, playback_policy, demo, per_title_encode, passthrough, mp4_support, normalize_audio].hash
+      [live_stream_id, asset_id, passthrough, created_at, asset_state, asset_duration, delivered_seconds].hash
     end
 
     # Builds the object from hash
