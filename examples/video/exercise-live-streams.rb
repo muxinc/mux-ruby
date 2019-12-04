@@ -41,6 +41,32 @@ assert stream_get.data != nil
 assert stream_get.data.id == stream.data.id
 puts "get-live-stream OK ✅"
 
+# ========== create-live-stream-simulcast-target ==========
+create_simulcast_target = MuxRuby::CreateSimulcastTargetRequest.new
+create_simulcast_target.passthrough = 'foo'
+create_simulcast_target.stream_key = 'bar'
+create_simulcast_target.url = 'rtmp://dontforgettolikeand.subscribe'
+target = live_api.create_live_stream_simulcast_target(stream.data.id, create_simulcast_target)
+assert target != nil
+assert target.data != nil
+puts "create-live-stream-simulcast-target OK ✅"
+
+# ========== get-live-stream-simulcast-target ==========
+target_get = live_api.get_live_stream_simulcast_target(stream.data.id, target.data.id)
+assert target_get != nil
+assert target_get.data != nil
+assert target.data.id == target_get.data.id
+puts "get-live-stream-simulcast-target OK ✅"
+
+# ========== delete-live-stream-simulcast-target ==========
+live_api.delete_live_stream_simulcast_target(stream.data.id, target.data.id)
+puts "delete-live-stream-simulcast-target OK ✅"
+stream_no_target = live_api.get_live_stream(stream.data.id)
+assert stream_no_target != nil
+assert stream_no_target.data != nil
+assert stream_no_target.data.simulcast_targets == nil
+puts "delete-live-stream-simulcast-target OK ✅"
+
 # ========== create-live-stream-playback-id ==========
 create_playback_id_request = MuxRuby::CreatePlaybackIDRequest.new
 create_playback_id_request.policy = MuxRuby::PlaybackPolicy::SIGNED
@@ -67,7 +93,7 @@ assert reset_key != nil
 assert reset_key.data != nil
 assert reset_key.data.id == stream.data.id
 assert reset_key.data.stream_key != stream.data.stream_key
-puts "delete-live-stream-playback-id OK ✅"
+puts "reset-stream-key OK ✅"
 
 # ========== signal-live-stream-complete ==========
 begin
