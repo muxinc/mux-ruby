@@ -11,7 +11,7 @@ module MuxRuby
 
     attr_accessor :new_asset_settings
 
-    # When live streaming software disconnects from Mux, either intentionally or due to a drop in the network, the Reconnect Window is the time in seconds that Mux should wait for the streaming software to reconnect before considering the live stream finished and completing the recorded asset. Default: 60 seconds
+    # When live streaming software disconnects from Mux, either intentionally or due to a drop in the network, the Reconnect Window is the time in seconds that Mux should wait for the streaming software to reconnect before considering the live stream finished and completing the recorded asset. Defaults to 60 seconds on the API if not specified.
     attr_accessor :reconnect_window
 
     attr_accessor :passthrough
@@ -61,8 +61,6 @@ module MuxRuby
 
       if attributes.has_key?(:'reconnect_window')
         self.reconnect_window = attributes[:'reconnect_window']
-      else
-        self.reconnect_window = 60
       end
 
       if attributes.has_key?(:'passthrough')
