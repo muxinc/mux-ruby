@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **master** | [**AssetMaster**](AssetMaster.md) |  | [optional] 
 **master_access** | **String** |  | [optional] [default to &#39;none&#39;]
 **mp4_support** | **String** |  | [optional] [default to &#39;none&#39;]
+**normalize_audio** | **BOOLEAN** |  | [optional] [default to false]
 **static_renditions** | [**AssetStaticRenditions**](AssetStaticRenditions.md) |  | [optional] 
 
 

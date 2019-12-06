@@ -6,23 +6,21 @@
 require 'date'
 
 module MuxRuby
-  class CreateAssetRequest
-    attr_accessor :input
+  class SimulcastTarget
+    # ID of the Simulcast Target
+    attr_accessor :id
 
-    attr_accessor :playback_policy
-
-    attr_accessor :demo
-
-    attr_accessor :per_title_encode
-
+    # Arbitrary Metadata set when creating a simulcast target.
     attr_accessor :passthrough
 
-    attr_accessor :mp4_support
+    # The current status of the simulcast target. See Statuses below for detailed description.   * `idle`: Default status. When the parent live stream is in disconnected status, simulcast targets will be idle state.   * `starting`: The simulcast target transitions into this state when the parent live stream transition into connected state.   * `broadcasting`: The simulcast target has successfully connected to the third party live streaming service and is pushing video to that service.   * `errored`: The simulcast target encountered an error either while attempting to connect to the third party live streaming service, or mid-broadcasting. Compared to other errored statuses in the Mux Video API, a simulcast may transition back into the broadcasting state if a connection with the service can be re-established. 
+    attr_accessor :status
 
-    # Normalize the audio track loudness level. This parameter is only applicable to on-demand (not live) assets.
-    attr_accessor :normalize_audio
+    # Stream Key represents an stream identifier for the third party live streaming service to simulcast the parent live stream too.
+    attr_accessor :stream_key
 
-    attr_accessor :master_access
+    # RTMP hostname including the application name for the third party live streaming service.
+    attr_accessor :url
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -49,28 +47,22 @@ module MuxRuby
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'input' => :'input',
-        :'playback_policy' => :'playback_policy',
-        :'demo' => :'demo',
-        :'per_title_encode' => :'per_title_encode',
+        :'id' => :'id',
         :'passthrough' => :'passthrough',
-        :'mp4_support' => :'mp4_support',
-        :'normalize_audio' => :'normalize_audio',
-        :'master_access' => :'master_access'
+        :'status' => :'status',
+        :'stream_key' => :'stream_key',
+        :'url' => :'url'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'input' => :'Array<InputSettings>',
-        :'playback_policy' => :'Array<PlaybackPolicy>',
-        :'demo' => :'BOOLEAN',
-        :'per_title_encode' => :'BOOLEAN',
+        :'id' => :'String',
         :'passthrough' => :'String',
-        :'mp4_support' => :'String',
-        :'normalize_audio' => :'BOOLEAN',
-        :'master_access' => :'String'
+        :'status' => :'String',
+        :'stream_key' => :'String',
+        :'url' => :'String'
       }
     end
 
@@ -82,42 +74,24 @@ module MuxRuby
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'input')
-        if (value = attributes[:'input']).is_a?(Array)
-          self.input = value
-        end
-      end
-
-      if attributes.has_key?(:'playback_policy')
-        if (value = attributes[:'playback_policy']).is_a?(Array)
-          self.playback_policy = value
-        end
-      end
-
-      if attributes.has_key?(:'demo')
-        self.demo = attributes[:'demo']
-      end
-
-      if attributes.has_key?(:'per_title_encode')
-        self.per_title_encode = attributes[:'per_title_encode']
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
       end
 
       if attributes.has_key?(:'passthrough')
         self.passthrough = attributes[:'passthrough']
       end
 
-      if attributes.has_key?(:'mp4_support')
-        self.mp4_support = attributes[:'mp4_support']
+      if attributes.has_key?(:'status')
+        self.status = attributes[:'status']
       end
 
-      if attributes.has_key?(:'normalize_audio')
-        self.normalize_audio = attributes[:'normalize_audio']
-      else
-        self.normalize_audio = false
+      if attributes.has_key?(:'stream_key')
+        self.stream_key = attributes[:'stream_key']
       end
 
-      if attributes.has_key?(:'master_access')
-        self.master_access = attributes[:'master_access']
+      if attributes.has_key?(:'url')
+        self.url = attributes[:'url']
       end
     end
 
@@ -131,31 +105,19 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      mp4_support_validator = EnumAttributeValidator.new('String', ['none', 'standard'])
-      return false unless mp4_support_validator.valid?(@mp4_support)
-      master_access_validator = EnumAttributeValidator.new('String', ['none', 'temporary'])
-      return false unless master_access_validator.valid?(@master_access)
+      status_validator = EnumAttributeValidator.new('String', ['idle', 'starting', 'broadcasting', 'errored'])
+      return false unless status_validator.valid?(@status)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] mp4_support Object to be assigned
-    def mp4_support=(mp4_support)
-      validator = EnumAttributeValidator.new('String', ['none', 'standard'])
-      unless validator.valid?(mp4_support)
-        fail ArgumentError, 'invalid value for "mp4_support", must be one of #{validator.allowable_values}.'
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ['idle', 'starting', 'broadcasting', 'errored'])
+      unless validator.valid?(status)
+        fail ArgumentError, 'invalid value for "status", must be one of #{validator.allowable_values}.'
       end
-      @mp4_support = mp4_support
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] master_access Object to be assigned
-    def master_access=(master_access)
-      validator = EnumAttributeValidator.new('String', ['none', 'temporary'])
-      unless validator.valid?(master_access)
-        fail ArgumentError, 'invalid value for "master_access", must be one of #{validator.allowable_values}.'
-      end
-      @master_access = master_access
+      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -163,14 +125,11 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          input == o.input &&
-          playback_policy == o.playback_policy &&
-          demo == o.demo &&
-          per_title_encode == o.per_title_encode &&
+          id == o.id &&
           passthrough == o.passthrough &&
-          mp4_support == o.mp4_support &&
-          normalize_audio == o.normalize_audio &&
-          master_access == o.master_access
+          status == o.status &&
+          stream_key == o.stream_key &&
+          url == o.url
     end
 
     # @see the `==` method
@@ -182,7 +141,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [input, playback_policy, demo, per_title_encode, passthrough, mp4_support, normalize_audio, master_access].hash
+      [id, passthrough, status, stream_key, url].hash
     end
 
     # Builds the object from hash

@@ -48,6 +48,19 @@ describe 'LiveStreamsApi' do
     end
   end
 
+  # unit tests for create_live_stream_simulcast_target
+  # Create a live stream simulcast target
+  # Create a simulcast target for the parent live stream. Simulcast target can only be created when the parent live stream is in idle state. Only one simulcast target can be created at a time with this API.
+  # @param live_stream_id The live stream ID
+  # @param create_simulcast_target_request 
+  # @param [Hash] opts the optional parameters
+  # @return [SimulcastTargetResponse]
+  describe 'create_live_stream_simulcast_target test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for delete_live_stream
   # Delete a live stream
   # @param live_stream_id The live stream ID
@@ -71,6 +84,19 @@ describe 'LiveStreamsApi' do
     end
   end
 
+  # unit tests for delete_live_stream_simulcast_target
+  # Delete a Live Stream Simulcast Target
+  # Delete the simulcast target using the simulcast target ID returned when creating the simulcast target. Simulcast Target can only be deleted when the parent live stream is in idle state.
+  # @param live_stream_id The live stream ID
+  # @param simulcast_target_id The ID of the simulcast target.
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'delete_live_stream_simulcast_target test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_live_stream
   # Retrieve a live stream
   # Retrieves the details of a live stream that has previously been created. Supply the unique live stream ID that was returned from your previous request, and Mux will return the corresponding live stream information. The same information is returned when creating a live stream.
@@ -78,6 +104,19 @@ describe 'LiveStreamsApi' do
   # @param [Hash] opts the optional parameters
   # @return [LiveStreamResponse]
   describe 'get_live_stream test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for get_live_stream_simulcast_target
+  # Retrieve a Live Stream Simulcast Target
+  # Retrieves the details of the simulcast target created for the parent live stream. Supply the unique live stream ID and simulcast target ID that was returned in the response of create simulcast target request, and Mux will return the corresponding information.
+  # @param live_stream_id The live stream ID
+  # @param simulcast_target_id The ID of the simulcast target.
+  # @param [Hash] opts the optional parameters
+  # @return [SimulcastTargetResponse]
+  describe 'get_live_stream_simulcast_target test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

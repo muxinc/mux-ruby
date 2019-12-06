@@ -124,6 +124,67 @@ module MuxRuby
       return data, status_code, headers
     end
 
+    # Create a live stream simulcast target
+    # Create a simulcast target for the parent live stream. Simulcast target can only be created when the parent live stream is in idle state. Only one simulcast target can be created at a time with this API.
+    # @param live_stream_id The live stream ID
+    # @param create_simulcast_target_request 
+    # @param [Hash] opts the optional parameters
+    # @return [SimulcastTargetResponse]
+    def create_live_stream_simulcast_target(live_stream_id, create_simulcast_target_request, opts = {})
+      data, _status_code, _headers = create_live_stream_simulcast_target_with_http_info(live_stream_id, create_simulcast_target_request, opts)
+      data
+    end
+
+    # Create a live stream simulcast target
+    # Create a simulcast target for the parent live stream. Simulcast target can only be created when the parent live stream is in idle state. Only one simulcast target can be created at a time with this API.
+    # @param live_stream_id The live stream ID
+    # @param create_simulcast_target_request 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(SimulcastTargetResponse, Fixnum, Hash)>] SimulcastTargetResponse data, response status code and response headers
+    def create_live_stream_simulcast_target_with_http_info(live_stream_id, create_simulcast_target_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LiveStreamsApi.create_live_stream_simulcast_target ...'
+      end
+      # verify the required parameter 'live_stream_id' is set
+      if @api_client.config.client_side_validation && live_stream_id.nil?
+        fail ArgumentError, "Missing the required parameter 'live_stream_id' when calling LiveStreamsApi.create_live_stream_simulcast_target"
+      end
+      # verify the required parameter 'create_simulcast_target_request' is set
+      if @api_client.config.client_side_validation && create_simulcast_target_request.nil?
+        fail ArgumentError, "Missing the required parameter 'create_simulcast_target_request' when calling LiveStreamsApi.create_live_stream_simulcast_target"
+      end
+      # resource path
+      local_var_path = '/video/v1/live-streams/{LIVE_STREAM_ID}/simulcast-targets'.sub('{' + 'LIVE_STREAM_ID' + '}', live_stream_id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(create_simulcast_target_request)
+      auth_names = ['accessToken']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'SimulcastTargetResponse')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LiveStreamsApi#create_live_stream_simulcast_target\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Delete a live stream
     # @param live_stream_id The live stream ID
     # @param [Hash] opts the optional parameters
@@ -226,6 +287,62 @@ module MuxRuby
       return data, status_code, headers
     end
 
+    # Delete a Live Stream Simulcast Target
+    # Delete the simulcast target using the simulcast target ID returned when creating the simulcast target. Simulcast Target can only be deleted when the parent live stream is in idle state.
+    # @param live_stream_id The live stream ID
+    # @param simulcast_target_id The ID of the simulcast target.
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def delete_live_stream_simulcast_target(live_stream_id, simulcast_target_id, opts = {})
+      delete_live_stream_simulcast_target_with_http_info(live_stream_id, simulcast_target_id, opts)
+      nil
+    end
+
+    # Delete a Live Stream Simulcast Target
+    # Delete the simulcast target using the simulcast target ID returned when creating the simulcast target. Simulcast Target can only be deleted when the parent live stream is in idle state.
+    # @param live_stream_id The live stream ID
+    # @param simulcast_target_id The ID of the simulcast target.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    def delete_live_stream_simulcast_target_with_http_info(live_stream_id, simulcast_target_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LiveStreamsApi.delete_live_stream_simulcast_target ...'
+      end
+      # verify the required parameter 'live_stream_id' is set
+      if @api_client.config.client_side_validation && live_stream_id.nil?
+        fail ArgumentError, "Missing the required parameter 'live_stream_id' when calling LiveStreamsApi.delete_live_stream_simulcast_target"
+      end
+      # verify the required parameter 'simulcast_target_id' is set
+      if @api_client.config.client_side_validation && simulcast_target_id.nil?
+        fail ArgumentError, "Missing the required parameter 'simulcast_target_id' when calling LiveStreamsApi.delete_live_stream_simulcast_target"
+      end
+      # resource path
+      local_var_path = '/video/v1/live-streams/{LIVE_STREAM_ID}/simulcast-targets/{SIMULCAST_TARGET_ID}'.sub('{' + 'LIVE_STREAM_ID' + '}', live_stream_id.to_s).sub('{' + 'SIMULCAST_TARGET_ID' + '}', simulcast_target_id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['accessToken']
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LiveStreamsApi#delete_live_stream_simulcast_target\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Retrieve a live stream
     # Retrieves the details of a live stream that has previously been created. Supply the unique live stream ID that was returned from your previous request, and Mux will return the corresponding live stream information. The same information is returned when creating a live stream.
     # @param live_stream_id The live stream ID
@@ -275,6 +392,65 @@ module MuxRuby
         :return_type => 'LiveStreamResponse')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: LiveStreamsApi#get_live_stream\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Retrieve a Live Stream Simulcast Target
+    # Retrieves the details of the simulcast target created for the parent live stream. Supply the unique live stream ID and simulcast target ID that was returned in the response of create simulcast target request, and Mux will return the corresponding information.
+    # @param live_stream_id The live stream ID
+    # @param simulcast_target_id The ID of the simulcast target.
+    # @param [Hash] opts the optional parameters
+    # @return [SimulcastTargetResponse]
+    def get_live_stream_simulcast_target(live_stream_id, simulcast_target_id, opts = {})
+      data, _status_code, _headers = get_live_stream_simulcast_target_with_http_info(live_stream_id, simulcast_target_id, opts)
+      data
+    end
+
+    # Retrieve a Live Stream Simulcast Target
+    # Retrieves the details of the simulcast target created for the parent live stream. Supply the unique live stream ID and simulcast target ID that was returned in the response of create simulcast target request, and Mux will return the corresponding information.
+    # @param live_stream_id The live stream ID
+    # @param simulcast_target_id The ID of the simulcast target.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(SimulcastTargetResponse, Fixnum, Hash)>] SimulcastTargetResponse data, response status code and response headers
+    def get_live_stream_simulcast_target_with_http_info(live_stream_id, simulcast_target_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LiveStreamsApi.get_live_stream_simulcast_target ...'
+      end
+      # verify the required parameter 'live_stream_id' is set
+      if @api_client.config.client_side_validation && live_stream_id.nil?
+        fail ArgumentError, "Missing the required parameter 'live_stream_id' when calling LiveStreamsApi.get_live_stream_simulcast_target"
+      end
+      # verify the required parameter 'simulcast_target_id' is set
+      if @api_client.config.client_side_validation && simulcast_target_id.nil?
+        fail ArgumentError, "Missing the required parameter 'simulcast_target_id' when calling LiveStreamsApi.get_live_stream_simulcast_target"
+      end
+      # resource path
+      local_var_path = '/video/v1/live-streams/{LIVE_STREAM_ID}/simulcast-targets/{SIMULCAST_TARGET_ID}'.sub('{' + 'LIVE_STREAM_ID' + '}', live_stream_id.to_s).sub('{' + 'SIMULCAST_TARGET_ID' + '}', simulcast_target_id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['accessToken']
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'SimulcastTargetResponse')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LiveStreamsApi#get_live_stream_simulcast_target\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
