@@ -12,7 +12,5 @@ Name | Type | Description | Notes
 **sample_rate** | **Integer** |  | [optional] 
 **sample_size** | **Integer** |  | [optional] 
 **channels** | **Integer** |  | [optional] 
-**text_track_type** | **String** |  | [optional] 
-**language** | **String** |  | [optional] 
 
 

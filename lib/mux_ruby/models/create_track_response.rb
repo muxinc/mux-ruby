@@ -6,71 +6,20 @@
 require 'date'
 
 module MuxRuby
-  # Input object with additional configuration
-  class InputSettings
-    attr_accessor :url
-
-    attr_accessor :overlay_settings
-
-    attr_accessor :type
-
-    attr_accessor :text_type
-
-    attr_accessor :language_code
-
-    attr_accessor :name
-
-    attr_accessor :closed_captions
-
-    attr_accessor :passthrough
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+  class CreateTrackResponse
+    attr_accessor :data
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'url' => :'url',
-        :'overlay_settings' => :'overlay_settings',
-        :'type' => :'type',
-        :'text_type' => :'text_type',
-        :'language_code' => :'language_code',
-        :'name' => :'name',
-        :'closed_captions' => :'closed_captions',
-        :'passthrough' => :'passthrough'
+        :'data' => :'data'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'url' => :'String',
-        :'overlay_settings' => :'InputSettingsOverlaySettings',
-        :'type' => :'String',
-        :'text_type' => :'String',
-        :'language_code' => :'String',
-        :'name' => :'String',
-        :'closed_captions' => :'BOOLEAN',
-        :'passthrough' => :'String'
+        :'data' => :'Track'
       }
     end
 
@@ -82,36 +31,8 @@ module MuxRuby
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'url')
-        self.url = attributes[:'url']
-      end
-
-      if attributes.has_key?(:'overlay_settings')
-        self.overlay_settings = attributes[:'overlay_settings']
-      end
-
-      if attributes.has_key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.has_key?(:'text_type')
-        self.text_type = attributes[:'text_type']
-      end
-
-      if attributes.has_key?(:'language_code')
-        self.language_code = attributes[:'language_code']
-      end
-
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.has_key?(:'closed_captions')
-        self.closed_captions = attributes[:'closed_captions']
-      end
-
-      if attributes.has_key?(:'passthrough')
-        self.passthrough = attributes[:'passthrough']
+      if attributes.has_key?(:'data')
+        self.data = attributes[:'data']
       end
     end
 
@@ -125,31 +46,7 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      type_validator = EnumAttributeValidator.new('String', ['video', 'audio', 'text'])
-      return false unless type_validator.valid?(@type)
-      text_type_validator = EnumAttributeValidator.new('String', ['caption', 'chapters', 'descriptions', 'metadata', 'subtitles'])
-      return false unless text_type_validator.valid?(@text_type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ['video', 'audio', 'text'])
-      unless validator.valid?(type)
-        fail ArgumentError, 'invalid value for "type", must be one of #{validator.allowable_values}.'
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] text_type Object to be assigned
-    def text_type=(text_type)
-      validator = EnumAttributeValidator.new('String', ['caption', 'chapters', 'descriptions', 'metadata', 'subtitles'])
-      unless validator.valid?(text_type)
-        fail ArgumentError, 'invalid value for "text_type", must be one of #{validator.allowable_values}.'
-      end
-      @text_type = text_type
     end
 
     # Checks equality by comparing each attribute.
@@ -157,14 +54,7 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          url == o.url &&
-          overlay_settings == o.overlay_settings &&
-          type == o.type &&
-          text_type == o.text_type &&
-          language_code == o.language_code &&
-          name == o.name &&
-          closed_captions == o.closed_captions &&
-          passthrough == o.passthrough
+          data == o.data
     end
 
     # @see the `==` method
@@ -176,7 +66,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [url, overlay_settings, type, text_type, language_code, name, closed_captions, passthrough].hash
+      [data].hash
     end
 
     # Builds the object from hash

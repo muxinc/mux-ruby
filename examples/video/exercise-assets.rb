@@ -16,7 +16,7 @@ assets_api = MuxRuby::AssetsApi.new
 
 # ========== create-asset ==========
 car = MuxRuby::CreateAssetRequest.new
-car.input = 'https://storage.googleapis.com/muxdemofiles/mux-video-intro.mp4'
+car.input = [{:url => 'https://storage.googleapis.com/muxdemofiles/mux-video-intro.mp4'}, {:url => "https://tears-of-steel-subtitles.s3.amazonaws.com/tears-fr.vtt", :type => "text", :text_type => "subtitles", :name => "French", :language_code => "fr", :closed_captions => false}]
 create_response = assets_api.create_asset(car)
 assert create_response != nil
 assert create_response.data.id != nil
@@ -76,6 +76,23 @@ assert mp4_asset.data != nil
 assert mp4_asset.data.id == create_response.data.id
 assert mp4_asset.data.mp4_support == 'standard'
 puts "update-asset-mp4-support OK ✅"
+
+
+# ========== create-asset-track ==========
+cat = MuxRuby::CreateTrackRequest.new(:url => "https://tears-of-steel-subtitles.s3.amazonaws.com/tears-en.vtt", :type => "text", :text_type => "subtitles", :language_code => "en", :name => "English", :closed_captions => false)
+subtitles_track = assets_api.create_asset_track(create_response.data.id, cat)
+assert subtitles_track != nil
+assert subtitles_track.data.id != nil
+assert subtitles_track.data.name == 'English'
+asset_with_2_captions = assets_api.get_asset(create_response.data.id)
+assert asset_with_2_captions.data.tracks.length == 4 # Audio, Video, French that we ingested with the asset, and the English we added here!
+puts "create-asset-track OK ✅"
+
+# ========== delete-asset-track ==========
+assets_api.delete_asset_track(create_response.data.id, subtitles_track.data.id)
+asset_with_1_captions = assets_api.get_asset(create_response.data.id)
+assert asset_with_1_captions.data.tracks.length == 3 # Audio, Video, French that we ingested with the asset, and the English we added here!
+puts "delete-asset-track OK ✅"
 
 # ========== delete-asset-playback-id ==========
 assets_api.delete_asset_playback_id(create_response.data.id, pb_id_c.data.id)

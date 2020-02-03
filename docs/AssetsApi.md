@@ -6,8 +6,10 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_asset**](AssetsApi.md#create_asset) | **POST** /video/v1/assets | Create an asset
 [**create_asset_playback_id**](AssetsApi.md#create_asset_playback_id) | **POST** /video/v1/assets/{ASSET_ID}/playback-ids | Create a playback ID
+[**create_asset_track**](AssetsApi.md#create_asset_track) | **POST** /video/v1/assets/{ASSET_ID}/tracks | Create an asset track
 [**delete_asset**](AssetsApi.md#delete_asset) | **DELETE** /video/v1/assets/{ASSET_ID} | Delete an asset
 [**delete_asset_playback_id**](AssetsApi.md#delete_asset_playback_id) | **DELETE** /video/v1/assets/{ASSET_ID}/playback-ids/{PLAYBACK_ID} | Delete a playback ID
+[**delete_asset_track**](AssetsApi.md#delete_asset_track) | **DELETE** /video/v1/assets/{ASSET_ID}/tracks/{TRACK_ID} | Delete an asset track
 [**get_asset**](AssetsApi.md#get_asset) | **GET** /video/v1/assets/{ASSET_ID} | Retrieve an asset
 [**get_asset_input_info**](AssetsApi.md#get_asset_input_info) | **GET** /video/v1/assets/{ASSET_ID}/input-info | Retrieve asset input info
 [**get_asset_playback_id**](AssetsApi.md#get_asset_playback_id) | **GET** /video/v1/assets/{ASSET_ID}/playback-ids/{PLAYBACK_ID} | Retrieve a playback ID
@@ -117,6 +119,57 @@ Name | Type | Description  | Notes
 
 
 
+# **create_asset_track**
+> CreateTrackResponse create_asset_track(asset_id, create_track_request)
+
+Create an asset track
+
+### Example
+```ruby
+# load the gem
+require 'mux_ruby'
+# setup authorization
+MuxRuby.configure do |config|
+  # Configure HTTP basic authorization: accessToken
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = MuxRuby::AssetsApi.new
+asset_id = 'asset_id_example' # String | The asset ID.
+create_track_request = MuxRuby::CreateTrackRequest.new # CreateTrackRequest | 
+
+begin
+  #Create an asset track
+  result = api_instance.create_asset_track(asset_id, create_track_request)
+  p result
+rescue MuxRuby::ApiError => e
+  puts "Exception when calling AssetsApi->create_asset_track: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **asset_id** | **String**| The asset ID. | 
+ **create_track_request** | [**CreateTrackRequest**](CreateTrackRequest.md)|  | 
+
+### Return type
+
+[**CreateTrackResponse**](CreateTrackResponse.md)
+
+### Authorization
+
+[accessToken](../README.md#accessToken)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+
 # **delete_asset**
 > delete_asset(asset_id)
 
@@ -199,6 +252,56 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **asset_id** | **String**| The asset ID. | 
  **playback_id** | **String**| The live stream&#39;s playback ID. | 
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[accessToken](../README.md#accessToken)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+
+# **delete_asset_track**
+> delete_asset_track(asset_id, track_id)
+
+Delete an asset track
+
+### Example
+```ruby
+# load the gem
+require 'mux_ruby'
+# setup authorization
+MuxRuby.configure do |config|
+  # Configure HTTP basic authorization: accessToken
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = MuxRuby::AssetsApi.new
+asset_id = 'asset_id_example' # String | The asset ID.
+track_id = 'track_id_example' # String | The track ID.
+
+begin
+  #Delete an asset track
+  api_instance.delete_asset_track(asset_id, track_id)
+rescue MuxRuby::ApiError => e
+  puts "Exception when calling AssetsApi->delete_asset_track: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **asset_id** | **String**| The asset ID. | 
+ **track_id** | **String**| The track ID. | 
 
 ### Return type
 

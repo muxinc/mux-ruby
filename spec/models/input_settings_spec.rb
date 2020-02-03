@@ -31,13 +31,51 @@ describe 'InputSettings' do
     end
   end
 
-  describe 'test attribute "language"' do
+  describe 'test attribute "overlay_settings"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  describe 'test attribute "overlay_settings"' do
+  describe 'test attribute "type"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["video", "audio", "text"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.type = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "text_type"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["caption", "chapters", "descriptions", "metadata", "subtitles"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.text_type = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "language_code"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "name"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "closed_captions"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "passthrough"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
