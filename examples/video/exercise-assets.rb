@@ -77,7 +77,6 @@ assert mp4_asset.data.id == create_response.data.id
 assert mp4_asset.data.mp4_support == 'standard'
 puts "update-asset-mp4-support OK ✅"
 
-
 # ========== create-asset-track ==========
 cat = MuxRuby::CreateTrackRequest.new(:url => "https://tears-of-steel-subtitles.s3.amazonaws.com/tears-en.vtt", :type => "text", :text_type => "subtitles", :language_code => "en", :name => "English", :closed_captions => false)
 subtitles_track = assets_api.create_asset_track(create_response.data.id, cat)
