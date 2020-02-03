@@ -127,7 +127,7 @@ module MuxRuby
     def valid?
       type_validator = EnumAttributeValidator.new('String', ['video', 'audio', 'text'])
       return false unless type_validator.valid?(@type)
-      text_type_validator = EnumAttributeValidator.new('String', ['caption', 'chapters', 'descriptions', 'metadata', 'subtitles'])
+      text_type_validator = EnumAttributeValidator.new('String', ['subtitles'])
       return false unless text_type_validator.valid?(@text_type)
       true
     end
@@ -145,7 +145,7 @@ module MuxRuby
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] text_type Object to be assigned
     def text_type=(text_type)
-      validator = EnumAttributeValidator.new('String', ['caption', 'chapters', 'descriptions', 'metadata', 'subtitles'])
+      validator = EnumAttributeValidator.new('String', ['subtitles'])
       unless validator.valid?(text_type)
         fail ArgumentError, 'invalid value for "text_type", must be one of #{validator.allowable_values}.'
       end

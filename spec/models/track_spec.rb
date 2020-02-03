@@ -80,7 +80,7 @@ describe 'Track' do
   describe 'test attribute "text_type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["caption", "chapters", "descriptions", "metadata", "subtitles"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["subtitles"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.text_type = value }.not_to raise_error
       # end
