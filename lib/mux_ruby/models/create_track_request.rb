@@ -6,22 +6,10 @@
 require 'date'
 
 module MuxRuby
-  class Track
-    attr_accessor :id
+  class CreateTrackRequest
+    attr_accessor :url
 
     attr_accessor :type
-
-    attr_accessor :duration
-
-    attr_accessor :max_width
-
-    attr_accessor :max_height
-
-    attr_accessor :max_frame_rate
-
-    attr_accessor :max_channels
-
-    attr_accessor :max_channel_layout
 
     attr_accessor :text_type
 
@@ -58,14 +46,8 @@ module MuxRuby
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
+        :'url' => :'url',
         :'type' => :'type',
-        :'duration' => :'duration',
-        :'max_width' => :'max_width',
-        :'max_height' => :'max_height',
-        :'max_frame_rate' => :'max_frame_rate',
-        :'max_channels' => :'max_channels',
-        :'max_channel_layout' => :'max_channel_layout',
         :'text_type' => :'text_type',
         :'language_code' => :'language_code',
         :'name' => :'name',
@@ -77,14 +59,8 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
+        :'url' => :'String',
         :'type' => :'String',
-        :'duration' => :'Float',
-        :'max_width' => :'Integer',
-        :'max_height' => :'Integer',
-        :'max_frame_rate' => :'Float',
-        :'max_channels' => :'Integer',
-        :'max_channel_layout' => :'String',
         :'text_type' => :'String',
         :'language_code' => :'String',
         :'name' => :'String',
@@ -101,36 +77,12 @@ module MuxRuby
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.has_key?(:'url')
+        self.url = attributes[:'url']
       end
 
       if attributes.has_key?(:'type')
         self.type = attributes[:'type']
-      end
-
-      if attributes.has_key?(:'duration')
-        self.duration = attributes[:'duration']
-      end
-
-      if attributes.has_key?(:'max_width')
-        self.max_width = attributes[:'max_width']
-      end
-
-      if attributes.has_key?(:'max_height')
-        self.max_height = attributes[:'max_height']
-      end
-
-      if attributes.has_key?(:'max_frame_rate')
-        self.max_frame_rate = attributes[:'max_frame_rate']
-      end
-
-      if attributes.has_key?(:'max_channels')
-        self.max_channels = attributes[:'max_channels']
-      end
-
-      if attributes.has_key?(:'max_channel_layout')
-        self.max_channel_layout = attributes[:'max_channel_layout']
       end
 
       if attributes.has_key?(:'text_type')
@@ -158,23 +110,43 @@ module MuxRuby
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @url.nil?
+        invalid_properties.push('invalid value for "url", url cannot be nil.')
+      end
+
+      if @type.nil?
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      end
+
+      if @text_type.nil?
+        invalid_properties.push('invalid value for "text_type", text_type cannot be nil.')
+      end
+
+      if @language_code.nil?
+        invalid_properties.push('invalid value for "language_code", language_code cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      type_validator = EnumAttributeValidator.new('String', ['video', 'audio', 'text'])
+      return false if @url.nil?
+      return false if @type.nil?
+      type_validator = EnumAttributeValidator.new('String', ['text'])
       return false unless type_validator.valid?(@type)
+      return false if @text_type.nil?
       text_type_validator = EnumAttributeValidator.new('String', ['subtitles'])
       return false unless text_type_validator.valid?(@text_type)
+      return false if @language_code.nil?
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ['video', 'audio', 'text'])
+      validator = EnumAttributeValidator.new('String', ['text'])
       unless validator.valid?(type)
         fail ArgumentError, 'invalid value for "type", must be one of #{validator.allowable_values}.'
       end
@@ -196,14 +168,8 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
+          url == o.url &&
           type == o.type &&
-          duration == o.duration &&
-          max_width == o.max_width &&
-          max_height == o.max_height &&
-          max_frame_rate == o.max_frame_rate &&
-          max_channels == o.max_channels &&
-          max_channel_layout == o.max_channel_layout &&
           text_type == o.text_type &&
           language_code == o.language_code &&
           name == o.name &&
@@ -220,7 +186,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, type, duration, max_width, max_height, max_frame_rate, max_channels, max_channel_layout, text_type, language_code, name, closed_captions, passthrough].hash
+      [url, type, text_type, language_code, name, closed_captions, passthrough].hash
     end
 
     # Builds the object from hash

@@ -11,7 +11,10 @@ Name | Type | Description | Notes
 **max_frame_rate** | **Float** |  | [optional] 
 **max_channels** | **Integer** |  | [optional] 
 **max_channel_layout** | **String** |  | [optional] 
-**text_track_type** | **String** |  | [optional] 
-**language** | **String** |  | [optional] 
+**text_type** | **String** |  | [optional] 
+**language_code** | **String** |  | [optional] 
+**name** | **String** |  | [optional] 
+**closed_captions** | **BOOLEAN** |  | [optional] 
+**passthrough** | **String** |  | [optional] 
 
 

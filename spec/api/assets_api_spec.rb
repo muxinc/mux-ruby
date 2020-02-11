@@ -49,6 +49,18 @@ describe 'AssetsApi' do
     end
   end
 
+  # unit tests for create_asset_track
+  # Create an asset track
+  # @param asset_id The asset ID.
+  # @param create_track_request 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateTrackResponse]
+  describe 'create_asset_track test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for delete_asset
   # Delete an asset
   # @param asset_id The asset ID.
@@ -67,6 +79,18 @@ describe 'AssetsApi' do
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'delete_asset_playback_id test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for delete_asset_track
+  # Delete an asset track
+  # @param asset_id The asset ID.
+  # @param track_id The track ID.
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'delete_asset_track test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

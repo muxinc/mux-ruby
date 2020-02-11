@@ -5,13 +5,6 @@ require 'solid_assert'
 
 SolidAssert.enable_assertions
 
-# Exercises all asset operations:
-#   list-breakdown-values
-#   get-overall-values
-#   list-insights
-#   get-metric-timeseries-data
-#   list-all-metric-values
-
 # Authentication Setup
 openapi = MuxRuby.configure do |config|
   config.username = ENV['MUX_TOKEN_ID']

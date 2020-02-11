@@ -25,10 +25,6 @@ module MuxRuby
 
     attr_accessor :channels
 
-    attr_accessor :text_track_type
-
-    attr_accessor :language
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -40,9 +36,7 @@ module MuxRuby
         :'frame_rate' => :'frame_rate',
         :'sample_rate' => :'sample_rate',
         :'sample_size' => :'sample_size',
-        :'channels' => :'channels',
-        :'text_track_type' => :'text_track_type',
-        :'language' => :'language'
+        :'channels' => :'channels'
       }
     end
 
@@ -57,9 +51,7 @@ module MuxRuby
         :'frame_rate' => :'Float',
         :'sample_rate' => :'Integer',
         :'sample_size' => :'Integer',
-        :'channels' => :'Integer',
-        :'text_track_type' => :'String',
-        :'language' => :'String'
+        :'channels' => :'Integer'
       }
     end
 
@@ -106,14 +98,6 @@ module MuxRuby
       if attributes.has_key?(:'channels')
         self.channels = attributes[:'channels']
       end
-
-      if attributes.has_key?(:'text_track_type')
-        self.text_track_type = attributes[:'text_track_type']
-      end
-
-      if attributes.has_key?(:'language')
-        self.language = attributes[:'language']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -142,9 +126,7 @@ module MuxRuby
           frame_rate == o.frame_rate &&
           sample_rate == o.sample_rate &&
           sample_size == o.sample_size &&
-          channels == o.channels &&
-          text_track_type == o.text_track_type &&
-          language == o.language
+          channels == o.channels
     end
 
     # @see the `==` method
@@ -156,7 +138,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [type, duration, encoding, width, height, frame_rate, sample_rate, sample_size, channels, text_track_type, language].hash
+      [type, duration, encoding, width, height, frame_rate, sample_rate, sample_size, channels].hash
     end
 
     # Builds the object from hash
