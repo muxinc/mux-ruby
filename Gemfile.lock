@@ -35,7 +35,7 @@ GEM
       byebug (~> 10.0)
       pry (~> 0.10)
     public_suffix (3.0.3)
-    rake (12.0.0)
+    rake (13.0.1)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -70,7 +70,7 @@ DEPENDENCIES
   autotest-rails-pure (~> 4.1, >= 4.1.2)
   mux_ruby!
   pry-byebug
-  rake (~> 12.0.0)
+  rake (~> 13.0.1)
   rspec (~> 3.6, >= 3.6.0)
   vcr (~> 3.0, >= 3.0.1)
   webmock (~> 1.24, >= 1.24.3)
