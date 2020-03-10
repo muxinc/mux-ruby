@@ -41,7 +41,7 @@ module MuxRuby
   class ServiceError < ApiError
   end
 
-  class SlowDownError < ApiError
+  class TooManyRequestsError < ApiError
   end
 
 end

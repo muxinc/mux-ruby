@@ -70,7 +70,7 @@ module MuxRuby
                                  :response_body => response.body),
             response.status_message
         elsif response.code == 429
-          fail SlowDownError.new(:code => response.code,
+          fail TooManyRequestsError.new(:code => response.code,
                                  :response_headers => response.headers,
                                  :response_body => response.body),
             response.status_message
