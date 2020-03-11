@@ -555,6 +555,67 @@ module MuxRuby
       return data, status_code, headers
     end
 
+    # Update master access
+    # Allows you add temporary access to the master (highest-quality) version of the asset in MP4 format. A URL will be created that can be used to download the master version for 24 hours. After 24 hours Master Access will revert to \"none\". This master version is not optimized for web and not meant to be streamed, only downloaded for purposes like archiving or editing the video offline.
+    # @param asset_id The asset ID.
+    # @param update_asset_master_access_request 
+    # @param [Hash] opts the optional parameters
+    # @return [AssetResponse]
+    def update_asset_master_access(asset_id, update_asset_master_access_request, opts = {})
+      data, _status_code, _headers = update_asset_master_access_with_http_info(asset_id, update_asset_master_access_request, opts)
+      data
+    end
+
+    # Update master access
+    # Allows you add temporary access to the master (highest-quality) version of the asset in MP4 format. A URL will be created that can be used to download the master version for 24 hours. After 24 hours Master Access will revert to \&quot;none\&quot;. This master version is not optimized for web and not meant to be streamed, only downloaded for purposes like archiving or editing the video offline.
+    # @param asset_id The asset ID.
+    # @param update_asset_master_access_request 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AssetResponse, Fixnum, Hash)>] AssetResponse data, response status code and response headers
+    def update_asset_master_access_with_http_info(asset_id, update_asset_master_access_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AssetsApi.update_asset_master_access ...'
+      end
+      # verify the required parameter 'asset_id' is set
+      if @api_client.config.client_side_validation && asset_id.nil?
+        fail ArgumentError, "Missing the required parameter 'asset_id' when calling AssetsApi.update_asset_master_access"
+      end
+      # verify the required parameter 'update_asset_master_access_request' is set
+      if @api_client.config.client_side_validation && update_asset_master_access_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_asset_master_access_request' when calling AssetsApi.update_asset_master_access"
+      end
+      # resource path
+      local_var_path = '/video/v1/assets/{ASSET_ID}/master-access'.sub('{' + 'ASSET_ID' + '}', asset_id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(update_asset_master_access_request)
+      auth_names = ['accessToken']
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'AssetResponse')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AssetsApi#update_asset_master_access\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Update MP4 support
     # Allows you add or remove mp4 support for assets that were created without it. Currently there are two values supported in this request, `standard` and `none`. `none` means that an asset *does not* have mp4 support, so submitting a request with `mp4_support` set to `none` will delete the mp4 assets from the asset in question.
     # @param asset_id The asset ID.

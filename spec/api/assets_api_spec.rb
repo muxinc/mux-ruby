@@ -144,6 +144,19 @@ describe 'AssetsApi' do
     end
   end
 
+  # unit tests for update_asset_master_access
+  # Update master access
+  # Allows you add temporary access to the master (highest-quality) version of the asset in MP4 format. A URL will be created that can be used to download the master version for 24 hours. After 24 hours Master Access will revert to \&quot;none\&quot;. This master version is not optimized for web and not meant to be streamed, only downloaded for purposes like archiving or editing the video offline.
+  # @param asset_id The asset ID.
+  # @param update_asset_master_access_request 
+  # @param [Hash] opts the optional parameters
+  # @return [AssetResponse]
+  describe 'update_asset_master_access test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for update_asset_mp4_support
   # Update MP4 support
   # Allows you add or remove mp4 support for assets that were created without it. Currently there are two values supported in this request, &#x60;standard&#x60; and &#x60;none&#x60;. &#x60;none&#x60; means that an asset *does not* have mp4 support, so submitting a request with &#x60;mp4_support&#x60; set to &#x60;none&#x60; will delete the mp4 assets from the asset in question.
