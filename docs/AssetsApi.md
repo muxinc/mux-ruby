@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**get_asset_input_info**](AssetsApi.md#get_asset_input_info) | **GET** /video/v1/assets/{ASSET_ID}/input-info | Retrieve asset input info
 [**get_asset_playback_id**](AssetsApi.md#get_asset_playback_id) | **GET** /video/v1/assets/{ASSET_ID}/playback-ids/{PLAYBACK_ID} | Retrieve a playback ID
 [**list_assets**](AssetsApi.md#list_assets) | **GET** /video/v1/assets | List assets
+[**update_asset_master_access**](AssetsApi.md#update_asset_master_access) | **PUT** /video/v1/assets/{ASSET_ID}/master-access | Update master access
 [**update_asset_mp4_support**](AssetsApi.md#update_asset_mp4_support) | **PUT** /video/v1/assets/{ASSET_ID}/mp4-support | Update MP4 support
 
 
@@ -520,6 +521,59 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+
+# **update_asset_master_access**
+> AssetResponse update_asset_master_access(asset_id, update_asset_master_access_request)
+
+Update master access
+
+Allows you add temporary access to the master (highest-quality) version of the asset in MP4 format. A URL will be created that can be used to download the master version for 24 hours. After 24 hours Master Access will revert to \"none\". This master version is not optimized for web and not meant to be streamed, only downloaded for purposes like archiving or editing the video offline.
+
+### Example
+```ruby
+# load the gem
+require 'mux_ruby'
+# setup authorization
+MuxRuby.configure do |config|
+  # Configure HTTP basic authorization: accessToken
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = MuxRuby::AssetsApi.new
+asset_id = 'asset_id_example' # String | The asset ID.
+update_asset_master_access_request = MuxRuby::UpdateAssetMasterAccessRequest.new # UpdateAssetMasterAccessRequest | 
+
+begin
+  #Update master access
+  result = api_instance.update_asset_master_access(asset_id, update_asset_master_access_request)
+  p result
+rescue MuxRuby::ApiError => e
+  puts "Exception when calling AssetsApi->update_asset_master_access: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **asset_id** | **String**| The asset ID. | 
+ **update_asset_master_access_request** | [**UpdateAssetMasterAccessRequest**](UpdateAssetMasterAccessRequest.md)|  | 
+
+### Return type
+
+[**AssetResponse**](AssetResponse.md)
+
+### Authorization
+
+[accessToken](../README.md#accessToken)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 

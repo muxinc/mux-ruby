@@ -77,6 +77,16 @@ assert mp4_asset.data.id == create_response.data.id
 assert mp4_asset.data.mp4_support == 'standard'
 puts "update-asset-mp4-support OK ✅"
 
+# ========== update-asset-master-access ==========
+master_req = MuxRuby::UpdateAssetMasterAccessRequest.new
+master_req.master_access = 'temporary'
+master_asset = assets_api.update_asset_master_access(create_response.data.id, master_req)
+assert master_asset != nil
+assert master_asset.data != nil
+assert master_asset.data.id == create_response.data.id
+assert master_asset.data.master_access == 'temporary'
+puts "update-asset-master-access OK ✅"
+
 # ========== create-asset-track ==========
 cat = MuxRuby::CreateTrackRequest.new(:url => "https://tears-of-steel-subtitles.s3.amazonaws.com/tears-en.vtt", :type => "text", :text_type => "subtitles", :language_code => "en", :name => "English", :closed_captions => false)
 subtitles_track = assets_api.create_asset_track(create_response.data.id, cat)
