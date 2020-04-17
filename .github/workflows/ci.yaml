@@ -1,0 +1,31 @@
+name: Integration Test
+
+on: push
+
+# Long term this should be:
+# on: 
+#   push:
+#     branches:
+#       - master
+#   pull_request:
+
+jobs:
+  build:
+    name: Integration Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Install Ruby 2.6
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.x
+      - name: Install Bundler
+        run: gem install bundler
+      - name: Install Ruby Dependencies
+        run: bundle install --jobs 4 --retry 3
+      - name: Run Integration Tests
+        env:
+          MUX_TOKEN_ID: ${{ secrets.MUX_TOKEN_ID }}
+          MUX_TOKEN_SECRET: ${{ secrets.MUX_TOKEN_SECRET }}
+        run: bash test-video.sh
