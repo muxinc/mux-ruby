@@ -28,4 +28,4 @@ jobs:
         env:
           MUX_TOKEN_ID: ${{ secrets.MUX_TOKEN_ID }}
           MUX_TOKEN_SECRET: ${{ secrets.MUX_TOKEN_SECRET }}
-        run: bash test-video.sh
+        run: bash test.sh
