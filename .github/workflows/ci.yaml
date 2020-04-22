@@ -1,13 +1,10 @@
 name: Integration Test
 
-on: push
-
-# Long term this should be:
-# on: 
-#   push:
-#     branches:
-#       - master
-#   pull_request:
+on:
+  push:
+    branches:
+      - master
+  pull_request:
 
 jobs:
   build:
