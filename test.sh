@@ -13,8 +13,15 @@ then
       exit 255
 fi
 
-TESTS=./examples/video/exercise*
-for f in $TESTS
+VIDEO_TESTS=./examples/video/exercise*
+for f in $VIDEO_TESTS
+do
+  echo "========== Running $f =========="
+    ruby -I lib $f
+done
+
+DATA_TESTS=./examples/data/exercise*
+for f in $DATA_TESTS
 do
   echo "========== Running $f =========="
     ruby -I lib $f
