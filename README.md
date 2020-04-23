@@ -1,4 +1,5 @@
 ![Mux Ruby Banner](github-ruby-sdk.png)
+
 ![](https://github.com/muxinc/mux-ruby/workflows/Integration%20Test/badge.svg)
 
 # Mux Ruby
