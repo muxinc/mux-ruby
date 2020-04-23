@@ -1,5 +1,7 @@
 ![Mux Ruby Banner](github-ruby-sdk.png)
 
+![](https://github.com/muxinc/mux-ruby/workflows/Integration%20Test/badge.svg)
+
 # Mux Ruby
 
 Official Mux API wrapper for ruby projects, supporting both Mux Data and Mux Video.
