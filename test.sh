@@ -13,14 +13,14 @@ then
       exit 255
 fi
 
-VIDEO_TESTS=./examples/video/exercise*
+VIDEO_TESTS=./examples/video/exercise*.rb
 for f in $VIDEO_TESTS
 do
   echo "========== Running $f =========="
     ruby -I lib $f
 done
 
-DATA_TESTS=./examples/data/exercise*
+DATA_TESTS=./examples/data/exercise*.rb
 for f in $DATA_TESTS
 do
   echo "========== Running $f =========="
