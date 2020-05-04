@@ -1,0 +1,23 @@
+name: Release to RubyGems
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    name: Release to RubyGems
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Install Ruby 2.6
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.x
+      - name: Build Gem
+        run: gem build -o mux_ruby.gem mux_ruby.gemspec
+      - name: Push Gem to RubyGems
+        env:
+          GEM_HOST_API_KEY: ${{ secrets.GEM_HOST_API_KEY }}
+        run: gem push mux_ruby.gem
