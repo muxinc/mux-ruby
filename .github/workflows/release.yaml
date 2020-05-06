@@ -1,7 +1,8 @@
 name: Release to RubyGems
 
 on:
-  pull_request:
+  release:
+    types: [created]
 
 jobs:
   build:
@@ -21,4 +22,4 @@ jobs:
       - name: Push Gem to RubyGems
         env:
           GEM_HOST_API_KEY: ${{ secrets.GEM_HOST_API_KEY }}
-        run: gem push mux_ruby.gem --host http://134.122.101.75:9292
+        run: gem push mux_ruby.gem
