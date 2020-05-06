@@ -20,6 +20,8 @@ Gem::Specification.new do |s|
   s.license     = "MIT"
   s.required_ruby_version = ">= 1.9"
 
+  s.metadata['allowed_push_host'] = 'http://134.122.101.75:9292'
+
   s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
   s.add_runtime_dependency 'json', '~> 2.1', '>= 2.1.0'
 
