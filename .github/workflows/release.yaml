@@ -16,6 +16,8 @@ jobs:
           ruby-version: 2.6.x
       - name: Build Gem
         run: gem build -o mux_ruby.gem mux_ruby.gemspec
+      - name: Debug
+        run: gem --version
       - name: Push Gem to RubyGems
         env:
           GEM_HOST_API_KEY: ${{ secrets.GEM_HOST_API_KEY }}
