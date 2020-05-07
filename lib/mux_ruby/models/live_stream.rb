@@ -31,6 +31,8 @@ module MuxRuby
 
     attr_accessor :simulcast_targets
 
+    attr_accessor :test
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -45,7 +47,8 @@ module MuxRuby
         :'passthrough' => :'passthrough',
         :'reconnect_window' => :'reconnect_window',
         :'reduced_latency' => :'reduced_latency',
-        :'simulcast_targets' => :'simulcast_targets'
+        :'simulcast_targets' => :'simulcast_targets',
+        :'test' => :'test'
       }
     end
 
@@ -63,7 +66,8 @@ module MuxRuby
         :'passthrough' => :'String',
         :'reconnect_window' => :'Float',
         :'reduced_latency' => :'BOOLEAN',
-        :'simulcast_targets' => :'Array<SimulcastTarget>'
+        :'simulcast_targets' => :'Array<SimulcastTarget>',
+        :'test' => :'BOOLEAN'
       }
     end
 
@@ -128,6 +132,10 @@ module MuxRuby
           self.simulcast_targets = value
         end
       end
+
+      if attributes.has_key?(:'test')
+        self.test = attributes[:'test']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -159,7 +167,8 @@ module MuxRuby
           passthrough == o.passthrough &&
           reconnect_window == o.reconnect_window &&
           reduced_latency == o.reduced_latency &&
-          simulcast_targets == o.simulcast_targets
+          simulcast_targets == o.simulcast_targets &&
+          test == o.test
     end
 
     # @see the `==` method
@@ -171,7 +180,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created_at, stream_key, active_asset_id, recent_asset_ids, status, playback_ids, new_asset_settings, passthrough, reconnect_window, reduced_latency, simulcast_targets].hash
+      [id, created_at, stream_key, active_asset_id, recent_asset_ids, status, playback_ids, new_asset_settings, passthrough, reconnect_window, reduced_latency, simulcast_targets, test].hash
     end
 
     # Builds the object from hash

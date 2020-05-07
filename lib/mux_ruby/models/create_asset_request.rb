@@ -11,8 +11,6 @@ module MuxRuby
 
     attr_accessor :playback_policy
 
-    attr_accessor :demo
-
     attr_accessor :per_title_encode
 
     attr_accessor :passthrough
@@ -23,6 +21,8 @@ module MuxRuby
     attr_accessor :normalize_audio
 
     attr_accessor :master_access
+
+    attr_accessor :test
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -51,12 +51,12 @@ module MuxRuby
       {
         :'input' => :'input',
         :'playback_policy' => :'playback_policy',
-        :'demo' => :'demo',
         :'per_title_encode' => :'per_title_encode',
         :'passthrough' => :'passthrough',
         :'mp4_support' => :'mp4_support',
         :'normalize_audio' => :'normalize_audio',
-        :'master_access' => :'master_access'
+        :'master_access' => :'master_access',
+        :'test' => :'test'
       }
     end
 
@@ -65,12 +65,12 @@ module MuxRuby
       {
         :'input' => :'Array<InputSettings>',
         :'playback_policy' => :'Array<PlaybackPolicy>',
-        :'demo' => :'BOOLEAN',
         :'per_title_encode' => :'BOOLEAN',
         :'passthrough' => :'String',
         :'mp4_support' => :'String',
         :'normalize_audio' => :'BOOLEAN',
-        :'master_access' => :'String'
+        :'master_access' => :'String',
+        :'test' => :'BOOLEAN'
       }
     end
 
@@ -94,10 +94,6 @@ module MuxRuby
         end
       end
 
-      if attributes.has_key?(:'demo')
-        self.demo = attributes[:'demo']
-      end
-
       if attributes.has_key?(:'per_title_encode')
         self.per_title_encode = attributes[:'per_title_encode']
       end
@@ -118,6 +114,10 @@ module MuxRuby
 
       if attributes.has_key?(:'master_access')
         self.master_access = attributes[:'master_access']
+      end
+
+      if attributes.has_key?(:'test')
+        self.test = attributes[:'test']
       end
     end
 
@@ -165,12 +165,12 @@ module MuxRuby
       self.class == o.class &&
           input == o.input &&
           playback_policy == o.playback_policy &&
-          demo == o.demo &&
           per_title_encode == o.per_title_encode &&
           passthrough == o.passthrough &&
           mp4_support == o.mp4_support &&
           normalize_audio == o.normalize_audio &&
-          master_access == o.master_access
+          master_access == o.master_access &&
+          test == o.test
     end
 
     # @see the `==` method
@@ -182,7 +182,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [input, playback_policy, demo, per_title_encode, passthrough, mp4_support, normalize_audio, master_access].hash
+      [input, playback_policy, per_title_encode, passthrough, mp4_support, normalize_audio, master_access, test].hash
     end
 
     # Builds the object from hash

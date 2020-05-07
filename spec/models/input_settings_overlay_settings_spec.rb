@@ -28,6 +28,10 @@ describe 'InputSettingsOverlaySettings' do
   describe 'test attribute "vertical_align"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["top", "middle", "bottom"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.vertical_align = value }.not_to raise_error
+      # end
     end
   end
 
@@ -40,6 +44,10 @@ describe 'InputSettingsOverlaySettings' do
   describe 'test attribute "horizontal_align"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["left", "center", "right"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.horizontal_align = value }.not_to raise_error
+      # end
     end
   end
 

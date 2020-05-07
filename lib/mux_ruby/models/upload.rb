@@ -27,6 +27,8 @@ module MuxRuby
     # The URL to upload the associated source media to.
     attr_accessor :url
 
+    attr_accessor :test
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -59,7 +61,8 @@ module MuxRuby
         :'asset_id' => :'asset_id',
         :'error' => :'error',
         :'cors_origin' => :'cors_origin',
-        :'url' => :'url'
+        :'url' => :'url',
+        :'test' => :'test'
       }
     end
 
@@ -73,7 +76,8 @@ module MuxRuby
         :'asset_id' => :'String',
         :'error' => :'UploadError',
         :'cors_origin' => :'String',
-        :'url' => :'String'
+        :'url' => :'String',
+        :'test' => :'BOOLEAN'
       }
     end
 
@@ -117,6 +121,10 @@ module MuxRuby
 
       if attributes.has_key?(:'url')
         self.url = attributes[:'url']
+      end
+
+      if attributes.has_key?(:'test')
+        self.test = attributes[:'test']
       end
     end
 
@@ -181,7 +189,8 @@ module MuxRuby
           asset_id == o.asset_id &&
           error == o.error &&
           cors_origin == o.cors_origin &&
-          url == o.url
+          url == o.url &&
+          test == o.test
     end
 
     # @see the `==` method
@@ -193,7 +202,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, timeout, status, new_asset_settings, asset_id, error, cors_origin, url].hash
+      [id, timeout, status, new_asset_settings, asset_id, error, cors_origin, url, test].hash
     end
 
     # Builds the object from hash

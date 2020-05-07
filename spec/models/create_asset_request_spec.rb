@@ -37,12 +37,6 @@ describe 'CreateAssetRequest' do
     end
   end
 
-  describe 'test attribute "demo"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   describe 'test attribute "per_title_encode"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -78,6 +72,12 @@ describe 'CreateAssetRequest' do
       # validator.allowable_values.each do |value|
       #   expect { @instance.master_access = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe 'test attribute "test"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
