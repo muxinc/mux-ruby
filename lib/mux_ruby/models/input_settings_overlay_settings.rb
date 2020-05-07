@@ -21,6 +21,28 @@ module MuxRuby
 
     attr_accessor :opacity
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -94,7 +116,31 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      vertical_align_validator = EnumAttributeValidator.new('String', ['top', 'middle', 'bottom'])
+      return false unless vertical_align_validator.valid?(@vertical_align)
+      horizontal_align_validator = EnumAttributeValidator.new('String', ['left', 'center', 'right'])
+      return false unless horizontal_align_validator.valid?(@horizontal_align)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] vertical_align Object to be assigned
+    def vertical_align=(vertical_align)
+      validator = EnumAttributeValidator.new('String', ['top', 'middle', 'bottom'])
+      unless validator.valid?(vertical_align)
+        fail ArgumentError, 'invalid value for "vertical_align", must be one of #{validator.allowable_values}.'
+      end
+      @vertical_align = vertical_align
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] horizontal_align Object to be assigned
+    def horizontal_align=(horizontal_align)
+      validator = EnumAttributeValidator.new('String', ['left', 'center', 'right'])
+      unless validator.valid?(horizontal_align)
+        fail ArgumentError, 'invalid value for "horizontal_align", must be one of #{validator.allowable_values}.'
+      end
+      @horizontal_align = horizontal_align
     end
 
     # Checks equality by comparing each attribute.

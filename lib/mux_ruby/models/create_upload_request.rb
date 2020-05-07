@@ -15,12 +15,15 @@ module MuxRuby
 
     attr_accessor :new_asset_settings
 
+    attr_accessor :test
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'timeout' => :'timeout',
         :'cors_origin' => :'cors_origin',
-        :'new_asset_settings' => :'new_asset_settings'
+        :'new_asset_settings' => :'new_asset_settings',
+        :'test' => :'test'
       }
     end
 
@@ -29,7 +32,8 @@ module MuxRuby
       {
         :'timeout' => :'Integer',
         :'cors_origin' => :'String',
-        :'new_asset_settings' => :'CreateAssetRequest'
+        :'new_asset_settings' => :'CreateAssetRequest',
+        :'test' => :'BOOLEAN'
       }
     end
 
@@ -53,6 +57,10 @@ module MuxRuby
 
       if attributes.has_key?(:'new_asset_settings')
         self.new_asset_settings = attributes[:'new_asset_settings']
+      end
+
+      if attributes.has_key?(:'test')
+        self.test = attributes[:'test']
       end
     end
 
@@ -105,7 +113,8 @@ module MuxRuby
       self.class == o.class &&
           timeout == o.timeout &&
           cors_origin == o.cors_origin &&
-          new_asset_settings == o.new_asset_settings
+          new_asset_settings == o.new_asset_settings &&
+          test == o.test
     end
 
     # @see the `==` method
@@ -117,7 +126,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [timeout, cors_origin, new_asset_settings].hash
+      [timeout, cors_origin, new_asset_settings, test].hash
     end
 
     # Builds the object from hash

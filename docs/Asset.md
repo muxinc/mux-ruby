@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 **aspect_ratio** | **String** |  | [optional] 
 **playback_ids** | [**Array&lt;PlaybackID&gt;**](PlaybackID.md) |  | [optional] 
 **tracks** | [**Array&lt;Track&gt;**](Track.md) |  | [optional] 
-**demo** | **BOOLEAN** |  | [optional] 
 **errors** | [**AssetErrors**](AssetErrors.md) |  | [optional] 
 **per_title_encode** | **BOOLEAN** |  | [optional] 
 **is_live** | **BOOLEAN** |  | [optional] 
@@ -24,5 +23,6 @@ Name | Type | Description | Notes
 **mp4_support** | **String** |  | [optional] [default to &#39;none&#39;]
 **normalize_audio** | **BOOLEAN** |  | [optional] [default to false]
 **static_renditions** | [**AssetStaticRenditions**](AssetStaticRenditions.md) |  | [optional] 
+**test** | **BOOLEAN** |  | [optional] 
 
 

@@ -19,6 +19,8 @@ module MuxRuby
     # Latency is the time from when the streamer does something in real life to when you see it happen in the player. Set this if you want lower latency for your live stream. Note: Reconnect windows are incompatible with Reduced Latency and will always be set to zero (0) seconds. Read more here: https://mux.com/blog/reduced-latency-for-mux-live-streaming-now-available/
     attr_accessor :reduced_latency
 
+    attr_accessor :test
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -26,7 +28,8 @@ module MuxRuby
         :'new_asset_settings' => :'new_asset_settings',
         :'reconnect_window' => :'reconnect_window',
         :'passthrough' => :'passthrough',
-        :'reduced_latency' => :'reduced_latency'
+        :'reduced_latency' => :'reduced_latency',
+        :'test' => :'test'
       }
     end
 
@@ -37,7 +40,8 @@ module MuxRuby
         :'new_asset_settings' => :'CreateAssetRequest',
         :'reconnect_window' => :'Float',
         :'passthrough' => :'String',
-        :'reduced_latency' => :'BOOLEAN'
+        :'reduced_latency' => :'BOOLEAN',
+        :'test' => :'BOOLEAN'
       }
     end
 
@@ -69,6 +73,10 @@ module MuxRuby
 
       if attributes.has_key?(:'reduced_latency')
         self.reduced_latency = attributes[:'reduced_latency']
+      end
+
+      if attributes.has_key?(:'test')
+        self.test = attributes[:'test']
       end
     end
 
@@ -118,7 +126,8 @@ module MuxRuby
           new_asset_settings == o.new_asset_settings &&
           reconnect_window == o.reconnect_window &&
           passthrough == o.passthrough &&
-          reduced_latency == o.reduced_latency
+          reduced_latency == o.reduced_latency &&
+          test == o.test
     end
 
     # @see the `==` method
@@ -130,7 +139,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [playback_policy, new_asset_settings, reconnect_window, passthrough, reduced_latency].hash
+      [playback_policy, new_asset_settings, reconnect_window, passthrough, reduced_latency, test].hash
     end
 
     # Builds the object from hash

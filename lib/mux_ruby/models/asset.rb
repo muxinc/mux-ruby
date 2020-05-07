@@ -27,8 +27,6 @@ module MuxRuby
 
     attr_accessor :tracks
 
-    attr_accessor :demo
-
     attr_accessor :errors
 
     attr_accessor :per_title_encode
@@ -48,6 +46,8 @@ module MuxRuby
     attr_accessor :normalize_audio
 
     attr_accessor :static_renditions
+
+    attr_accessor :test
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -84,7 +84,6 @@ module MuxRuby
         :'aspect_ratio' => :'aspect_ratio',
         :'playback_ids' => :'playback_ids',
         :'tracks' => :'tracks',
-        :'demo' => :'demo',
         :'errors' => :'errors',
         :'per_title_encode' => :'per_title_encode',
         :'is_live' => :'is_live',
@@ -94,7 +93,8 @@ module MuxRuby
         :'master_access' => :'master_access',
         :'mp4_support' => :'mp4_support',
         :'normalize_audio' => :'normalize_audio',
-        :'static_renditions' => :'static_renditions'
+        :'static_renditions' => :'static_renditions',
+        :'test' => :'test'
       }
     end
 
@@ -111,7 +111,6 @@ module MuxRuby
         :'aspect_ratio' => :'String',
         :'playback_ids' => :'Array<PlaybackID>',
         :'tracks' => :'Array<Track>',
-        :'demo' => :'BOOLEAN',
         :'errors' => :'AssetErrors',
         :'per_title_encode' => :'BOOLEAN',
         :'is_live' => :'BOOLEAN',
@@ -121,7 +120,8 @@ module MuxRuby
         :'master_access' => :'String',
         :'mp4_support' => :'String',
         :'normalize_audio' => :'BOOLEAN',
-        :'static_renditions' => :'AssetStaticRenditions'
+        :'static_renditions' => :'AssetStaticRenditions',
+        :'test' => :'BOOLEAN'
       }
     end
 
@@ -177,10 +177,6 @@ module MuxRuby
         end
       end
 
-      if attributes.has_key?(:'demo')
-        self.demo = attributes[:'demo']
-      end
-
       if attributes.has_key?(:'errors')
         self.errors = attributes[:'errors']
       end
@@ -225,6 +221,10 @@ module MuxRuby
 
       if attributes.has_key?(:'static_renditions')
         self.static_renditions = attributes[:'static_renditions']
+      end
+
+      if attributes.has_key?(:'test')
+        self.test = attributes[:'test']
       end
     end
 
@@ -280,7 +280,6 @@ module MuxRuby
           aspect_ratio == o.aspect_ratio &&
           playback_ids == o.playback_ids &&
           tracks == o.tracks &&
-          demo == o.demo &&
           errors == o.errors &&
           per_title_encode == o.per_title_encode &&
           is_live == o.is_live &&
@@ -290,7 +289,8 @@ module MuxRuby
           master_access == o.master_access &&
           mp4_support == o.mp4_support &&
           normalize_audio == o.normalize_audio &&
-          static_renditions == o.static_renditions
+          static_renditions == o.static_renditions &&
+          test == o.test
     end
 
     # @see the `==` method
@@ -302,7 +302,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created_at, deleted_at, status, duration, max_stored_resolution, max_stored_frame_rate, aspect_ratio, playback_ids, tracks, demo, errors, per_title_encode, is_live, passthrough, live_stream_id, master, master_access, mp4_support, normalize_audio, static_renditions].hash
+      [id, created_at, deleted_at, status, duration, max_stored_resolution, max_stored_frame_rate, aspect_ratio, playback_ids, tracks, errors, per_title_encode, is_live, passthrough, live_stream_id, master, master_access, mp4_support, normalize_audio, static_renditions, test].hash
     end
 
     # Builds the object from hash

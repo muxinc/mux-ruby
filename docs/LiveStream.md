@@ -15,5 +15,6 @@ Name | Type | Description | Notes
 **reconnect_window** | **Float** |  | [optional] 
 **reduced_latency** | **BOOLEAN** |  | [optional] 
 **simulcast_targets** | [**Array&lt;SimulcastTarget&gt;**](SimulcastTarget.md) |  | [optional] 
+**test** | **BOOLEAN** |  | [optional] 
 
 
