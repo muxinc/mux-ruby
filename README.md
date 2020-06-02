@@ -21,8 +21,11 @@ Use `bundle install` to install dependencies if you're developing locally.
 ## Installation
 
 ### Adding to your Gemfile
+
+This gem can be sourced from [RubyGems](https://rubygems.org/gems/mux_ruby)
+
 ```
-gem 'mux_ruby', :git => 'git://github.com/muxinc/mux-ruby.git'
+gem 'mux_ruby'
 ```
 
 ### Clone and install locally
