@@ -223,9 +223,13 @@ module MuxRuby
 
     attr_accessor :asn
 
+    attr_accessor :asn_name
+
     attr_accessor :quality_score
 
     attr_accessor :player_software_version
+
+    attr_accessor :player_mux_plugin_name
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -338,8 +342,10 @@ module MuxRuby
         :'player_autoplay' => :'player_autoplay',
         :'player_height' => :'player_height',
         :'asn' => :'asn',
+        :'asn_name' => :'asn_name',
         :'quality_score' => :'quality_score',
-        :'player_software_version' => :'player_software_version'
+        :'player_software_version' => :'player_software_version',
+        :'player_mux_plugin_name' => :'player_mux_plugin_name'
       }
     end
 
@@ -354,22 +360,22 @@ module MuxRuby
         :'preroll_requested' => :'BOOLEAN',
         :'page_type' => :'String',
         :'startup_score' => :'String',
-        :'view_seek_duration' => :'String',
+        :'view_seek_duration' => :'Integer',
         :'country_name' => :'String',
         :'player_source_height' => :'Integer',
         :'longitude' => :'String',
-        :'buffering_count' => :'String',
-        :'video_duration' => :'String',
+        :'buffering_count' => :'Integer',
+        :'video_duration' => :'Integer',
         :'player_source_type' => :'String',
         :'city' => :'String',
         :'view_id' => :'String',
         :'platform_description' => :'String',
-        :'video_startup_preroll_request_time' => :'String',
+        :'video_startup_preroll_request_time' => :'Integer',
         :'viewer_device_name' => :'String',
         :'video_series' => :'String',
         :'viewer_application_name' => :'String',
         :'updated_at' => :'String',
-        :'view_total_content_playback_time' => :'String',
+        :'view_total_content_playback_time' => :'Integer',
         :'cdn' => :'String',
         :'player_instance_id' => :'String',
         :'video_language' => :'String',
@@ -380,8 +386,8 @@ module MuxRuby
         :'playback_score' => :'String',
         :'page_url' => :'String',
         :'metro' => :'String',
-        :'view_max_request_latency' => :'String',
-        :'requests_for_first_preroll' => :'String',
+        :'view_max_request_latency' => :'Integer',
+        :'requests_for_first_preroll' => :'Integer',
         :'view_total_downscaling' => :'String',
         :'latitude' => :'String',
         :'player_source_host_name' => :'String',
@@ -391,7 +397,7 @@ module MuxRuby
         :'player_language' => :'String',
         :'page_load_time' => :'Integer',
         :'viewer_device_category' => :'String',
-        :'video_startup_preroll_load_time' => :'String',
+        :'video_startup_preroll_load_time' => :'Integer',
         :'player_version' => :'String',
         :'watch_time' => :'Integer',
         :'player_source_stream_type' => :'String',
@@ -401,14 +407,14 @@ module MuxRuby
         :'experiment_name' => :'String',
         :'viewer_os_version' => :'String',
         :'player_preload' => :'BOOLEAN',
-        :'buffering_duration' => :'String',
+        :'buffering_duration' => :'Integer',
         :'player_view_count' => :'Integer',
         :'player_software' => :'String',
-        :'player_load_time' => :'String',
+        :'player_load_time' => :'Integer',
         :'platform_summary' => :'String',
         :'video_encoding_variant' => :'String',
         :'player_width' => :'Integer',
-        :'view_seek_count' => :'String',
+        :'view_seek_count' => :'Integer',
         :'viewer_experience_score' => :'String',
         :'view_error_id' => :'Integer',
         :'video_variant_name' => :'String',
@@ -420,7 +426,7 @@ module MuxRuby
         :'events' => :'Array<VideoViewEvent>',
         :'player_name' => :'String',
         :'view_start' => :'String',
-        :'view_average_request_throughput' => :'String',
+        :'view_average_request_throughput' => :'Integer',
         :'video_producer' => :'String',
         :'error_type_id' => :'Integer',
         :'mux_viewer_id' => :'String',
@@ -431,7 +437,7 @@ module MuxRuby
         :'video_content_type' => :'String',
         :'viewer_os_family' => :'String',
         :'player_poster' => :'String',
-        :'view_average_request_latency' => :'String',
+        :'view_average_request_latency' => :'Integer',
         :'video_variant_id' => :'String',
         :'player_source_duration' => :'Integer',
         :'player_source_url' => :'String',
@@ -440,7 +446,7 @@ module MuxRuby
         :'id' => :'String',
         :'short_time' => :'String',
         :'rebuffer_percentage' => :'String',
-        :'time_to_first_frame' => :'String',
+        :'time_to_first_frame' => :'Integer',
         :'viewer_user_id' => :'String',
         :'video_stream_type' => :'String',
         :'player_startup_time' => :'Integer',
@@ -454,8 +460,10 @@ module MuxRuby
         :'player_autoplay' => :'BOOLEAN',
         :'player_height' => :'Integer',
         :'asn' => :'Integer',
+        :'asn_name' => :'String',
         :'quality_score' => :'String',
-        :'player_software_version' => :'String'
+        :'player_software_version' => :'String',
+        :'player_mux_plugin_name' => :'String'
       }
     end
 
@@ -901,12 +909,20 @@ module MuxRuby
         self.asn = attributes[:'asn']
       end
 
+      if attributes.has_key?(:'asn_name')
+        self.asn_name = attributes[:'asn_name']
+      end
+
       if attributes.has_key?(:'quality_score')
         self.quality_score = attributes[:'quality_score']
       end
 
       if attributes.has_key?(:'player_software_version')
         self.player_software_version = attributes[:'player_software_version']
+      end
+
+      if attributes.has_key?(:'player_mux_plugin_name')
+        self.player_mux_plugin_name = attributes[:'player_mux_plugin_name']
       end
     end
 
@@ -1036,8 +1052,10 @@ module MuxRuby
           player_autoplay == o.player_autoplay &&
           player_height == o.player_height &&
           asn == o.asn &&
+          asn_name == o.asn_name &&
           quality_score == o.quality_score &&
-          player_software_version == o.player_software_version
+          player_software_version == o.player_software_version &&
+          player_mux_plugin_name == o.player_mux_plugin_name
     end
 
     # @see the `==` method
@@ -1049,7 +1067,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [view_total_upscaling, preroll_ad_asset_hostname, player_source_domain, region, viewer_user_agent, preroll_requested, page_type, startup_score, view_seek_duration, country_name, player_source_height, longitude, buffering_count, video_duration, player_source_type, city, view_id, platform_description, video_startup_preroll_request_time, viewer_device_name, video_series, viewer_application_name, updated_at, view_total_content_playback_time, cdn, player_instance_id, video_language, player_source_width, player_error_message, player_mux_plugin_version, watched, playback_score, page_url, metro, view_max_request_latency, requests_for_first_preroll, view_total_downscaling, latitude, player_source_host_name, inserted_at, view_end, mux_embed_version, player_language, page_load_time, viewer_device_category, video_startup_preroll_load_time, player_version, watch_time, player_source_stream_type, preroll_ad_tag_hostname, viewer_device_manufacturer, rebuffering_score, experiment_name, viewer_os_version, player_preload, buffering_duration, player_view_count, player_software, player_load_time, platform_summary, video_encoding_variant, player_width, view_seek_count, viewer_experience_score, view_error_id, video_variant_name, preroll_played, viewer_application_engine, viewer_os_architecture, player_error_code, buffering_rate, events, player_name, view_start, view_average_request_throughput, video_producer, error_type_id, mux_viewer_id, video_id, continent_code, session_id, exit_before_video_start, video_content_type, viewer_os_family, player_poster, view_average_request_latency, video_variant_id, player_source_duration, player_source_url, mux_api_version, video_title, id, short_time, rebuffer_percentage, time_to_first_frame, viewer_user_id, video_stream_type, player_startup_time, viewer_application_version, view_max_downscale_percentage, view_max_upscale_percentage, country_code, used_fullscreen, isp, property_id, player_autoplay, player_height, asn, quality_score, player_software_version].hash
+      [view_total_upscaling, preroll_ad_asset_hostname, player_source_domain, region, viewer_user_agent, preroll_requested, page_type, startup_score, view_seek_duration, country_name, player_source_height, longitude, buffering_count, video_duration, player_source_type, city, view_id, platform_description, video_startup_preroll_request_time, viewer_device_name, video_series, viewer_application_name, updated_at, view_total_content_playback_time, cdn, player_instance_id, video_language, player_source_width, player_error_message, player_mux_plugin_version, watched, playback_score, page_url, metro, view_max_request_latency, requests_for_first_preroll, view_total_downscaling, latitude, player_source_host_name, inserted_at, view_end, mux_embed_version, player_language, page_load_time, viewer_device_category, video_startup_preroll_load_time, player_version, watch_time, player_source_stream_type, preroll_ad_tag_hostname, viewer_device_manufacturer, rebuffering_score, experiment_name, viewer_os_version, player_preload, buffering_duration, player_view_count, player_software, player_load_time, platform_summary, video_encoding_variant, player_width, view_seek_count, viewer_experience_score, view_error_id, video_variant_name, preroll_played, viewer_application_engine, viewer_os_architecture, player_error_code, buffering_rate, events, player_name, view_start, view_average_request_throughput, video_producer, error_type_id, mux_viewer_id, video_id, continent_code, session_id, exit_before_video_start, video_content_type, viewer_os_family, player_poster, view_average_request_latency, video_variant_id, player_source_duration, player_source_url, mux_api_version, video_title, id, short_time, rebuffer_percentage, time_to_first_frame, viewer_user_id, video_stream_type, player_startup_time, viewer_application_version, view_max_downscale_percentage, view_max_upscale_percentage, country_code, used_fullscreen, isp, property_id, player_autoplay, player_height, asn, asn_name, quality_score, player_software_version, player_mux_plugin_name].hash
     end
 
     # Builds the object from hash

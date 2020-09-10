@@ -28,7 +28,7 @@ describe 'AssetStaticRenditionsFiles' do
   describe 'test attribute "name"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["low.mp4", "medium.mp4", "high.mp4"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["low.mp4", "medium.mp4", "high.mp4", "audio.m4a"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.name = value }.not_to raise_error
       # end
@@ -38,7 +38,7 @@ describe 'AssetStaticRenditionsFiles' do
   describe 'test attribute "ext"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["mp4"])
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["mp4", "m4a"])
       # validator.allowable_values.each do |value|
       #   expect { @instance.ext = value }.not_to raise_error
       # end
