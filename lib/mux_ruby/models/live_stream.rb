@@ -62,7 +62,7 @@ module MuxRuby
         :'recent_asset_ids' => :'Array<String>',
         :'status' => :'String',
         :'playback_ids' => :'Array<PlaybackID>',
-        :'new_asset_settings' => :'Asset',
+        :'new_asset_settings' => :'CreateAssetRequest',
         :'passthrough' => :'String',
         :'reconnect_window' => :'Float',
         :'reduced_latency' => :'BOOLEAN',

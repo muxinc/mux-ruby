@@ -9,5 +9,6 @@ Name | Type | Description | Notes
 **passthrough** | **String** |  | [optional] 
 **reduced_latency** | **BOOLEAN** | Latency is the time from when the streamer does something in real life to when you see it happen in the player. Set this if you want lower latency for your live stream. Note: Reconnect windows are incompatible with Reduced Latency and will always be set to zero (0) seconds. Read more here: https://mux.com/blog/reduced-latency-for-mux-live-streaming-now-available/ | [optional] 
 **test** | **BOOLEAN** |  | [optional] 
+**simulcast_targets** | [**Array&lt;CreateSimulcastTargetRequest&gt;**](CreateSimulcastTargetRequest.md) |  | [optional] 
 
 

@@ -21,6 +21,8 @@ module MuxRuby
 
     attr_accessor :test
 
+    attr_accessor :simulcast_targets
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -29,7 +31,8 @@ module MuxRuby
         :'reconnect_window' => :'reconnect_window',
         :'passthrough' => :'passthrough',
         :'reduced_latency' => :'reduced_latency',
-        :'test' => :'test'
+        :'test' => :'test',
+        :'simulcast_targets' => :'simulcast_targets'
       }
     end
 
@@ -41,7 +44,8 @@ module MuxRuby
         :'reconnect_window' => :'Float',
         :'passthrough' => :'String',
         :'reduced_latency' => :'BOOLEAN',
-        :'test' => :'BOOLEAN'
+        :'test' => :'BOOLEAN',
+        :'simulcast_targets' => :'Array<CreateSimulcastTargetRequest>'
       }
     end
 
@@ -77,6 +81,12 @@ module MuxRuby
 
       if attributes.has_key?(:'test')
         self.test = attributes[:'test']
+      end
+
+      if attributes.has_key?(:'simulcast_targets')
+        if (value = attributes[:'simulcast_targets']).is_a?(Array)
+          self.simulcast_targets = value
+        end
       end
     end
 
@@ -127,7 +137,8 @@ module MuxRuby
           reconnect_window == o.reconnect_window &&
           passthrough == o.passthrough &&
           reduced_latency == o.reduced_latency &&
-          test == o.test
+          test == o.test &&
+          simulcast_targets == o.simulcast_targets
     end
 
     # @see the `==` method
@@ -139,7 +150,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [playback_policy, new_asset_settings, reconnect_window, passthrough, reduced_latency, test].hash
+      [playback_policy, new_asset_settings, reconnect_window, passthrough, reduced_latency, test, simulcast_targets].hash
     end
 
     # Builds the object from hash
