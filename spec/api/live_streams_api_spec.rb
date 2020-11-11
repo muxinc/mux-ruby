@@ -97,6 +97,30 @@ describe 'LiveStreamsApi' do
     end
   end
 
+  # unit tests for disable_live_stream
+  # Disable a live stream
+  # Disables a live stream, making it reject incoming RTMP streams until re-enabled.
+  # @param live_stream_id The live stream ID
+  # @param [Hash] opts the optional parameters
+  # @return [DisableLiveStreamResponse]
+  describe 'disable_live_stream test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for enable_live_stream
+  # Enable a live stream
+  # Enables a live stream, allowing it to accept an incoming RTMP stream.
+  # @param live_stream_id The live stream ID
+  # @param [Hash] opts the optional parameters
+  # @return [EnableLiveStreamResponse]
+  describe 'enable_live_stream test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_live_stream
   # Retrieve a live stream
   # Retrieves the details of a live stream that has previously been created. Supply the unique live stream ID that was returned from your previous request, and Mux will return the corresponding live stream information. The same information is returned when creating a live stream.

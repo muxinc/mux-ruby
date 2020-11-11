@@ -104,6 +104,28 @@ rescue MuxRuby::ApiError => e
 end
 puts "signal-live-stream-complete OK ✅"
 
+# ========== disable-live-stream ==========
+begin
+  live_api.disable_live_stream(stream.data.id)
+  disabled_live_stream = live_api.get_live_stream(stream.data.id)
+  assert disabled_live_stream.data.status == 'disabled'
+rescue MuxRuby::ApiError => e
+  puts "Should not have errored when disabling stream"
+  exit 1
+end
+puts "disable-live-stream OK ✅"
+
+# ========== enable-live-stream ==========
+begin
+  live_api.enable_live_stream(stream.data.id)
+  enabled_live_stream = live_api.get_live_stream(stream.data.id)
+  assert enabled_live_stream.data.status == 'idle'
+rescue MuxRuby::ApiError => e
+  puts "Should not have errored when enabling stream"
+  exit 1
+end
+puts "enable-live-stream OK ✅"
+
 # ========== delete-live-stream ==========
 live_api.delete_live_stream(stream.data.id)
 begin

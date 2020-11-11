@@ -343,6 +343,112 @@ module MuxRuby
       return data, status_code, headers
     end
 
+    # Disable a live stream
+    # Disables a live stream, making it reject incoming RTMP streams until re-enabled.
+    # @param live_stream_id The live stream ID
+    # @param [Hash] opts the optional parameters
+    # @return [DisableLiveStreamResponse]
+    def disable_live_stream(live_stream_id, opts = {})
+      data, _status_code, _headers = disable_live_stream_with_http_info(live_stream_id, opts)
+      data
+    end
+
+    # Disable a live stream
+    # Disables a live stream, making it reject incoming RTMP streams until re-enabled.
+    # @param live_stream_id The live stream ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(DisableLiveStreamResponse, Fixnum, Hash)>] DisableLiveStreamResponse data, response status code and response headers
+    def disable_live_stream_with_http_info(live_stream_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LiveStreamsApi.disable_live_stream ...'
+      end
+      # verify the required parameter 'live_stream_id' is set
+      if @api_client.config.client_side_validation && live_stream_id.nil?
+        fail ArgumentError, "Missing the required parameter 'live_stream_id' when calling LiveStreamsApi.disable_live_stream"
+      end
+      # resource path
+      local_var_path = '/video/v1/live-streams/{LIVE_STREAM_ID}/disable'.sub('{' + 'LIVE_STREAM_ID' + '}', live_stream_id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['accessToken']
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'DisableLiveStreamResponse')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LiveStreamsApi#disable_live_stream\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Enable a live stream
+    # Enables a live stream, allowing it to accept an incoming RTMP stream.
+    # @param live_stream_id The live stream ID
+    # @param [Hash] opts the optional parameters
+    # @return [EnableLiveStreamResponse]
+    def enable_live_stream(live_stream_id, opts = {})
+      data, _status_code, _headers = enable_live_stream_with_http_info(live_stream_id, opts)
+      data
+    end
+
+    # Enable a live stream
+    # Enables a live stream, allowing it to accept an incoming RTMP stream.
+    # @param live_stream_id The live stream ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(EnableLiveStreamResponse, Fixnum, Hash)>] EnableLiveStreamResponse data, response status code and response headers
+    def enable_live_stream_with_http_info(live_stream_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LiveStreamsApi.enable_live_stream ...'
+      end
+      # verify the required parameter 'live_stream_id' is set
+      if @api_client.config.client_side_validation && live_stream_id.nil?
+        fail ArgumentError, "Missing the required parameter 'live_stream_id' when calling LiveStreamsApi.enable_live_stream"
+      end
+      # resource path
+      local_var_path = '/video/v1/live-streams/{LIVE_STREAM_ID}/enable'.sub('{' + 'LIVE_STREAM_ID' + '}', live_stream_id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['accessToken']
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'EnableLiveStreamResponse')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LiveStreamsApi#enable_live_stream\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Retrieve a live stream
     # Retrieves the details of a live stream that has previously been created. Supply the unique live stream ID that was returned from your previous request, and Mux will return the corresponding live stream information. The same information is returned when creating a live stream.
     # @param live_stream_id The live stream ID
