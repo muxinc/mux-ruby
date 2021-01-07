@@ -14,17 +14,47 @@ end
 # API Client Initialization
 rt_api = MuxRuby::RealTimeApi.new
 
-# dimensions = rt_api.list_realtime_dimensions
-# puts dimensions
+# Test coverage here isn't fantastic due to not knowning if the account we're testing against has
+# any real-time data. This has been manually verified against real-world data.
 
-# metrics = rt_api.list_realtime_metrics
-# puts metrics
+# ========== list-realtime-dimensions ==========
+dimensions = rt_api.list_realtime_dimensions
+assert dimensions != nil
+assert dimensions.data != nil
+assert dimensions.data.length > 0
+assert dimensions.data.first.name != ''
+assert dimensions.data.first.display_name != ''
+puts "list-realtime-dimensions OK ✅"
 
-# breakdown = rt_api.get_realtime_breakdown('current-rebuffering-percentage', {:dimension => 'asn'})
-# puts breakdown
+# ========== list-realtime-metrics ==========
+metrics = rt_api.list_realtime_metrics
+assert metrics != nil
+assert metrics.data != nil
+assert metrics.data.length > 0
+assert metrics.data.first.name != ''
+assert metrics.data.first.display_name != ''
+puts "list-realtime-metrics OK ✅"
 
+# ========== get-realtime-breakdown ==========
+breakdown = rt_api.get_realtime_breakdown('current-rebuffering-percentage', {:dimension => 'asn'})
+assert breakdown != nil
+assert breakdown.data != nil
+puts "get-realtime-breakdown OK ✅"
+
+# ========== get-realtime-histogram-timeseries ==========
 histogram_timeseries = rt_api.get_realtime_histogram_timeseries('video-startup-time')
-puts histogram_timeseries
+assert histogram_timeseries != nil
+assert histogram_timeseries.meta != nil
+assert histogram_timeseries.meta.buckets != nil
+assert histogram_timeseries.meta.buckets.length > 0
+assert histogram_timeseries.data != nil
+assert histogram_timeseries.data.length > 0
+puts "get-realtime-histogram-timeseries OK ✅"
 
-# timeseries = rt_api.get_realtime_timeseries('current-rebuffering-percentage')
-# puts timeseries
+# ========== get-realtime-timeseries ==========
+timeseries = rt_api.get_realtime_timeseries('current-rebuffering-percentage')
+assert timeseries != nil
+assert timeseries.data != nil
+assert timeseries.data.length > 0
+assert timeseries.data.first.date != ''
+puts "get-realtime-timeseries OK ✅"
