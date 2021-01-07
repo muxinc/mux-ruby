@@ -15,7 +15,7 @@ end
 rt_api = MuxRuby::RealTimeApi.new
 
 # Test coverage here isn't fantastic due to not knowning if the account we're testing against has
-# any real-time data. This has been manually verified against real-world data.
+# any real-time data. The behaviour has been manually verified against real-world data.
 
 # ========== list-realtime-dimensions ==========
 dimensions = rt_api.list_realtime_dimensions
