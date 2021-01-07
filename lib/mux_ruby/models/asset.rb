@@ -257,11 +257,23 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      max_stored_resolution_validator = EnumAttributeValidator.new('String', ['Audio only', 'SD', 'HD', 'FHD', 'UHD'])
+      return false unless max_stored_resolution_validator.valid?(@max_stored_resolution)
       master_access_validator = EnumAttributeValidator.new('String', ['temporary', 'none'])
       return false unless master_access_validator.valid?(@master_access)
       mp4_support_validator = EnumAttributeValidator.new('String', ['standard', 'none'])
       return false unless mp4_support_validator.valid?(@mp4_support)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] max_stored_resolution Object to be assigned
+    def max_stored_resolution=(max_stored_resolution)
+      validator = EnumAttributeValidator.new('String', ['Audio only', 'SD', 'HD', 'FHD', 'UHD'])
+      unless validator.valid?(max_stored_resolution)
+        fail ArgumentError, 'invalid value for "max_stored_resolution", must be one of #{validator.allowable_values}.'
+      end
+      @max_stored_resolution = max_stored_resolution
     end
 
     # Custom attribute writer method checking allowed values (enum).

@@ -6,45 +6,45 @@
 require 'uri'
 
 module MuxRuby
-  class FiltersApi
+  class DimensionsApi
     attr_accessor :api_client
 
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Lists values for a specific filter
-    # Deprecated: The API has been replaced by the list-dimension-values API call.  Lists the values for a filter along with a total count of related views. 
-    # @param filter_id ID of the Filter
+    # Lists the values for a specific dimension
+    # Lists the values for a dimension along with a total count of related views.   Note: This API replaces the list-filter-values API call. 
+    # @param dimension_id ID of the Dimension
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Number of items to include in the response (default to 25)
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60; (default to 1)
     # @option opts [Array<String>] :filters Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US).  Possible filter names are the same as returned by the List Filters endpoint. 
     # @option opts [Array<String>] :timeframe Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]&#x3D;). Accepted formats are...   * array of epoch timestamps e.g. timeframe[]&#x3D;1498867200&amp;timeframe[]&#x3D;1498953600    * duration string e.g. timeframe[]&#x3D;24:hours or timeframe[]&#x3D;7:days. 
-    # @return [ListFilterValuesResponse]
-    def list_filter_values(filter_id, opts = {})
-      data, _status_code, _headers = list_filter_values_with_http_info(filter_id, opts)
+    # @return [ListDimensionValuesResponse]
+    def list_dimension_values(dimension_id, opts = {})
+      data, _status_code, _headers = list_dimension_values_with_http_info(dimension_id, opts)
       data
     end
 
-    # Lists values for a specific filter
-    # Deprecated: The API has been replaced by the list-dimension-values API call.  Lists the values for a filter along with a total count of related views. 
-    # @param filter_id ID of the Filter
+    # Lists the values for a specific dimension
+    # Lists the values for a dimension along with a total count of related views.   Note: This API replaces the list-filter-values API call. 
+    # @param dimension_id ID of the Dimension
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Number of items to include in the response
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60;
     # @option opts [Array<String>] :filters Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US).  Possible filter names are the same as returned by the List Filters endpoint. 
     # @option opts [Array<String>] :timeframe Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]&#x3D;). Accepted formats are...   * array of epoch timestamps e.g. timeframe[]&#x3D;1498867200&amp;timeframe[]&#x3D;1498953600    * duration string e.g. timeframe[]&#x3D;24:hours or timeframe[]&#x3D;7:days. 
-    # @return [Array<(ListFilterValuesResponse, Fixnum, Hash)>] ListFilterValuesResponse data, response status code and response headers
-    def list_filter_values_with_http_info(filter_id, opts = {})
+    # @return [Array<(ListDimensionValuesResponse, Fixnum, Hash)>] ListDimensionValuesResponse data, response status code and response headers
+    def list_dimension_values_with_http_info(dimension_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: FiltersApi.list_filter_values ...'
+        @api_client.config.logger.debug 'Calling API: DimensionsApi.list_dimension_values ...'
       end
-      # verify the required parameter 'filter_id' is set
-      if @api_client.config.client_side_validation && filter_id.nil?
-        fail ArgumentError, "Missing the required parameter 'filter_id' when calling FiltersApi.list_filter_values"
+      # verify the required parameter 'dimension_id' is set
+      if @api_client.config.client_side_validation && dimension_id.nil?
+        fail ArgumentError, "Missing the required parameter 'dimension_id' when calling DimensionsApi.list_dimension_values"
       end
       # resource path
-      local_var_path = '/data/v1/filters/{FILTER_ID}'.sub('{' + 'FILTER_ID' + '}', filter_id.to_s)
+      local_var_path = '/data/v1/dimensions/{DIMENSION_ID}'.sub('{' + 'DIMENSION_ID' + '}', dimension_id.to_s)
 
       # query parameters
       query_params = {}
@@ -70,32 +70,32 @@ module MuxRuby
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'ListFilterValuesResponse')
+        :return_type => 'ListDimensionValuesResponse')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: FiltersApi#list_filter_values\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: DimensionsApi#list_dimension_values\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # List Filters
-    # Deprecated: The API has been replaced by the list-dimensions API call.  Lists all the filters broken out into basic and advanced. 
+    # List Dimensions
+    # List all available dimensions.  Note: This API replaces the list-filters API call. 
     # @param [Hash] opts the optional parameters
-    # @return [ListFiltersResponse]
-    def list_filters(opts = {})
-      data, _status_code, _headers = list_filters_with_http_info(opts)
+    # @return [ListDimensionsResponse]
+    def list_dimensions(opts = {})
+      data, _status_code, _headers = list_dimensions_with_http_info(opts)
       data
     end
 
-    # List Filters
-    # Deprecated: The API has been replaced by the list-dimensions API call.  Lists all the filters broken out into basic and advanced. 
+    # List Dimensions
+    # List all available dimensions.  Note: This API replaces the list-filters API call. 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ListFiltersResponse, Fixnum, Hash)>] ListFiltersResponse data, response status code and response headers
-    def list_filters_with_http_info(opts = {})
+    # @return [Array<(ListDimensionsResponse, Fixnum, Hash)>] ListDimensionsResponse data, response status code and response headers
+    def list_dimensions_with_http_info(opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: FiltersApi.list_filters ...'
+        @api_client.config.logger.debug 'Calling API: DimensionsApi.list_dimensions ...'
       end
       # resource path
-      local_var_path = '/data/v1/filters'
+      local_var_path = '/data/v1/dimensions'
 
       # query parameters
       query_params = {}
@@ -117,9 +117,9 @@ module MuxRuby
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'ListFiltersResponse')
+        :return_type => 'ListDimensionsResponse')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: FiltersApi#list_filters\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: DimensionsApi#list_dimensions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
