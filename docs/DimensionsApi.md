@@ -1,19 +1,19 @@
-# MuxRuby::FiltersApi
+# MuxRuby::DimensionsApi
 
 All URIs are relative to *https://api.mux.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**list_filter_values**](FiltersApi.md#list_filter_values) | **GET** /data/v1/filters/{FILTER_ID} | Lists values for a specific filter
-[**list_filters**](FiltersApi.md#list_filters) | **GET** /data/v1/filters | List Filters
+[**list_dimension_values**](DimensionsApi.md#list_dimension_values) | **GET** /data/v1/dimensions/{DIMENSION_ID} | Lists the values for a specific dimension
+[**list_dimensions**](DimensionsApi.md#list_dimensions) | **GET** /data/v1/dimensions | List Dimensions
 
 
-# **list_filter_values**
-> ListFilterValuesResponse list_filter_values(filter_id, opts)
+# **list_dimension_values**
+> ListDimensionValuesResponse list_dimension_values(dimension_id, opts)
 
-Lists values for a specific filter
+Lists the values for a specific dimension
 
-Deprecated: The API has been replaced by the list-dimension-values API call.  Lists the values for a filter along with a total count of related views. 
+Lists the values for a dimension along with a total count of related views.   Note: This API replaces the list-filter-values API call. 
 
 ### Example
 ```ruby
@@ -26,8 +26,8 @@ MuxRuby.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = MuxRuby::FiltersApi.new
-filter_id = 'abcd1234' # String | ID of the Filter
+api_instance = MuxRuby::DimensionsApi.new
+dimension_id = 'abcd1234' # String | ID of the Dimension
 opts = {
   limit: 25, # Integer | Number of items to include in the response
   page: 1, # Integer | Offset by this many pages, of the size of `limit`
@@ -36,11 +36,11 @@ opts = {
 }
 
 begin
-  #Lists values for a specific filter
-  result = api_instance.list_filter_values(filter_id, opts)
+  #Lists the values for a specific dimension
+  result = api_instance.list_dimension_values(dimension_id, opts)
   p result
 rescue MuxRuby::ApiError => e
-  puts "Exception when calling FiltersApi->list_filter_values: #{e}"
+  puts "Exception when calling DimensionsApi->list_dimension_values: #{e}"
 end
 ```
 
@@ -48,7 +48,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **filter_id** | **String**| ID of the Filter | 
+ **dimension_id** | **String**| ID of the Dimension | 
  **limit** | **Integer**| Number of items to include in the response | [optional] [default to 25]
  **page** | **Integer**| Offset by this many pages, of the size of &#x60;limit&#x60; | [optional] [default to 1]
  **filters** | [**Array&lt;String&gt;**](String.md)| Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US).  Possible filter names are the same as returned by the List Filters endpoint.  | [optional] 
@@ -56,7 +56,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListFilterValuesResponse**](ListFilterValuesResponse.md)
+[**ListDimensionValuesResponse**](ListDimensionValuesResponse.md)
 
 ### Authorization
 
@@ -69,12 +69,12 @@ Name | Type | Description  | Notes
 
 
 
-# **list_filters**
-> ListFiltersResponse list_filters
+# **list_dimensions**
+> ListDimensionsResponse list_dimensions
 
-List Filters
+List Dimensions
 
-Deprecated: The API has been replaced by the list-dimensions API call.  Lists all the filters broken out into basic and advanced. 
+List all available dimensions.  Note: This API replaces the list-filters API call. 
 
 ### Example
 ```ruby
@@ -87,14 +87,14 @@ MuxRuby.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = MuxRuby::FiltersApi.new
+api_instance = MuxRuby::DimensionsApi.new
 
 begin
-  #List Filters
-  result = api_instance.list_filters
+  #List Dimensions
+  result = api_instance.list_dimensions
   p result
 rescue MuxRuby::ApiError => e
-  puts "Exception when calling FiltersApi->list_filters: #{e}"
+  puts "Exception when calling DimensionsApi->list_dimensions: #{e}"
 end
 ```
 
@@ -103,7 +103,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ListFiltersResponse**](ListFiltersResponse.md)
+[**ListDimensionsResponse**](ListDimensionsResponse.md)
 
 ### Authorization
 
