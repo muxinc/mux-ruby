@@ -39,8 +39,8 @@ module MuxRuby
       {
         :'timestamp' => :'String',
         :'sum' => :'Integer',
-        :'p95' => :'Integer',
-        :'median' => :'Integer',
+        :'p95' => :'Float',
+        :'median' => :'Float',
         :'max_percentage' => :'Float',
         :'bucket_values' => :'Array<RealTimeHistogramTimeseriesBucketValues>',
         :'average' => :'Float'
