@@ -2,7 +2,7 @@ name: Release to RubyGems
 
 on:
   release:
-    types: [created]
+    types: [created, published]
 
 jobs:
   build:
@@ -17,6 +17,17 @@ jobs:
           ruby-version: 2.6.x
       - name: Update system rubygems
         run: gem update --system
+      #
+      - name: Install Bundler
+        run: gem install bundler
+      - name: Install Ruby Dependencies
+        run: bundle install --jobs 4 --retry 3
+      - name: Run Integration Tests
+        env:
+          MUX_TOKEN_ID: ${{ secrets.MUX_TOKEN_ID }}
+          MUX_TOKEN_SECRET: ${{ secrets.MUX_TOKEN_SECRET }}
+        run: bash test.sh
+      #
       - name: Build Gem
         run: gem build -o mux_ruby.gem mux_ruby.gemspec
       - name: Push Gem to RubyGems
