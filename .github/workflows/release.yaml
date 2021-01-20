@@ -2,6 +2,8 @@ name: Release to RubyGems
 
 on:
   release:
+    # `created` does not fire on draft releases. `published` fires
+    # when a draft release is published. having both reduces footguns.
     types: [created, published]
 
 jobs:
