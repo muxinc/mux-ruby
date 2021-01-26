@@ -7,7 +7,10 @@ require 'date'
 
 module MuxRuby
   class AssetStaticRenditions
-    # * `ready`: All MP4s are downloadable * `preparing`: We are preparing the MP4s * `disabled`: MP4 support was not requested or has been removed * `errored`: There was a Mux internal error that prevented the MP4s from being created 
+    # * `ready`: All MP4s are downloadable
+    # * `preparing`: We are preparing the MP4s
+    # * `disabled`: MP4 support was not requested or has been removed
+    # * `errored`: There was a Mux internal error that prevented the MP4s from being created
     attr_accessor :status
 
     attr_accessor :files
