@@ -128,7 +128,7 @@ module MuxRuby
     def vertical_align=(vertical_align)
       validator = EnumAttributeValidator.new('String', ['top', 'middle', 'bottom'])
       unless validator.valid?(vertical_align)
-        fail ArgumentError, 'invalid value for "vertical_align", must be one of #{validator.allowable_values}.'
+        fail ArgumentError, "invalid value for \"vertical_align\", must be one of #{validator.allowable_values}."
       end
       @vertical_align = vertical_align
     end
@@ -138,7 +138,7 @@ module MuxRuby
     def horizontal_align=(horizontal_align)
       validator = EnumAttributeValidator.new('String', ['left', 'center', 'right'])
       unless validator.valid?(horizontal_align)
-        fail ArgumentError, 'invalid value for "horizontal_align", must be one of #{validator.allowable_values}.'
+        fail ArgumentError, "invalid value for \"horizontal_align\", must be one of #{validator.allowable_values}."
       end
       @horizontal_align = horizontal_align
     end

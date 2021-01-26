@@ -124,7 +124,7 @@ module MuxRuby
     def name=(name)
       validator = EnumAttributeValidator.new('String', ['low.mp4', 'medium.mp4', 'high.mp4', 'audio.m4a'])
       unless validator.valid?(name)
-        fail ArgumentError, 'invalid value for "name", must be one of #{validator.allowable_values}.'
+        fail ArgumentError, "invalid value for \"name\", must be one of #{validator.allowable_values}."
       end
       @name = name
     end
@@ -134,7 +134,7 @@ module MuxRuby
     def ext=(ext)
       validator = EnumAttributeValidator.new('String', ['mp4', 'm4a'])
       unless validator.valid?(ext)
-        fail ArgumentError, 'invalid value for "ext", must be one of #{validator.allowable_values}.'
+        fail ArgumentError, "invalid value for \"ext\", must be one of #{validator.allowable_values}."
       end
       @ext = ext
     end
