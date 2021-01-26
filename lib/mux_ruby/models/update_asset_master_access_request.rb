@@ -79,7 +79,7 @@ module MuxRuby
     def master_access=(master_access)
       validator = EnumAttributeValidator.new('String', ['temporary', 'none'])
       unless validator.valid?(master_access)
-        fail ArgumentError, 'invalid value for "master_access", must be one of #{validator.allowable_values}.'
+        fail ArgumentError, "invalid value for 'master_access', must be one of #{validator.allowable_values}."
       end
       @master_access = master_access
     end

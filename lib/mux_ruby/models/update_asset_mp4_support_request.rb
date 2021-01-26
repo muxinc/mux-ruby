@@ -79,7 +79,7 @@ module MuxRuby
     def mp4_support=(mp4_support)
       validator = EnumAttributeValidator.new('String', ['standard', 'none'])
       unless validator.valid?(mp4_support)
-        fail ArgumentError, 'invalid value for "mp4_support", must be one of #{validator.allowable_values}.'
+        fail ArgumentError, "invalid value for 'mp4_support', must be one of #{validator.allowable_values}."
       end
       @mp4_support = mp4_support
     end
