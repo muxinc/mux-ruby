@@ -115,7 +115,7 @@ module MuxRuby
     def status=(status)
       validator = EnumAttributeValidator.new('String', ['idle', 'starting', 'broadcasting', 'errored'])
       unless validator.valid?(status)
-        fail ArgumentError, 'invalid value for "status", must be one of #{validator.allowable_values}.'
+        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
       end
       @status = status
     end

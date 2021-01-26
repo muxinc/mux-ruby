@@ -157,7 +157,7 @@ module MuxRuby
     def video_gop_size=(video_gop_size)
       validator = EnumAttributeValidator.new('String', ['high'])
       unless validator.valid?(video_gop_size)
-        fail ArgumentError, 'invalid value for "video_gop_size", must be one of #{validator.allowable_values}.'
+        fail ArgumentError, "invalid value for \"video_gop_size\", must be one of #{validator.allowable_values}."
       end
       @video_gop_size = video_gop_size
     end
@@ -167,7 +167,7 @@ module MuxRuby
     def video_edit_list=(video_edit_list)
       validator = EnumAttributeValidator.new('String', ['non-standard'])
       unless validator.valid?(video_edit_list)
-        fail ArgumentError, 'invalid value for "video_edit_list", must be one of #{validator.allowable_values}.'
+        fail ArgumentError, "invalid value for \"video_edit_list\", must be one of #{validator.allowable_values}."
       end
       @video_edit_list = video_edit_list
     end
@@ -177,7 +177,7 @@ module MuxRuby
     def audio_edit_list=(audio_edit_list)
       validator = EnumAttributeValidator.new('String', ['non-standard'])
       unless validator.valid?(audio_edit_list)
-        fail ArgumentError, 'invalid value for "audio_edit_list", must be one of #{validator.allowable_values}.'
+        fail ArgumentError, "invalid value for \"audio_edit_list\", must be one of #{validator.allowable_values}."
       end
       @audio_edit_list = audio_edit_list
     end
@@ -187,7 +187,7 @@ module MuxRuby
     def unexpected_media_file_parameters=(unexpected_media_file_parameters)
       validator = EnumAttributeValidator.new('String', ['non-standard'])
       unless validator.valid?(unexpected_media_file_parameters)
-        fail ArgumentError, 'invalid value for "unexpected_media_file_parameters", must be one of #{validator.allowable_values}.'
+        fail ArgumentError, "invalid value for \"unexpected_media_file_parameters\", must be one of #{validator.allowable_values}."
       end
       @unexpected_media_file_parameters = unexpected_media_file_parameters
     end
