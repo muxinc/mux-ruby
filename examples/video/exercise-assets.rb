@@ -13,6 +13,7 @@ end
 
 # API Client Initialization
 assets_api = MuxRuby::AssetsApi.new
+playback_ids_api = MuxRuby::PlaybackIDApi.new
 
 # ========== create-asset ==========
 car = MuxRuby::CreateAssetRequest.new
@@ -66,6 +67,12 @@ assert pb_id != nil
 assert pb_id.data != nil
 assert pb_id.data.id == pb_id_c.data.id
 puts "get-asset-playback-id OK ✅"
+
+# ========== get-asset-or-livestream-id ==========
+get_playback_id_resp = playback_ids_api.get_asset_or_livestream_id(pb_id.data.id).data
+assert get_playback_id_resp.object.id == create_response.data.id
+assert get_playback_id_resp.object.type == "asset"
+puts "get-asset-or-livestream-id OK ✅"
 
 # ========== update-asset-mp4-support ==========
 mp4_req = MuxRuby::UpdateAssetMP4SupportRequest.new
