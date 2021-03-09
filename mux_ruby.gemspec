@@ -21,6 +21,8 @@ Gem::Specification.new do |s|
   s.required_ruby_version = ">= 1.9"
   s.metadata    = { "source_code_uri" => "https://github.com/muxinc/mux-ruby" }
 
+  s.metadata    = { "source_code_uri" => "https://github.com/muxinc/mux-ruby" }
+
   s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
   s.add_runtime_dependency 'json', '~> 2.1', '>= 2.1.0'
 
