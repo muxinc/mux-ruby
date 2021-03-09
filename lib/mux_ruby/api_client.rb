@@ -58,32 +58,32 @@ module MuxRuby
           fail UnauthorizedError.new(:code => response.code,
                                      :response_headers => response.headers,
                                      :response_body => response.body,
-                                     :message => response.return_message)
+                                     :message => response.status_message)
         elsif response.code == 403
           fail ForbiddenError.new(:code => response.code,
                                   :response_headers => response.headers,
                                   :response_body => response.body,
-                                  :message => response.return_message)
+                                  :message => response.status_message)
         elsif response.code == 404
           fail NotFoundError.new(:code => response.code,
                                  :response_headers => response.headers,
                                  :response_body => response.body,
-                                 :message => response.return_message)
+                                 :message => response.status_message)
         elsif response.code == 429
           fail TooManyRequestsError.new(:code => response.code,
                                  :response_headers => response.headers,
                                  :response_body => response.body,
-                                 :message => response.return_message)
+                                 :message => response.status_message)
         elsif response.code.between?(500, 599)
           fail ServiceError.new(:code => response.code,
                                 :response_headers => response.headers,
                                 :response_body => response.body,
-                                :message => response.return_message)
+                                :message => response.status_message)
         else
           fail ApiError.new(:code => response.code,
                             :response_headers => response.headers,
                             :response_body => response.body,
-                            :message => response.return_message)
+                            :message => response.status_message)
         end
       end
 

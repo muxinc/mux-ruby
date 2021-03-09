@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
   s.description = "Ruby API wrapper for Mux"
   s.license     = "MIT"
   s.required_ruby_version = ">= 1.9"
-  s.metadata    = { "source_code_uri" => "https://github.com/muxinc/mux-ruby" }
 
   s.metadata    = { "source_code_uri" => "https://github.com/muxinc/mux-ruby" }
 
