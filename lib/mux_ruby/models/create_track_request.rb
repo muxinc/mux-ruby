@@ -13,12 +13,16 @@ module MuxRuby
 
     attr_accessor :text_type
 
+    # The language code value must be a valid BCP 47 specification compliant value. For example, en for English or en-US for the US version of English.
     attr_accessor :language_code
 
+    # The name of the track containing a human-readable description. This value must be unqiue across all the text type and subtitles text type tracks. HLS manifest will associate subtitle text track with this value. For example, set the value to \"English\" for subtitles text track with language_code as en-US. If this parameter is not included, Mux will auto-populate based on the language_code value.
     attr_accessor :name
 
+    # Indicates the track provides Subtitles for the Deaf or Hard-of-hearing (SDH).
     attr_accessor :closed_captions
 
+    # Arbitrary metadata set for the track either when creating the asset or track.
     attr_accessor :passthrough
 
     class EnumAttributeValidator

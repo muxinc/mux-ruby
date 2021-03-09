@@ -6,22 +6,29 @@
 require 'date'
 
 module MuxRuby
-  # Input object with additional configuration
+  # An array of objects that each describe an input file to be used to create the asset. As a shortcut, `input` can also be a string URL for a file when only one input file is used. See `input[].url` for requirements.
   class InputSettings
+    # The web address of the subtitle text track file that Mux should download and use to create the track. Mux supports [SubRip Text (SRT)](https://en.wikipedia.org/wiki/SubRip) and [Web Video Text Tracks](https://www.w3.org/TR/webvtt1/) format for ingesting Subtitles and Closed Captions.
     attr_accessor :url
 
     attr_accessor :overlay_settings
 
+    # This parameter is required for the `text` track type.
     attr_accessor :type
 
+    # Type of text track. This parameter only supports subtitles value. For more information on Subtitles / Closed Captions, [see this blog post](https://mux.com/blog/subtitles-captions-webvtt-hls-and-those-magic-flags/). This parameter is required for `text` track type.
     attr_accessor :text_type
 
+    # The language code value must be a valid [BCP 47](https://tools.ietf.org/html/bcp47) specification compliant value. For example, en for English or en-US for the US version of English. This parameter is required for text type and subtitles text type track.
     attr_accessor :language_code
 
+    # The name of the track containing a human-readable description. This value must be unique across all text type and subtitles `text` type tracks. The hls manifest will associate a subtitle text track with this value. For example, the value should be \"English\" for subtitles text track with language_code as en. This optional parameter should be used only for `text` type and subtitles `text` type track. If this parameter is not included, Mux will auto-populate based on the `input[].language_code` value.
     attr_accessor :name
 
+    # Indicates the track provides Subtitles for the Deaf or Hard-of-hearing (SDH). This optional parameter should be used for `text` type and subtitles `text` type tracks.
     attr_accessor :closed_captions
 
+    # This optional parameter should be used for `text` type and subtitles `text` type tracks.
     attr_accessor :passthrough
 
     class EnumAttributeValidator

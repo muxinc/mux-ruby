@@ -37,7 +37,7 @@ MuxRuby.configure do |config|
 end
 
 api_instance = MuxRuby::AssetsApi.new
-create_asset_request = MuxRuby::CreateAssetRequest.new # CreateAssetRequest | 
+create_asset_request = {"input":"https://muxed.s3.amazonaws.com/leds.mp4","playback_policy":["public"]} # CreateAssetRequest | 
 
 begin
   #Create an asset
@@ -87,7 +87,7 @@ end
 
 api_instance = MuxRuby::AssetsApi.new
 asset_id = 'asset_id_example' # String | The asset ID.
-create_playback_id_request = MuxRuby::CreatePlaybackIDRequest.new # CreatePlaybackIDRequest | 
+create_playback_id_request = {"policy":"public"} # CreatePlaybackIDRequest | 
 
 begin
   #Create a playback ID
@@ -138,7 +138,7 @@ end
 
 api_instance = MuxRuby::AssetsApi.new
 asset_id = 'asset_id_example' # String | The asset ID.
-create_track_request = MuxRuby::CreateTrackRequest.new # CreateTrackRequest | 
+create_track_request = {"url":"https://example.com/myVideo_en.srt","type":"text","text_type":"subtitles","language_code":"en-US","name":"English","closed_captions":true,"passthrough":"English"} # CreateTrackRequest | 
 
 begin
   #Create an asset track
@@ -175,6 +175,8 @@ Name | Type | Description  | Notes
 > delete_asset(asset_id)
 
 Delete an asset
+
+Deletes a video asset and all its data 
 
 ### Example
 ```ruby
@@ -477,6 +479,8 @@ Name | Type | Description  | Notes
 
 List assets
 
+List all Mux assets. 
+
 ### Example
 ```ruby
 # load the gem
@@ -545,7 +549,7 @@ end
 
 api_instance = MuxRuby::AssetsApi.new
 asset_id = 'asset_id_example' # String | The asset ID.
-update_asset_master_access_request = MuxRuby::UpdateAssetMasterAccessRequest.new # UpdateAssetMasterAccessRequest | 
+update_asset_master_access_request = {"master_access":"temporary"} # UpdateAssetMasterAccessRequest | 
 
 begin
   #Update master access
@@ -598,7 +602,7 @@ end
 
 api_instance = MuxRuby::AssetsApi.new
 asset_id = 'asset_id_example' # String | The asset ID.
-update_asset_mp4_support_request = MuxRuby::UpdateAssetMP4SupportRequest.new # UpdateAssetMP4SupportRequest | 
+update_asset_mp4_support_request = {"mp4_support":"standard"} # UpdateAssetMP4SupportRequest | 
 
 begin
   #Update MP4 support

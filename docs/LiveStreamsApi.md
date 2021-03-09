@@ -36,7 +36,7 @@ MuxRuby.configure do |config|
 end
 
 api_instance = MuxRuby::LiveStreamsApi.new
-create_live_stream_request = MuxRuby::CreateLiveStreamRequest.new # CreateLiveStreamRequest | 
+create_live_stream_request = {"playback_policy":"public","new_asset_settings":{"playback_policy":"public"}} # CreateLiveStreamRequest | 
 
 begin
   #Create a live stream
@@ -86,7 +86,7 @@ end
 
 api_instance = MuxRuby::LiveStreamsApi.new
 live_stream_id = 'live_stream_id_example' # String | The live stream ID
-create_playback_id_request = MuxRuby::CreatePlaybackIDRequest.new # CreatePlaybackIDRequest | 
+create_playback_id_request = {"policy":"signed"} # CreatePlaybackIDRequest | 
 
 begin
   #Create a live stream playback ID
@@ -139,7 +139,7 @@ end
 
 api_instance = MuxRuby::LiveStreamsApi.new
 live_stream_id = 'live_stream_id_example' # String | The live stream ID
-create_simulcast_target_request = MuxRuby::CreateSimulcastTargetRequest.new # CreateSimulcastTargetRequest | 
+create_simulcast_target_request = {"url":"rtmp://live.example.com/app","stream_key":"abcdefgh","passthrough":"Example"} # CreateSimulcastTargetRequest | 
 
 begin
   #Create a live stream simulcast target

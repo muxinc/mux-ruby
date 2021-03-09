@@ -63,6 +63,7 @@ describe 'AssetsApi' do
 
   # unit tests for delete_asset
   # Delete an asset
+  # Deletes a video asset and all its data 
   # @param asset_id The asset ID.
   # @param [Hash] opts the optional parameters
   # @return [nil]
@@ -134,6 +135,7 @@ describe 'AssetsApi' do
 
   # unit tests for list_assets
   # List assets
+  # List all Mux assets. 
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :limit Number of items to include in the response
   # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60;
