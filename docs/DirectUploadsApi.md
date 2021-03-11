@@ -78,7 +78,7 @@ MuxRuby.configure do |config|
 end
 
 api_instance = MuxRuby::DirectUploadsApi.new
-create_upload_request = {"cors_origin":"https://example.com/","new_asset_settings":{"playback_policy":["public"],"mp4_support":"standard"}} # CreateUploadRequest | 
+create_upload_request = MuxRuby::CreateUploadRequest.new # CreateUploadRequest | 
 
 begin
   #Create a new direct upload URL
