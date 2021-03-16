@@ -549,7 +549,7 @@ end
 
 api_instance = MuxRuby::AssetsApi.new
 asset_id = 'asset_id_example' # String | The asset ID.
-update_asset_master_access_request = MuxRuby::CreateTrackRequest.new # UpdateAssetMasterAccessRequest | 
+update_asset_master_access_request = MuxRuby::UpdateAssetMasterAccessRequest.new # UpdateAssetMasterAccessRequest | 
 
 begin
   #Update master access

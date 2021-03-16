@@ -86,7 +86,7 @@ end
 
 api_instance = MuxRuby::LiveStreamsApi.new
 live_stream_id = 'live_stream_id_example' # String | The live stream ID
-create_playback_id_request = MuxRuby::CreateLiveStreamRequest.new # CreatePlaybackIDRequest | 
+create_playback_id_request = MuxRuby::CreatePlaybackIDRequest.new # CreatePlaybackIDRequest | 
 
 begin
   #Create a live stream playback ID
