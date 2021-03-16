@@ -7,8 +7,10 @@ require 'date'
 
 module MuxRuby
   class AssetErrors
+    # The type of error that occurred for this asset.
     attr_accessor :type
 
+    # Error messages with more details.
     attr_accessor :messages
 
     # Attribute mapping from ruby-style variable name to JSON key.

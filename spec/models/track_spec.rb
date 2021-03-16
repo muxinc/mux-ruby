@@ -74,6 +74,10 @@ describe 'Track' do
   describe 'test attribute "max_channel_layout"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["mono", "stereo", "5.2", "7.1"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.max_channel_layout = value }.not_to raise_error
+      # end
     end
   end
 

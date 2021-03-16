@@ -7,20 +7,27 @@ require 'date'
 
 module MuxRuby
   class Asset
+    # Unique identifier for the Asset.
     attr_accessor :id
 
+    # Time at which the object was created. Measured in seconds since the Unix epoch.
     attr_accessor :created_at
 
     attr_accessor :deleted_at
 
+    # The status of the asset.
     attr_accessor :status
 
+    # The duration of the asset in seconds (max duration for a single asset is 24 hours).
     attr_accessor :duration
 
+    # The maximum resolution that has been stored for the asset. The asset may be delivered at lower resolutions depending on the device and bandwidth, however it cannot be delivered at a higher value than is stored.
     attr_accessor :max_stored_resolution
 
+    # The maximum frame rate that has been stored for the asset. The asset may be delivered at lower frame rates depending on the device and bandwidth, however it cannot be delivered at a higher value than is stored. This field may return -1 if the frame rate of the input cannot be reliably determined. 
     attr_accessor :max_stored_frame_rate
 
+    # The aspect ratio of the asset in the form of `width:height`, for example `16:9`.
     attr_accessor :aspect_ratio
 
     attr_accessor :playback_ids
@@ -31,10 +38,13 @@ module MuxRuby
 
     attr_accessor :per_title_encode
 
+    # Whether the asset is created from a live stream and the live stream is currently `active` and not in `idle` state.
     attr_accessor :is_live
 
+    # Arbitrary metadata set for the asset. Max 255 characters.
     attr_accessor :passthrough
 
+    # Unique identifier for the live stream. This is an optional parameter added when the asset is created from a live stream.
     attr_accessor :live_stream_id
 
     attr_accessor :master
@@ -43,6 +53,10 @@ module MuxRuby
 
     attr_accessor :mp4_support
 
+    # Asset Identifier of the video used as the source for creating the clip.
+    attr_accessor :source_asset_id
+
+    # Normalize the audio track loudness level. This parameter is only applicable to on-demand (not live) assets.
     attr_accessor :normalize_audio
 
     attr_accessor :static_renditions
@@ -52,6 +66,7 @@ module MuxRuby
 
     attr_accessor :non_standard_input_reasons
 
+    # Indicates this asset is a test asset if the value is `true`. A Test asset can help evaluate the Mux Video APIs without incurring any cost. There is no limit on number of test assets created. Test assets are watermarked with the Mux logo, limited to 10 seconds, and deleted after 24 hrs.
     attr_accessor :test
 
     class EnumAttributeValidator
@@ -97,6 +112,7 @@ module MuxRuby
         :'master' => :'master',
         :'master_access' => :'master_access',
         :'mp4_support' => :'mp4_support',
+        :'source_asset_id' => :'source_asset_id',
         :'normalize_audio' => :'normalize_audio',
         :'static_renditions' => :'static_renditions',
         :'recording_times' => :'recording_times',
@@ -126,6 +142,7 @@ module MuxRuby
         :'master' => :'AssetMaster',
         :'master_access' => :'String',
         :'mp4_support' => :'String',
+        :'source_asset_id' => :'String',
         :'normalize_audio' => :'BOOLEAN',
         :'static_renditions' => :'AssetStaticRenditions',
         :'recording_times' => :'Array<AssetRecordingTimes>',
@@ -222,6 +239,10 @@ module MuxRuby
         self.mp4_support = 'none'
       end
 
+      if attributes.has_key?(:'source_asset_id')
+        self.source_asset_id = attributes[:'source_asset_id']
+      end
+
       if attributes.has_key?(:'normalize_audio')
         self.normalize_audio = attributes[:'normalize_audio']
       else
@@ -257,6 +278,8 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      status_validator = EnumAttributeValidator.new('String', ['preparing', 'ready', 'errored'])
+      return false unless status_validator.valid?(@status)
       max_stored_resolution_validator = EnumAttributeValidator.new('String', ['Audio only', 'SD', 'HD', 'FHD', 'UHD'])
       return false unless max_stored_resolution_validator.valid?(@max_stored_resolution)
       master_access_validator = EnumAttributeValidator.new('String', ['temporary', 'none'])
@@ -264,6 +287,16 @@ module MuxRuby
       mp4_support_validator = EnumAttributeValidator.new('String', ['standard', 'none'])
       return false unless mp4_support_validator.valid?(@mp4_support)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ['preparing', 'ready', 'errored'])
+      unless validator.valid?(status)
+        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+      end
+      @status = status
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -319,6 +352,7 @@ module MuxRuby
           master == o.master &&
           master_access == o.master_access &&
           mp4_support == o.mp4_support &&
+          source_asset_id == o.source_asset_id &&
           normalize_audio == o.normalize_audio &&
           static_renditions == o.static_renditions &&
           recording_times == o.recording_times &&
@@ -335,7 +369,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created_at, deleted_at, status, duration, max_stored_resolution, max_stored_frame_rate, aspect_ratio, playback_ids, tracks, errors, per_title_encode, is_live, passthrough, live_stream_id, master, master_access, mp4_support, normalize_audio, static_renditions, recording_times, non_standard_input_reasons, test].hash
+      [id, created_at, deleted_at, status, duration, max_stored_resolution, max_stored_frame_rate, aspect_ratio, playback_ids, tracks, errors, per_title_encode, is_live, passthrough, live_stream_id, master, master_access, mp4_support, source_asset_id, normalize_audio, static_renditions, recording_times, non_standard_input_reasons, test].hash
     end
 
     # Builds the object from hash

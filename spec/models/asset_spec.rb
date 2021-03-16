@@ -46,6 +46,10 @@ describe 'Asset' do
   describe 'test attribute "status"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["preparing", "ready", "errored"])
+      # validator.allowable_values.each do |value|
+      #   expect { @instance.status = value }.not_to raise_error
+      # end
     end
   end
 
@@ -142,6 +146,12 @@ describe 'Asset' do
       # validator.allowable_values.each do |value|
       #   expect { @instance.mp4_support = value }.not_to raise_error
       # end
+    end
+  end
+
+  describe 'test attribute "source_asset_id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
