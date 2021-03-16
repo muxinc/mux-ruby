@@ -53,6 +53,19 @@ end
 puts "get-asset OK ✅"
 puts "get-asset-input-info OK ✅"
 
+# ========== clipping ==========
+clip_request = MuxRuby::CreateAssetRequest.new
+clip_request.input = [
+  {
+    url: "mux://assets/#{create_response.data.id}",
+    start_time: 0.0,
+    end_time: 5.0
+  }
+]
+create_clip_response = assets_api.create_asset(clip_request)
+assert create_clip_response != nil
+assert create_clip_response.data.id != nil
+
 # ========== create-asset-playback-id ==========
 cpbr = MuxRuby::CreatePlaybackIDRequest.new
 cpbr.policy = MuxRuby::PlaybackPolicy::PUBLIC
