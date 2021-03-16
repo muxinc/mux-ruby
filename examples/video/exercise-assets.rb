@@ -65,6 +65,7 @@ clip_request.input = [
 create_clip_response = assets_api.create_asset(clip_request)
 assert create_clip_response != nil
 assert create_clip_response.data.id != nil
+puts "clipping OK ✅"
 
 # ========== create-asset-playback-id ==========
 cpbr = MuxRuby::CreatePlaybackIDRequest.new
