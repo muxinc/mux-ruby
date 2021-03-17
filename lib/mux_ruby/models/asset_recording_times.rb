@@ -7,10 +7,10 @@ require 'date'
 
 module MuxRuby
   class AssetRecordingTimes
-    # The time at which the recording for the live stream started. The time value is Unix epoch time represented in ISO 8601 format
+    # The time at which the recording for the live stream started. The time value is Unix epoch time represented in ISO 8601 format.
     attr_accessor :started_at
 
-    # The duration of the live stream recorded. The time value is in seconds
+    # The duration of the live stream recorded. The time value is in seconds.
     attr_accessor :duration
 
     # Attribute mapping from ruby-style variable name to JSON key.

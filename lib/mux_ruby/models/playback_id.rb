@@ -7,6 +7,7 @@ require 'date'
 
 module MuxRuby
   class PlaybackID
+    # Unique identifier for the PlaybackID
     attr_accessor :id
 
     attr_accessor :policy

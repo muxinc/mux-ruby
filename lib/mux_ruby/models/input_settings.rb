@@ -6,22 +6,35 @@
 require 'date'
 
 module MuxRuby
-  # Input object with additional configuration
+  # An array of objects that each describe an input file to be used to create the asset. As a shortcut, `input` can also be a string URL for a file when only one input file is used. See `input[].url` for requirements.
   class InputSettings
+    # The web address of the file that Mux should download and use. * For subtitles text tracks, the url is the location of subtitle/captions file. Mux supports [SubRip Text (SRT)](https://en.wikipedia.org/wiki/SubRip) and [Web Video Text Tracks](https://www.w3.org/TR/webvtt1/) format for ingesting Subtitles and Closed Captions. * For Watermarking or Overlay, the url is the location of the watermark image. * When creating clips from existing Mux assets, the url is defined with `mux://assets/{asset_id}` template where `asset_id` is the Asset Identifier for creating the clip from. 
     attr_accessor :url
 
     attr_accessor :overlay_settings
 
+    # The time offset in seconds from the beginning of the video indicating the clip's starting marker. The default value is 0 when not included.
+    attr_accessor :start_time
+
+    # The time offset in seconds from the beginning of the video, indicating the clip's ending marker. The default value is the duration of the video when not included.
+    attr_accessor :end_time
+
+    # This parameter is required for the `text` track type.
     attr_accessor :type
 
+    # Type of text track. This parameter only supports subtitles value. For more information on Subtitles / Closed Captions, [see this blog post](https://mux.com/blog/subtitles-captions-webvtt-hls-and-those-magic-flags/). This parameter is required for `text` track type.
     attr_accessor :text_type
 
+    # The language code value must be a valid [BCP 47](https://tools.ietf.org/html/bcp47) specification compliant value. For example, en for English or en-US for the US version of English. This parameter is required for text type and subtitles text type track.
     attr_accessor :language_code
 
+    # The name of the track containing a human-readable description. This value must be unique across all text type and subtitles `text` type tracks. The hls manifest will associate a subtitle text track with this value. For example, the value should be \"English\" for subtitles text track with language_code as en. This optional parameter should be used only for `text` type and subtitles `text` type track. If this parameter is not included, Mux will auto-populate based on the `input[].language_code` value.
     attr_accessor :name
 
+    # Indicates the track provides Subtitles for the Deaf or Hard-of-hearing (SDH). This optional parameter should be used for `text` type and subtitles `text` type tracks.
     attr_accessor :closed_captions
 
+    # This optional parameter should be used for `text` type and subtitles `text` type tracks.
     attr_accessor :passthrough
 
     class EnumAttributeValidator
@@ -51,6 +64,8 @@ module MuxRuby
       {
         :'url' => :'url',
         :'overlay_settings' => :'overlay_settings',
+        :'start_time' => :'start_time',
+        :'end_time' => :'end_time',
         :'type' => :'type',
         :'text_type' => :'text_type',
         :'language_code' => :'language_code',
@@ -65,6 +80,8 @@ module MuxRuby
       {
         :'url' => :'String',
         :'overlay_settings' => :'InputSettingsOverlaySettings',
+        :'start_time' => :'Float',
+        :'end_time' => :'Float',
         :'type' => :'String',
         :'text_type' => :'String',
         :'language_code' => :'String',
@@ -88,6 +105,14 @@ module MuxRuby
 
       if attributes.has_key?(:'overlay_settings')
         self.overlay_settings = attributes[:'overlay_settings']
+      end
+
+      if attributes.has_key?(:'start_time')
+        self.start_time = attributes[:'start_time']
+      end
+
+      if attributes.has_key?(:'end_time')
+        self.end_time = attributes[:'end_time']
       end
 
       if attributes.has_key?(:'type')
@@ -159,6 +184,8 @@ module MuxRuby
       self.class == o.class &&
           url == o.url &&
           overlay_settings == o.overlay_settings &&
+          start_time == o.start_time &&
+          end_time == o.end_time &&
           type == o.type &&
           text_type == o.text_type &&
           language_code == o.language_code &&
@@ -176,7 +203,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [url, overlay_settings, type, text_type, language_code, name, closed_captions, passthrough].hash
+      [url, overlay_settings, start_time, end_time, type, text_type, language_code, name, closed_captions, passthrough].hash
     end
 
     # Builds the object from hash

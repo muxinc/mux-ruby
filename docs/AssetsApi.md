@@ -176,6 +176,8 @@ Name | Type | Description  | Notes
 
 Delete an asset
 
+Deletes a video asset and all its data 
+
 ### Example
 ```ruby
 # load the gem
@@ -476,6 +478,8 @@ Name | Type | Description  | Notes
 > ListAssetsResponse list_assets(opts)
 
 List assets
+
+List all Mux assets. 
 
 ### Example
 ```ruby

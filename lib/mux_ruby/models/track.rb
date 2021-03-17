@@ -7,30 +7,43 @@ require 'date'
 
 module MuxRuby
   class Track
+    # Unique identifier for the Track
     attr_accessor :id
 
+    # The type of track
     attr_accessor :type
 
+    # The duration in seconds of the track media. This parameter is not set for the `text` type track. This field is optional and may not be set. The top level `duration` field of an asset will always be set.
     attr_accessor :duration
 
+    # The maximum width in pixels available for the track. Only set for the `video` type track.
     attr_accessor :max_width
 
+    # The maximum height in pixels available for the track. Only set for the `video` type track.
     attr_accessor :max_height
 
+    # The maximum frame rate available for the track. Only set for the `video` type track. This field may return `-1` if the frame rate of the input cannot be reliably determined.
     attr_accessor :max_frame_rate
 
+    # The maximum number of audio channels the track supports. Only set for the `audio` type track.
     attr_accessor :max_channels
 
+    # Only set for the `audio` type track.
     attr_accessor :max_channel_layout
 
+    # This parameter is set only for the `text` type track.
     attr_accessor :text_type
 
+    # The language code value represents [BCP 47](https://tools.ietf.org/html/bcp47) specification compliant value. For example, `en` for English or `en-US` for the US version of English. This parameter is set for `text` type and `subtitles` text type track.
     attr_accessor :language_code
 
+    # The name of the track containing a human-readable description. The hls manifest will associate a subtitle text track with this value. For example, the value is \"English\" for subtitles text track for the `language_code` value of `en-US`. This parameter is set for the `text` type and `subtitles` text type track.
     attr_accessor :name
 
+    # Indicates the track provides Subtitles for the Deaf or Hard-of-hearing (SDH). This parameter is set for the `text` type and `subtitles` text type track.
     attr_accessor :closed_captions
 
+    # Arbitrary metadata set for the track either when creating the asset or track. This parameter is set for `text` type and `subtitles` text type track. Max 255 characters.
     attr_accessor :passthrough
 
     class EnumAttributeValidator
@@ -166,6 +179,8 @@ module MuxRuby
     def valid?
       type_validator = EnumAttributeValidator.new('String', ['video', 'audio', 'text'])
       return false unless type_validator.valid?(@type)
+      max_channel_layout_validator = EnumAttributeValidator.new('String', ['mono', 'stereo', '5.2', '7.1'])
+      return false unless max_channel_layout_validator.valid?(@max_channel_layout)
       text_type_validator = EnumAttributeValidator.new('String', ['subtitles'])
       return false unless text_type_validator.valid?(@text_type)
       true
@@ -179,6 +194,16 @@ module MuxRuby
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] max_channel_layout Object to be assigned
+    def max_channel_layout=(max_channel_layout)
+      validator = EnumAttributeValidator.new('String', ['mono', 'stereo', '5.2', '7.1'])
+      unless validator.valid?(max_channel_layout)
+        fail ArgumentError, "invalid value for \"max_channel_layout\", must be one of #{validator.allowable_values}."
+      end
+      @max_channel_layout = max_channel_layout
     end
 
     # Custom attribute writer method checking allowed values (enum).

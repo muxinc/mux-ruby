@@ -6,26 +6,49 @@
 require 'date'
 
 module MuxRuby
-  class AssetErrors
-    # The type of error that occurred for this asset.
+  # Describes the Asset or LiveStream object associated with the playback ID.
+  class GetAssetOrLiveStreamIdResponseDataObject
+    # The identifier of the object.
+    attr_accessor :id
+
+    # Identifies the object type associated with the playback ID.
     attr_accessor :type
 
-    # Error messages with more details.
-    attr_accessor :messages
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'type' => :'type',
-        :'messages' => :'messages'
+        :'id' => :'id',
+        :'type' => :'type'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'type' => :'String',
-        :'messages' => :'Array<String>'
+        :'id' => :'String',
+        :'type' => :'String'
       }
     end
 
@@ -37,14 +60,12 @@ module MuxRuby
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'messages')
-        if (value = attributes[:'messages']).is_a?(Array)
-          self.messages = value
-        end
+      if attributes.has_key?(:'type')
+        self.type = attributes[:'type']
       end
     end
 
@@ -58,7 +79,19 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      type_validator = EnumAttributeValidator.new('String', ['asset', 'live_stream'])
+      return false unless type_validator.valid?(@type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ['asset', 'live_stream'])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -66,8 +99,8 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          type == o.type &&
-          messages == o.messages
+          id == o.id &&
+          type == o.type
     end
 
     # @see the `==` method
@@ -79,7 +112,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [type, messages].hash
+      [id, type].hash
     end
 
     # Builds the object from hash

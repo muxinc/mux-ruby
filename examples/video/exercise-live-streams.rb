@@ -13,6 +13,7 @@ end
 
 # API Client Initialization
 live_api = MuxRuby::LiveStreamsApi.new
+playback_ids_api = MuxRuby::PlaybackIDApi.new
 
 # ========== create-live-stream ==========
 create_asset_request = MuxRuby::CreateAssetRequest.new
@@ -40,6 +41,13 @@ assert stream_get != nil
 assert stream_get.data != nil
 assert stream_get.data.id == stream.data.id
 puts "get-live-stream OK ✅"
+
+# ========== get-asset-or-livestream-id ==========
+playback_id = stream.data.playback_ids.first.id
+get_playback_id_resp = playback_ids_api.get_asset_or_livestream_id(playback_id).data
+assert get_playback_id_resp.object.id == stream.data.id
+assert get_playback_id_resp.object.type == "live_stream"
+puts "get-asset-or-livestream-id OK ✅"
 
 # ========== create-live-stream-simulcast-target ==========
 create_simulcast_target = MuxRuby::CreateSimulcastTargetRequest.new

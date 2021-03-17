@@ -7,31 +7,31 @@ require 'date'
 
 module MuxRuby
   class AssetNonStandardInputReasons
-    # The video codec used on the input file
+    # The video codec used on the input file.
     attr_accessor :video_codec
 
-    # The audio codec used on the input file
+    # The audio codec used on the input file.
     attr_accessor :audio_codec
 
-    # The video key frame Interval (also called as Group of Picture or GOP) of the input file
+    # The video key frame Interval (also called as Group of Picture or GOP) of the input file.
     attr_accessor :video_gop_size
 
-    # The video frame rate of the input file
+    # The video frame rate of the input file.
     attr_accessor :video_frame_rate
 
-    # The video resolution of the input file
+    # The video resolution of the input file.
     attr_accessor :video_resolution
 
-    # The video pixel aspect ratio of the input file
+    # The video pixel aspect ratio of the input file.
     attr_accessor :pixel_aspect_ratio
 
-    # Video Edit List reason indicates that the input file's video track contains a complex Edit Decision List
+    # Video Edit List reason indicates that the input file's video track contains a complex Edit Decision List.
     attr_accessor :video_edit_list
 
-    # Audio Edit List reason indicates that the input file's audio track contains a complex Edit Decision List
+    # Audio Edit List reason indicates that the input file's audio track contains a complex Edit Decision List.
     attr_accessor :audio_edit_list
 
-    # A catch-all reason when the input file in created with non-standard encoding parameters
+    # A catch-all reason when the input file in created with non-standard encoding parameters.
     attr_accessor :unexpected_media_file_parameters
 
     class EnumAttributeValidator

@@ -6,26 +6,29 @@
 require 'date'
 
 module MuxRuby
-  class AssetErrors
-    # The type of error that occurred for this asset.
-    attr_accessor :type
+  class GetAssetOrLiveStreamIdResponseData
+    # The Playback ID used to retrieve the corresponding asset or the live stream ID
+    attr_accessor :id
 
-    # Error messages with more details.
-    attr_accessor :messages
+    attr_accessor :policy
+
+    attr_accessor :object
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'type' => :'type',
-        :'messages' => :'messages'
+        :'id' => :'id',
+        :'policy' => :'policy',
+        :'object' => :'object'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'type' => :'String',
-        :'messages' => :'Array<String>'
+        :'id' => :'String',
+        :'policy' => :'PlaybackPolicy',
+        :'object' => :'GetAssetOrLiveStreamIdResponseDataObject'
       }
     end
 
@@ -37,14 +40,16 @@ module MuxRuby
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'messages')
-        if (value = attributes[:'messages']).is_a?(Array)
-          self.messages = value
-        end
+      if attributes.has_key?(:'policy')
+        self.policy = attributes[:'policy']
+      end
+
+      if attributes.has_key?(:'object')
+        self.object = attributes[:'object']
       end
     end
 
@@ -66,8 +71,9 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          type == o.type &&
-          messages == o.messages
+          id == o.id &&
+          policy == o.policy &&
+          object == o.object
     end
 
     # @see the `==` method
@@ -79,7 +85,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [type, messages].hash
+      [id, policy, object].hash
     end
 
     # Builds the object from hash

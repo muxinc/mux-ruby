@@ -6,26 +6,20 @@
 require 'date'
 
 module MuxRuby
-  class AssetErrors
-    # The type of error that occurred for this asset.
-    attr_accessor :type
-
-    # Error messages with more details.
-    attr_accessor :messages
+  class GetAssetOrLiveStreamIdResponse
+    attr_accessor :data
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'type' => :'type',
-        :'messages' => :'messages'
+        :'data' => :'data'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'type' => :'String',
-        :'messages' => :'Array<String>'
+        :'data' => :'GetAssetOrLiveStreamIdResponseData'
       }
     end
 
@@ -37,14 +31,8 @@ module MuxRuby
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.has_key?(:'messages')
-        if (value = attributes[:'messages']).is_a?(Array)
-          self.messages = value
-        end
+      if attributes.has_key?(:'data')
+        self.data = attributes[:'data']
       end
     end
 
@@ -66,8 +54,7 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          type == o.type &&
-          messages == o.messages
+          data == o.data
     end
 
     # @see the `==` method
@@ -79,7 +66,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [type, messages].hash
+      [data].hash
     end
 
     # Builds the object from hash
