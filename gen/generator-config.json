@@ -1,0 +1,10 @@
+{
+    "gemAuthor": "Mux",
+    "gemAuthorEmail": "devex@mux.com",
+    "gemDescription": "The Ruby client for Mux Data and Mux Video.",
+    "gemHomepage": "https://docs.mux.com",
+    "gemLicense": "MIT",
+    
+    "gemName": "mux_ruby",
+    "moduleName": "MuxRuby"
+}
