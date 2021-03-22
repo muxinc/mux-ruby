@@ -16,7 +16,11 @@ ensure:
 clean:
 	rm -rf tmp
 
-build: ensure
+clean-products:
+	rm -rf "${OUTPUT_DIR}/lib"
+	rm -rf "${OUTPUT_DIR}/docs"
+
+build: ensure clean-products
 	${OAS_CLI} generate -g "${GENERATOR_TYPE}" -c "${CONFIG_PATH}" -t "${TEMPLATE_DIR}" -o "${OUTPUT_DIR}" -i "${OAS_SPEC_PATH}"
 
 config-help: ensure
