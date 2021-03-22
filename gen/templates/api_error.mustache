@@ -47,18 +47,21 @@ module {{moduleName}}
     end
   end
 
-  class NotFoundError < ApiError
+  class ClientError < ApiError
   end
 
-  class UnauthorizedError < ApiError
+  class NotFoundError < ClientError
   end
 
-  class ForbiddenError < ApiError
+  class UnauthorizedError < ClientError
+  end
+
+  class ForbiddenError < ClientError
+  end
+
+  class TooManyRequestsError < ClientError
   end
 
   class ServiceError < ApiError
-  end
-
-  class TooManyRequestsError < ApiError
   end
 end

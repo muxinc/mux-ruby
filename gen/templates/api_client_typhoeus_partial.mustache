@@ -37,6 +37,11 @@
                                  :response_headers => response.headers,
                                  :response_body => response.body,
                                  :message => response.status_message)
+        elsif response.code.between?(400, 499)
+          fail ClientError.new(:code => response.code,
+                                :response_headers => response.headers,
+                                :response_body => response.body,
+                                :message => response.status_message)
         elsif response.code.between?(500, 599)
           fail ServiceError.new(:code => response.code,
                                 :response_headers => response.headers,
