@@ -2,21 +2,23 @@
 
 All URIs are relative to *https://api.mux.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**list_delivery_usage**](DeliveryUsageApi.md#list_delivery_usage) | **GET** /video/v1/delivery-usage | List Usage
+| Method | HTTP request | Description |
+| ------ | ------------ | ----------- |
+| [**list_delivery_usage**](DeliveryUsageApi.md#list_delivery_usage) | **GET** /video/v1/delivery-usage | List Usage |
 
 
-# **list_delivery_usage**
-> ListDeliveryUsageResponse list_delivery_usage(opts)
+## list_delivery_usage
+
+> <ListDeliveryUsageResponse> list_delivery_usage(opts)
 
 List Usage
 
 Returns a list of delivery usage records and their associated Asset IDs or Live Stream IDs. 
 
-### Example
+### Examples
+
 ```ruby
-# load the gem
+require 'time'
 require 'mux_ruby'
 # setup authorization
 MuxRuby.configure do |config|
@@ -27,29 +29,47 @@ end
 
 api_instance = MuxRuby::DeliveryUsageApi.new
 opts = {
-  page: 1, # Integer | Offset by this many pages, of the size of `limit`
-  limit: 100, # Integer | Number of items to include in the response
+  page: 56, # Integer | Offset by this many pages, of the size of `limit`
+  limit: 56, # Integer | Number of items to include in the response
   asset_id: 'asset_id_example', # String | Filter response to return delivery usage for this asset only.
-  timeframe: ['timeframe_example'] # Array<String> | Time window to get delivery usage information. timeframe[0] indicates the start time, timeframe[1] indicates the end time in seconds since the Unix epoch. Default time window is 1 hour representing usage from 13th to 12th hour from when the request is made. 
+  timeframe: ['inner_example'] # Array<String> | Time window to get delivery usage information. timeframe[0] indicates the start time, timeframe[1] indicates the end time in seconds since the Unix epoch. Default time window is 1 hour representing usage from 13th to 12th hour from when the request is made. 
 }
 
 begin
-  #List Usage
+  # List Usage
   result = api_instance.list_delivery_usage(opts)
   p result
 rescue MuxRuby::ApiError => e
-  puts "Exception when calling DeliveryUsageApi->list_delivery_usage: #{e}"
+  puts "Error when calling DeliveryUsageApi->list_delivery_usage: #{e}"
+end
+```
+
+#### Using the list_delivery_usage_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListDeliveryUsageResponse>, Integer, Hash)> list_delivery_usage_with_http_info(opts)
+
+```ruby
+begin
+  # List Usage
+  data, status_code, headers = api_instance.list_delivery_usage_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListDeliveryUsageResponse>
+rescue MuxRuby::ApiError => e
+  puts "Error when calling DeliveryUsageApi->list_delivery_usage_with_http_info: #{e}"
 end
 ```
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **page** | **Integer**| Offset by this many pages, of the size of &#x60;limit&#x60; | [optional] [default to 1]
- **limit** | **Integer**| Number of items to include in the response | [optional] [default to 100]
- **asset_id** | **String**| Filter response to return delivery usage for this asset only. | [optional] 
- **timeframe** | [**Array&lt;String&gt;**](String.md)| Time window to get delivery usage information. timeframe[0] indicates the start time, timeframe[1] indicates the end time in seconds since the Unix epoch. Default time window is 1 hour representing usage from 13th to 12th hour from when the request is made.  | [optional] 
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **page** | **Integer** | Offset by this many pages, of the size of &#x60;limit&#x60; | [optional][default to 1] |
+| **limit** | **Integer** | Number of items to include in the response | [optional][default to 100] |
+| **asset_id** | **String** | Filter response to return delivery usage for this asset only. | [optional] |
+| **timeframe** | [**Array&lt;String&gt;**](String.md) | Time window to get delivery usage information. timeframe[0] indicates the start time, timeframe[1] indicates the end time in seconds since the Unix epoch. Default time window is 1 hour representing usage from 13th to 12th hour from when the request is made.  | [optional] |
 
 ### Return type
 
@@ -61,8 +81,6 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
+- **Content-Type**: Not defined
+- **Accept**: application/json
 

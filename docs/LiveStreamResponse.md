@@ -1,8 +1,18 @@
 # MuxRuby::LiveStreamResponse
 
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**data** | [**LiveStream**](.md) |  | [optional] 
 
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **data** | [**LiveStream**](.md) |  | [optional] |
+
+## Example
+
+```ruby
+require 'mux_ruby'
+
+instance = MuxRuby::LiveStreamResponse.new(
+  data: null
+)
+```
 

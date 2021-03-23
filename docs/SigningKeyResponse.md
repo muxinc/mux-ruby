@@ -1,8 +1,18 @@
 # MuxRuby::SigningKeyResponse
 
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**data** | [**SigningKey**](.md) |  | [optional] 
 
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **data** | [**SigningKey**](.md) |  | [optional] |
+
+## Example
+
+```ruby
+require 'mux_ruby'
+
+instance = MuxRuby::SigningKeyResponse.new(
+  data: null
+)
+```
 
