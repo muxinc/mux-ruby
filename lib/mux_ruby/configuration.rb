@@ -151,7 +151,7 @@ module MuxRuby
       @client_side_validation = true
       @verify_ssl = true
       @verify_ssl_host = true
-      @params_encoding = :rack # original value: nil
+      @params_encoding = :multi # original value: nil
       @cert_file = nil
       @key_file = nil
       @debugging = false
