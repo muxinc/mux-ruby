@@ -1,0 +1,11 @@
+{
+  "!!source": "https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/ruby.md",
+  "gemName": "mux_ruby",
+  "gemAuthor": "Mux",
+  "gemAuthorEmail": "devex@mux.com",
+  "gemDescription": "The Ruby client for Mux Data and Mux Video.",
+  "gemHomepage": "https://docs.mux.com",
+  "gemLicense": "MIT",
+  "moduleName": "MuxRuby",
+  "gemVersion": "2.0.0-rc.1"
+}

@@ -1,8 +1,18 @@
 # MuxRuby::CreateTrackResponse
 
 ## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**data** | [**Track**](.md) |  | [optional] 
 
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **data** | [**Track**](.md) |  | [optional] |
+
+## Example
+
+```ruby
+require 'mux_ruby'
+
+instance = MuxRuby::CreateTrackResponse.new(
+  data: null
+)
+```
 
