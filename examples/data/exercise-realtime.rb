@@ -42,7 +42,7 @@ assert breakdown.data != nil
 puts "get-realtime-breakdown OK ✅"
 
 # ========== get-realtime-histogram-timeseries ==========
-histogram_timeseries = rt_api.get_realtime_histogram_timeseries('playback-failure-percentage')
+histogram_timeseries = rt_api.get_realtime_histogram_timeseries('video-startup-time')
 assert histogram_timeseries != nil
 assert histogram_timeseries.meta != nil
 assert histogram_timeseries.meta.buckets != nil

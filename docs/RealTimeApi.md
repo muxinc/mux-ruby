@@ -95,7 +95,7 @@ end
 
 ## get_realtime_histogram_timeseries
 
-> <GetRealTimeHistogramTimeseriesResponse> get_realtime_histogram_timeseries(realtime_metric_id, opts)
+> <GetRealTimeHistogramTimeseriesResponse> get_realtime_histogram_timeseries(realtime_histogram_metric_id, opts)
 
 Get Real-Time Histogram Timeseries
 
@@ -114,14 +114,14 @@ MuxRuby.configure do |config|
 end
 
 api_instance = MuxRuby::RealTimeApi.new
-realtime_metric_id = 'current-concurrent-viewers' # String | ID of the Realtime Metric
+realtime_histogram_metric_id = 'video-startup-time' # String | ID of the Realtime Histogram Metric
 opts = {
   filters: ['inner_example'] # Array<String> | Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]=operating_system:windows&filters[]=country:US). Possible filter names are the same as returned by the List Filters endpoint. 
 }
 
 begin
   # Get Real-Time Histogram Timeseries
-  result = api_instance.get_realtime_histogram_timeseries(realtime_metric_id, opts)
+  result = api_instance.get_realtime_histogram_timeseries(realtime_histogram_metric_id, opts)
   p result
 rescue MuxRuby::ApiError => e
   puts "Error when calling RealTimeApi->get_realtime_histogram_timeseries: #{e}"
@@ -132,12 +132,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetRealTimeHistogramTimeseriesResponse>, Integer, Hash)> get_realtime_histogram_timeseries_with_http_info(realtime_metric_id, opts)
+> <Array(<GetRealTimeHistogramTimeseriesResponse>, Integer, Hash)> get_realtime_histogram_timeseries_with_http_info(realtime_histogram_metric_id, opts)
 
 ```ruby
 begin
   # Get Real-Time Histogram Timeseries
-  data, status_code, headers = api_instance.get_realtime_histogram_timeseries_with_http_info(realtime_metric_id, opts)
+  data, status_code, headers = api_instance.get_realtime_histogram_timeseries_with_http_info(realtime_histogram_metric_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <GetRealTimeHistogramTimeseriesResponse>
@@ -150,7 +150,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **realtime_metric_id** | **String** | ID of the Realtime Metric |  |
+| **realtime_histogram_metric_id** | **String** | ID of the Realtime Histogram Metric |  |
 | **filters** | [**Array&lt;String&gt;**](String.md) | Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US). Possible filter names are the same as returned by the List Filters endpoint.  | [optional] |
 
 ### Return type

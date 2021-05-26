@@ -116,36 +116,36 @@ module MuxRuby
 
     # Get Real-Time Histogram Timeseries
     # Gets histogram timeseries information for a specific metric. 
-    # @param realtime_metric_id [String] ID of the Realtime Metric
+    # @param realtime_histogram_metric_id [String] ID of the Realtime Histogram Metric
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :filters Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US). Possible filter names are the same as returned by the List Filters endpoint. 
     # @return [GetRealTimeHistogramTimeseriesResponse]
-    def get_realtime_histogram_timeseries(realtime_metric_id, opts = {})
-      data, _status_code, _headers = get_realtime_histogram_timeseries_with_http_info(realtime_metric_id, opts)
+    def get_realtime_histogram_timeseries(realtime_histogram_metric_id, opts = {})
+      data, _status_code, _headers = get_realtime_histogram_timeseries_with_http_info(realtime_histogram_metric_id, opts)
       data
     end
 
     # Get Real-Time Histogram Timeseries
     # Gets histogram timeseries information for a specific metric. 
-    # @param realtime_metric_id [String] ID of the Realtime Metric
+    # @param realtime_histogram_metric_id [String] ID of the Realtime Histogram Metric
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :filters Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US). Possible filter names are the same as returned by the List Filters endpoint. 
     # @return [Array<(GetRealTimeHistogramTimeseriesResponse, Integer, Hash)>] GetRealTimeHistogramTimeseriesResponse data, response status code and response headers
-    def get_realtime_histogram_timeseries_with_http_info(realtime_metric_id, opts = {})
+    def get_realtime_histogram_timeseries_with_http_info(realtime_histogram_metric_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RealTimeApi.get_realtime_histogram_timeseries ...'
       end
-      # verify the required parameter 'realtime_metric_id' is set
-      if @api_client.config.client_side_validation && realtime_metric_id.nil?
-        fail ArgumentError, "Missing the required parameter 'realtime_metric_id' when calling RealTimeApi.get_realtime_histogram_timeseries"
+      # verify the required parameter 'realtime_histogram_metric_id' is set
+      if @api_client.config.client_side_validation && realtime_histogram_metric_id.nil?
+        fail ArgumentError, "Missing the required parameter 'realtime_histogram_metric_id' when calling RealTimeApi.get_realtime_histogram_timeseries"
       end
       # verify enum value
-      allowable_values = ["current-concurrent-viewers", "current-rebuffering-percentage", "exits-before-video-start", "playback-failure-percentage", "current-average-bitrate"]
-      if @api_client.config.client_side_validation && !allowable_values.include?(realtime_metric_id)
-        fail ArgumentError, "invalid value for \"realtime_metric_id\", must be one of #{allowable_values}"
+      allowable_values = ["video-startup-time"]
+      if @api_client.config.client_side_validation && !allowable_values.include?(realtime_histogram_metric_id)
+        fail ArgumentError, "invalid value for \"realtime_histogram_metric_id\", must be one of #{allowable_values}"
       end
       # resource path
-      local_var_path = '/data/v1/realtime/metrics/{REALTIME_HISTOGRAM_METRIC_ID}/histogram-timeseries'.sub('{' + 'REALTIME_METRIC_ID' + '}', CGI.escape(realtime_metric_id.to_s))
+      local_var_path = '/data/v1/realtime/metrics/{REALTIME_HISTOGRAM_METRIC_ID}/histogram-timeseries'.sub('{' + 'REALTIME_HISTOGRAM_METRIC_ID' + '}', CGI.escape(realtime_histogram_metric_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
