@@ -33,7 +33,7 @@ gem build mux_ruby.gemspec
 Then either install the gem locally:
 
 ```shell
-gem install ./mux_ruby-2.0.0-rc.1.gem
+gem install ./mux_ruby-2.0.0.pre.rc.1.gem
 ```
 
 (for development, run `gem install --dev ./mux_ruby-2.0.0-rc.1.gem` to install the development dependencies)
