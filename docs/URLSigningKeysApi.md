@@ -16,7 +16,7 @@ All URIs are relative to *https://api.mux.com*
 
 Create a URL signing key
 
-Creates a new signing key pair. When creating a new signing key, the API will generate a 2048-bit RSA key-pair and return the private key and a generated key-id; the public key will be stored at Mux to validate signed tokens. 
+Creates a new signing key pair. When creating a new signing key, the API will generate a 2048-bit RSA key-pair and return the private key and a generated key-id; the public key will be stored at Mux to validate signed tokens.
 
 ### Examples
 
@@ -83,7 +83,7 @@ This endpoint does not need any parameter.
 
 Delete a URL signing key
 
-Deletes an existing signing key. Use with caution, as this will invalidate any existing signatures and no URLs can be signed using the key again. 
+Deletes an existing signing key. Use with caution, as this will invalidate any existing signatures and no URLs can be signed using the key again.
 
 ### Examples
 
@@ -222,7 +222,7 @@ end
 
 List URL signing keys
 
-Returns a list of URL signing keys. 
+Returns a list of URL signing keys.
 
 ### Examples
 

@@ -17,7 +17,7 @@ All URIs are relative to *https://api.mux.com*
 
 Get metric timeseries data
 
-Returns timeseries data for a specific metric 
+Returns timeseries data for a specific metric.
 
 ### Examples
 
@@ -99,7 +99,7 @@ end
 
 Get Overall values
 
-Returns the overall value for a specific metric, as well as the total view count, watch time, and the Mux Global metric value for the metric. 
+Returns the overall value for a specific metric, as well as the total view count, watch time, and the Mux Global metric value for the metric.
 
 ### Examples
 
@@ -177,7 +177,7 @@ end
 
 List all metric values
 
-List all of the values across every breakdown for a specific metric 
+List all of the values across every breakdown for a specific metric.
 
 ### Examples
 
@@ -255,7 +255,7 @@ end
 
 List breakdown values
 
-List the breakdown values for a specific metric 
+List the breakdown values for a specific metric.
 
 ### Examples
 
@@ -343,7 +343,7 @@ end
 
 List Insights
 
-Returns a list of insights for a metric. These are the worst performing values across all breakdowns sorted by how much they negatively impact a specific metric. 
+Returns a list of insights for a metric. These are the worst performing values across all breakdowns sorted by how much they negatively impact a specific metric.
 
 ### Examples
 

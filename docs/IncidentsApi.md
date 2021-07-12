@@ -15,7 +15,7 @@ All URIs are relative to *https://api.mux.com*
 
 Get an Incident
 
-Returns the details of an incident 
+Returns the details of an incident.
 
 ### Examples
 
@@ -85,7 +85,7 @@ end
 
 List Incidents
 
-Returns a list of incidents 
+Returns a list of incidents.
 
 ### Examples
 
@@ -167,7 +167,7 @@ end
 
 List Related Incidents
 
-Returns all the incidents that seem related to a specific incident 
+Returns all the incidents that seem related to a specific incident.
 
 ### Examples
 

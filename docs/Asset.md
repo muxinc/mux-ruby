@@ -7,14 +7,15 @@
 | **id** | **String** | Unique identifier for the Asset. Max 255 characters. | [optional] |
 | **created_at** | **String** | Time the Asset was created, defined as a Unix timestamp (seconds since epoch). | [optional] |
 | **status** | **String** | The status of the asset. | [optional] |
-| **duration** | **Float** | The duration of the asset in seconds (max duration for a single asset is 24 hours). | [optional] |
+| **duration** | **Float** | The duration of the asset in seconds (max duration for a single asset is 12 hours). | [optional] |
 | **max_stored_resolution** | **String** | The maximum resolution that has been stored for the asset. The asset may be delivered at lower resolutions depending on the device and bandwidth, however it cannot be delivered at a higher value than is stored. | [optional] |
-| **max_stored_frame_rate** | **Float** | The maximum frame rate that has been stored for the asset. The asset may be delivered at lower frame rates depending on the device and bandwidth, however it cannot be delivered at a higher value than is stored. This field may return -1 if the frame rate of the input cannot be reliably determined.  | [optional] |
+| **max_stored_frame_rate** | **Float** | The maximum frame rate that has been stored for the asset. The asset may be delivered at lower frame rates depending on the device and bandwidth, however it cannot be delivered at a higher value than is stored. This field may return -1 if the frame rate of the input cannot be reliably determined. | [optional] |
 | **aspect_ratio** | **String** | The aspect ratio of the asset in the form of &#x60;width:height&#x60;, for example &#x60;16:9&#x60;. | [optional] |
 | **playback_ids** | [**Array&lt;PlaybackID&gt;**](PlaybackID.md) | An array of Playback ID objects. Use these to create HLS playback URLs. See [Play your videos](https://docs.mux.com/guides/video/play-your-videos) for more details. | [optional] |
 | **tracks** | [**Array&lt;Track&gt;**](Track.md) | The individual media tracks that make up an asset. | [optional] |
 | **errors** | [**AssetErrors**](AssetErrors.md) |  | [optional] |
 | **per_title_encode** | **Boolean** |  | [optional] |
+| **upload_id** | **String** | Unique identifier for the Direct Upload. This is an optional parameter added when the asset is created from a direct upload. | [optional] |
 | **is_live** | **Boolean** | Whether the asset is created from a live stream and the live stream is currently &#x60;active&#x60; and not in &#x60;idle&#x60; state. | [optional] |
 | **passthrough** | **String** | Arbitrary metadata set for the asset. Max 255 characters. | [optional] |
 | **live_stream_id** | **String** | Unique identifier for the live stream. This is an optional parameter added when the asset is created from a live stream. | [optional] |
@@ -45,6 +46,7 @@ instance = MuxRuby::Asset.new(
   tracks: null,
   errors: null,
   per_title_encode: null,
+  upload_id: null,
   is_live: null,
   passthrough: null,
   live_stream_id: null,

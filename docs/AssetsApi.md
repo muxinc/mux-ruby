@@ -24,7 +24,7 @@ All URIs are relative to *https://api.mux.com*
 
 Create an asset
 
-Create a new Mux Video asset. 
+Create a new Mux Video asset.
 
 ### Examples
 
@@ -234,7 +234,7 @@ end
 
 Delete an asset
 
-Deletes a video asset and all its data 
+Deletes a video asset and all its data.
 
 ### Examples
 
@@ -651,7 +651,7 @@ end
 
 List assets
 
-List all Mux assets. 
+List all Mux assets.
 
 ### Examples
 
@@ -668,7 +668,9 @@ end
 api_instance = MuxRuby::AssetsApi.new
 opts = {
   limit: 56, # Integer | Number of items to include in the response
-  page: 56 # Integer | Offset by this many pages, of the size of `limit`
+  page: 56, # Integer | Offset by this many pages, of the size of `limit`
+  live_stream_id: 'live_stream_id_example', # String | Filter response to return all the assets for this live stream only
+  upload_id: 'upload_id_example' # String | Filter response to return an asset created from this direct upload only
 }
 
 begin
@@ -704,6 +706,8 @@ end
 | ---- | ---- | ----------- | ----- |
 | **limit** | **Integer** | Number of items to include in the response | [optional][default to 25] |
 | **page** | **Integer** | Offset by this many pages, of the size of &#x60;limit&#x60; | [optional][default to 1] |
+| **live_stream_id** | **String** | Filter response to return all the assets for this live stream only | [optional] |
+| **upload_id** | **String** | Filter response to return an asset created from this direct upload only | [optional] |
 
 ### Return type
 

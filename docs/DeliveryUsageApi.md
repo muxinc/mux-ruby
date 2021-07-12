@@ -13,7 +13,7 @@ All URIs are relative to *https://api.mux.com*
 
 List Usage
 
-Returns a list of delivery usage records and their associated Asset IDs or Live Stream IDs. 
+Returns a list of delivery usage records and their associated Asset IDs or Live Stream IDs.
 
 ### Examples
 
@@ -32,7 +32,7 @@ opts = {
   page: 56, # Integer | Offset by this many pages, of the size of `limit`
   limit: 56, # Integer | Number of items to include in the response
   asset_id: 'asset_id_example', # String | Filter response to return delivery usage for this asset only.
-  timeframe: ['inner_example'] # Array<String> | Time window to get delivery usage information. timeframe[0] indicates the start time, timeframe[1] indicates the end time in seconds since the Unix epoch. Default time window is 1 hour representing usage from 13th to 12th hour from when the request is made. 
+  timeframe: ['inner_example'] # Array<String> | Time window to get delivery usage information. timeframe[0] indicates the start time, timeframe[1] indicates the end time in seconds since the Unix epoch. Default time window is 1 hour representing usage from 13th to 12th hour from when the request is made.
 }
 
 begin
@@ -69,7 +69,7 @@ end
 | **page** | **Integer** | Offset by this many pages, of the size of &#x60;limit&#x60; | [optional][default to 1] |
 | **limit** | **Integer** | Number of items to include in the response | [optional][default to 100] |
 | **asset_id** | **String** | Filter response to return delivery usage for this asset only. | [optional] |
-| **timeframe** | [**Array&lt;String&gt;**](String.md) | Time window to get delivery usage information. timeframe[0] indicates the start time, timeframe[1] indicates the end time in seconds since the Unix epoch. Default time window is 1 hour representing usage from 13th to 12th hour from when the request is made.  | [optional] |
+| **timeframe** | [**Array&lt;String&gt;**](String.md) | Time window to get delivery usage information. timeframe[0] indicates the start time, timeframe[1] indicates the end time in seconds since the Unix epoch. Default time window is 1 hour representing usage from 13th to 12th hour from when the request is made. | [optional] |
 
 ### Return type
 

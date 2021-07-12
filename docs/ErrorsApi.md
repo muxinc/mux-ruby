@@ -13,7 +13,7 @@ All URIs are relative to *https://api.mux.com*
 
 List Errors
 
-Returns a list of errors 
+Returns a list of errors.
 
 ### Examples
 

@@ -13,7 +13,7 @@ All URIs are relative to *https://api.mux.com*
 
 Retrieve an Asset or Live Stream ID
 
-Retrieves the Identifier of the Asset or Live Stream associated with the Playback ID. 
+Retrieves the Identifier of the Asset or Live Stream associated with the Playback ID.
 
 ### Examples
 

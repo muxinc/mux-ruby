@@ -13,7 +13,7 @@ All URIs are relative to *https://api.mux.com*
 
 List property video view export links
 
-Lists the available video view exports along with URLs to retrieve them 
+Lists the available video view exports along with URLs to retrieve them.
 
 ### Examples
 

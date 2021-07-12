@@ -116,6 +116,14 @@
 | **quality_score** | **String** |  | [optional] |
 | **player_software_version** | **String** |  | [optional] |
 | **player_mux_plugin_name** | **String** |  | [optional] |
+| **sub_property_id** | **String** |  | [optional] |
+| **player_remote_played** | **Boolean** |  | [optional] |
+| **view_max_playhead_position** | **String** |  | [optional] |
+| **view_playing_time** | **String** |  | [optional] |
+| **view_session_id** | **String** |  | [optional] |
+| **viewer_connection_type** | **String** |  | [optional] |
+| **viewer_device_model** | **String** |  | [optional] |
+| **weighted_average_bitrate** | **Integer** |  | [optional] |
 
 ## Example
 
@@ -234,7 +242,15 @@ instance = MuxRuby::VideoView.new(
   asn_name: null,
   quality_score: null,
   player_software_version: null,
-  player_mux_plugin_name: null
+  player_mux_plugin_name: null,
+  sub_property_id: null,
+  player_remote_played: null,
+  view_max_playhead_position: null,
+  view_playing_time: null,
+  view_session_id: null,
+  viewer_connection_type: null,
+  viewer_device_model: null,
+  weighted_average_bitrate: null
 )
 ```
 

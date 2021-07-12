@@ -14,7 +14,7 @@ All URIs are relative to *https://api.mux.com*
 
 Get a Video View
 
-Returns the details of a video view 
+Returns the details of a video view.
 
 ### Examples
 
@@ -84,7 +84,7 @@ end
 
 List Video Views
 
-Returns a list of video views 
+Returns a list of video views.
 
 ### Examples
 
