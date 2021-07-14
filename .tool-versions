@@ -1,3 +1,4 @@
-java adopt-openjdk-8u282-b08
-ruby 2.7.0
-nodejs 13.9.0
+ruby 2.7.4
+java zulu-16.30.19
+nodejs 16.5.0
+yarn 1.22.10
