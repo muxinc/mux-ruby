@@ -36,7 +36,7 @@ metric_id = 'aggregate_startup_time' # String | ID of the Metric
 opts = {
   timeframe: ['inner_example'], # Array<String> | Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]=). Accepted formats are...   * array of epoch timestamps e.g. timeframe[]=1498867200&timeframe[]=1498953600   * duration string e.g. timeframe[]=24:hours or timeframe[]=7:days. 
   filters: ['inner_example'], # Array<String> | Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]=operating_system:windows&filters[]=country:US). Possible filter names are the same as returned by the List Filters endpoint. 
-  measurement: '95th', # String | Measurement for the provided metric. If omitted, the deafult for the metric will be used.
+  measurement: '95th', # String | Measurement for the provided metric. If omitted, the default for the metric will be used.
   order_direction: 'asc', # String | Sort order.
   group_by: 'hour' # String | Time granularity to group results by. If this value is omitted, a default granularity is chosen based on the supplied timeframe.
 }
@@ -75,7 +75,7 @@ end
 | **metric_id** | **String** | ID of the Metric |  |
 | **timeframe** | [**Array&lt;String&gt;**](String.md) | Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]&#x3D;). Accepted formats are...   * array of epoch timestamps e.g. timeframe[]&#x3D;1498867200&amp;timeframe[]&#x3D;1498953600   * duration string e.g. timeframe[]&#x3D;24:hours or timeframe[]&#x3D;7:days.  | [optional] |
 | **filters** | [**Array&lt;String&gt;**](String.md) | Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US). Possible filter names are the same as returned by the List Filters endpoint.  | [optional] |
-| **measurement** | **String** | Measurement for the provided metric. If omitted, the deafult for the metric will be used. | [optional] |
+| **measurement** | **String** | Measurement for the provided metric. If omitted, the default for the metric will be used. | [optional] |
 | **order_direction** | **String** | Sort order. | [optional] |
 | **group_by** | **String** | Time granularity to group results by. If this value is omitted, a default granularity is chosen based on the supplied timeframe. | [optional] |
 
@@ -118,7 +118,7 @@ metric_id = 'aggregate_startup_time' # String | ID of the Metric
 opts = {
   timeframe: ['inner_example'], # Array<String> | Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]=). Accepted formats are...   * array of epoch timestamps e.g. timeframe[]=1498867200&timeframe[]=1498953600   * duration string e.g. timeframe[]=24:hours or timeframe[]=7:days. 
   filters: ['inner_example'], # Array<String> | Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]=operating_system:windows&filters[]=country:US). Possible filter names are the same as returned by the List Filters endpoint. 
-  measurement: '95th' # String | Measurement for the provided metric. If omitted, the deafult for the metric will be used.
+  measurement: '95th' # String | Measurement for the provided metric. If omitted, the default for the metric will be used.
 }
 
 begin
@@ -155,7 +155,7 @@ end
 | **metric_id** | **String** | ID of the Metric |  |
 | **timeframe** | [**Array&lt;String&gt;**](String.md) | Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]&#x3D;). Accepted formats are...   * array of epoch timestamps e.g. timeframe[]&#x3D;1498867200&amp;timeframe[]&#x3D;1498953600   * duration string e.g. timeframe[]&#x3D;24:hours or timeframe[]&#x3D;7:days.  | [optional] |
 | **filters** | [**Array&lt;String&gt;**](String.md) | Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US). Possible filter names are the same as returned by the List Filters endpoint.  | [optional] |
-| **measurement** | **String** | Measurement for the provided metric. If omitted, the deafult for the metric will be used. | [optional] |
+| **measurement** | **String** | Measurement for the provided metric. If omitted, the default for the metric will be used. | [optional] |
 
 ### Return type
 
@@ -273,7 +273,7 @@ api_instance = MuxRuby::MetricsApi.new
 metric_id = 'aggregate_startup_time' # String | ID of the Metric
 opts = {
   group_by: 'asn', # String | Breakdown value to group the results by
-  measurement: '95th', # String | Measurement for the provided metric. If omitted, the deafult for the metric will be used.
+  measurement: '95th', # String | Measurement for the provided metric. If omitted, the default for the metric will be used.
   filters: ['inner_example'], # Array<String> | Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]=operating_system:windows&filters[]=country:US). Possible filter names are the same as returned by the List Filters endpoint. 
   limit: 56, # Integer | Number of items to include in the response
   page: 56, # Integer | Offset by this many pages, of the size of `limit`
@@ -315,7 +315,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **metric_id** | **String** | ID of the Metric |  |
 | **group_by** | **String** | Breakdown value to group the results by | [optional] |
-| **measurement** | **String** | Measurement for the provided metric. If omitted, the deafult for the metric will be used. | [optional] |
+| **measurement** | **String** | Measurement for the provided metric. If omitted, the default for the metric will be used. | [optional] |
 | **filters** | [**Array&lt;String&gt;**](String.md) | Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US). Possible filter names are the same as returned by the List Filters endpoint.  | [optional] |
 | **limit** | **Integer** | Number of items to include in the response | [optional][default to 25] |
 | **page** | **Integer** | Offset by this many pages, of the size of &#x60;limit&#x60; | [optional][default to 1] |
@@ -360,7 +360,7 @@ end
 api_instance = MuxRuby::MetricsApi.new
 metric_id = 'aggregate_startup_time' # String | ID of the Metric
 opts = {
-  measurement: '95th', # String | Measurement for the provided metric. If omitted, the deafult for the metric will be used.
+  measurement: '95th', # String | Measurement for the provided metric. If omitted, the default for the metric will be used.
   order_direction: 'asc', # String | Sort order.
   timeframe: ['inner_example'] # Array<String> | Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]=). Accepted formats are...   * array of epoch timestamps e.g. timeframe[]=1498867200&timeframe[]=1498953600   * duration string e.g. timeframe[]=24:hours or timeframe[]=7:days. 
 }
@@ -397,7 +397,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **metric_id** | **String** | ID of the Metric |  |
-| **measurement** | **String** | Measurement for the provided metric. If omitted, the deafult for the metric will be used. | [optional] |
+| **measurement** | **String** | Measurement for the provided metric. If omitted, the default for the metric will be used. | [optional] |
 | **order_direction** | **String** | Sort order. | [optional] |
 | **timeframe** | [**Array&lt;String&gt;**](String.md) | Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]&#x3D;). Accepted formats are...   * array of epoch timestamps e.g. timeframe[]&#x3D;1498867200&amp;timeframe[]&#x3D;1498953600   * duration string e.g. timeframe[]&#x3D;24:hours or timeframe[]&#x3D;7:days.  | [optional] |
 
