@@ -32,6 +32,8 @@ docs/DisableLiveStreamResponse.md
 docs/EnableLiveStreamResponse.md
 docs/Error.md
 docs/ErrorsApi.md
+docs/ExportDate.md
+docs/ExportFile.md
 docs/ExportsApi.md
 docs/FilterValue.md
 docs/FiltersApi.md
@@ -78,6 +80,7 @@ docs/ListRealTimeMetricsResponse.md
 docs/ListRelatedIncidentsResponse.md
 docs/ListSigningKeysResponse.md
 docs/ListUploadsResponse.md
+docs/ListVideoViewExportsResponse.md
 docs/ListVideoViewsResponse.md
 docs/LiveStream.md
 docs/LiveStreamResponse.md
@@ -154,6 +157,8 @@ lib/mux_ruby/models/dimension_value.rb
 lib/mux_ruby/models/disable_live_stream_response.rb
 lib/mux_ruby/models/enable_live_stream_response.rb
 lib/mux_ruby/models/error.rb
+lib/mux_ruby/models/export_date.rb
+lib/mux_ruby/models/export_file.rb
 lib/mux_ruby/models/filter_value.rb
 lib/mux_ruby/models/get_asset_input_info_response.rb
 lib/mux_ruby/models/get_asset_or_live_stream_id_response.rb
@@ -197,6 +202,7 @@ lib/mux_ruby/models/list_real_time_metrics_response.rb
 lib/mux_ruby/models/list_related_incidents_response.rb
 lib/mux_ruby/models/list_signing_keys_response.rb
 lib/mux_ruby/models/list_uploads_response.rb
+lib/mux_ruby/models/list_video_view_exports_response.rb
 lib/mux_ruby/models/list_video_views_response.rb
 lib/mux_ruby/models/live_stream.rb
 lib/mux_ruby/models/live_stream_response.rb

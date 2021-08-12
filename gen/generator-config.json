@@ -7,5 +7,5 @@
   "gemHomepage": "https://docs.mux.com",
   "gemLicense": "MIT",
   "moduleName": "MuxRuby",
-  "gemVersion": "2.0.0-rc.2"
+  "gemVersion": "2.0.0"
 }

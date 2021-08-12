@@ -20,7 +20,7 @@ module MuxRuby
       @api_client = api_client
     end
     # List property video view export links
-    # Lists the available video view exports along with URLs to retrieve them.
+    # Deprecated: The API has been replaced by the list-exports-views API call.  Lists the available video view exports along with URLs to retrieve them. 
     # @param [Hash] opts the optional parameters
     # @return [ListExportsResponse]
     def list_exports(opts = {})
@@ -29,7 +29,7 @@ module MuxRuby
     end
 
     # List property video view export links
-    # Lists the available video view exports along with URLs to retrieve them.
+    # Deprecated: The API has been replaced by the list-exports-views API call.  Lists the available video view exports along with URLs to retrieve them. 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ListExportsResponse, Integer, Hash)>] ListExportsResponse data, response status code and response headers
     def list_exports_with_http_info(opts = {})
@@ -72,6 +72,63 @@ module MuxRuby
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ExportsApi#list_exports\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List available property view exports
+    # Lists the available video view exports along with URLs to retrieve them.
+    # @param [Hash] opts the optional parameters
+    # @return [ListVideoViewExportsResponse]
+    def list_exports_views(opts = {})
+      data, _status_code, _headers = list_exports_views_with_http_info(opts)
+      data
+    end
+
+    # List available property view exports
+    # Lists the available video view exports along with URLs to retrieve them.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ListVideoViewExportsResponse, Integer, Hash)>] ListVideoViewExportsResponse data, response status code and response headers
+    def list_exports_views_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ExportsApi.list_exports_views ...'
+      end
+      # resource path
+      local_var_path = '/data/v1/exports/views'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ListVideoViewExportsResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['accessToken']
+
+      new_options = opts.merge(
+        :operation => :"ExportsApi.list_exports_views",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ExportsApi#list_exports_views\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

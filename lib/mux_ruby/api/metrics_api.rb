@@ -25,7 +25,7 @@ module MuxRuby
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :timeframe Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]&#x3D;). Accepted formats are...   * array of epoch timestamps e.g. timeframe[]&#x3D;1498867200&amp;timeframe[]&#x3D;1498953600   * duration string e.g. timeframe[]&#x3D;24:hours or timeframe[]&#x3D;7:days. 
     # @option opts [Array<String>] :filters Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US). Possible filter names are the same as returned by the List Filters endpoint. 
-    # @option opts [String] :measurement Measurement for the provided metric. If omitted, the deafult for the metric will be used.
+    # @option opts [String] :measurement Measurement for the provided metric. If omitted, the default for the metric will be used.
     # @option opts [String] :order_direction Sort order.
     # @option opts [String] :group_by Time granularity to group results by. If this value is omitted, a default granularity is chosen based on the supplied timeframe.
     # @return [GetMetricTimeseriesDataResponse]
@@ -40,7 +40,7 @@ module MuxRuby
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :timeframe Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]&#x3D;). Accepted formats are...   * array of epoch timestamps e.g. timeframe[]&#x3D;1498867200&amp;timeframe[]&#x3D;1498953600   * duration string e.g. timeframe[]&#x3D;24:hours or timeframe[]&#x3D;7:days. 
     # @option opts [Array<String>] :filters Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US). Possible filter names are the same as returned by the List Filters endpoint. 
-    # @option opts [String] :measurement Measurement for the provided metric. If omitted, the deafult for the metric will be used.
+    # @option opts [String] :measurement Measurement for the provided metric. If omitted, the default for the metric will be used.
     # @option opts [String] :order_direction Sort order.
     # @option opts [String] :group_by Time granularity to group results by. If this value is omitted, a default granularity is chosen based on the supplied timeframe.
     # @return [Array<(GetMetricTimeseriesDataResponse, Integer, Hash)>] GetMetricTimeseriesDataResponse data, response status code and response headers
@@ -53,11 +53,11 @@ module MuxRuby
         fail ArgumentError, "Missing the required parameter 'metric_id' when calling MetricsApi.get_metric_timeseries_data"
       end
       # verify enum value
-      allowable_values = ["aggregate_startup_time", "downscale_percentage", "exits_before_video_start", "max_downscale_percentage", "max_upscale_percentage", "page_load_time", "playback_failure_percentage", "playback_failure_score", "player_startup_time", "rebuffer_count", "rebuffer_duration", "rebuffer_frequency", "rebuffer_percentage", "rebuffer_score", "requests_for_first_preroll", "seek_latency", "startup_time_score", "upscale_percentage", "video_quality_score", "video_startup_preroll_load_time", "video_startup_preroll_request_time", "video_startup_time", "viewer_experience_score"]
+      allowable_values = ["aggregate_startup_time", "downscale_percentage", "exits_before_video_start", "max_downscale_percentage", "max_upscale_percentage", "page_load_time", "playback_failure_percentage", "playback_failure_score", "player_startup_time", "playing_time", "rebuffer_count", "rebuffer_duration", "rebuffer_frequency", "rebuffer_percentage", "rebuffer_score", "requests_for_first_preroll", "seek_latency", "startup_time_score", "unique_viewers", "upscale_percentage", "video_quality_score", "video_startup_preroll_load_time", "video_startup_preroll_request_time", "video_startup_time", "viewer_experience_score", "views", "weighted_average_bitrate"]
       if @api_client.config.client_side_validation && !allowable_values.include?(metric_id)
         fail ArgumentError, "invalid value for \"metric_id\", must be one of #{allowable_values}"
       end
-      allowable_values = ["95th", "median", "avg"]
+      allowable_values = ["95th", "median", "avg", "count", "sum"]
       if @api_client.config.client_side_validation && opts[:'measurement'] && !allowable_values.include?(opts[:'measurement'])
         fail ArgumentError, "invalid value for \"measurement\", must be one of #{allowable_values}"
       end
@@ -120,7 +120,7 @@ module MuxRuby
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :timeframe Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]&#x3D;). Accepted formats are...   * array of epoch timestamps e.g. timeframe[]&#x3D;1498867200&amp;timeframe[]&#x3D;1498953600   * duration string e.g. timeframe[]&#x3D;24:hours or timeframe[]&#x3D;7:days. 
     # @option opts [Array<String>] :filters Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US). Possible filter names are the same as returned by the List Filters endpoint. 
-    # @option opts [String] :measurement Measurement for the provided metric. If omitted, the deafult for the metric will be used.
+    # @option opts [String] :measurement Measurement for the provided metric. If omitted, the default for the metric will be used.
     # @return [GetOverallValuesResponse]
     def get_overall_values(metric_id, opts = {})
       data, _status_code, _headers = get_overall_values_with_http_info(metric_id, opts)
@@ -133,7 +133,7 @@ module MuxRuby
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :timeframe Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]&#x3D;). Accepted formats are...   * array of epoch timestamps e.g. timeframe[]&#x3D;1498867200&amp;timeframe[]&#x3D;1498953600   * duration string e.g. timeframe[]&#x3D;24:hours or timeframe[]&#x3D;7:days. 
     # @option opts [Array<String>] :filters Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US). Possible filter names are the same as returned by the List Filters endpoint. 
-    # @option opts [String] :measurement Measurement for the provided metric. If omitted, the deafult for the metric will be used.
+    # @option opts [String] :measurement Measurement for the provided metric. If omitted, the default for the metric will be used.
     # @return [Array<(GetOverallValuesResponse, Integer, Hash)>] GetOverallValuesResponse data, response status code and response headers
     def get_overall_values_with_http_info(metric_id, opts = {})
       if @api_client.config.debugging
@@ -144,11 +144,11 @@ module MuxRuby
         fail ArgumentError, "Missing the required parameter 'metric_id' when calling MetricsApi.get_overall_values"
       end
       # verify enum value
-      allowable_values = ["aggregate_startup_time", "downscale_percentage", "exits_before_video_start", "max_downscale_percentage", "max_upscale_percentage", "page_load_time", "playback_failure_percentage", "playback_failure_score", "player_startup_time", "rebuffer_count", "rebuffer_duration", "rebuffer_frequency", "rebuffer_percentage", "rebuffer_score", "requests_for_first_preroll", "seek_latency", "startup_time_score", "upscale_percentage", "video_quality_score", "video_startup_preroll_load_time", "video_startup_preroll_request_time", "video_startup_time", "viewer_experience_score"]
+      allowable_values = ["aggregate_startup_time", "downscale_percentage", "exits_before_video_start", "max_downscale_percentage", "max_upscale_percentage", "page_load_time", "playback_failure_percentage", "playback_failure_score", "player_startup_time", "playing_time", "rebuffer_count", "rebuffer_duration", "rebuffer_frequency", "rebuffer_percentage", "rebuffer_score", "requests_for_first_preroll", "seek_latency", "startup_time_score", "unique_viewers", "upscale_percentage", "video_quality_score", "video_startup_preroll_load_time", "video_startup_preroll_request_time", "video_startup_time", "viewer_experience_score", "views", "weighted_average_bitrate"]
       if @api_client.config.client_side_validation && !allowable_values.include?(metric_id)
         fail ArgumentError, "invalid value for \"metric_id\", must be one of #{allowable_values}"
       end
-      allowable_values = ["95th", "median", "avg"]
+      allowable_values = ["95th", "median", "avg", "count", "sum"]
       if @api_client.config.client_side_validation && opts[:'measurement'] && !allowable_values.include?(opts[:'measurement'])
         fail ArgumentError, "invalid value for \"measurement\", must be one of #{allowable_values}"
       end
@@ -273,7 +273,7 @@ module MuxRuby
     # @param metric_id [String] ID of the Metric
     # @param [Hash] opts the optional parameters
     # @option opts [String] :group_by Breakdown value to group the results by
-    # @option opts [String] :measurement Measurement for the provided metric. If omitted, the deafult for the metric will be used.
+    # @option opts [String] :measurement Measurement for the provided metric. If omitted, the default for the metric will be used.
     # @option opts [Array<String>] :filters Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US). Possible filter names are the same as returned by the List Filters endpoint. 
     # @option opts [Integer] :limit Number of items to include in the response (default to 25)
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60; (default to 1)
@@ -291,7 +291,7 @@ module MuxRuby
     # @param metric_id [String] ID of the Metric
     # @param [Hash] opts the optional parameters
     # @option opts [String] :group_by Breakdown value to group the results by
-    # @option opts [String] :measurement Measurement for the provided metric. If omitted, the deafult for the metric will be used.
+    # @option opts [String] :measurement Measurement for the provided metric. If omitted, the default for the metric will be used.
     # @option opts [Array<String>] :filters Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US). Possible filter names are the same as returned by the List Filters endpoint. 
     # @option opts [Integer] :limit Number of items to include in the response
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60;
@@ -308,7 +308,7 @@ module MuxRuby
         fail ArgumentError, "Missing the required parameter 'metric_id' when calling MetricsApi.list_breakdown_values"
       end
       # verify enum value
-      allowable_values = ["aggregate_startup_time", "downscale_percentage", "exits_before_video_start", "max_downscale_percentage", "max_upscale_percentage", "page_load_time", "playback_failure_percentage", "playback_failure_score", "player_startup_time", "rebuffer_count", "rebuffer_duration", "rebuffer_frequency", "rebuffer_percentage", "rebuffer_score", "requests_for_first_preroll", "seek_latency", "startup_time_score", "upscale_percentage", "video_quality_score", "video_startup_preroll_load_time", "video_startup_preroll_request_time", "video_startup_time", "viewer_experience_score"]
+      allowable_values = ["aggregate_startup_time", "downscale_percentage", "exits_before_video_start", "max_downscale_percentage", "max_upscale_percentage", "page_load_time", "playback_failure_percentage", "playback_failure_score", "player_startup_time", "playing_time", "rebuffer_count", "rebuffer_duration", "rebuffer_frequency", "rebuffer_percentage", "rebuffer_score", "requests_for_first_preroll", "seek_latency", "startup_time_score", "unique_viewers", "upscale_percentage", "video_quality_score", "video_startup_preroll_load_time", "video_startup_preroll_request_time", "video_startup_time", "viewer_experience_score", "views", "weighted_average_bitrate"]
       if @api_client.config.client_side_validation && !allowable_values.include?(metric_id)
         fail ArgumentError, "invalid value for \"metric_id\", must be one of #{allowable_values}"
       end
@@ -316,7 +316,7 @@ module MuxRuby
       if @api_client.config.client_side_validation && opts[:'group_by'] && !allowable_values.include?(opts[:'group_by'])
         fail ArgumentError, "invalid value for \"group_by\", must be one of #{allowable_values}"
       end
-      allowable_values = ["95th", "median", "avg"]
+      allowable_values = ["95th", "median", "avg", "count", "sum"]
       if @api_client.config.client_side_validation && opts[:'measurement'] && !allowable_values.include?(opts[:'measurement'])
         fail ArgumentError, "invalid value for \"measurement\", must be one of #{allowable_values}"
       end
@@ -380,7 +380,7 @@ module MuxRuby
     # Returns a list of insights for a metric. These are the worst performing values across all breakdowns sorted by how much they negatively impact a specific metric.
     # @param metric_id [String] ID of the Metric
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :measurement Measurement for the provided metric. If omitted, the deafult for the metric will be used.
+    # @option opts [String] :measurement Measurement for the provided metric. If omitted, the default for the metric will be used.
     # @option opts [String] :order_direction Sort order.
     # @option opts [Array<String>] :timeframe Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]&#x3D;). Accepted formats are...   * array of epoch timestamps e.g. timeframe[]&#x3D;1498867200&amp;timeframe[]&#x3D;1498953600   * duration string e.g. timeframe[]&#x3D;24:hours or timeframe[]&#x3D;7:days. 
     # @return [ListInsightsResponse]
@@ -393,7 +393,7 @@ module MuxRuby
     # Returns a list of insights for a metric. These are the worst performing values across all breakdowns sorted by how much they negatively impact a specific metric.
     # @param metric_id [String] ID of the Metric
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :measurement Measurement for the provided metric. If omitted, the deafult for the metric will be used.
+    # @option opts [String] :measurement Measurement for the provided metric. If omitted, the default for the metric will be used.
     # @option opts [String] :order_direction Sort order.
     # @option opts [Array<String>] :timeframe Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]&#x3D;). Accepted formats are...   * array of epoch timestamps e.g. timeframe[]&#x3D;1498867200&amp;timeframe[]&#x3D;1498953600   * duration string e.g. timeframe[]&#x3D;24:hours or timeframe[]&#x3D;7:days. 
     # @return [Array<(ListInsightsResponse, Integer, Hash)>] ListInsightsResponse data, response status code and response headers
@@ -406,11 +406,11 @@ module MuxRuby
         fail ArgumentError, "Missing the required parameter 'metric_id' when calling MetricsApi.list_insights"
       end
       # verify enum value
-      allowable_values = ["aggregate_startup_time", "downscale_percentage", "exits_before_video_start", "max_downscale_percentage", "max_upscale_percentage", "page_load_time", "playback_failure_percentage", "playback_failure_score", "player_startup_time", "rebuffer_count", "rebuffer_duration", "rebuffer_frequency", "rebuffer_percentage", "rebuffer_score", "requests_for_first_preroll", "seek_latency", "startup_time_score", "upscale_percentage", "video_quality_score", "video_startup_preroll_load_time", "video_startup_preroll_request_time", "video_startup_time", "viewer_experience_score"]
+      allowable_values = ["aggregate_startup_time", "downscale_percentage", "exits_before_video_start", "max_downscale_percentage", "max_upscale_percentage", "page_load_time", "playback_failure_percentage", "playback_failure_score", "player_startup_time", "playing_time", "rebuffer_count", "rebuffer_duration", "rebuffer_frequency", "rebuffer_percentage", "rebuffer_score", "requests_for_first_preroll", "seek_latency", "startup_time_score", "unique_viewers", "upscale_percentage", "video_quality_score", "video_startup_preroll_load_time", "video_startup_preroll_request_time", "video_startup_time", "viewer_experience_score", "views", "weighted_average_bitrate"]
       if @api_client.config.client_side_validation && !allowable_values.include?(metric_id)
         fail ArgumentError, "invalid value for \"metric_id\", must be one of #{allowable_values}"
       end
-      allowable_values = ["95th", "median", "avg"]
+      allowable_values = ["95th", "median", "avg", "count", "sum"]
       if @api_client.config.client_side_validation && opts[:'measurement'] && !allowable_values.include?(opts[:'measurement'])
         fail ArgumentError, "invalid value for \"measurement\", must be one of #{allowable_values}"
       end
