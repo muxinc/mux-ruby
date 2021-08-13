@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://docs.mux.com"
   s.summary     = "Mux API Ruby Gem"
   s.description = "The Ruby client for Mux Data and Mux Video."
+  s.metadata    = { source_code_uri: "https://github.com/muxinc/mux-ruby" }
   s.license     = "MIT"
   s.required_ruby_version = ">= 2.4"
 
