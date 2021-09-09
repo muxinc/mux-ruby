@@ -257,7 +257,7 @@ module MuxRuby
     end
 
     # List Real-Time Dimensions
-    # Lists availiable real-time dimensions.
+    # Lists available real-time dimensions.
     # @param [Hash] opts the optional parameters
     # @return [ListRealTimeDimensionsResponse]
     def list_realtime_dimensions(opts = {})
@@ -266,7 +266,7 @@ module MuxRuby
     end
 
     # List Real-Time Dimensions
-    # Lists availiable real-time dimensions.
+    # Lists available real-time dimensions.
     # @param [Hash] opts the optional parameters
     # @return [Array<(ListRealTimeDimensionsResponse, Integer, Hash)>] ListRealTimeDimensionsResponse data, response status code and response headers
     def list_realtime_dimensions_with_http_info(opts = {})
@@ -314,7 +314,7 @@ module MuxRuby
     end
 
     # List Real-Time Metrics
-    # Lists availiable real-time metrics.
+    # Lists available real-time metrics.
     # @param [Hash] opts the optional parameters
     # @return [ListRealTimeMetricsResponse]
     def list_realtime_metrics(opts = {})
@@ -323,7 +323,7 @@ module MuxRuby
     end
 
     # List Real-Time Metrics
-    # Lists availiable real-time metrics.
+    # Lists available real-time metrics.
     # @param [Hash] opts the optional parameters
     # @return [Array<(ListRealTimeMetricsResponse, Integer, Hash)>] ListRealTimeMetricsResponse data, response status code and response headers
     def list_realtime_metrics_with_http_info(opts = {})

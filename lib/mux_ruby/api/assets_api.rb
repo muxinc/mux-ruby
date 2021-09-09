@@ -349,6 +349,7 @@ module MuxRuby
     end
 
     # Delete an asset track
+    # Removes a text track from an asset. Audio and video tracks on assets cannot be removed.
     # @param asset_id [String] The asset ID.
     # @param track_id [String] The track ID.
     # @param [Hash] opts the optional parameters
@@ -359,6 +360,7 @@ module MuxRuby
     end
 
     # Delete an asset track
+    # Removes a text track from an asset. Audio and video tracks on assets cannot be removed.
     # @param asset_id [String] The asset ID.
     # @param track_id [String] The track ID.
     # @param [Hash] opts the optional parameters

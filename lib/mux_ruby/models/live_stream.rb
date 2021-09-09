@@ -50,6 +50,9 @@ module MuxRuby
     # Latency is the time from when the streamer does something in real life to when you see it happen in the player. Set this if you want lower latency for your live stream. **Note**: Reconnect windows are incompatible with Reduced Latency and will always be set to zero (0) seconds. See the [Reduce live stream latency guide](https://docs.mux.com/guides/video/reduce-live-stream-latency) to understand the tradeoffs.
     attr_accessor :reduced_latency
 
+    # Latency is the time from when the streamer does something in real life to when you see it happen in the player. Setting this option will enable compatibility with the LL-HLS specification for low-latency streaming. This typically has lower latency than Reduced Latency streams, and cannot be combined with Reduced Latency. Note: Reconnect windows are incompatible with Low Latency and will always be set to zero (0) seconds.
+    attr_accessor :low_latency
+
     # Each Simulcast Target contains configuration details to broadcast (or \"restream\") a live stream to a third-party streaming service. [See the Stream live to 3rd party platforms guide](https://docs.mux.com/guides/video/stream-live-to-3rd-party-platforms).
     attr_accessor :simulcast_targets
 
@@ -93,6 +96,7 @@ module MuxRuby
         :'audio_only' => :'audio_only',
         :'reconnect_window' => :'reconnect_window',
         :'reduced_latency' => :'reduced_latency',
+        :'low_latency' => :'low_latency',
         :'simulcast_targets' => :'simulcast_targets',
         :'test' => :'test'
       }
@@ -118,6 +122,7 @@ module MuxRuby
         :'audio_only' => :'Boolean',
         :'reconnect_window' => :'Float',
         :'reduced_latency' => :'Boolean',
+        :'low_latency' => :'Boolean',
         :'simulcast_targets' => :'Array<SimulcastTarget>',
         :'test' => :'Boolean'
       }
@@ -198,6 +203,10 @@ module MuxRuby
         self.reduced_latency = attributes[:'reduced_latency']
       end
 
+      if attributes.key?(:'low_latency')
+        self.low_latency = attributes[:'low_latency']
+      end
+
       if attributes.key?(:'simulcast_targets')
         if (value = attributes[:'simulcast_targets']).is_a?(Array)
           self.simulcast_targets = value
@@ -251,6 +260,7 @@ module MuxRuby
           audio_only == o.audio_only &&
           reconnect_window == o.reconnect_window &&
           reduced_latency == o.reduced_latency &&
+          low_latency == o.low_latency &&
           simulcast_targets == o.simulcast_targets &&
           test == o.test
     end
@@ -264,7 +274,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, stream_key, active_asset_id, recent_asset_ids, status, playback_ids, new_asset_settings, passthrough, audio_only, reconnect_window, reduced_latency, simulcast_targets, test].hash
+      [id, created_at, stream_key, active_asset_id, recent_asset_ids, status, playback_ids, new_asset_settings, passthrough, audio_only, reconnect_window, reduced_latency, low_latency, simulcast_targets, test].hash
     end
 
     # Builds the object from hash
