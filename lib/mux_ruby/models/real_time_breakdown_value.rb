@@ -23,7 +23,7 @@ module MuxRuby
 
     attr_accessor :display_value
 
-    attr_accessor :concurent_viewers
+    attr_accessor :concurrent_viewers
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -32,7 +32,7 @@ module MuxRuby
         :'negative_impact' => :'negative_impact',
         :'metric_value' => :'metric_value',
         :'display_value' => :'display_value',
-        :'concurent_viewers' => :'concurent_viewers'
+        :'concurrent_viewers' => :'concurrent_viewers'
       }
     end
 
@@ -48,7 +48,7 @@ module MuxRuby
         :'negative_impact' => :'Integer',
         :'metric_value' => :'Float',
         :'display_value' => :'String',
-        :'concurent_viewers' => :'Integer'
+        :'concurrent_viewers' => :'Integer'
       }
     end
 
@@ -89,8 +89,8 @@ module MuxRuby
         self.display_value = attributes[:'display_value']
       end
 
-      if attributes.key?(:'concurent_viewers')
-        self.concurent_viewers = attributes[:'concurent_viewers']
+      if attributes.key?(:'concurrent_viewers')
+        self.concurrent_viewers = attributes[:'concurrent_viewers']
       end
     end
 
@@ -116,7 +116,7 @@ module MuxRuby
           negative_impact == o.negative_impact &&
           metric_value == o.metric_value &&
           display_value == o.display_value &&
-          concurent_viewers == o.concurent_viewers
+          concurrent_viewers == o.concurrent_viewers
     end
 
     # @see the `==` method
@@ -128,7 +128,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [value, negative_impact, metric_value, display_value, concurent_viewers].hash
+      [value, negative_impact, metric_value, display_value, concurrent_viewers].hash
     end
 
     # Builds the object from hash

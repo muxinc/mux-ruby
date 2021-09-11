@@ -8,7 +8,7 @@
 | **negative_impact** | **Integer** |  | [optional] |
 | **metric_value** | **Float** |  | [optional] |
 | **display_value** | **String** |  | [optional] |
-| **concurent_viewers** | **Integer** |  | [optional] |
+| **concurrent_viewers** | **Integer** |  | [optional] |
 
 ## Example
 
@@ -20,7 +20,7 @@ instance = MuxRuby::RealTimeBreakdownValue.new(
   negative_impact: null,
   metric_value: null,
   display_value: null,
-  concurent_viewers: null
+  concurrent_viewers: null
 )
 ```
 

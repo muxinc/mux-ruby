@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **value** | **Float** |  | [optional] |
 | **date** | **String** |  | [optional] |
-| **concurent_viewers** | **Integer** |  | [optional] |
+| **concurrent_viewers** | **Integer** |  | [optional] |
 
 ## Example
 
@@ -16,7 +16,7 @@ require 'mux_ruby'
 instance = MuxRuby::RealTimeTimeseriesDatapoint.new(
   value: null,
   date: null,
-  concurent_viewers: null
+  concurrent_viewers: null
 )
 ```
 

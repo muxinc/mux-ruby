@@ -19,14 +19,14 @@ module MuxRuby
 
     attr_accessor :date
 
-    attr_accessor :concurent_viewers
+    attr_accessor :concurrent_viewers
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'value' => :'value',
         :'date' => :'date',
-        :'concurent_viewers' => :'concurent_viewers'
+        :'concurrent_viewers' => :'concurrent_viewers'
       }
     end
 
@@ -40,7 +40,7 @@ module MuxRuby
       {
         :'value' => :'Float',
         :'date' => :'String',
-        :'concurent_viewers' => :'Integer'
+        :'concurrent_viewers' => :'Integer'
       }
     end
 
@@ -73,8 +73,8 @@ module MuxRuby
         self.date = attributes[:'date']
       end
 
-      if attributes.key?(:'concurent_viewers')
-        self.concurent_viewers = attributes[:'concurent_viewers']
+      if attributes.key?(:'concurrent_viewers')
+        self.concurrent_viewers = attributes[:'concurrent_viewers']
       end
     end
 
@@ -98,7 +98,7 @@ module MuxRuby
       self.class == o.class &&
           value == o.value &&
           date == o.date &&
-          concurent_viewers == o.concurent_viewers
+          concurrent_viewers == o.concurrent_viewers
     end
 
     # @see the `==` method
@@ -110,7 +110,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [value, date, concurent_viewers].hash
+      [value, date, concurrent_viewers].hash
     end
 
     # Builds the object from hash
