@@ -42,6 +42,7 @@ docs/GetAssetOrLiveStreamIdResponse.md
 docs/GetAssetOrLiveStreamIdResponseData.md
 docs/GetAssetOrLiveStreamIdResponseDataObject.md
 docs/GetAssetPlaybackIDResponse.md
+docs/GetLiveStreamPlaybackIDResponse.md
 docs/GetMetricTimeseriesDataResponse.md
 docs/GetOverallValuesResponse.md
 docs/GetRealTimeBreakdownResponse.md
@@ -165,6 +166,7 @@ lib/mux_ruby/models/get_asset_or_live_stream_id_response.rb
 lib/mux_ruby/models/get_asset_or_live_stream_id_response_data.rb
 lib/mux_ruby/models/get_asset_or_live_stream_id_response_data_object.rb
 lib/mux_ruby/models/get_asset_playback_id_response.rb
+lib/mux_ruby/models/get_live_stream_playback_id_response.rb
 lib/mux_ruby/models/get_metric_timeseries_data_response.rb
 lib/mux_ruby/models/get_overall_values_response.rb
 lib/mux_ruby/models/get_real_time_breakdown_response.rb

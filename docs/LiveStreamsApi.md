@@ -13,6 +13,7 @@ All URIs are relative to *https://api.mux.com*
 | [**disable_live_stream**](LiveStreamsApi.md#disable_live_stream) | **PUT** /video/v1/live-streams/{LIVE_STREAM_ID}/disable | Disable a live stream |
 | [**enable_live_stream**](LiveStreamsApi.md#enable_live_stream) | **PUT** /video/v1/live-streams/{LIVE_STREAM_ID}/enable | Enable a live stream |
 | [**get_live_stream**](LiveStreamsApi.md#get_live_stream) | **GET** /video/v1/live-streams/{LIVE_STREAM_ID} | Retrieve a live stream |
+| [**get_live_stream_playback_id**](LiveStreamsApi.md#get_live_stream_playback_id) | **GET** /video/v1/live-streams/{LIVE_STREAM_ID}/playback-ids/{PLAYBACK_ID} | Retrieve a live stream playback ID |
 | [**get_live_stream_simulcast_target**](LiveStreamsApi.md#get_live_stream_simulcast_target) | **GET** /video/v1/live-streams/{LIVE_STREAM_ID}/simulcast-targets/{SIMULCAST_TARGET_ID} | Retrieve a Live Stream Simulcast Target |
 | [**list_live_streams**](LiveStreamsApi.md#list_live_streams) | **GET** /video/v1/live-streams | List live streams |
 | [**reset_stream_key**](LiveStreamsApi.md#reset_stream_key) | **POST** /video/v1/live-streams/{LIVE_STREAM_ID}/reset-stream-key | Reset a live stream’s stream key |
@@ -635,6 +636,76 @@ end
 ### Return type
 
 [**LiveStreamResponse**](LiveStreamResponse.md)
+
+### Authorization
+
+[accessToken](../README.md#accessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_live_stream_playback_id
+
+> <GetLiveStreamPlaybackIDResponse> get_live_stream_playback_id(live_stream_id, playback_id)
+
+Retrieve a live stream playback ID
+
+### Examples
+
+```ruby
+require 'time'
+require 'mux_ruby'
+# setup authorization
+MuxRuby.configure do |config|
+  # Configure HTTP basic authorization: accessToken
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = MuxRuby::LiveStreamsApi.new
+live_stream_id = 'live_stream_id_example' # String | The live stream ID
+playback_id = 'playback_id_example' # String | The live stream's playback ID.
+
+begin
+  # Retrieve a live stream playback ID
+  result = api_instance.get_live_stream_playback_id(live_stream_id, playback_id)
+  p result
+rescue MuxRuby::ApiError => e
+  puts "Error when calling LiveStreamsApi->get_live_stream_playback_id: #{e}"
+end
+```
+
+#### Using the get_live_stream_playback_id_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetLiveStreamPlaybackIDResponse>, Integer, Hash)> get_live_stream_playback_id_with_http_info(live_stream_id, playback_id)
+
+```ruby
+begin
+  # Retrieve a live stream playback ID
+  data, status_code, headers = api_instance.get_live_stream_playback_id_with_http_info(live_stream_id, playback_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetLiveStreamPlaybackIDResponse>
+rescue MuxRuby::ApiError => e
+  puts "Error when calling LiveStreamsApi->get_live_stream_playback_id_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **live_stream_id** | **String** | The live stream ID |  |
+| **playback_id** | **String** | The live stream&#39;s playback ID. |  |
+
+### Return type
+
+[**GetLiveStreamPlaybackIDResponse**](GetLiveStreamPlaybackIDResponse.md)
 
 ### Authorization
 
