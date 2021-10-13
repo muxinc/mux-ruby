@@ -31,6 +31,9 @@ module MuxRuby
     # The video resolution of the input file. Video resolution higher than 2048 pixels on any one dimension (height or width) is considered non-standard, The resolution value is presented as `width` x `height` in pixels.
     attr_accessor :video_resolution
 
+    # The video bitrate of the input file is `high`. This parameter is present when the average bitrate of any key frame interval (also known as Group of Pictures or GOP) is higher than what's considered standard which typically is 16 Mbps.
+    attr_accessor :video_bitrate
+
     # The video pixel aspect ratio of the input file.
     attr_accessor :pixel_aspect_ratio
 
@@ -73,6 +76,7 @@ module MuxRuby
         :'video_gop_size' => :'video_gop_size',
         :'video_frame_rate' => :'video_frame_rate',
         :'video_resolution' => :'video_resolution',
+        :'video_bitrate' => :'video_bitrate',
         :'pixel_aspect_ratio' => :'pixel_aspect_ratio',
         :'video_edit_list' => :'video_edit_list',
         :'audio_edit_list' => :'audio_edit_list',
@@ -93,6 +97,7 @@ module MuxRuby
         :'video_gop_size' => :'String',
         :'video_frame_rate' => :'String',
         :'video_resolution' => :'String',
+        :'video_bitrate' => :'String',
         :'pixel_aspect_ratio' => :'String',
         :'video_edit_list' => :'String',
         :'audio_edit_list' => :'String',
@@ -141,6 +146,10 @@ module MuxRuby
         self.video_resolution = attributes[:'video_resolution']
       end
 
+      if attributes.key?(:'video_bitrate')
+        self.video_bitrate = attributes[:'video_bitrate']
+      end
+
       if attributes.key?(:'pixel_aspect_ratio')
         self.pixel_aspect_ratio = attributes[:'pixel_aspect_ratio']
       end
@@ -170,6 +179,8 @@ module MuxRuby
     def valid?
       video_gop_size_validator = EnumAttributeValidator.new('String', ["high"])
       return false unless video_gop_size_validator.valid?(@video_gop_size)
+      video_bitrate_validator = EnumAttributeValidator.new('String', ["high"])
+      return false unless video_bitrate_validator.valid?(@video_bitrate)
       video_edit_list_validator = EnumAttributeValidator.new('String', ["non-standard"])
       return false unless video_edit_list_validator.valid?(@video_edit_list)
       audio_edit_list_validator = EnumAttributeValidator.new('String', ["non-standard"])
@@ -187,6 +198,16 @@ module MuxRuby
         fail ArgumentError, "invalid value for \"video_gop_size\", must be one of #{validator.allowable_values}."
       end
       @video_gop_size = video_gop_size
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] video_bitrate Object to be assigned
+    def video_bitrate=(video_bitrate)
+      validator = EnumAttributeValidator.new('String', ["high"])
+      unless validator.valid?(video_bitrate)
+        fail ArgumentError, "invalid value for \"video_bitrate\", must be one of #{validator.allowable_values}."
+      end
+      @video_bitrate = video_bitrate
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -229,6 +250,7 @@ module MuxRuby
           video_gop_size == o.video_gop_size &&
           video_frame_rate == o.video_frame_rate &&
           video_resolution == o.video_resolution &&
+          video_bitrate == o.video_bitrate &&
           pixel_aspect_ratio == o.pixel_aspect_ratio &&
           video_edit_list == o.video_edit_list &&
           audio_edit_list == o.audio_edit_list &&
@@ -244,7 +266,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [video_codec, audio_codec, video_gop_size, video_frame_rate, video_resolution, pixel_aspect_ratio, video_edit_list, audio_edit_list, unexpected_media_file_parameters].hash
+      [video_codec, audio_codec, video_gop_size, video_frame_rate, video_resolution, video_bitrate, pixel_aspect_ratio, video_edit_list, audio_edit_list, unexpected_media_file_parameters].hash
     end
 
     # Builds the object from hash

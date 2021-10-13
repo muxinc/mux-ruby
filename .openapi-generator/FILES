@@ -241,6 +241,4 @@ lib/mux_ruby/version.rb
 mux_ruby.gemspec
 spec/api_client_spec.rb
 spec/configuration_spec.rb
-spec/models/live_stream_embedded_subtitle_settings_spec.rb
-spec/models/update_live_stream_embedded_subtitles_request_spec.rb
 spec/spec_helper.rb
