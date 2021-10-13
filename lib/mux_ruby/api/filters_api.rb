@@ -20,7 +20,7 @@ module MuxRuby
       @api_client = api_client
     end
     # Lists values for a specific filter
-    # Deprecated: The API has been replaced by the list-dimension-values API call.  Lists the values for a filter along with a total count of related views. 
+    # The API has been replaced by the list-dimension-values API call.  Lists the values for a filter along with a total count of related views. 
     # @param filter_id [String] ID of the Filter
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Number of items to include in the response (default to 25)
@@ -34,7 +34,7 @@ module MuxRuby
     end
 
     # Lists values for a specific filter
-    # Deprecated: The API has been replaced by the list-dimension-values API call.  Lists the values for a filter along with a total count of related views. 
+    # The API has been replaced by the list-dimension-values API call.  Lists the values for a filter along with a total count of related views. 
     # @param filter_id [String] ID of the Filter
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Number of items to include in the response
@@ -95,7 +95,7 @@ module MuxRuby
     end
 
     # List Filters
-    # Deprecated: The API has been replaced by the list-dimensions API call.  Lists all the filters broken out into basic and advanced. 
+    # The API has been replaced by the list-dimensions API call.  Lists all the filters broken out into basic and advanced. 
     # @param [Hash] opts the optional parameters
     # @return [ListFiltersResponse]
     def list_filters(opts = {})
@@ -104,7 +104,7 @@ module MuxRuby
     end
 
     # List Filters
-    # Deprecated: The API has been replaced by the list-dimensions API call.  Lists all the filters broken out into basic and advanced. 
+    # The API has been replaced by the list-dimensions API call.  Lists all the filters broken out into basic and advanced. 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ListFiltersResponse, Integer, Hash)>] ListFiltersResponse data, response status code and response headers
     def list_filters_with_http_info(opts = {})

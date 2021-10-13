@@ -84,6 +84,7 @@ docs/ListUploadsResponse.md
 docs/ListVideoViewExportsResponse.md
 docs/ListVideoViewsResponse.md
 docs/LiveStream.md
+docs/LiveStreamEmbeddedSubtitleSettings.md
 docs/LiveStreamResponse.md
 docs/LiveStreamsApi.md
 docs/Metric.md
@@ -109,6 +110,7 @@ docs/Track.md
 docs/URLSigningKeysApi.md
 docs/UpdateAssetMP4SupportRequest.md
 docs/UpdateAssetMasterAccessRequest.md
+docs/UpdateLiveStreamEmbeddedSubtitlesRequest.md
 docs/Upload.md
 docs/UploadError.md
 docs/UploadResponse.md
@@ -207,6 +209,7 @@ lib/mux_ruby/models/list_uploads_response.rb
 lib/mux_ruby/models/list_video_view_exports_response.rb
 lib/mux_ruby/models/list_video_views_response.rb
 lib/mux_ruby/models/live_stream.rb
+lib/mux_ruby/models/live_stream_embedded_subtitle_settings.rb
 lib/mux_ruby/models/live_stream_response.rb
 lib/mux_ruby/models/metric.rb
 lib/mux_ruby/models/notification_rule.rb
@@ -227,6 +230,7 @@ lib/mux_ruby/models/simulcast_target_response.rb
 lib/mux_ruby/models/track.rb
 lib/mux_ruby/models/update_asset_master_access_request.rb
 lib/mux_ruby/models/update_asset_mp4_support_request.rb
+lib/mux_ruby/models/update_live_stream_embedded_subtitles_request.rb
 lib/mux_ruby/models/upload.rb
 lib/mux_ruby/models/upload_error.rb
 lib/mux_ruby/models/upload_response.rb
@@ -237,4 +241,6 @@ lib/mux_ruby/version.rb
 mux_ruby.gemspec
 spec/api_client_spec.rb
 spec/configuration_spec.rb
+spec/models/live_stream_embedded_subtitle_settings_spec.rb
+spec/models/update_live_stream_embedded_subtitles_request_spec.rb
 spec/spec_helper.rb

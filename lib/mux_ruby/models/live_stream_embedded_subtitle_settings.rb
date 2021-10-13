@@ -14,46 +14,48 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class CreateLiveStreamRequest
-    attr_accessor :playback_policy
+  class LiveStreamEmbeddedSubtitleSettings
+    # A name for this live caption stream.
+    attr_accessor :name
 
-    attr_accessor :new_asset_settings
-
-    # When live streaming software disconnects from Mux, either intentionally or due to a drop in the network, the Reconnect Window is the time in seconds that Mux should wait for the streaming software to reconnect before considering the live stream finished and completing the recorded asset. Defaults to 60 seconds on the API if not specified.
-    attr_accessor :reconnect_window
-
+    # Arbitrary metadata set for the live stream caption track. Max 255 characters.
     attr_accessor :passthrough
 
-    # Force the live stream to only process the audio track when the value is set to true. Mux drops the video track if broadcasted.
-    attr_accessor :audio_only
+    # The language of the caption stream. Value must be BCP 47 compliant.
+    attr_accessor :language_code
 
-    # Describe the subtitle contents of the incoming live stream.
-    attr_accessor :embedded_subtitles
+    # CEA-608 caption channel to read data from.
+    attr_accessor :language_channel
 
-    # Latency is the time from when the streamer does something in real life to when you see it happen in the player. Set this if you want lower latency for your live stream. Note: Reconnect windows are incompatible with Reduced Latency and will always be set to zero (0) seconds. Read more here: https://mux.com/blog/reduced-latency-for-mux-live-streaming-now-available/
-    attr_accessor :reduced_latency
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    # Latency is the time from when the streamer does something in real life to when you see it happen in the player. Setting this option will enable compatibility with the LL-HLS specification for low-latency streaming. This typically has lower latency than Reduced Latency streams, and cannot be combined with Reduced Latency. Note: Reconnect windows are incompatible with Low Latency and will always be set to zero (0) seconds.
-    attr_accessor :low_latency
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
 
-    # Marks the live stream as a test live stream when the value is set to true. A test live stream can help evaluate the Mux Video APIs without incurring any cost. There is no limit on number of test live streams created. Test live streams are watermarked with the Mux logo and limited to 5 minutes. The test live stream is disabled after the stream is active for 5 mins and the recorded asset also deleted after 24 hours.
-    attr_accessor :test
-
-    attr_accessor :simulcast_targets
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'playback_policy' => :'playback_policy',
-        :'new_asset_settings' => :'new_asset_settings',
-        :'reconnect_window' => :'reconnect_window',
+        :'name' => :'name',
         :'passthrough' => :'passthrough',
-        :'audio_only' => :'audio_only',
-        :'embedded_subtitles' => :'embedded_subtitles',
-        :'reduced_latency' => :'reduced_latency',
-        :'low_latency' => :'low_latency',
-        :'test' => :'test',
-        :'simulcast_targets' => :'simulcast_targets'
+        :'language_code' => :'language_code',
+        :'language_channel' => :'language_channel'
       }
     end
 
@@ -65,16 +67,10 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'playback_policy' => :'Array<PlaybackPolicy>',
-        :'new_asset_settings' => :'CreateAssetRequest',
-        :'reconnect_window' => :'Float',
+        :'name' => :'String',
         :'passthrough' => :'String',
-        :'audio_only' => :'Boolean',
-        :'embedded_subtitles' => :'Array<LiveStreamEmbeddedSubtitleSettings>',
-        :'reduced_latency' => :'Boolean',
-        :'low_latency' => :'Boolean',
-        :'test' => :'Boolean',
-        :'simulcast_targets' => :'Array<CreateSimulcastTargetRequest>'
+        :'language_code' => :'String',
+        :'language_channel' => :'String'
       }
     end
 
@@ -88,61 +84,35 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::CreateLiveStreamRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::LiveStreamEmbeddedSubtitleSettings` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::CreateLiveStreamRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::LiveStreamEmbeddedSubtitleSettings`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'playback_policy')
-        if (value = attributes[:'playback_policy']).is_a?(Array)
-          self.playback_policy = value
-        end
-      end
-
-      if attributes.key?(:'new_asset_settings')
-        self.new_asset_settings = attributes[:'new_asset_settings']
-      end
-
-      if attributes.key?(:'reconnect_window')
-        self.reconnect_window = attributes[:'reconnect_window']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
 
       if attributes.key?(:'passthrough')
         self.passthrough = attributes[:'passthrough']
       end
 
-      if attributes.key?(:'audio_only')
-        self.audio_only = attributes[:'audio_only']
+      if attributes.key?(:'language_code')
+        self.language_code = attributes[:'language_code']
+      else
+        self.language_code = 'en'
       end
 
-      if attributes.key?(:'embedded_subtitles')
-        if (value = attributes[:'embedded_subtitles']).is_a?(Array)
-          self.embedded_subtitles = value
-        end
-      end
-
-      if attributes.key?(:'reduced_latency')
-        self.reduced_latency = attributes[:'reduced_latency']
-      end
-
-      if attributes.key?(:'low_latency')
-        self.low_latency = attributes[:'low_latency']
-      end
-
-      if attributes.key?(:'test')
-        self.test = attributes[:'test']
-      end
-
-      if attributes.key?(:'simulcast_targets')
-        if (value = attributes[:'simulcast_targets']).is_a?(Array)
-          self.simulcast_targets = value
-        end
+      if attributes.key?(:'language_channel')
+        self.language_channel = attributes[:'language_channel']
+      else
+        self.language_channel = 'cc1'
       end
     end
 
@@ -150,37 +120,25 @@ module MuxRuby
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@reconnect_window.nil? && @reconnect_window > 300
-        invalid_properties.push('invalid value for "reconnect_window", must be smaller than or equal to 300.')
-      end
-
-      if !@reconnect_window.nil? && @reconnect_window < 0.1
-        invalid_properties.push('invalid value for "reconnect_window", must be greater than or equal to 0.1.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@reconnect_window.nil? && @reconnect_window > 300
-      return false if !@reconnect_window.nil? && @reconnect_window < 0.1
+      language_channel_validator = EnumAttributeValidator.new('String', ["cc1"])
+      return false unless language_channel_validator.valid?(@language_channel)
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] reconnect_window Value to be assigned
-    def reconnect_window=(reconnect_window)
-      if !reconnect_window.nil? && reconnect_window > 300
-        fail ArgumentError, 'invalid value for "reconnect_window", must be smaller than or equal to 300.'
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] language_channel Object to be assigned
+    def language_channel=(language_channel)
+      validator = EnumAttributeValidator.new('String', ["cc1"])
+      unless validator.valid?(language_channel)
+        fail ArgumentError, "invalid value for \"language_channel\", must be one of #{validator.allowable_values}."
       end
-
-      if !reconnect_window.nil? && reconnect_window < 0.1
-        fail ArgumentError, 'invalid value for "reconnect_window", must be greater than or equal to 0.1.'
-      end
-
-      @reconnect_window = reconnect_window
+      @language_channel = language_channel
     end
 
     # Checks equality by comparing each attribute.
@@ -188,16 +146,10 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          playback_policy == o.playback_policy &&
-          new_asset_settings == o.new_asset_settings &&
-          reconnect_window == o.reconnect_window &&
+          name == o.name &&
           passthrough == o.passthrough &&
-          audio_only == o.audio_only &&
-          embedded_subtitles == o.embedded_subtitles &&
-          reduced_latency == o.reduced_latency &&
-          low_latency == o.low_latency &&
-          test == o.test &&
-          simulcast_targets == o.simulcast_targets
+          language_code == o.language_code &&
+          language_channel == o.language_channel
     end
 
     # @see the `==` method
@@ -209,7 +161,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [playback_policy, new_asset_settings, reconnect_window, passthrough, audio_only, embedded_subtitles, reduced_latency, low_latency, test, simulcast_targets].hash
+      [name, passthrough, language_code, language_channel].hash
     end
 
     # Builds the object from hash

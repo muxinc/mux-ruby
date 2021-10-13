@@ -20,7 +20,7 @@ module MuxRuby
       @api_client = api_client
     end
     # List property video view export links
-    # Deprecated: The API has been replaced by the list-exports-views API call.  Lists the available video view exports along with URLs to retrieve them. 
+    # The API has been replaced by the list-exports-views API call.  Lists the available video view exports along with URLs to retrieve them. 
     # @param [Hash] opts the optional parameters
     # @return [ListExportsResponse]
     def list_exports(opts = {})
@@ -29,7 +29,7 @@ module MuxRuby
     end
 
     # List property video view export links
-    # Deprecated: The API has been replaced by the list-exports-views API call.  Lists the available video view exports along with URLs to retrieve them. 
+    # The API has been replaced by the list-exports-views API call.  Lists the available video view exports along with URLs to retrieve them. 
     # @param [Hash] opts the optional parameters
     # @return [Array<(ListExportsResponse, Integer, Hash)>] ListExportsResponse data, response status code and response headers
     def list_exports_with_http_info(opts = {})

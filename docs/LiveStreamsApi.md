@@ -18,6 +18,7 @@ All URIs are relative to *https://api.mux.com*
 | [**list_live_streams**](LiveStreamsApi.md#list_live_streams) | **GET** /video/v1/live-streams | List live streams |
 | [**reset_stream_key**](LiveStreamsApi.md#reset_stream_key) | **POST** /video/v1/live-streams/{LIVE_STREAM_ID}/reset-stream-key | Reset a live stream’s stream key |
 | [**signal_live_stream_complete**](LiveStreamsApi.md#signal_live_stream_complete) | **PUT** /video/v1/live-streams/{LIVE_STREAM_ID}/complete | Signal a live stream is finished |
+| [**update_live_stream_embedded_subtitles**](LiveStreamsApi.md#update_live_stream_embedded_subtitles) | **PUT** /video/v1/live-streams/{LIVE_STREAM_ID}/embedded-subtitles | Update a live stream&#39;s embedded subtitles |
 
 
 ## create_live_stream
@@ -1000,5 +1001,77 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## update_live_stream_embedded_subtitles
+
+> <LiveStreamResponse> update_live_stream_embedded_subtitles(live_stream_id, update_live_stream_embedded_subtitles_request)
+
+Update a live stream's embedded subtitles
+
+Configures a live stream to receive embedded subtitles including captions and translations.
+
+### Examples
+
+```ruby
+require 'time'
+require 'mux_ruby'
+# setup authorization
+MuxRuby.configure do |config|
+  # Configure HTTP basic authorization: accessToken
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = MuxRuby::LiveStreamsApi.new
+live_stream_id = 'live_stream_id_example' # String | The live stream ID
+update_live_stream_embedded_subtitles_request = MuxRuby::UpdateLiveStreamEmbeddedSubtitlesRequest.new # UpdateLiveStreamEmbeddedSubtitlesRequest | 
+
+begin
+  # Update a live stream's embedded subtitles
+  result = api_instance.update_live_stream_embedded_subtitles(live_stream_id, update_live_stream_embedded_subtitles_request)
+  p result
+rescue MuxRuby::ApiError => e
+  puts "Error when calling LiveStreamsApi->update_live_stream_embedded_subtitles: #{e}"
+end
+```
+
+#### Using the update_live_stream_embedded_subtitles_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LiveStreamResponse>, Integer, Hash)> update_live_stream_embedded_subtitles_with_http_info(live_stream_id, update_live_stream_embedded_subtitles_request)
+
+```ruby
+begin
+  # Update a live stream's embedded subtitles
+  data, status_code, headers = api_instance.update_live_stream_embedded_subtitles_with_http_info(live_stream_id, update_live_stream_embedded_subtitles_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LiveStreamResponse>
+rescue MuxRuby::ApiError => e
+  puts "Error when calling LiveStreamsApi->update_live_stream_embedded_subtitles_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **live_stream_id** | **String** | The live stream ID |  |
+| **update_live_stream_embedded_subtitles_request** | [**UpdateLiveStreamEmbeddedSubtitlesRequest**](UpdateLiveStreamEmbeddedSubtitlesRequest.md) |  |  |
+
+### Return type
+
+[**LiveStreamResponse**](LiveStreamResponse.md)
+
+### Authorization
+
+[accessToken](../README.md#accessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
