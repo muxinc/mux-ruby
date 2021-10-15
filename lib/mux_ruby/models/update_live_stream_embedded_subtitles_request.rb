@@ -15,7 +15,7 @@ require 'time'
 
 module MuxRuby
   class UpdateLiveStreamEmbeddedSubtitlesRequest
-    # Describe the embedded subtitle contents of the incoming live stream.
+    # Describe the embedded closed caption contents of the incoming live stream.
     attr_accessor :embedded_subtitles
 
     # Attribute mapping from ruby-style variable name to JSON key.

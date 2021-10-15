@@ -15,13 +15,13 @@ require 'time'
 
 module MuxRuby
   class LiveStreamEmbeddedSubtitleSettings
-    # A name for this live stream subtitle track.
+    # A name for this live stream closed caption track.
     attr_accessor :name
 
-    # Arbitrary metadata set for the live stream subtitle track. Max 255 characters.
+    # Arbitrary metadata set for the live stream closed caption track. Max 255 characters.
     attr_accessor :passthrough
 
-    # The language of the subtitle stream. Value must be BCP 47 compliant.
+    # The language of the closed caption stream. Value must be BCP 47 compliant.
     attr_accessor :language_code
 
     # CEA-608 caption channel to read data from.

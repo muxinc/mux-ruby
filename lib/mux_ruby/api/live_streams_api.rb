@@ -929,7 +929,7 @@ module MuxRuby
     end
 
     # Update a live stream's embedded subtitles
-    # Configures a live stream to receive embedded subtitles including captions and translations.
+    # Configures a live stream to receive embedded closed captions. The resulting Asset's subtitle text track will have `closed_captions: true` set. 
     # @param live_stream_id [String] The live stream ID
     # @param update_live_stream_embedded_subtitles_request [UpdateLiveStreamEmbeddedSubtitlesRequest] 
     # @param [Hash] opts the optional parameters
@@ -940,7 +940,7 @@ module MuxRuby
     end
 
     # Update a live stream&#39;s embedded subtitles
-    # Configures a live stream to receive embedded subtitles including captions and translations.
+    # Configures a live stream to receive embedded closed captions. The resulting Asset&#39;s subtitle text track will have &#x60;closed_captions: true&#x60; set. 
     # @param live_stream_id [String] The live stream ID
     # @param update_live_stream_embedded_subtitles_request [UpdateLiveStreamEmbeddedSubtitlesRequest] 
     # @param [Hash] opts the optional parameters

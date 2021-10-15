@@ -27,7 +27,7 @@ module MuxRuby
     # Force the live stream to only process the audio track when the value is set to true. Mux drops the video track if broadcasted.
     attr_accessor :audio_only
 
-    # Describe the subtitle contents of the incoming live stream.
+    # Describe the embedded closed caption contents of the incoming live stream.
     attr_accessor :embedded_subtitles
 
     # Latency is the time from when the streamer does something in real life to when you see it happen in the player. Set this if you want lower latency for your live stream. Note: Reconnect windows are incompatible with Reduced Latency and will always be set to zero (0) seconds. Read more here: https://mux.com/blog/reduced-latency-for-mux-live-streaming-now-available/
