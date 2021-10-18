@@ -119,6 +119,7 @@ assert asset_with_2_captions.data.tracks.length == 4 # Audio, Video, French that
 puts "create-asset-track OK ✅"
 
 # ========== delete-asset-track ==========
+Kernel.sleep(5)
 assets_api.delete_asset_track(create_response.data.id, subtitles_track.data.id)
 asset_with_1_captions = assets_api.get_asset(create_response.data.id)
 assert asset_with_1_captions.data.tracks.length == 3 # Audio, Video, French that we ingested with the asset
