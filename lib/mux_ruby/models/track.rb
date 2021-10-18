@@ -205,8 +205,6 @@ module MuxRuby
     def valid?
       type_validator = EnumAttributeValidator.new('String', ["video", "audio", "text"])
       return false unless type_validator.valid?(@type)
-      max_channel_layout_validator = EnumAttributeValidator.new('String', ["mono", "stereo", "5.2", "7.1"])
-      return false unless max_channel_layout_validator.valid?(@max_channel_layout)
       text_type_validator = EnumAttributeValidator.new('String', ["subtitles"])
       return false unless text_type_validator.valid?(@text_type)
       true
@@ -220,16 +218,6 @@ module MuxRuby
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] max_channel_layout Object to be assigned
-    def max_channel_layout=(max_channel_layout)
-      validator = EnumAttributeValidator.new('String', ["mono", "stereo", "5.2", "7.1"])
-      unless validator.valid?(max_channel_layout)
-        fail ArgumentError, "invalid value for \"max_channel_layout\", must be one of #{validator.allowable_values}."
-      end
-      @max_channel_layout = max_channel_layout
     end
 
     # Custom attribute writer method checking allowed values (enum).
