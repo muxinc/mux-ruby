@@ -16,7 +16,6 @@ errors_api = MuxRuby::ErrorsApi.new
 
 # ========== list-errors ==========
 errors = errors_api.list_errors(:filters => ['browser:Safari'], :timeframe => ['7:days'])
-require 'pry'; binding.pry
 assert errors != nil
 assert errors.data != nil
 puts "list-errors OK ✅"
