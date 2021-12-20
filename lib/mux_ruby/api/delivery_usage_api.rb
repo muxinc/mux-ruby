@@ -24,7 +24,8 @@ module MuxRuby
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60; (default to 1)
     # @option opts [Integer] :limit Number of items to include in the response (default to 100)
-    # @option opts [String] :asset_id Filter response to return delivery usage for this asset only.
+    # @option opts [String] :asset_id Filter response to return delivery usage for this asset only. You cannot specify both the &#x60;asset_id&#x60; and &#x60;live_stream_id&#x60; parameters together.
+    # @option opts [String] :live_stream_id Filter response to return delivery usage for assets for this live stream. You cannot specify both the &#x60;asset_id&#x60; and &#x60;live_stream_id&#x60; parameters together.
     # @option opts [Array<String>] :timeframe Time window to get delivery usage information. timeframe[0] indicates the start time, timeframe[1] indicates the end time in seconds since the Unix epoch. Default time window is 1 hour representing usage from 13th to 12th hour from when the request is made.
     # @return [ListDeliveryUsageResponse]
     def list_delivery_usage(opts = {})
@@ -37,7 +38,8 @@ module MuxRuby
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60;
     # @option opts [Integer] :limit Number of items to include in the response
-    # @option opts [String] :asset_id Filter response to return delivery usage for this asset only.
+    # @option opts [String] :asset_id Filter response to return delivery usage for this asset only. You cannot specify both the &#x60;asset_id&#x60; and &#x60;live_stream_id&#x60; parameters together.
+    # @option opts [String] :live_stream_id Filter response to return delivery usage for assets for this live stream. You cannot specify both the &#x60;asset_id&#x60; and &#x60;live_stream_id&#x60; parameters together.
     # @option opts [Array<String>] :timeframe Time window to get delivery usage information. timeframe[0] indicates the start time, timeframe[1] indicates the end time in seconds since the Unix epoch. Default time window is 1 hour representing usage from 13th to 12th hour from when the request is made.
     # @return [Array<(ListDeliveryUsageResponse, Integer, Hash)>] ListDeliveryUsageResponse data, response status code and response headers
     def list_delivery_usage_with_http_info(opts = {})
@@ -52,6 +54,7 @@ module MuxRuby
       query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
       query_params[:'asset_id'] = opts[:'asset_id'] if !opts[:'asset_id'].nil?
+      query_params[:'live_stream_id'] = opts[:'live_stream_id'] if !opts[:'live_stream_id'].nil?
       query_params[:'timeframe[]'] = @api_client.build_collection_param(opts[:'timeframe'], :multi) if !opts[:'timeframe'].nil?
 
       # header parameters

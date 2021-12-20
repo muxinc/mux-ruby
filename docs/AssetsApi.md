@@ -14,6 +14,7 @@ All URIs are relative to *https://api.mux.com*
 | [**get_asset_input_info**](AssetsApi.md#get_asset_input_info) | **GET** /video/v1/assets/{ASSET_ID}/input-info | Retrieve asset input info |
 | [**get_asset_playback_id**](AssetsApi.md#get_asset_playback_id) | **GET** /video/v1/assets/{ASSET_ID}/playback-ids/{PLAYBACK_ID} | Retrieve a playback ID |
 | [**list_assets**](AssetsApi.md#list_assets) | **GET** /video/v1/assets | List assets |
+| [**update_asset**](AssetsApi.md#update_asset) | **PATCH** /video/v1/assets/{ASSET_ID} | Update an Asset |
 | [**update_asset_master_access**](AssetsApi.md#update_asset_master_access) | **PUT** /video/v1/assets/{ASSET_ID}/master-access | Update master access |
 | [**update_asset_mp4_support**](AssetsApi.md#update_asset_mp4_support) | **PUT** /video/v1/assets/{ASSET_ID}/mp4-support | Update MP4 support |
 
@@ -722,6 +723,78 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## update_asset
+
+> <AssetResponse> update_asset(asset_id, update_asset_request)
+
+Update an Asset
+
+Updates the details of an already-created Asset with the provided Asset ID. This currently supports only the `passthrough` field.
+
+### Examples
+
+```ruby
+require 'time'
+require 'mux_ruby'
+# setup authorization
+MuxRuby.configure do |config|
+  # Configure HTTP basic authorization: accessToken
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = MuxRuby::AssetsApi.new
+asset_id = 'asset_id_example' # String | The asset ID.
+update_asset_request = MuxRuby::UpdateAssetRequest.new # UpdateAssetRequest | 
+
+begin
+  # Update an Asset
+  result = api_instance.update_asset(asset_id, update_asset_request)
+  p result
+rescue MuxRuby::ApiError => e
+  puts "Error when calling AssetsApi->update_asset: #{e}"
+end
+```
+
+#### Using the update_asset_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AssetResponse>, Integer, Hash)> update_asset_with_http_info(asset_id, update_asset_request)
+
+```ruby
+begin
+  # Update an Asset
+  data, status_code, headers = api_instance.update_asset_with_http_info(asset_id, update_asset_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AssetResponse>
+rescue MuxRuby::ApiError => e
+  puts "Error when calling AssetsApi->update_asset_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **asset_id** | **String** | The asset ID. |  |
+| **update_asset_request** | [**UpdateAssetRequest**](UpdateAssetRequest.md) |  |  |
+
+### Return type
+
+[**AssetResponse**](AssetResponse.md)
+
+### Authorization
+
+[accessToken](../README.md#accessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

@@ -30,7 +30,7 @@ module MuxRuby
     # Indicates the track provides Subtitles for the Deaf or Hard-of-hearing (SDH).
     attr_accessor :closed_captions
 
-    # Arbitrary metadata set for the track either when creating the asset or track.
+    # Arbitrary user-supplied metadata set for the track either when creating the asset or track.
     attr_accessor :passthrough
 
     class EnumAttributeValidator

@@ -51,7 +51,7 @@ module MuxRuby
     # Indicates the track provides Subtitles for the Deaf or Hard-of-hearing (SDH). This parameter is set for the `text` type and `subtitles` text type track.
     attr_accessor :closed_captions
 
-    # Arbitrary metadata set for the track either when creating the asset or track. This parameter is set for `text` type and `subtitles` text type track. Max 255 characters.
+    # Arbitrary user-supplied metadata set for the track either when creating the asset or track. This parameter is set for `text` type and `subtitles` text type track. Max 255 characters.
     attr_accessor :passthrough
 
     class EnumAttributeValidator

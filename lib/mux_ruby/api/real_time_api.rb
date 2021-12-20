@@ -25,7 +25,7 @@ module MuxRuby
     # @param [Hash] opts the optional parameters
     # @option opts [String] :dimension Dimension the specified value belongs to
     # @option opts [Float] :timestamp Timestamp to limit results by. This value must be provided as a unix timestamp. Defaults to the current unix timestamp.
-    # @option opts [Array<String>] :filters Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US). Possible filter names are the same as returned by the List Filters endpoint. 
+    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
     # @option opts [String] :order_by Value to order the results by
     # @option opts [String] :order_direction Sort order.
     # @return [GetRealTimeBreakdownResponse]
@@ -40,7 +40,7 @@ module MuxRuby
     # @param [Hash] opts the optional parameters
     # @option opts [String] :dimension Dimension the specified value belongs to
     # @option opts [Float] :timestamp Timestamp to limit results by. This value must be provided as a unix timestamp. Defaults to the current unix timestamp.
-    # @option opts [Array<String>] :filters Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US). Possible filter names are the same as returned by the List Filters endpoint. 
+    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
     # @option opts [String] :order_by Value to order the results by
     # @option opts [String] :order_direction Sort order.
     # @return [Array<(GetRealTimeBreakdownResponse, Integer, Hash)>] GetRealTimeBreakdownResponse data, response status code and response headers
@@ -118,7 +118,7 @@ module MuxRuby
     # Gets histogram timeseries information for a specific metric.
     # @param realtime_histogram_metric_id [String] ID of the Realtime Histogram Metric
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<String>] :filters Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US). Possible filter names are the same as returned by the List Filters endpoint. 
+    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
     # @return [GetRealTimeHistogramTimeseriesResponse]
     def get_realtime_histogram_timeseries(realtime_histogram_metric_id, opts = {})
       data, _status_code, _headers = get_realtime_histogram_timeseries_with_http_info(realtime_histogram_metric_id, opts)
@@ -129,7 +129,7 @@ module MuxRuby
     # Gets histogram timeseries information for a specific metric.
     # @param realtime_histogram_metric_id [String] ID of the Realtime Histogram Metric
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<String>] :filters Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US). Possible filter names are the same as returned by the List Filters endpoint. 
+    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
     # @return [Array<(GetRealTimeHistogramTimeseriesResponse, Integer, Hash)>] GetRealTimeHistogramTimeseriesResponse data, response status code and response headers
     def get_realtime_histogram_timeseries_with_http_info(realtime_histogram_metric_id, opts = {})
       if @api_client.config.debugging
@@ -189,7 +189,7 @@ module MuxRuby
     # Gets Time series information for a specific metric along with the number of concurrent viewers.
     # @param realtime_metric_id [String] ID of the Realtime Metric
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<String>] :filters Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US). Possible filter names are the same as returned by the List Filters endpoint. 
+    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
     # @return [GetRealTimeTimeseriesResponse]
     def get_realtime_timeseries(realtime_metric_id, opts = {})
       data, _status_code, _headers = get_realtime_timeseries_with_http_info(realtime_metric_id, opts)
@@ -200,7 +200,7 @@ module MuxRuby
     # Gets Time series information for a specific metric along with the number of concurrent viewers.
     # @param realtime_metric_id [String] ID of the Realtime Metric
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<String>] :filters Filter key:value pairs. Must be provided as an array query string parameter (e.g. filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;country:US). Possible filter names are the same as returned by the List Filters endpoint. 
+    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
     # @return [Array<(GetRealTimeTimeseriesResponse, Integer, Hash)>] GetRealTimeTimeseriesResponse data, response status code and response headers
     def get_realtime_timeseries_with_http_info(realtime_metric_id, opts = {})
       if @api_client.config.debugging

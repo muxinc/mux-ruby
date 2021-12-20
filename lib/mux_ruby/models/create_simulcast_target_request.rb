@@ -15,7 +15,7 @@ require 'time'
 
 module MuxRuby
   class CreateSimulcastTargetRequest
-    # Arbitrary metadata set by you when creating a simulcast target.
+    # Arbitrary user-supplied metadata set by you when creating a simulcast target.
     attr_accessor :passthrough
 
     # Stream Key represents a stream identifier on the third party live streaming service to send the parent live stream to.

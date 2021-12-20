@@ -677,6 +677,77 @@ module MuxRuby
       return data, status_code, headers
     end
 
+    # Update an Asset
+    # Updates the details of an already-created Asset with the provided Asset ID. This currently supports only the `passthrough` field.
+    # @param asset_id [String] The asset ID.
+    # @param update_asset_request [UpdateAssetRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [AssetResponse]
+    def update_asset(asset_id, update_asset_request, opts = {})
+      data, _status_code, _headers = update_asset_with_http_info(asset_id, update_asset_request, opts)
+      data
+    end
+
+    # Update an Asset
+    # Updates the details of an already-created Asset with the provided Asset ID. This currently supports only the &#x60;passthrough&#x60; field.
+    # @param asset_id [String] The asset ID.
+    # @param update_asset_request [UpdateAssetRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AssetResponse, Integer, Hash)>] AssetResponse data, response status code and response headers
+    def update_asset_with_http_info(asset_id, update_asset_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AssetsApi.update_asset ...'
+      end
+      # verify the required parameter 'asset_id' is set
+      if @api_client.config.client_side_validation && asset_id.nil?
+        fail ArgumentError, "Missing the required parameter 'asset_id' when calling AssetsApi.update_asset"
+      end
+      # verify the required parameter 'update_asset_request' is set
+      if @api_client.config.client_side_validation && update_asset_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_asset_request' when calling AssetsApi.update_asset"
+      end
+      # resource path
+      local_var_path = '/video/v1/assets/{ASSET_ID}'.sub('{' + 'ASSET_ID' + '}', CGI.escape(asset_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_asset_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AssetResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['accessToken']
+
+      new_options = opts.merge(
+        :operation => :"AssetsApi.update_asset",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AssetsApi#update_asset\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Update master access
     # Allows you to add temporary access to the master (highest-quality) version of the asset in MP4 format. A URL will be created that can be used to download the master version for 24 hours. After 24 hours Master Access will revert to \"none\". This master version is not optimized for web and not meant to be streamed, only downloaded for purposes like archiving or editing the video offline.
     # @param asset_id [String] The asset ID.

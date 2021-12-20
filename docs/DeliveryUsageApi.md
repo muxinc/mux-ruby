@@ -31,7 +31,8 @@ api_instance = MuxRuby::DeliveryUsageApi.new
 opts = {
   page: 56, # Integer | Offset by this many pages, of the size of `limit`
   limit: 56, # Integer | Number of items to include in the response
-  asset_id: 'asset_id_example', # String | Filter response to return delivery usage for this asset only.
+  asset_id: 'asset_id_example', # String | Filter response to return delivery usage for this asset only. You cannot specify both the `asset_id` and `live_stream_id` parameters together.
+  live_stream_id: 'live_stream_id_example', # String | Filter response to return delivery usage for assets for this live stream. You cannot specify both the `asset_id` and `live_stream_id` parameters together.
   timeframe: ['inner_example'] # Array<String> | Time window to get delivery usage information. timeframe[0] indicates the start time, timeframe[1] indicates the end time in seconds since the Unix epoch. Default time window is 1 hour representing usage from 13th to 12th hour from when the request is made.
 }
 
@@ -68,7 +69,8 @@ end
 | ---- | ---- | ----------- | ----- |
 | **page** | **Integer** | Offset by this many pages, of the size of &#x60;limit&#x60; | [optional][default to 1] |
 | **limit** | **Integer** | Number of items to include in the response | [optional][default to 100] |
-| **asset_id** | **String** | Filter response to return delivery usage for this asset only. | [optional] |
+| **asset_id** | **String** | Filter response to return delivery usage for this asset only. You cannot specify both the &#x60;asset_id&#x60; and &#x60;live_stream_id&#x60; parameters together. | [optional] |
+| **live_stream_id** | **String** | Filter response to return delivery usage for assets for this live stream. You cannot specify both the &#x60;asset_id&#x60; and &#x60;live_stream_id&#x60; parameters together. | [optional] |
 | **timeframe** | [**Array&lt;String&gt;**](String.md) | Time window to get delivery usage information. timeframe[0] indicates the start time, timeframe[1] indicates the end time in seconds since the Unix epoch. Default time window is 1 hour representing usage from 13th to 12th hour from when the request is made. | [optional] |
 
 ### Return type

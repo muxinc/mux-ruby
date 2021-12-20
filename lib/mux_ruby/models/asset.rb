@@ -52,7 +52,7 @@ module MuxRuby
     # Whether the asset is created from a live stream and the live stream is currently `active` and not in `idle` state.
     attr_accessor :is_live
 
-    # Arbitrary metadata set for the asset. Max 255 characters.
+    # Arbitrary user-supplied metadata set for the asset. Max 255 characters.
     attr_accessor :passthrough
 
     # Unique identifier for the live stream. This is an optional parameter added when the asset is created from a live stream.

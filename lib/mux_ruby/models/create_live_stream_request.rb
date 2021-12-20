@@ -30,16 +30,41 @@ module MuxRuby
     # Describe the embedded closed caption contents of the incoming live stream.
     attr_accessor :embedded_subtitles
 
-    # Latency is the time from when the streamer does something in real life to when you see it happen in the player. Set this if you want lower latency for your live stream. Note: Reconnect windows are incompatible with Reduced Latency and will always be set to zero (0) seconds. Read more here: https://mux.com/blog/reduced-latency-for-mux-live-streaming-now-available/
+    # This field is deprecated. Please use latency_mode instead. Latency is the time from when the streamer transmits a frame of video to when you see it in the player. Set this if you want lower latency for your live stream. Note: Reconnect windows are incompatible with Reduced Latency and will always be set to zero (0) seconds. Read more here: https://mux.com/blog/reduced-latency-for-mux-live-streaming-now-available/
     attr_accessor :reduced_latency
 
-    # Latency is the time from when the streamer does something in real life to when you see it happen in the player. Setting this option will enable compatibility with the LL-HLS specification for low-latency streaming. This typically has lower latency than Reduced Latency streams, and cannot be combined with Reduced Latency. Note: Reconnect windows are incompatible with Low Latency and will always be set to zero (0) seconds.
+    # This field is deprecated. Please use latency_mode instead. Latency is the time from when the streamer transmits a frame of video to when you see it in the player. Setting this option will enable compatibility with the LL-HLS specification for low-latency streaming. This typically has lower latency than Reduced Latency streams, and cannot be combined with Reduced Latency. Note: Reconnect windows are incompatible with Low Latency and will always be set to zero (0) seconds.
     attr_accessor :low_latency
+
+    # Latency is the time from when the streamer transmits a frame of video to when you see it in the player. Set this as an alternative to setting low latency or reduced latency flags. The Low Latency value is a beta feature. Note: Reconnect windows are incompatible with Reduced Latency and Low Latency and will always be set to zero (0) seconds. Read more here: https://mux.com/blog/introducing-low-latency-live-streaming/
+    attr_accessor :latency_mode
 
     # Marks the live stream as a test live stream when the value is set to true. A test live stream can help evaluate the Mux Video APIs without incurring any cost. There is no limit on number of test live streams created. Test live streams are watermarked with the Mux logo and limited to 5 minutes. The test live stream is disabled after the stream is active for 5 mins and the recorded asset also deleted after 24 hours.
     attr_accessor :test
 
     attr_accessor :simulcast_targets
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -52,6 +77,7 @@ module MuxRuby
         :'embedded_subtitles' => :'embedded_subtitles',
         :'reduced_latency' => :'reduced_latency',
         :'low_latency' => :'low_latency',
+        :'latency_mode' => :'latency_mode',
         :'test' => :'test',
         :'simulcast_targets' => :'simulcast_targets'
       }
@@ -73,6 +99,7 @@ module MuxRuby
         :'embedded_subtitles' => :'Array<LiveStreamEmbeddedSubtitleSettings>',
         :'reduced_latency' => :'Boolean',
         :'low_latency' => :'Boolean',
+        :'latency_mode' => :'String',
         :'test' => :'Boolean',
         :'simulcast_targets' => :'Array<CreateSimulcastTargetRequest>'
       }
@@ -135,6 +162,10 @@ module MuxRuby
         self.low_latency = attributes[:'low_latency']
       end
 
+      if attributes.key?(:'latency_mode')
+        self.latency_mode = attributes[:'latency_mode']
+      end
+
       if attributes.key?(:'test')
         self.test = attributes[:'test']
       end
@@ -166,6 +197,8 @@ module MuxRuby
     def valid?
       return false if !@reconnect_window.nil? && @reconnect_window > 300
       return false if !@reconnect_window.nil? && @reconnect_window < 0.1
+      latency_mode_validator = EnumAttributeValidator.new('String', ["low", "reduced", "standard"])
+      return false unless latency_mode_validator.valid?(@latency_mode)
       true
     end
 
@@ -183,6 +216,16 @@ module MuxRuby
       @reconnect_window = reconnect_window
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] latency_mode Object to be assigned
+    def latency_mode=(latency_mode)
+      validator = EnumAttributeValidator.new('String', ["low", "reduced", "standard"])
+      unless validator.valid?(latency_mode)
+        fail ArgumentError, "invalid value for \"latency_mode\", must be one of #{validator.allowable_values}."
+      end
+      @latency_mode = latency_mode
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -196,6 +239,7 @@ module MuxRuby
           embedded_subtitles == o.embedded_subtitles &&
           reduced_latency == o.reduced_latency &&
           low_latency == o.low_latency &&
+          latency_mode == o.latency_mode &&
           test == o.test &&
           simulcast_targets == o.simulcast_targets
     end
@@ -209,7 +253,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [playback_policy, new_asset_settings, reconnect_window, passthrough, audio_only, embedded_subtitles, reduced_latency, low_latency, test, simulcast_targets].hash
+      [playback_policy, new_asset_settings, reconnect_window, passthrough, audio_only, embedded_subtitles, reduced_latency, low_latency, latency_mode, test, simulcast_targets].hash
     end
 
     # Builds the object from hash

@@ -928,6 +928,77 @@ module MuxRuby
       return data, status_code, headers
     end
 
+    # Update a live stream
+    # Updates the parameters of a previously-created live stream. This currently supports a subset of variables. Supply the live stream ID and the updated parameters and Mux will return the corresponding live stream information. The information returned will be the same after update as for subsequent get live stream requests.
+    # @param live_stream_id [String] The live stream ID
+    # @param update_live_stream_request [UpdateLiveStreamRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [LiveStreamResponse]
+    def update_live_stream(live_stream_id, update_live_stream_request, opts = {})
+      data, _status_code, _headers = update_live_stream_with_http_info(live_stream_id, update_live_stream_request, opts)
+      data
+    end
+
+    # Update a live stream
+    # Updates the parameters of a previously-created live stream. This currently supports a subset of variables. Supply the live stream ID and the updated parameters and Mux will return the corresponding live stream information. The information returned will be the same after update as for subsequent get live stream requests.
+    # @param live_stream_id [String] The live stream ID
+    # @param update_live_stream_request [UpdateLiveStreamRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(LiveStreamResponse, Integer, Hash)>] LiveStreamResponse data, response status code and response headers
+    def update_live_stream_with_http_info(live_stream_id, update_live_stream_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LiveStreamsApi.update_live_stream ...'
+      end
+      # verify the required parameter 'live_stream_id' is set
+      if @api_client.config.client_side_validation && live_stream_id.nil?
+        fail ArgumentError, "Missing the required parameter 'live_stream_id' when calling LiveStreamsApi.update_live_stream"
+      end
+      # verify the required parameter 'update_live_stream_request' is set
+      if @api_client.config.client_side_validation && update_live_stream_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_live_stream_request' when calling LiveStreamsApi.update_live_stream"
+      end
+      # resource path
+      local_var_path = '/video/v1/live-streams/{LIVE_STREAM_ID}'.sub('{' + 'LIVE_STREAM_ID' + '}', CGI.escape(live_stream_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_live_stream_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LiveStreamResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['accessToken']
+
+      new_options = opts.merge(
+        :operation => :"LiveStreamsApi.update_live_stream",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PATCH, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LiveStreamsApi#update_live_stream\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Update a live stream's embedded subtitles
     # Configures a live stream to receive embedded closed captions. The resulting Asset's subtitle text track will have `closed_captions: true` set. 
     # @param live_stream_id [String] The live stream ID

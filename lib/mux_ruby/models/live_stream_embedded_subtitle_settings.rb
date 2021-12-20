@@ -18,7 +18,7 @@ module MuxRuby
     # A name for this live stream closed caption track.
     attr_accessor :name
 
-    # Arbitrary metadata set for the live stream closed caption track. Max 255 characters.
+    # Arbitrary user-supplied metadata set for the live stream closed caption track. Max 255 characters.
     attr_accessor :passthrough
 
     # The language of the closed caption stream. Value must be BCP 47 compliant.
