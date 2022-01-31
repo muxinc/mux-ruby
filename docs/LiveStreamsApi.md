@@ -813,7 +813,8 @@ api_instance = MuxRuby::LiveStreamsApi.new
 opts = {
   limit: 56, # Integer | Number of items to include in the response
   page: 56, # Integer | Offset by this many pages, of the size of `limit`
-  stream_key: 'stream_key_example' # String | Filter response to return live stream for this stream key only
+  stream_key: 'stream_key_example', # String | Filter response to return live stream for this stream key only
+  status: MuxRuby::LiveStreamStatus::ACTIVE # LiveStreamStatus | Filter response to return live streams with the specified status only
 }
 
 begin
@@ -850,6 +851,7 @@ end
 | **limit** | **Integer** | Number of items to include in the response | [optional][default to 25] |
 | **page** | **Integer** | Offset by this many pages, of the size of &#x60;limit&#x60; | [optional][default to 1] |
 | **stream_key** | **String** | Filter response to return live stream for this stream key only | [optional] |
+| **status** | [**LiveStreamStatus**](.md) | Filter response to return live streams with the specified status only | [optional] |
 
 ### Return type
 

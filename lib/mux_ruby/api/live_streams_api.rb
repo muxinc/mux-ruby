@@ -743,6 +743,7 @@ module MuxRuby
     # @option opts [Integer] :limit Number of items to include in the response (default to 25)
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60; (default to 1)
     # @option opts [String] :stream_key Filter response to return live stream for this stream key only
+    # @option opts [LiveStreamStatus] :status Filter response to return live streams with the specified status only
     # @return [ListLiveStreamsResponse]
     def list_live_streams(opts = {})
       data, _status_code, _headers = list_live_streams_with_http_info(opts)
@@ -754,6 +755,7 @@ module MuxRuby
     # @option opts [Integer] :limit Number of items to include in the response
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60;
     # @option opts [String] :stream_key Filter response to return live stream for this stream key only
+    # @option opts [LiveStreamStatus] :status Filter response to return live streams with the specified status only
     # @return [Array<(ListLiveStreamsResponse, Integer, Hash)>] ListLiveStreamsResponse data, response status code and response headers
     def list_live_streams_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -767,6 +769,7 @@ module MuxRuby
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
       query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
       query_params[:'stream_key'] = opts[:'stream_key'] if !opts[:'stream_key'].nil?
+      query_params[:'status'] = opts[:'status'] if !opts[:'status'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

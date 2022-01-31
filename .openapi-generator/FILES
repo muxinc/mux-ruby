@@ -87,6 +87,7 @@ docs/ListVideoViewsResponse.md
 docs/LiveStream.md
 docs/LiveStreamEmbeddedSubtitleSettings.md
 docs/LiveStreamResponse.md
+docs/LiveStreamStatus.md
 docs/LiveStreamsApi.md
 docs/Metric.md
 docs/MetricsApi.md
@@ -221,6 +222,7 @@ lib/mux_ruby/models/list_video_views_response.rb
 lib/mux_ruby/models/live_stream.rb
 lib/mux_ruby/models/live_stream_embedded_subtitle_settings.rb
 lib/mux_ruby/models/live_stream_response.rb
+lib/mux_ruby/models/live_stream_status.rb
 lib/mux_ruby/models/metric.rb
 lib/mux_ruby/models/notification_rule.rb
 lib/mux_ruby/models/overall_values.rb
@@ -255,14 +257,6 @@ lib/mux_ruby/models/video_view_event.rb
 lib/mux_ruby/models/video_view_response.rb
 lib/mux_ruby/version.rb
 mux_ruby.gemspec
-spec/api/playback_restrictions_api_spec.rb
 spec/api_client_spec.rb
 spec/configuration_spec.rb
-spec/models/create_playback_restriction_request_spec.rb
-spec/models/playback_restriction_response_spec.rb
-spec/models/playback_restriction_spec.rb
-spec/models/referrer_domain_restriction_spec.rb
-spec/models/update_asset_request_spec.rb
-spec/models/update_live_stream_request_spec.rb
-spec/models/update_referrer_domain_restriction_request_spec.rb
 spec/spec_helper.rb

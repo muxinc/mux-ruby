@@ -30,7 +30,6 @@ module MuxRuby
     # An array of strings with the most recent Assets that were created from this live stream.
     attr_accessor :recent_asset_ids
 
-    # `idle` indicates that there is no active broadcast. `active` indicates that there is an active broadcast and `disabled` status indicates that no future RTMP streams can be published.
     attr_accessor :status
 
     # An array of Playback ID objects. Use these to create HLS playback URLs. See [Play your videos](https://docs.mux.com/guides/video/play-your-videos) for more details.
@@ -123,7 +122,7 @@ module MuxRuby
         :'stream_key' => :'String',
         :'active_asset_id' => :'String',
         :'recent_asset_ids' => :'Array<String>',
-        :'status' => :'String',
+        :'status' => :'LiveStreamStatus',
         :'playback_ids' => :'Array<PlaybackID>',
         :'new_asset_settings' => :'CreateAssetRequest',
         :'passthrough' => :'String',
@@ -248,21 +247,9 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      status_validator = EnumAttributeValidator.new('String', ["active", "idle", "disabled"])
-      return false unless status_validator.valid?(@status)
       latency_mode_validator = EnumAttributeValidator.new('String', ["low", "reduced", "standard"])
       return false unless latency_mode_validator.valid?(@latency_mode)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["active", "idle", "disabled"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
     end
 
     # Custom attribute writer method checking allowed values (enum).
