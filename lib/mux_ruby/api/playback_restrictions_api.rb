@@ -23,7 +23,7 @@ module MuxRuby
     # Create a new Playback Restriction.
     # @param create_playback_restriction_request [CreatePlaybackRestrictionRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [PlaybackRestriction]
+    # @return [PlaybackRestrictionResponse]
     def create_playback_restriction(create_playback_restriction_request, opts = {})
       data, _status_code, _headers = create_playback_restriction_with_http_info(create_playback_restriction_request, opts)
       data
@@ -33,7 +33,7 @@ module MuxRuby
     # Create a new Playback Restriction.
     # @param create_playback_restriction_request [CreatePlaybackRestrictionRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(PlaybackRestriction, Integer, Hash)>] PlaybackRestriction data, response status code and response headers
+    # @return [Array<(PlaybackRestrictionResponse, Integer, Hash)>] PlaybackRestrictionResponse data, response status code and response headers
     def create_playback_restriction_with_http_info(create_playback_restriction_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PlaybackRestrictionsApi.create_playback_restriction ...'
@@ -62,7 +62,7 @@ module MuxRuby
       post_body = opts[:debug_body] || @api_client.object_to_http_body(create_playback_restriction_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'PlaybackRestriction'
+      return_type = opts[:debug_return_type] || 'PlaybackRestrictionResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['accessToken']
@@ -149,7 +149,7 @@ module MuxRuby
     # Retrieves a Playback Restriction associated with the unique identifier.
     # @param playback_restriction_id [String] ID of the Playback Restriction.
     # @param [Hash] opts the optional parameters
-    # @return [PlaybackRestriction]
+    # @return [PlaybackRestrictionResponse]
     def get_playback_restriction(playback_restriction_id, opts = {})
       data, _status_code, _headers = get_playback_restriction_with_http_info(playback_restriction_id, opts)
       data
@@ -159,7 +159,7 @@ module MuxRuby
     # Retrieves a Playback Restriction associated with the unique identifier.
     # @param playback_restriction_id [String] ID of the Playback Restriction.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(PlaybackRestriction, Integer, Hash)>] PlaybackRestriction data, response status code and response headers
+    # @return [Array<(PlaybackRestrictionResponse, Integer, Hash)>] PlaybackRestrictionResponse data, response status code and response headers
     def get_playback_restriction_with_http_info(playback_restriction_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PlaybackRestrictionsApi.get_playback_restriction ...'
@@ -186,7 +186,7 @@ module MuxRuby
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'PlaybackRestriction'
+      return_type = opts[:debug_return_type] || 'PlaybackRestrictionResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['accessToken']
@@ -213,7 +213,7 @@ module MuxRuby
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60; (default to 1)
     # @option opts [Integer] :limit Number of items to include in the response (default to 25)
-    # @return [Array<PlaybackRestriction>]
+    # @return [ListPlaybackRestrictionsResponse]
     def list_playback_restrictions(opts = {})
       data, _status_code, _headers = list_playback_restrictions_with_http_info(opts)
       data
@@ -224,7 +224,7 @@ module MuxRuby
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60;
     # @option opts [Integer] :limit Number of items to include in the response
-    # @return [Array<(Array<PlaybackRestriction>, Integer, Hash)>] Array<PlaybackRestriction> data, response status code and response headers
+    # @return [Array<(ListPlaybackRestrictionsResponse, Integer, Hash)>] ListPlaybackRestrictionsResponse data, response status code and response headers
     def list_playback_restrictions_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PlaybackRestrictionsApi.list_playback_restrictions ...'
@@ -249,7 +249,7 @@ module MuxRuby
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'Array<PlaybackRestriction>'
+      return_type = opts[:debug_return_type] || 'ListPlaybackRestrictionsResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['accessToken']
@@ -272,22 +272,22 @@ module MuxRuby
     end
 
     # Update the Referrer Playback Restriction
-    # Allows you to modify the list of domians or change how Mux validates playback requests without the `Referer` HTTP header. The Referrer restriction fully replaces the old list with this new list of domains.
+    # Allows you to modify the list of domains or change how Mux validates playback requests without the `Referer` HTTP header. The Referrer restriction fully replaces the old list with this new list of domains.
     # @param playback_restriction_id [String] ID of the Playback Restriction.
     # @param body [ReferrerDomainRestriction] 
     # @param [Hash] opts the optional parameters
-    # @return [PlaybackRestriction]
+    # @return [PlaybackRestrictionResponse]
     def update_referrer_domain_restriction(playback_restriction_id, body, opts = {})
       data, _status_code, _headers = update_referrer_domain_restriction_with_http_info(playback_restriction_id, body, opts)
       data
     end
 
     # Update the Referrer Playback Restriction
-    # Allows you to modify the list of domians or change how Mux validates playback requests without the &#x60;Referer&#x60; HTTP header. The Referrer restriction fully replaces the old list with this new list of domains.
+    # Allows you to modify the list of domains or change how Mux validates playback requests without the &#x60;Referer&#x60; HTTP header. The Referrer restriction fully replaces the old list with this new list of domains.
     # @param playback_restriction_id [String] ID of the Playback Restriction.
     # @param body [ReferrerDomainRestriction] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(PlaybackRestriction, Integer, Hash)>] PlaybackRestriction data, response status code and response headers
+    # @return [Array<(PlaybackRestrictionResponse, Integer, Hash)>] PlaybackRestrictionResponse data, response status code and response headers
     def update_referrer_domain_restriction_with_http_info(playback_restriction_id, body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PlaybackRestrictionsApi.update_referrer_domain_restriction ...'
@@ -320,7 +320,7 @@ module MuxRuby
       post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'PlaybackRestriction'
+      return_type = opts[:debug_return_type] || 'PlaybackRestrictionResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['accessToken']

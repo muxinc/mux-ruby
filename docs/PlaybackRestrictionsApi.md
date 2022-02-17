@@ -13,7 +13,7 @@ All URIs are relative to *https://api.mux.com*
 
 ## create_playback_restriction
 
-> <PlaybackRestriction> create_playback_restriction(create_playback_restriction_request)
+> <PlaybackRestrictionResponse> create_playback_restriction(create_playback_restriction_request)
 
 Create a Playback Restriction
 
@@ -47,7 +47,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PlaybackRestriction>, Integer, Hash)> create_playback_restriction_with_http_info(create_playback_restriction_request)
+> <Array(<PlaybackRestrictionResponse>, Integer, Hash)> create_playback_restriction_with_http_info(create_playback_restriction_request)
 
 ```ruby
 begin
@@ -55,7 +55,7 @@ begin
   data, status_code, headers = api_instance.create_playback_restriction_with_http_info(create_playback_restriction_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <PlaybackRestriction>
+  p data # => <PlaybackRestrictionResponse>
 rescue MuxRuby::ApiError => e
   puts "Error when calling PlaybackRestrictionsApi->create_playback_restriction_with_http_info: #{e}"
 end
@@ -69,7 +69,7 @@ end
 
 ### Return type
 
-[**PlaybackRestriction**](PlaybackRestriction.md)
+[**PlaybackRestrictionResponse**](PlaybackRestrictionResponse.md)
 
 ### Authorization
 
@@ -152,7 +152,7 @@ nil (empty response body)
 
 ## get_playback_restriction
 
-> <PlaybackRestriction> get_playback_restriction(playback_restriction_id)
+> <PlaybackRestrictionResponse> get_playback_restriction(playback_restriction_id)
 
 Retrieve a Playback Restriction
 
@@ -186,7 +186,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PlaybackRestriction>, Integer, Hash)> get_playback_restriction_with_http_info(playback_restriction_id)
+> <Array(<PlaybackRestrictionResponse>, Integer, Hash)> get_playback_restriction_with_http_info(playback_restriction_id)
 
 ```ruby
 begin
@@ -194,7 +194,7 @@ begin
   data, status_code, headers = api_instance.get_playback_restriction_with_http_info(playback_restriction_id)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <PlaybackRestriction>
+  p data # => <PlaybackRestrictionResponse>
 rescue MuxRuby::ApiError => e
   puts "Error when calling PlaybackRestrictionsApi->get_playback_restriction_with_http_info: #{e}"
 end
@@ -208,7 +208,7 @@ end
 
 ### Return type
 
-[**PlaybackRestriction**](PlaybackRestriction.md)
+[**PlaybackRestrictionResponse**](PlaybackRestrictionResponse.md)
 
 ### Authorization
 
@@ -222,7 +222,7 @@ end
 
 ## list_playback_restrictions
 
-> <Array<PlaybackRestriction>> list_playback_restrictions(opts)
+> <ListPlaybackRestrictionsResponse> list_playback_restrictions(opts)
 
 List Playback Restrictions
 
@@ -259,7 +259,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Array<PlaybackRestriction>>, Integer, Hash)> list_playback_restrictions_with_http_info(opts)
+> <Array(<ListPlaybackRestrictionsResponse>, Integer, Hash)> list_playback_restrictions_with_http_info(opts)
 
 ```ruby
 begin
@@ -267,7 +267,7 @@ begin
   data, status_code, headers = api_instance.list_playback_restrictions_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Array<PlaybackRestriction>>
+  p data # => <ListPlaybackRestrictionsResponse>
 rescue MuxRuby::ApiError => e
   puts "Error when calling PlaybackRestrictionsApi->list_playback_restrictions_with_http_info: #{e}"
 end
@@ -282,7 +282,7 @@ end
 
 ### Return type
 
-[**Array&lt;PlaybackRestriction&gt;**](PlaybackRestriction.md)
+[**ListPlaybackRestrictionsResponse**](ListPlaybackRestrictionsResponse.md)
 
 ### Authorization
 
@@ -296,11 +296,11 @@ end
 
 ## update_referrer_domain_restriction
 
-> <PlaybackRestriction> update_referrer_domain_restriction(playback_restriction_id, body)
+> <PlaybackRestrictionResponse> update_referrer_domain_restriction(playback_restriction_id, body)
 
 Update the Referrer Playback Restriction
 
-Allows you to modify the list of domians or change how Mux validates playback requests without the `Referer` HTTP header. The Referrer restriction fully replaces the old list with this new list of domains.
+Allows you to modify the list of domains or change how Mux validates playback requests without the `Referer` HTTP header. The Referrer restriction fully replaces the old list with this new list of domains.
 
 ### Examples
 
@@ -331,7 +331,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PlaybackRestriction>, Integer, Hash)> update_referrer_domain_restriction_with_http_info(playback_restriction_id, body)
+> <Array(<PlaybackRestrictionResponse>, Integer, Hash)> update_referrer_domain_restriction_with_http_info(playback_restriction_id, body)
 
 ```ruby
 begin
@@ -339,7 +339,7 @@ begin
   data, status_code, headers = api_instance.update_referrer_domain_restriction_with_http_info(playback_restriction_id, body)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <PlaybackRestriction>
+  p data # => <PlaybackRestrictionResponse>
 rescue MuxRuby::ApiError => e
   puts "Error when calling PlaybackRestrictionsApi->update_referrer_domain_restriction_with_http_info: #{e}"
 end
@@ -354,7 +354,7 @@ end
 
 ### Return type
 
-[**PlaybackRestriction**](PlaybackRestriction.md)
+[**PlaybackRestrictionResponse**](PlaybackRestrictionResponse.md)
 
 ### Authorization
 

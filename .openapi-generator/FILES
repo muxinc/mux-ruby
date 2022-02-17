@@ -76,6 +76,7 @@ docs/ListFiltersResponseData.md
 docs/ListIncidentsResponse.md
 docs/ListInsightsResponse.md
 docs/ListLiveStreamsResponse.md
+docs/ListPlaybackRestrictionsResponse.md
 docs/ListRealTimeDimensionsResponse.md
 docs/ListRealTimeDimensionsResponseData.md
 docs/ListRealTimeMetricsResponse.md
@@ -211,6 +212,7 @@ lib/mux_ruby/models/list_filters_response_data.rb
 lib/mux_ruby/models/list_incidents_response.rb
 lib/mux_ruby/models/list_insights_response.rb
 lib/mux_ruby/models/list_live_streams_response.rb
+lib/mux_ruby/models/list_playback_restrictions_response.rb
 lib/mux_ruby/models/list_real_time_dimensions_response.rb
 lib/mux_ruby/models/list_real_time_dimensions_response_data.rb
 lib/mux_ruby/models/list_real_time_metrics_response.rb
