@@ -21,6 +21,9 @@ require '{{importPath}}'
 {{/apis}}
 {{/apiInfo}}
 
+# Custom imports
+require 'mux_ruby/helpers'
+
 module {{moduleName}}
   class << self
     # Customize default settings for the SDK using block.

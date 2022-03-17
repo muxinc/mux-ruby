@@ -144,6 +144,9 @@ require 'mux_ruby/api/real_time_api'
 require 'mux_ruby/api/url_signing_keys_api'
 require 'mux_ruby/api/video_views_api'
 
+# Custom imports
+require 'mux_ruby/helpers'
+
 module MuxRuby
   class << self
     # Customize default settings for the SDK using block.

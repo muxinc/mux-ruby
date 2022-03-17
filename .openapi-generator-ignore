@@ -25,3 +25,6 @@
 
 git_push.sh
 .travis.yml
+
+lib/helpers.rb
+lib/helpers/**/*.rb

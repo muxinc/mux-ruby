@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = ">= 2.4"
 
   s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
+  s.add_runtime_dependency 'securecompare', '1.0.0'
 
   s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
 
