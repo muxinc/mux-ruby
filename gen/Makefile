@@ -22,6 +22,7 @@ clean-products:
 
 build: ensure clean-products
 	${OAS_CLI} generate -g "${GENERATOR_TYPE}" -c "${CONFIG_PATH}" -t "${TEMPLATE_DIR}" -o "${OUTPUT_DIR}" -i "${OAS_SPEC_PATH}"
+	cp -R "${OUTPUT_DIR}/lib-manual/*" "${OUTPUT_DIR}/lib/mux_ruby"
 
 config-help: ensure
 	${OAS_CLI} config-help -g "${GENERATOR_TYPE}"
