@@ -28,3 +28,8 @@ git_push.sh
 
 lib/helpers.rb
 lib/helpers/**/*.rb
+
+spec/api_client_spec.rb
+spec/configuration_spec.rb
+spec/api/**/*.rb
+spec/models/**/*.rb
