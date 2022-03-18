@@ -24,6 +24,8 @@ jobs:
         run: gem install bundler
       - name: Install Ruby Dependencies
         run: bundle install --jobs 4 --retry 3
+      - name: Run unit test
+        run: rake spec
       - name: Run Integration Tests
         env:
           MUX_TOKEN_ID: ${{ secrets.MUX_TOKEN_ID }}
