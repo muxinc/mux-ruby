@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.description = "The Ruby client for Mux Data and Mux Video."
   s.metadata    = { "source_code_uri" => "https://github.com/muxinc/mux-ruby" }
   s.license     = "MIT"
-  s.required_ruby_version = ">= 2.4"
+  s.required_ruby_version = ">= 2.7"
 
   s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
   s.add_runtime_dependency 'securecompare', '1.0.0'
