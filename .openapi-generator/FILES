@@ -259,6 +259,4 @@ lib/mux_ruby/models/video_view_event.rb
 lib/mux_ruby/models/video_view_response.rb
 lib/mux_ruby/version.rb
 mux_ruby.gemspec
-spec/api_client_spec.rb
-spec/configuration_spec.rb
 spec/spec_helper.rb
