@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     mux_ruby (3.3.1)
+      jwt (~> 2.3)
       securecompare (= 1.0.0)
       typhoeus (~> 1.0, >= 1.0.1)
 
@@ -16,6 +17,7 @@ GEM
       ffi (>= 1.15.0)
     ffi (1.15.4)
     jaro_winkler (1.5.4)
+    jwt (2.3.0)
     method_source (1.0.0)
     parallel (1.20.1)
     parser (3.0.2.0)
