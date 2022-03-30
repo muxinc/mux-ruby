@@ -9,14 +9,19 @@ on:
 jobs:
   build:
     name: Release to RubyGems
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ['2.7', head]
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-      - name: Install Ruby 2.6
-        uses: actions/setup-ruby@v1
+      - name: Install Ruby ${{ matrix.ruby }}
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.6.x
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
       - name: Update system rubygems
         run: gem update --system
       #
@@ -24,6 +29,8 @@ jobs:
         run: gem install bundler
       - name: Install Ruby Dependencies
         run: bundle install --jobs 4 --retry 3
+      - name: Run unit test
+        run: rake spec
       - name: Run Integration Tests
         env:
           MUX_TOKEN_ID: ${{ secrets.MUX_TOKEN_ID }}

@@ -44,6 +44,9 @@ module MuxRuby
 
     attr_accessor :simulcast_targets
 
+    # The time in seconds a live stream may be continuously active before being disconnected. Defaults to 12 hours.
+    attr_accessor :max_continuous_duration
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -79,7 +82,8 @@ module MuxRuby
         :'low_latency' => :'low_latency',
         :'latency_mode' => :'latency_mode',
         :'test' => :'test',
-        :'simulcast_targets' => :'simulcast_targets'
+        :'simulcast_targets' => :'simulcast_targets',
+        :'max_continuous_duration' => :'max_continuous_duration'
       }
     end
 
@@ -101,7 +105,8 @@ module MuxRuby
         :'low_latency' => :'Boolean',
         :'latency_mode' => :'String',
         :'test' => :'Boolean',
-        :'simulcast_targets' => :'Array<CreateSimulcastTargetRequest>'
+        :'simulcast_targets' => :'Array<CreateSimulcastTargetRequest>',
+        :'max_continuous_duration' => :'Integer'
       }
     end
 
@@ -175,6 +180,12 @@ module MuxRuby
           self.simulcast_targets = value
         end
       end
+
+      if attributes.key?(:'max_continuous_duration')
+        self.max_continuous_duration = attributes[:'max_continuous_duration']
+      else
+        self.max_continuous_duration = 43200
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -189,6 +200,14 @@ module MuxRuby
         invalid_properties.push('invalid value for "reconnect_window", must be greater than or equal to 0.1.')
       end
 
+      if !@max_continuous_duration.nil? && @max_continuous_duration > 43200
+        invalid_properties.push('invalid value for "max_continuous_duration", must be smaller than or equal to 43200.')
+      end
+
+      if !@max_continuous_duration.nil? && @max_continuous_duration < 60
+        invalid_properties.push('invalid value for "max_continuous_duration", must be greater than or equal to 60.')
+      end
+
       invalid_properties
     end
 
@@ -199,6 +218,8 @@ module MuxRuby
       return false if !@reconnect_window.nil? && @reconnect_window < 0.1
       latency_mode_validator = EnumAttributeValidator.new('String', ["low", "reduced", "standard"])
       return false unless latency_mode_validator.valid?(@latency_mode)
+      return false if !@max_continuous_duration.nil? && @max_continuous_duration > 43200
+      return false if !@max_continuous_duration.nil? && @max_continuous_duration < 60
       true
     end
 
@@ -226,6 +247,20 @@ module MuxRuby
       @latency_mode = latency_mode
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] max_continuous_duration Value to be assigned
+    def max_continuous_duration=(max_continuous_duration)
+      if !max_continuous_duration.nil? && max_continuous_duration > 43200
+        fail ArgumentError, 'invalid value for "max_continuous_duration", must be smaller than or equal to 43200.'
+      end
+
+      if !max_continuous_duration.nil? && max_continuous_duration < 60
+        fail ArgumentError, 'invalid value for "max_continuous_duration", must be greater than or equal to 60.'
+      end
+
+      @max_continuous_duration = max_continuous_duration
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -241,7 +276,8 @@ module MuxRuby
           low_latency == o.low_latency &&
           latency_mode == o.latency_mode &&
           test == o.test &&
-          simulcast_targets == o.simulcast_targets
+          simulcast_targets == o.simulcast_targets &&
+          max_continuous_duration == o.max_continuous_duration
     end
 
     # @see the `==` method
@@ -253,7 +289,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [playback_policy, new_asset_settings, reconnect_window, passthrough, audio_only, embedded_subtitles, reduced_latency, low_latency, latency_mode, test, simulcast_targets].hash
+      [playback_policy, new_asset_settings, reconnect_window, passthrough, audio_only, embedded_subtitles, reduced_latency, low_latency, latency_mode, test, simulcast_targets, max_continuous_duration].hash
     end
 
     # Builds the object from hash

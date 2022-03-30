@@ -1,7 +1,9 @@
 PATH
   remote: .
   specs:
-    mux_ruby (3.0.0)
+    mux_ruby (3.3.1)
+      jwt (~> 2.3)
+      securecompare (= 1.0.0)
       typhoeus (~> 1.0, >= 1.0.1)
 
 GEM
@@ -15,6 +17,7 @@ GEM
       ffi (>= 1.15.0)
     ffi (1.15.4)
     jaro_winkler (1.5.4)
+    jwt (2.3.0)
     method_source (1.0.0)
     parallel (1.20.1)
     parser (3.0.2.0)
@@ -50,6 +53,7 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.6)
     ruby-progressbar (1.11.0)
+    securecompare (1.0.0)
     solid_assert (1.0.0)
     typhoeus (1.4.0)
       ethon (>= 0.9.0)

@@ -55,12 +55,12 @@ describe MuxRuby::ApiClient do
     let(:config) { MuxRuby::Configuration.new }
     let(:api_client) { MuxRuby::ApiClient.new(config) }
 
-    it 'defaults to nil' do
-      expect(MuxRuby::Configuration.default.params_encoding).to eq(nil)
-      expect(config.params_encoding).to eq(nil)
+    it 'defaults to :multi' do
+      expect(MuxRuby::Configuration.default.params_encoding).to eq(:multi)
+      expect(config.params_encoding).to eq(:multi)
 
       request = api_client.build_request(:get, '/test')
-      expect(request.options[:params_encoding]).to eq(nil)
+      expect(request.options[:params_encoding]).to eq(:multi)
     end
 
     it 'can be customized' do
