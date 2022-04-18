@@ -86,6 +86,8 @@ end
 
 Create a new direct upload URL
 
+Creates a new direct upload, through which video content can be uploaded for ingest to Mux.
+
 ### Examples
 
 ```ruby
@@ -154,6 +156,8 @@ end
 
 Retrieve a single direct upload's info
 
+Fetches information about a single direct upload in the current environment.
+
 ### Examples
 
 ```ruby
@@ -221,6 +225,8 @@ end
 > <ListUploadsResponse> list_direct_uploads(opts)
 
 List direct uploads
+
+Lists currently extant direct uploads in the current environment.
 
 ### Examples
 

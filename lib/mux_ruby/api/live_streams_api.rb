@@ -20,6 +20,7 @@ module MuxRuby
       @api_client = api_client
     end
     # Create a live stream
+    # Creates a new live stream. Once created, an encoder can connect to Mux via the specified stream key and begin streaming to an audience.
     # @param create_live_stream_request [CreateLiveStreamRequest] 
     # @param [Hash] opts the optional parameters
     # @return [LiveStreamResponse]
@@ -29,6 +30,7 @@ module MuxRuby
     end
 
     # Create a live stream
+    # Creates a new live stream. Once created, an encoder can connect to Mux via the specified stream key and begin streaming to an audience.
     # @param create_live_stream_request [CreateLiveStreamRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(LiveStreamResponse, Integer, Hash)>] LiveStreamResponse data, response status code and response headers
@@ -83,6 +85,7 @@ module MuxRuby
     end
 
     # Create a live stream playback ID
+    # Create a new playback ID for this live stream, through which a viewer can watch the streamed content of the live stream.
     # @param live_stream_id [String] The live stream ID
     # @param create_playback_id_request [CreatePlaybackIDRequest] 
     # @param [Hash] opts the optional parameters
@@ -93,6 +96,7 @@ module MuxRuby
     end
 
     # Create a live stream playback ID
+    # Create a new playback ID for this live stream, through which a viewer can watch the streamed content of the live stream.
     # @param live_stream_id [String] The live stream ID
     # @param create_playback_id_request [CreatePlaybackIDRequest] 
     # @param [Hash] opts the optional parameters
@@ -223,6 +227,7 @@ module MuxRuby
     end
 
     # Delete a live stream
+    # Deletes a live stream from the current environment. If the live stream is currently active and being streamed to, ingest will be terminated and the encoder will be disconnected.
     # @param live_stream_id [String] The live stream ID
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -232,6 +237,7 @@ module MuxRuby
     end
 
     # Delete a live stream
+    # Deletes a live stream from the current environment. If the live stream is currently active and being streamed to, ingest will be terminated and the encoder will be disconnected.
     # @param live_stream_id [String] The live stream ID
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -282,6 +288,7 @@ module MuxRuby
     end
 
     # Delete a live stream playback ID
+    # Deletes the playback ID for the live stream. This will not disable ingest (as the live stream still exists). New attempts to play back the live stream will fail immediately. However, current viewers will be able to continue watching the stream for some period of time.
     # @param live_stream_id [String] The live stream ID
     # @param playback_id [String] The live stream&#39;s playback ID.
     # @param [Hash] opts the optional parameters
@@ -292,6 +299,7 @@ module MuxRuby
     end
 
     # Delete a live stream playback ID
+    # Deletes the playback ID for the live stream. This will not disable ingest (as the live stream still exists). New attempts to play back the live stream will fail immediately. However, current viewers will be able to continue watching the stream for some period of time.
     # @param live_stream_id [String] The live stream ID
     # @param playback_id [String] The live stream&#39;s playback ID.
     # @param [Hash] opts the optional parameters
@@ -603,6 +611,7 @@ module MuxRuby
     end
 
     # Retrieve a live stream playback ID
+    # Fetches information about a live stream's playback ID, through which a viewer can watch the streamed content from this live stream.
     # @param live_stream_id [String] The live stream ID
     # @param playback_id [String] The live stream&#39;s playback ID.
     # @param [Hash] opts the optional parameters
@@ -613,6 +622,7 @@ module MuxRuby
     end
 
     # Retrieve a live stream playback ID
+    # Fetches information about a live stream&#39;s playback ID, through which a viewer can watch the streamed content from this live stream.
     # @param live_stream_id [String] The live stream ID
     # @param playback_id [String] The live stream&#39;s playback ID.
     # @param [Hash] opts the optional parameters
@@ -739,6 +749,7 @@ module MuxRuby
     end
 
     # List live streams
+    # Lists the live streams that currently exist in the current environment.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Number of items to include in the response (default to 25)
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60; (default to 1)
@@ -751,6 +762,7 @@ module MuxRuby
     end
 
     # List live streams
+    # Lists the live streams that currently exist in the current environment.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Number of items to include in the response
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60;
@@ -805,7 +817,7 @@ module MuxRuby
       return data, status_code, headers
     end
 
-    # Reset a live stream’s stream key
+    # Reset a live stream's stream key
     # Reset a live stream key if you want to immediately stop the current stream key from working and create a new stream key that can be used for future broadcasts.
     # @param live_stream_id [String] The live stream ID
     # @param [Hash] opts the optional parameters
@@ -815,7 +827,7 @@ module MuxRuby
       data
     end
 
-    # Reset a live stream’s stream key
+    # Reset a live stream&#39;s stream key
     # Reset a live stream key if you want to immediately stop the current stream key from working and create a new stream key that can be used for future broadcasts.
     # @param live_stream_id [String] The live stream ID
     # @param [Hash] opts the optional parameters

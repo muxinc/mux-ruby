@@ -95,6 +95,8 @@ end
 
 Create a playback ID
 
+Creates a playback ID that can be used to stream the asset to a viewer.
+
 ### Examples
 
 ```ruby
@@ -164,6 +166,8 @@ end
 > <CreateTrackResponse> create_asset_track(asset_id, create_track_request)
 
 Create an asset track
+
+Adds an asset track (for example, subtitles) to an asset.
 
 ### Examples
 
@@ -303,6 +307,8 @@ nil (empty response body)
 > delete_asset_playback_id(asset_id, playback_id)
 
 Delete a playback ID
+
+Deletes a playback ID, rendering it nonfunctional for viewing an asset's video content. Please note that deleting the playback ID removes access to the underlying asset; a viewer who started playback before the playback ID was deleted may be able to watch the entire video for a limited duration.
 
 ### Examples
 
@@ -583,6 +589,8 @@ end
 > <GetAssetPlaybackIDResponse> get_asset_playback_id(asset_id, playback_id)
 
 Retrieve a playback ID
+
+Retrieves information about the specified playback ID.
 
 ### Examples
 

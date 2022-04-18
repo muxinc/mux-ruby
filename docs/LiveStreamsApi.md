@@ -16,7 +16,7 @@ All URIs are relative to *https://api.mux.com*
 | [**get_live_stream_playback_id**](LiveStreamsApi.md#get_live_stream_playback_id) | **GET** /video/v1/live-streams/{LIVE_STREAM_ID}/playback-ids/{PLAYBACK_ID} | Retrieve a live stream playback ID |
 | [**get_live_stream_simulcast_target**](LiveStreamsApi.md#get_live_stream_simulcast_target) | **GET** /video/v1/live-streams/{LIVE_STREAM_ID}/simulcast-targets/{SIMULCAST_TARGET_ID} | Retrieve a Live Stream Simulcast Target |
 | [**list_live_streams**](LiveStreamsApi.md#list_live_streams) | **GET** /video/v1/live-streams | List live streams |
-| [**reset_stream_key**](LiveStreamsApi.md#reset_stream_key) | **POST** /video/v1/live-streams/{LIVE_STREAM_ID}/reset-stream-key | Reset a live stream’s stream key |
+| [**reset_stream_key**](LiveStreamsApi.md#reset_stream_key) | **POST** /video/v1/live-streams/{LIVE_STREAM_ID}/reset-stream-key | Reset a live stream&#39;s stream key |
 | [**signal_live_stream_complete**](LiveStreamsApi.md#signal_live_stream_complete) | **PUT** /video/v1/live-streams/{LIVE_STREAM_ID}/complete | Signal a live stream is finished |
 | [**update_live_stream**](LiveStreamsApi.md#update_live_stream) | **PATCH** /video/v1/live-streams/{LIVE_STREAM_ID} | Update a live stream |
 | [**update_live_stream_embedded_subtitles**](LiveStreamsApi.md#update_live_stream_embedded_subtitles) | **PUT** /video/v1/live-streams/{LIVE_STREAM_ID}/embedded-subtitles | Update a live stream&#39;s embedded subtitles |
@@ -27,6 +27,8 @@ All URIs are relative to *https://api.mux.com*
 > <LiveStreamResponse> create_live_stream(create_live_stream_request)
 
 Create a live stream
+
+Creates a new live stream. Once created, an encoder can connect to Mux via the specified stream key and begin streaming to an audience.
 
 ### Examples
 
@@ -95,6 +97,8 @@ end
 > <CreatePlaybackIDResponse> create_live_stream_playback_id(live_stream_id, create_playback_id_request)
 
 Create a live stream playback ID
+
+Create a new playback ID for this live stream, through which a viewer can watch the streamed content of the live stream.
 
 ### Examples
 
@@ -238,6 +242,8 @@ end
 
 Delete a live stream
 
+Deletes a live stream from the current environment. If the live stream is currently active and being streamed to, ingest will be terminated and the encoder will be disconnected.
+
 ### Examples
 
 ```ruby
@@ -304,6 +310,8 @@ nil (empty response body)
 > delete_live_stream_playback_id(live_stream_id, playback_id)
 
 Delete a live stream playback ID
+
+Deletes the playback ID for the live stream. This will not disable ingest (as the live stream still exists). New attempts to play back the live stream will fail immediately. However, current viewers will be able to continue watching the stream for some period of time.
 
 ### Examples
 
@@ -655,6 +663,8 @@ end
 
 Retrieve a live stream playback ID
 
+Fetches information about a live stream's playback ID, through which a viewer can watch the streamed content from this live stream.
+
 ### Examples
 
 ```ruby
@@ -797,6 +807,8 @@ end
 
 List live streams
 
+Lists the live streams that currently exist in the current environment.
+
 ### Examples
 
 ```ruby
@@ -871,7 +883,7 @@ end
 
 > <LiveStreamResponse> reset_stream_key(live_stream_id)
 
-Reset a live stream’s stream key
+Reset a live stream's stream key
 
 Reset a live stream key if you want to immediately stop the current stream key from working and create a new stream key that can be used for future broadcasts.
 
@@ -891,7 +903,7 @@ api_instance = MuxRuby::LiveStreamsApi.new
 live_stream_id = 'live_stream_id_example' # String | The live stream ID
 
 begin
-  # Reset a live stream’s stream key
+  # Reset a live stream's stream key
   result = api_instance.reset_stream_key(live_stream_id)
   p result
 rescue MuxRuby::ApiError => e
@@ -907,7 +919,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Reset a live stream’s stream key
+  # Reset a live stream's stream key
   data, status_code, headers = api_instance.reset_stream_key_with_http_info(live_stream_id)
   p status_code # => 2xx
   p headers # => { ... }

@@ -85,6 +85,7 @@ module MuxRuby
     end
 
     # Create a playback ID
+    # Creates a playback ID that can be used to stream the asset to a viewer.
     # @param asset_id [String] The asset ID.
     # @param create_playback_id_request [CreatePlaybackIDRequest] 
     # @param [Hash] opts the optional parameters
@@ -95,6 +96,7 @@ module MuxRuby
     end
 
     # Create a playback ID
+    # Creates a playback ID that can be used to stream the asset to a viewer.
     # @param asset_id [String] The asset ID.
     # @param create_playback_id_request [CreatePlaybackIDRequest] 
     # @param [Hash] opts the optional parameters
@@ -154,6 +156,7 @@ module MuxRuby
     end
 
     # Create an asset track
+    # Adds an asset track (for example, subtitles) to an asset.
     # @param asset_id [String] The asset ID.
     # @param create_track_request [CreateTrackRequest] 
     # @param [Hash] opts the optional parameters
@@ -164,6 +167,7 @@ module MuxRuby
     end
 
     # Create an asset track
+    # Adds an asset track (for example, subtitles) to an asset.
     # @param asset_id [String] The asset ID.
     # @param create_track_request [CreateTrackRequest] 
     # @param [Hash] opts the optional parameters
@@ -284,6 +288,7 @@ module MuxRuby
     end
 
     # Delete a playback ID
+    # Deletes a playback ID, rendering it nonfunctional for viewing an asset's video content. Please note that deleting the playback ID removes access to the underlying asset; a viewer who started playback before the playback ID was deleted may be able to watch the entire video for a limited duration.
     # @param asset_id [String] The asset ID.
     # @param playback_id [String] The live stream&#39;s playback ID.
     # @param [Hash] opts the optional parameters
@@ -294,6 +299,7 @@ module MuxRuby
     end
 
     # Delete a playback ID
+    # Deletes a playback ID, rendering it nonfunctional for viewing an asset&#39;s video content. Please note that deleting the playback ID removes access to the underlying asset; a viewer who started playback before the playback ID was deleted may be able to watch the entire video for a limited duration.
     # @param asset_id [String] The asset ID.
     # @param playback_id [String] The live stream&#39;s playback ID.
     # @param [Hash] opts the optional parameters
@@ -542,6 +548,7 @@ module MuxRuby
     end
 
     # Retrieve a playback ID
+    # Retrieves information about the specified playback ID.
     # @param asset_id [String] The asset ID.
     # @param playback_id [String] The live stream&#39;s playback ID.
     # @param [Hash] opts the optional parameters
@@ -552,6 +559,7 @@ module MuxRuby
     end
 
     # Retrieve a playback ID
+    # Retrieves information about the specified playback ID.
     # @param asset_id [String] The asset ID.
     # @param playback_id [String] The live stream&#39;s playback ID.
     # @param [Hash] opts the optional parameters

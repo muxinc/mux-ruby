@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **data** | [**Incident**](.md) |  | [optional] |
+| **data** | [**Incident**](Incident.md) |  | [optional] |
 | **timeframe** | **Array&lt;Integer&gt;** |  | [optional] |
 
 ## Example

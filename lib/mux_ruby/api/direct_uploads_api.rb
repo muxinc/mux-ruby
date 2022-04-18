@@ -83,6 +83,7 @@ module MuxRuby
     end
 
     # Create a new direct upload URL
+    # Creates a new direct upload, through which video content can be uploaded for ingest to Mux.
     # @param create_upload_request [CreateUploadRequest] 
     # @param [Hash] opts the optional parameters
     # @return [UploadResponse]
@@ -92,6 +93,7 @@ module MuxRuby
     end
 
     # Create a new direct upload URL
+    # Creates a new direct upload, through which video content can be uploaded for ingest to Mux.
     # @param create_upload_request [CreateUploadRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UploadResponse, Integer, Hash)>] UploadResponse data, response status code and response headers
@@ -146,6 +148,7 @@ module MuxRuby
     end
 
     # Retrieve a single direct upload's info
+    # Fetches information about a single direct upload in the current environment.
     # @param upload_id [String] ID of the Upload
     # @param [Hash] opts the optional parameters
     # @return [UploadResponse]
@@ -155,6 +158,7 @@ module MuxRuby
     end
 
     # Retrieve a single direct upload&#39;s info
+    # Fetches information about a single direct upload in the current environment.
     # @param upload_id [String] ID of the Upload
     # @param [Hash] opts the optional parameters
     # @return [Array<(UploadResponse, Integer, Hash)>] UploadResponse data, response status code and response headers
@@ -207,6 +211,7 @@ module MuxRuby
     end
 
     # List direct uploads
+    # Lists currently extant direct uploads in the current environment.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Number of items to include in the response (default to 25)
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60; (default to 1)
@@ -217,6 +222,7 @@ module MuxRuby
     end
 
     # List direct uploads
+    # Lists currently extant direct uploads in the current environment.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Number of items to include in the response
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60;

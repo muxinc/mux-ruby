@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **referrer** | [**ReferrerDomainRestriction**](.md) |  | [optional] |
+| **referrer** | [**ReferrerDomainRestriction**](ReferrerDomainRestriction.md) |  | [optional] |
 
 ## Example
 

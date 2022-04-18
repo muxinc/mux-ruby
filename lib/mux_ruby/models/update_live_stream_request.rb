@@ -24,6 +24,9 @@ module MuxRuby
     # When live streaming software disconnects from Mux, either intentionally or due to a drop in the network, the Reconnect Window is the time in seconds that Mux should wait for the streaming software to reconnect before considering the live stream finished and completing the recorded asset.
     attr_accessor :reconnect_window
 
+    # The time in seconds a live stream may be continuously active before being disconnected. Defaults to 12 hours.
+    attr_accessor :max_continuous_duration
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -51,7 +54,8 @@ module MuxRuby
       {
         :'passthrough' => :'passthrough',
         :'latency_mode' => :'latency_mode',
-        :'reconnect_window' => :'reconnect_window'
+        :'reconnect_window' => :'reconnect_window',
+        :'max_continuous_duration' => :'max_continuous_duration'
       }
     end
 
@@ -65,7 +69,8 @@ module MuxRuby
       {
         :'passthrough' => :'String',
         :'latency_mode' => :'String',
-        :'reconnect_window' => :'Float'
+        :'reconnect_window' => :'Float',
+        :'max_continuous_duration' => :'Integer'
       }
     end
 
@@ -101,6 +106,12 @@ module MuxRuby
       if attributes.key?(:'reconnect_window')
         self.reconnect_window = attributes[:'reconnect_window']
       end
+
+      if attributes.key?(:'max_continuous_duration')
+        self.max_continuous_duration = attributes[:'max_continuous_duration']
+      else
+        self.max_continuous_duration = 43200
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -115,6 +126,14 @@ module MuxRuby
         invalid_properties.push('invalid value for "reconnect_window", must be greater than or equal to 0.1.')
       end
 
+      if !@max_continuous_duration.nil? && @max_continuous_duration > 43200
+        invalid_properties.push('invalid value for "max_continuous_duration", must be smaller than or equal to 43200.')
+      end
+
+      if !@max_continuous_duration.nil? && @max_continuous_duration < 60
+        invalid_properties.push('invalid value for "max_continuous_duration", must be greater than or equal to 60.')
+      end
+
       invalid_properties
     end
 
@@ -125,6 +144,8 @@ module MuxRuby
       return false unless latency_mode_validator.valid?(@latency_mode)
       return false if !@reconnect_window.nil? && @reconnect_window > 300
       return false if !@reconnect_window.nil? && @reconnect_window < 0.1
+      return false if !@max_continuous_duration.nil? && @max_continuous_duration > 43200
+      return false if !@max_continuous_duration.nil? && @max_continuous_duration < 60
       true
     end
 
@@ -152,6 +173,20 @@ module MuxRuby
       @reconnect_window = reconnect_window
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] max_continuous_duration Value to be assigned
+    def max_continuous_duration=(max_continuous_duration)
+      if !max_continuous_duration.nil? && max_continuous_duration > 43200
+        fail ArgumentError, 'invalid value for "max_continuous_duration", must be smaller than or equal to 43200.'
+      end
+
+      if !max_continuous_duration.nil? && max_continuous_duration < 60
+        fail ArgumentError, 'invalid value for "max_continuous_duration", must be greater than or equal to 60.'
+      end
+
+      @max_continuous_duration = max_continuous_duration
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -159,7 +194,8 @@ module MuxRuby
       self.class == o.class &&
           passthrough == o.passthrough &&
           latency_mode == o.latency_mode &&
-          reconnect_window == o.reconnect_window
+          reconnect_window == o.reconnect_window &&
+          max_continuous_duration == o.max_continuous_duration
     end
 
     # @see the `==` method
@@ -171,7 +207,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [passthrough, latency_mode, reconnect_window].hash
+      [passthrough, latency_mode, reconnect_window, max_continuous_duration].hash
     end
 
     # Builds the object from hash

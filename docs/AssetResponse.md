@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **data** | [**Asset**](.md) |  | [optional] |
+| **data** | [**Asset**](Asset.md) |  | [optional] |
 
 ## Example
 

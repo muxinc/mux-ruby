@@ -274,21 +274,21 @@ module MuxRuby
     # Update the Referrer Playback Restriction
     # Allows you to modify the list of domains or change how Mux validates playback requests without the `Referer` HTTP header. The Referrer restriction fully replaces the old list with this new list of domains.
     # @param playback_restriction_id [String] ID of the Playback Restriction.
-    # @param body [ReferrerDomainRestriction] 
+    # @param update_referrer_domain_restriction_request [UpdateReferrerDomainRestrictionRequest] 
     # @param [Hash] opts the optional parameters
     # @return [PlaybackRestrictionResponse]
-    def update_referrer_domain_restriction(playback_restriction_id, body, opts = {})
-      data, _status_code, _headers = update_referrer_domain_restriction_with_http_info(playback_restriction_id, body, opts)
+    def update_referrer_domain_restriction(playback_restriction_id, update_referrer_domain_restriction_request, opts = {})
+      data, _status_code, _headers = update_referrer_domain_restriction_with_http_info(playback_restriction_id, update_referrer_domain_restriction_request, opts)
       data
     end
 
     # Update the Referrer Playback Restriction
     # Allows you to modify the list of domains or change how Mux validates playback requests without the &#x60;Referer&#x60; HTTP header. The Referrer restriction fully replaces the old list with this new list of domains.
     # @param playback_restriction_id [String] ID of the Playback Restriction.
-    # @param body [ReferrerDomainRestriction] 
+    # @param update_referrer_domain_restriction_request [UpdateReferrerDomainRestrictionRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(PlaybackRestrictionResponse, Integer, Hash)>] PlaybackRestrictionResponse data, response status code and response headers
-    def update_referrer_domain_restriction_with_http_info(playback_restriction_id, body, opts = {})
+    def update_referrer_domain_restriction_with_http_info(playback_restriction_id, update_referrer_domain_restriction_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PlaybackRestrictionsApi.update_referrer_domain_restriction ...'
       end
@@ -296,9 +296,9 @@ module MuxRuby
       if @api_client.config.client_side_validation && playback_restriction_id.nil?
         fail ArgumentError, "Missing the required parameter 'playback_restriction_id' when calling PlaybackRestrictionsApi.update_referrer_domain_restriction"
       end
-      # verify the required parameter 'body' is set
-      if @api_client.config.client_side_validation && body.nil?
-        fail ArgumentError, "Missing the required parameter 'body' when calling PlaybackRestrictionsApi.update_referrer_domain_restriction"
+      # verify the required parameter 'update_referrer_domain_restriction_request' is set
+      if @api_client.config.client_side_validation && update_referrer_domain_restriction_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_referrer_domain_restriction_request' when calling PlaybackRestrictionsApi.update_referrer_domain_restriction"
       end
       # resource path
       local_var_path = '/video/v1/playback-restrictions/{PLAYBACK_RESTRICTION_ID}/referrer'.sub('{' + 'PLAYBACK_RESTRICTION_ID' + '}', CGI.escape(playback_restriction_id.to_s))
@@ -317,7 +317,7 @@ module MuxRuby
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(body)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_referrer_domain_restriction_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'PlaybackRestrictionResponse'

@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **data** | [**SimulcastTarget**](.md) |  | [optional] |
+| **data** | [**SimulcastTarget**](SimulcastTarget.md) |  | [optional] |
 
 ## Example
 

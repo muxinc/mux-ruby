@@ -64,6 +64,9 @@ module MuxRuby
     # True means this live stream is a test live stream. Test live streams can be used to help evaluate the Mux Video APIs for free. There is no limit on the number of test live streams, but they are watermarked with the Mux logo, and limited to 5 minutes. The test live stream is disabled after the stream is active for 5 mins and the recorded asset also deleted after 24 hours.
     attr_accessor :test
 
+    # The time in seconds a live stream may be continuously active before being disconnected. Defaults to 12 hours.
+    attr_accessor :max_continuous_duration
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -105,7 +108,8 @@ module MuxRuby
         :'low_latency' => :'low_latency',
         :'simulcast_targets' => :'simulcast_targets',
         :'latency_mode' => :'latency_mode',
-        :'test' => :'test'
+        :'test' => :'test',
+        :'max_continuous_duration' => :'max_continuous_duration'
       }
     end
 
@@ -133,7 +137,8 @@ module MuxRuby
         :'low_latency' => :'Boolean',
         :'simulcast_targets' => :'Array<SimulcastTarget>',
         :'latency_mode' => :'String',
-        :'test' => :'Boolean'
+        :'test' => :'Boolean',
+        :'max_continuous_duration' => :'Integer'
       }
     end
 
@@ -235,12 +240,26 @@ module MuxRuby
       if attributes.key?(:'test')
         self.test = attributes[:'test']
       end
+
+      if attributes.key?(:'max_continuous_duration')
+        self.max_continuous_duration = attributes[:'max_continuous_duration']
+      else
+        self.max_continuous_duration = 43200
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@max_continuous_duration.nil? && @max_continuous_duration > 43200
+        invalid_properties.push('invalid value for "max_continuous_duration", must be smaller than or equal to 43200.')
+      end
+
+      if !@max_continuous_duration.nil? && @max_continuous_duration < 60
+        invalid_properties.push('invalid value for "max_continuous_duration", must be greater than or equal to 60.')
+      end
+
       invalid_properties
     end
 
@@ -249,6 +268,8 @@ module MuxRuby
     def valid?
       latency_mode_validator = EnumAttributeValidator.new('String', ["low", "reduced", "standard"])
       return false unless latency_mode_validator.valid?(@latency_mode)
+      return false if !@max_continuous_duration.nil? && @max_continuous_duration > 43200
+      return false if !@max_continuous_duration.nil? && @max_continuous_duration < 60
       true
     end
 
@@ -260,6 +281,20 @@ module MuxRuby
         fail ArgumentError, "invalid value for \"latency_mode\", must be one of #{validator.allowable_values}."
       end
       @latency_mode = latency_mode
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] max_continuous_duration Value to be assigned
+    def max_continuous_duration=(max_continuous_duration)
+      if !max_continuous_duration.nil? && max_continuous_duration > 43200
+        fail ArgumentError, 'invalid value for "max_continuous_duration", must be smaller than or equal to 43200.'
+      end
+
+      if !max_continuous_duration.nil? && max_continuous_duration < 60
+        fail ArgumentError, 'invalid value for "max_continuous_duration", must be greater than or equal to 60.'
+      end
+
+      @max_continuous_duration = max_continuous_duration
     end
 
     # Checks equality by comparing each attribute.
@@ -283,7 +318,8 @@ module MuxRuby
           low_latency == o.low_latency &&
           simulcast_targets == o.simulcast_targets &&
           latency_mode == o.latency_mode &&
-          test == o.test
+          test == o.test &&
+          max_continuous_duration == o.max_continuous_duration
     end
 
     # @see the `==` method
@@ -295,7 +331,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, stream_key, active_asset_id, recent_asset_ids, status, playback_ids, new_asset_settings, passthrough, audio_only, embedded_subtitles, reconnect_window, reduced_latency, low_latency, simulcast_targets, latency_mode, test].hash
+      [id, created_at, stream_key, active_asset_id, recent_asset_ids, status, playback_ids, new_asset_settings, passthrough, audio_only, embedded_subtitles, reconnect_window, reduced_latency, low_latency, simulcast_targets, latency_mode, test, max_continuous_duration].hash
     end
 
     # Builds the object from hash

@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **data** | [**LiveStream**](.md) |  | [optional] |
+| **data** | [**LiveStream**](LiveStream.md) |  | [optional] |
 
 ## Example
 

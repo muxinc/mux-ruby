@@ -296,7 +296,7 @@ end
 
 ## update_referrer_domain_restriction
 
-> <PlaybackRestrictionResponse> update_referrer_domain_restriction(playback_restriction_id, body)
+> <PlaybackRestrictionResponse> update_referrer_domain_restriction(playback_restriction_id, update_referrer_domain_restriction_request)
 
 Update the Referrer Playback Restriction
 
@@ -316,11 +316,11 @@ end
 
 api_instance = MuxRuby::PlaybackRestrictionsApi.new
 playback_restriction_id = 'playback_restriction_id_example' # String | ID of the Playback Restriction.
-body = {"allowed_domains":["*.example.com"],"allow_no_referrer":true} # ReferrerDomainRestriction | 
+update_referrer_domain_restriction_request = MuxRuby::ReferrerDomainRestriction.new # UpdateReferrerDomainRestrictionRequest | 
 
 begin
   # Update the Referrer Playback Restriction
-  result = api_instance.update_referrer_domain_restriction(playback_restriction_id, body)
+  result = api_instance.update_referrer_domain_restriction(playback_restriction_id, update_referrer_domain_restriction_request)
   p result
 rescue MuxRuby::ApiError => e
   puts "Error when calling PlaybackRestrictionsApi->update_referrer_domain_restriction: #{e}"
@@ -331,12 +331,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PlaybackRestrictionResponse>, Integer, Hash)> update_referrer_domain_restriction_with_http_info(playback_restriction_id, body)
+> <Array(<PlaybackRestrictionResponse>, Integer, Hash)> update_referrer_domain_restriction_with_http_info(playback_restriction_id, update_referrer_domain_restriction_request)
 
 ```ruby
 begin
   # Update the Referrer Playback Restriction
-  data, status_code, headers = api_instance.update_referrer_domain_restriction_with_http_info(playback_restriction_id, body)
+  data, status_code, headers = api_instance.update_referrer_domain_restriction_with_http_info(playback_restriction_id, update_referrer_domain_restriction_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <PlaybackRestrictionResponse>
@@ -350,7 +350,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **playback_restriction_id** | **String** | ID of the Playback Restriction. |  |
-| **body** | **ReferrerDomainRestriction** |  |  |
+| **update_referrer_domain_restriction_request** | [**UpdateReferrerDomainRestrictionRequest**](UpdateReferrerDomainRestrictionRequest.md) |  |  |
 
 ### Return type
 

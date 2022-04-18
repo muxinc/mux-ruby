@@ -21,7 +21,7 @@ module MuxRuby
     # The type of track
     attr_accessor :type
 
-    # The duration in seconds of the track media. This parameter is not set for the `text` type track. This field is optional and may not be set. The top level `duration` field of an asset will always be set.
+    # The duration in seconds of the track media. This parameter is not set for `text` type tracks. This field is optional and may not be set. The top level `duration` field of an asset will always be set.
     attr_accessor :duration
 
     # The maximum width in pixels available for the track. Only set for the `video` type track.
@@ -39,20 +39,23 @@ module MuxRuby
     # Only set for the `audio` type track.
     attr_accessor :max_channel_layout
 
-    # This parameter is set only for the `text` type track.
+    # This parameter is only set for `text` type tracks.
     attr_accessor :text_type
 
-    # The language code value represents [BCP 47](https://tools.ietf.org/html/bcp47) specification compliant value. For example, `en` for English or `en-US` for the US version of English. This parameter is set for `text` type and `subtitles` text type track.
+    # The language code value represents [BCP 47](https://tools.ietf.org/html/bcp47) specification compliant value. For example, `en` for English or `en-US` for the US version of English. This parameter is only set for `text` type and `subtitles` text type tracks.
     attr_accessor :language_code
 
-    # The name of the track containing a human-readable description. The hls manifest will associate a subtitle text track with this value. For example, the value is \"English\" for subtitles text track for the `language_code` value of `en-US`. This parameter is set for the `text` type and `subtitles` text type track.
+    # The name of the track containing a human-readable description. The hls manifest will associate a subtitle text track with this value. For example, the value is \"English\" for subtitles text track for the `language_code` value of `en-US`. This parameter is only set for `text` type and `subtitles` text type tracks.
     attr_accessor :name
 
-    # Indicates the track provides Subtitles for the Deaf or Hard-of-hearing (SDH). This parameter is set for the `text` type and `subtitles` text type track.
+    # Indicates the track provides Subtitles for the Deaf or Hard-of-hearing (SDH). This parameter is only set for `text` type and `subtitles` text type tracks.
     attr_accessor :closed_captions
 
-    # Arbitrary user-supplied metadata set for the track either when creating the asset or track. This parameter is set for `text` type and `subtitles` text type track. Max 255 characters.
+    # Arbitrary user-supplied metadata set for the track either when creating the asset or track. This parameter is only set for `text` type tracks. Max 255 characters.
     attr_accessor :passthrough
+
+    # The status of the track. This parameter is only set for `text` type tracks.
+    attr_accessor :status
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -91,7 +94,8 @@ module MuxRuby
         :'language_code' => :'language_code',
         :'name' => :'name',
         :'closed_captions' => :'closed_captions',
-        :'passthrough' => :'passthrough'
+        :'passthrough' => :'passthrough',
+        :'status' => :'status'
       }
     end
 
@@ -115,7 +119,8 @@ module MuxRuby
         :'language_code' => :'String',
         :'name' => :'String',
         :'closed_captions' => :'Boolean',
-        :'passthrough' => :'String'
+        :'passthrough' => :'String',
+        :'status' => :'String'
       }
     end
 
@@ -191,6 +196,10 @@ module MuxRuby
       if attributes.key?(:'passthrough')
         self.passthrough = attributes[:'passthrough']
       end
+
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -207,6 +216,8 @@ module MuxRuby
       return false unless type_validator.valid?(@type)
       text_type_validator = EnumAttributeValidator.new('String', ["subtitles"])
       return false unless text_type_validator.valid?(@text_type)
+      status_validator = EnumAttributeValidator.new('String', ["preparing", "ready", "errored"])
+      return false unless status_validator.valid?(@status)
       true
     end
 
@@ -230,6 +241,16 @@ module MuxRuby
       @text_type = text_type
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ["preparing", "ready", "errored"])
+      unless validator.valid?(status)
+        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+      end
+      @status = status
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -247,7 +268,8 @@ module MuxRuby
           language_code == o.language_code &&
           name == o.name &&
           closed_captions == o.closed_captions &&
-          passthrough == o.passthrough
+          passthrough == o.passthrough &&
+          status == o.status
     end
 
     # @see the `==` method
@@ -259,7 +281,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, type, duration, max_width, max_height, max_frame_rate, max_channels, max_channel_layout, text_type, language_code, name, closed_captions, passthrough].hash
+      [id, type, duration, max_width, max_height, max_frame_rate, max_channels, max_channel_layout, text_type, language_code, name, closed_captions, passthrough, status].hash
     end
 
     # Builds the object from hash

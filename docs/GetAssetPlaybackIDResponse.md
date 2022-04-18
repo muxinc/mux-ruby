@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **data** | [**PlaybackID**](.md) |  | [optional] |
+| **data** | [**PlaybackID**](PlaybackID.md) |  | [optional] |
 
 ## Example
 

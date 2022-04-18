@@ -79,6 +79,13 @@ module MuxRuby
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'viewer_os_family',
+        :'viewer_application_name',
+        :'video_title',
+        :'player_error_message',
+        :'player_error_code',
+        :'error_type_id',
+        :'country_code',
       ])
     end
 

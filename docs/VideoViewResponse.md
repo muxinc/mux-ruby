@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **data** | [**VideoView**](.md) |  | [optional] |
+| **data** | [**VideoView**](VideoView.md) |  | [optional] |
 | **timeframe** | **Array&lt;Integer&gt;** |  | [optional] |
 
 ## Example

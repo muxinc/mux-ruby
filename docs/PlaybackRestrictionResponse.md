@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **data** | [**PlaybackRestriction**](.md) |  | [optional] |
+| **data** | [**PlaybackRestriction**](PlaybackRestriction.md) |  | [optional] |
 
 ## Example
 

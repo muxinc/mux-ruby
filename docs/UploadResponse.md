@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **data** | [**Upload**](.md) |  | [optional] |
+| **data** | [**Upload**](Upload.md) |  | [optional] |
 
 ## Example
 

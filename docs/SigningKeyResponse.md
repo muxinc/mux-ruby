@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **data** | [**SigningKey**](.md) |  | [optional] |
+| **data** | [**SigningKey**](SigningKey.md) |  | [optional] |
 
 ## Example
 
