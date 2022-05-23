@@ -14,22 +14,36 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class CreateSimulcastTargetRequest
-    # Arbitrary user-supplied metadata set by you when creating a simulcast target.
+  class Space
+    # Unique identifier for the space. Max 255 characters.
+    attr_accessor :id
+
+    # Time the space was created, defined as a Unix timestamp (seconds since epoch).
+    attr_accessor :created_at
+
+    attr_accessor :type
+
+    attr_accessor :status
+
+    # Arbitrary user-supplied metadata that will be included in the space details and related webhooks. Max: 255 characters.
     attr_accessor :passthrough
 
-    # Stream Key represents a stream identifier on the third party live streaming service to send the parent live stream to.
-    attr_accessor :stream_key
+    # An array of broadcast destinations.
+    attr_accessor :broadcasts
 
-    # RTMP hostname including application name for the third party live streaming service. Example: `rtmp://live.example.com/app`.
-    attr_accessor :url
+    # Unique identifier for the current lifecycle of the space. Only set when the space is `active` and is set to a new value each time the space transitions from `idle` to `active`. This value is useful for logging and debugging issues. Max 255 characters.
+    attr_accessor :active_session_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
+        :'created_at' => :'created_at',
+        :'type' => :'type',
+        :'status' => :'status',
         :'passthrough' => :'passthrough',
-        :'stream_key' => :'stream_key',
-        :'url' => :'url'
+        :'broadcasts' => :'broadcasts',
+        :'active_session_id' => :'active_session_id'
       }
     end
 
@@ -41,9 +55,13 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'String',
+        :'created_at' => :'String',
+        :'type' => :'SpaceType',
+        :'status' => :'SpaceStatus',
         :'passthrough' => :'String',
-        :'stream_key' => :'String',
-        :'url' => :'String'
+        :'broadcasts' => :'Array<Broadcast>',
+        :'active_session_id' => :'String'
       }
     end
 
@@ -57,27 +75,47 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::CreateSimulcastTargetRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::Space` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::CreateSimulcastTargetRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::Space`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      else
+        self.type = 'server'
+      end
+
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
 
       if attributes.key?(:'passthrough')
         self.passthrough = attributes[:'passthrough']
       end
 
-      if attributes.key?(:'stream_key')
-        self.stream_key = attributes[:'stream_key']
+      if attributes.key?(:'broadcasts')
+        if (value = attributes[:'broadcasts']).is_a?(Array)
+          self.broadcasts = value
+        end
       end
 
-      if attributes.key?(:'url')
-        self.url = attributes[:'url']
+      if attributes.key?(:'active_session_id')
+        self.active_session_id = attributes[:'active_session_id']
       end
     end
 
@@ -85,8 +123,20 @@ module MuxRuby
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @url.nil?
-        invalid_properties.push('invalid value for "url", url cannot be nil.')
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @created_at.nil?
+        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
+      end
+
+      if @type.nil?
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      end
+
+      if @status.nil?
+        invalid_properties.push('invalid value for "status", status cannot be nil.')
       end
 
       invalid_properties
@@ -95,7 +145,10 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @url.nil?
+      return false if @id.nil?
+      return false if @created_at.nil?
+      return false if @type.nil?
+      return false if @status.nil?
       true
     end
 
@@ -104,9 +157,13 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
+          created_at == o.created_at &&
+          type == o.type &&
+          status == o.status &&
           passthrough == o.passthrough &&
-          stream_key == o.stream_key &&
-          url == o.url
+          broadcasts == o.broadcasts &&
+          active_session_id == o.active_session_id
     end
 
     # @see the `==` method
@@ -118,7 +175,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [passthrough, stream_key, url].hash
+      [id, created_at, type, status, passthrough, broadcasts, active_session_id].hash
     end
 
     # Builds the object from hash

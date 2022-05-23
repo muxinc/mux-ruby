@@ -14,22 +14,28 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class CreateSimulcastTargetRequest
-    # Arbitrary user-supplied metadata set by you when creating a simulcast target.
+  class CreateBroadcastRequest
+    # Arbitrary user-supplied metadata that will be included in the broadcast details and related webhooks. Max: 255 characters.
     attr_accessor :passthrough
 
-    # Stream Key represents a stream identifier on the third party live streaming service to send the parent live stream to.
-    attr_accessor :stream_key
+    # The ID of the live stream that you want to broadcast to.
+    attr_accessor :live_stream_id
 
-    # RTMP hostname including application name for the third party live streaming service. Example: `rtmp://live.example.com/app`.
-    attr_accessor :url
+    attr_accessor :layout
+
+    # URL of an image to display as the background of the broadcast. Its dimensions should match the provided resolution.
+    attr_accessor :background
+
+    attr_accessor :resolution
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'passthrough' => :'passthrough',
-        :'stream_key' => :'stream_key',
-        :'url' => :'url'
+        :'live_stream_id' => :'live_stream_id',
+        :'layout' => :'layout',
+        :'background' => :'background',
+        :'resolution' => :'resolution'
       }
     end
 
@@ -42,8 +48,10 @@ module MuxRuby
     def self.openapi_types
       {
         :'passthrough' => :'String',
-        :'stream_key' => :'String',
-        :'url' => :'String'
+        :'live_stream_id' => :'String',
+        :'layout' => :'BroadcastLayout',
+        :'background' => :'String',
+        :'resolution' => :'BroadcastResolution'
       }
     end
 
@@ -57,13 +65,13 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::CreateSimulcastTargetRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::CreateBroadcastRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::CreateSimulcastTargetRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::CreateBroadcastRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -72,12 +80,24 @@ module MuxRuby
         self.passthrough = attributes[:'passthrough']
       end
 
-      if attributes.key?(:'stream_key')
-        self.stream_key = attributes[:'stream_key']
+      if attributes.key?(:'live_stream_id')
+        self.live_stream_id = attributes[:'live_stream_id']
       end
 
-      if attributes.key?(:'url')
-        self.url = attributes[:'url']
+      if attributes.key?(:'layout')
+        self.layout = attributes[:'layout']
+      else
+        self.layout = 'gallery'
+      end
+
+      if attributes.key?(:'background')
+        self.background = attributes[:'background']
+      end
+
+      if attributes.key?(:'resolution')
+        self.resolution = attributes[:'resolution']
+      else
+        self.resolution = '1920x1080'
       end
     end
 
@@ -85,8 +105,8 @@ module MuxRuby
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @url.nil?
-        invalid_properties.push('invalid value for "url", url cannot be nil.')
+      if @live_stream_id.nil?
+        invalid_properties.push('invalid value for "live_stream_id", live_stream_id cannot be nil.')
       end
 
       invalid_properties
@@ -95,7 +115,7 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @url.nil?
+      return false if @live_stream_id.nil?
       true
     end
 
@@ -105,8 +125,10 @@ module MuxRuby
       return true if self.equal?(o)
       self.class == o.class &&
           passthrough == o.passthrough &&
-          stream_key == o.stream_key &&
-          url == o.url
+          live_stream_id == o.live_stream_id &&
+          layout == o.layout &&
+          background == o.background &&
+          resolution == o.resolution
     end
 
     # @see the `==` method
@@ -118,7 +140,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [passthrough, stream_key, url].hash
+      [passthrough, live_stream_id, layout, background, resolution].hash
     end
 
     # Builds the object from hash

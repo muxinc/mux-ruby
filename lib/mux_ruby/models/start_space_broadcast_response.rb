@@ -14,22 +14,13 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class CreateSimulcastTargetRequest
-    # Arbitrary user-supplied metadata set by you when creating a simulcast target.
-    attr_accessor :passthrough
-
-    # Stream Key represents a stream identifier on the third party live streaming service to send the parent live stream to.
-    attr_accessor :stream_key
-
-    # RTMP hostname including application name for the third party live streaming service. Example: `rtmp://live.example.com/app`.
-    attr_accessor :url
+  class StartSpaceBroadcastResponse
+    attr_accessor :data
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'passthrough' => :'passthrough',
-        :'stream_key' => :'stream_key',
-        :'url' => :'url'
+        :'data' => :'data'
       }
     end
 
@@ -41,9 +32,7 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'passthrough' => :'String',
-        :'stream_key' => :'String',
-        :'url' => :'String'
+        :'data' => :'Object'
       }
     end
 
@@ -57,27 +46,19 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::CreateSimulcastTargetRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::StartSpaceBroadcastResponse` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::CreateSimulcastTargetRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::StartSpaceBroadcastResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'passthrough')
-        self.passthrough = attributes[:'passthrough']
-      end
-
-      if attributes.key?(:'stream_key')
-        self.stream_key = attributes[:'stream_key']
-      end
-
-      if attributes.key?(:'url')
-        self.url = attributes[:'url']
+      if attributes.key?(:'data')
+        self.data = attributes[:'data']
       end
     end
 
@@ -85,17 +66,12 @@ module MuxRuby
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @url.nil?
-        invalid_properties.push('invalid value for "url", url cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @url.nil?
       true
     end
 
@@ -104,9 +80,7 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          passthrough == o.passthrough &&
-          stream_key == o.stream_key &&
-          url == o.url
+          data == o.data
     end
 
     # @see the `==` method
@@ -118,7 +92,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [passthrough, stream_key, url].hash
+      [data].hash
     end
 
     # Builds the object from hash
