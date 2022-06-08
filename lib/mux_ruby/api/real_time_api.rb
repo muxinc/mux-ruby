@@ -24,7 +24,7 @@ module MuxRuby
     # @param realtime_metric_id [String] ID of the Realtime Metric
     # @param [Hash] opts the optional parameters
     # @option opts [String] :dimension Dimension the specified value belongs to
-    # @option opts [Float] :timestamp Timestamp to limit results by. This value must be provided as a unix timestamp. Defaults to the current unix timestamp.
+    # @option opts [Integer] :timestamp Timestamp to limit results by. This value must be provided as a unix timestamp. Defaults to the current unix timestamp.
     # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
     # @option opts [String] :order_by Value to order the results by
     # @option opts [String] :order_direction Sort order.
@@ -39,7 +39,7 @@ module MuxRuby
     # @param realtime_metric_id [String] ID of the Realtime Metric
     # @param [Hash] opts the optional parameters
     # @option opts [String] :dimension Dimension the specified value belongs to
-    # @option opts [Float] :timestamp Timestamp to limit results by. This value must be provided as a unix timestamp. Defaults to the current unix timestamp.
+    # @option opts [Integer] :timestamp Timestamp to limit results by. This value must be provided as a unix timestamp. Defaults to the current unix timestamp.
     # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
     # @option opts [String] :order_by Value to order the results by
     # @option opts [String] :order_direction Sort order.

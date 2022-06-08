@@ -519,7 +519,7 @@ end
 
 Start a space broadcast
 
-Starts broadcasting a space to the associated destination.
+Starts broadcasting a space to the associated destination. Broadcasts can only be started when the space is `active` (when there are participants connected).
 
 ### Examples
 

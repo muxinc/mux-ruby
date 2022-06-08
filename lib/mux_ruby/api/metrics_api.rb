@@ -20,14 +20,14 @@ module MuxRuby
       @api_client = api_client
     end
     # Get metric timeseries data
-    # Returns timeseries data for a specific metric.  Each interval represented in the data array contains an array with the following values:   * the first element is the interval time   * the second element is the calculated metric value    * the third element is the number of views in the interval that have a valid metric value 
+    # Returns timeseries data for a specific metric.  Each interval represented in the data array contains an array with the following values:   * the first element is the interval time   * the second element is the calculated metric value   * the third element is the number of views in the interval that have a valid metric value 
     # @param metric_id [String] ID of the Metric
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :timeframe Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]&#x3D;).  Accepted formats are...    * array of epoch timestamps e.g. &#x60;timeframe[]&#x3D;1498867200&amp;timeframe[]&#x3D;1498953600&#x60;   * duration string e.g. &#x60;timeframe[]&#x3D;24:hours or timeframe[]&#x3D;7:days&#x60; 
     # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
     # @option opts [String] :measurement Measurement for the provided metric. If omitted, the default for the metric will be used.
     # @option opts [String] :order_direction Sort order.
-    # @option opts [String] :group_by Time granularity to group results by. If this value is omitted, a default granularity is chosen based on the timeframe.  For timeframes of 6 hours or less, the default granularity is &#x60;ten_minutes&#x60;. Between 6 hours and 15 days inclusive, the default granularity is &#x60;hour&#x60;. The granularity of timeframes that exceed 15 days is &#x60;day&#x60;. This default behavior is subject to change; it is strongly suggested that you explicitly specify the granularity. 
+    # @option opts [String] :group_by Time granularity to group results by. If this value is omitted, a default granularity is chosen based on the timeframe.  For timeframes of 6 hours or less, the default granularity is &#x60;ten_minutes&#x60;. Between 6 hours and 15 hours inclusive, the default granularity is &#x60;hour&#x60;. The granularity of timeframes that exceed 15 hours is &#x60;day&#x60;. This default behavior is subject to change; it is strongly suggested that you explicitly specify the granularity. 
     # @return [GetMetricTimeseriesDataResponse]
     def get_metric_timeseries_data(metric_id, opts = {})
       data, _status_code, _headers = get_metric_timeseries_data_with_http_info(metric_id, opts)
@@ -35,14 +35,14 @@ module MuxRuby
     end
 
     # Get metric timeseries data
-    # Returns timeseries data for a specific metric.  Each interval represented in the data array contains an array with the following values:   * the first element is the interval time   * the second element is the calculated metric value    * the third element is the number of views in the interval that have a valid metric value 
+    # Returns timeseries data for a specific metric.  Each interval represented in the data array contains an array with the following values:   * the first element is the interval time   * the second element is the calculated metric value   * the third element is the number of views in the interval that have a valid metric value 
     # @param metric_id [String] ID of the Metric
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :timeframe Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]&#x3D;).  Accepted formats are...    * array of epoch timestamps e.g. &#x60;timeframe[]&#x3D;1498867200&amp;timeframe[]&#x3D;1498953600&#x60;   * duration string e.g. &#x60;timeframe[]&#x3D;24:hours or timeframe[]&#x3D;7:days&#x60; 
     # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
     # @option opts [String] :measurement Measurement for the provided metric. If omitted, the default for the metric will be used.
     # @option opts [String] :order_direction Sort order.
-    # @option opts [String] :group_by Time granularity to group results by. If this value is omitted, a default granularity is chosen based on the timeframe.  For timeframes of 6 hours or less, the default granularity is &#x60;ten_minutes&#x60;. Between 6 hours and 15 days inclusive, the default granularity is &#x60;hour&#x60;. The granularity of timeframes that exceed 15 days is &#x60;day&#x60;. This default behavior is subject to change; it is strongly suggested that you explicitly specify the granularity. 
+    # @option opts [String] :group_by Time granularity to group results by. If this value is omitted, a default granularity is chosen based on the timeframe.  For timeframes of 6 hours or less, the default granularity is &#x60;ten_minutes&#x60;. Between 6 hours and 15 hours inclusive, the default granularity is &#x60;hour&#x60;. The granularity of timeframes that exceed 15 hours is &#x60;day&#x60;. This default behavior is subject to change; it is strongly suggested that you explicitly specify the granularity. 
     # @return [Array<(GetMetricTimeseriesDataResponse, Integer, Hash)>] GetMetricTimeseriesDataResponse data, response status code and response headers
     def get_metric_timeseries_data_with_http_info(metric_id, opts = {})
       if @api_client.config.debugging
