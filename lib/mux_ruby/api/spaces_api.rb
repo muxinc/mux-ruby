@@ -114,7 +114,7 @@ module MuxRuby
         fail ArgumentError, "Missing the required parameter 'create_broadcast_request' when calling SpacesApi.create_space_broadcast"
       end
       # resource path
-      local_var_path = '/video/v1/spaces/${SPACE_ID}/broadcasts'.sub('{' + 'SPACE_ID' + '}', CGI.escape(space_id.to_s))
+      local_var_path = '/video/v1/spaces/{SPACE_ID}/broadcasts'.sub('{' + 'SPACE_ID' + '}', CGI.escape(space_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -179,7 +179,7 @@ module MuxRuby
         fail ArgumentError, "Missing the required parameter 'space_id' when calling SpacesApi.delete_space"
       end
       # resource path
-      local_var_path = '/video/v1/spaces/${SPACE_ID}'.sub('{' + 'SPACE_ID' + '}', CGI.escape(space_id.to_s))
+      local_var_path = '/video/v1/spaces/{SPACE_ID}'.sub('{' + 'SPACE_ID' + '}', CGI.escape(space_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -246,7 +246,7 @@ module MuxRuby
         fail ArgumentError, "Missing the required parameter 'broadcast_id' when calling SpacesApi.delete_space_broadcast"
       end
       # resource path
-      local_var_path = '/video/v1/spaces/${SPACE_ID}/broadcasts/${BROADCAST_ID}'.sub('{' + 'SPACE_ID' + '}', CGI.escape(space_id.to_s)).sub('{' + 'BROADCAST_ID' + '}', CGI.escape(broadcast_id.to_s))
+      local_var_path = '/video/v1/spaces/{SPACE_ID}/broadcasts/{BROADCAST_ID}'.sub('{' + 'SPACE_ID' + '}', CGI.escape(space_id.to_s)).sub('{' + 'BROADCAST_ID' + '}', CGI.escape(broadcast_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -307,7 +307,7 @@ module MuxRuby
         fail ArgumentError, "Missing the required parameter 'space_id' when calling SpacesApi.get_space"
       end
       # resource path
-      local_var_path = '/video/v1/spaces/${SPACE_ID}'.sub('{' + 'SPACE_ID' + '}', CGI.escape(space_id.to_s))
+      local_var_path = '/video/v1/spaces/{SPACE_ID}'.sub('{' + 'SPACE_ID' + '}', CGI.escape(space_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -376,7 +376,7 @@ module MuxRuby
         fail ArgumentError, "Missing the required parameter 'broadcast_id' when calling SpacesApi.get_space_broadcast"
       end
       # resource path
-      local_var_path = '/video/v1/spaces/${SPACE_ID}/broadcasts/${BROADCAST_ID}'.sub('{' + 'SPACE_ID' + '}', CGI.escape(space_id.to_s)).sub('{' + 'BROADCAST_ID' + '}', CGI.escape(broadcast_id.to_s))
+      local_var_path = '/video/v1/spaces/{SPACE_ID}/broadcasts/{BROADCAST_ID}'.sub('{' + 'SPACE_ID' + '}', CGI.escape(space_id.to_s)).sub('{' + 'BROADCAST_ID' + '}', CGI.escape(broadcast_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -508,7 +508,7 @@ module MuxRuby
         fail ArgumentError, "Missing the required parameter 'broadcast_id' when calling SpacesApi.start_space_broadcast"
       end
       # resource path
-      local_var_path = '/video/v1/spaces/${SPACE_ID}/broadcasts/${BROADCAST_ID}/start'.sub('{' + 'SPACE_ID' + '}', CGI.escape(space_id.to_s)).sub('{' + 'BROADCAST_ID' + '}', CGI.escape(broadcast_id.to_s))
+      local_var_path = '/video/v1/spaces/{SPACE_ID}/broadcasts/{BROADCAST_ID}/start'.sub('{' + 'SPACE_ID' + '}', CGI.escape(space_id.to_s)).sub('{' + 'BROADCAST_ID' + '}', CGI.escape(broadcast_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -577,7 +577,7 @@ module MuxRuby
         fail ArgumentError, "Missing the required parameter 'broadcast_id' when calling SpacesApi.stop_space_broadcast"
       end
       # resource path
-      local_var_path = '/video/v1/spaces/${SPACE_ID}/broadcasts/${BROADCAST_ID}/stop'.sub('{' + 'SPACE_ID' + '}', CGI.escape(space_id.to_s)).sub('{' + 'BROADCAST_ID' + '}', CGI.escape(broadcast_id.to_s))
+      local_var_path = '/video/v1/spaces/{SPACE_ID}/broadcasts/{BROADCAST_ID}/stop'.sub('{' + 'SPACE_ID' + '}', CGI.escape(space_id.to_s)).sub('{' + 'BROADCAST_ID' + '}', CGI.escape(broadcast_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
