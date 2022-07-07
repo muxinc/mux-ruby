@@ -124,6 +124,11 @@
 | **viewer_connection_type** | **String** |  | [optional] |
 | **viewer_device_model** | **String** |  | [optional] |
 | **weighted_average_bitrate** | **Integer** |  | [optional] |
+| **custom_1** | **String** |  | [optional] |
+| **custom_2** | **String** |  | [optional] |
+| **custom_3** | **String** |  | [optional] |
+| **custom_4** | **String** |  | [optional] |
+| **custom_5** | **String** |  | [optional] |
 
 ## Example
 
@@ -250,7 +255,12 @@ instance = MuxRuby::VideoView.new(
   view_session_id: null,
   viewer_connection_type: null,
   viewer_device_model: null,
-  weighted_average_bitrate: null
+  weighted_average_bitrate: null,
+  custom_1: null,
+  custom_2: null,
+  custom_3: null,
+  custom_4: null,
+  custom_5: null
 )
 ```
 

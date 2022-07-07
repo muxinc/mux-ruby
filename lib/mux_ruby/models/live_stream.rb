@@ -46,7 +46,10 @@ module MuxRuby
     # Describes the embedded closed caption configuration of the incoming live stream.
     attr_accessor :embedded_subtitles
 
-    # When live streaming software disconnects from Mux, either intentionally or due to a drop in the network, the Reconnect Window is the time in seconds that Mux should wait for the streaming software to reconnect before considering the live stream finished and completing the recorded asset. **Min**: 0.1s. **Max**: 300s (5 minutes).
+    # Configure the incoming live stream to include subtitles created with automatic speech recognition. Each Asset created from a live stream with `generated_subtitles` configured will automatically receive two text tracks. The first of these will have a `text_source` value of `generated_live`, and will be available with `ready` status as soon as the stream is live. The second text track will have a `text_source` value of `generated_live_final` and will contain subtitles with improved accuracy, timing, and formatting. However, `generated_live_final` tracks will not be available in `ready` status until the live stream ends. If an Asset has both `generated_live` and `generated_live_final` tracks that are `ready`, then only the `generated_live_final` track will be included during playback.
+    attr_accessor :generated_subtitles
+
+    # When live streaming software disconnects from Mux, either intentionally or due to a drop in the network, the Reconnect Window is the time in seconds that Mux should wait for the streaming software to reconnect before considering the live stream finished and completing the recorded asset. **Min**: 0.1s. **Max**: 1800s (30 minutes).
     attr_accessor :reconnect_window
 
     # This field is deprecated. Please use latency_mode instead. Latency is the time from when the streamer transmits a frame of video to when you see it in the player. Set this if you want lower latency for your live stream. **Note**: Reconnect windows are incompatible with Reduced Latency and will always be set to zero (0) seconds. See the [Reduce live stream latency guide](https://docs.mux.com/guides/video/reduce-live-stream-latency) to understand the tradeoffs.
@@ -103,6 +106,7 @@ module MuxRuby
         :'passthrough' => :'passthrough',
         :'audio_only' => :'audio_only',
         :'embedded_subtitles' => :'embedded_subtitles',
+        :'generated_subtitles' => :'generated_subtitles',
         :'reconnect_window' => :'reconnect_window',
         :'reduced_latency' => :'reduced_latency',
         :'low_latency' => :'low_latency',
@@ -132,6 +136,7 @@ module MuxRuby
         :'passthrough' => :'String',
         :'audio_only' => :'Boolean',
         :'embedded_subtitles' => :'Array<LiveStreamEmbeddedSubtitleSettings>',
+        :'generated_subtitles' => :'Array<LiveStreamGeneratedSubtitleSettings>',
         :'reconnect_window' => :'Float',
         :'reduced_latency' => :'Boolean',
         :'low_latency' => :'Boolean',
@@ -210,6 +215,12 @@ module MuxRuby
       if attributes.key?(:'embedded_subtitles')
         if (value = attributes[:'embedded_subtitles']).is_a?(Array)
           self.embedded_subtitles = value
+        end
+      end
+
+      if attributes.key?(:'generated_subtitles')
+        if (value = attributes[:'generated_subtitles']).is_a?(Array)
+          self.generated_subtitles = value
         end
       end
 
@@ -313,6 +324,7 @@ module MuxRuby
           passthrough == o.passthrough &&
           audio_only == o.audio_only &&
           embedded_subtitles == o.embedded_subtitles &&
+          generated_subtitles == o.generated_subtitles &&
           reconnect_window == o.reconnect_window &&
           reduced_latency == o.reduced_latency &&
           low_latency == o.low_latency &&
@@ -331,7 +343,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, stream_key, active_asset_id, recent_asset_ids, status, playback_ids, new_asset_settings, passthrough, audio_only, embedded_subtitles, reconnect_window, reduced_latency, low_latency, simulcast_targets, latency_mode, test, max_continuous_duration].hash
+      [id, created_at, stream_key, active_asset_id, recent_asset_ids, status, playback_ids, new_asset_settings, passthrough, audio_only, embedded_subtitles, generated_subtitles, reconnect_window, reduced_latency, low_latency, simulcast_targets, latency_mode, test, max_continuous_duration].hash
     end
 
     # Builds the object from hash

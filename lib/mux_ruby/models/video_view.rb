@@ -255,6 +255,16 @@ module MuxRuby
 
     attr_accessor :weighted_average_bitrate
 
+    attr_accessor :custom_1
+
+    attr_accessor :custom_2
+
+    attr_accessor :custom_3
+
+    attr_accessor :custom_4
+
+    attr_accessor :custom_5
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -377,7 +387,12 @@ module MuxRuby
         :'view_session_id' => :'view_session_id',
         :'viewer_connection_type' => :'viewer_connection_type',
         :'viewer_device_model' => :'viewer_device_model',
-        :'weighted_average_bitrate' => :'weighted_average_bitrate'
+        :'weighted_average_bitrate' => :'weighted_average_bitrate',
+        :'custom_1' => :'custom_1',
+        :'custom_2' => :'custom_2',
+        :'custom_3' => :'custom_3',
+        :'custom_4' => :'custom_4',
+        :'custom_5' => :'custom_5'
       }
     end
 
@@ -508,7 +523,12 @@ module MuxRuby
         :'view_session_id' => :'String',
         :'viewer_connection_type' => :'String',
         :'viewer_device_model' => :'String',
-        :'weighted_average_bitrate' => :'Integer'
+        :'weighted_average_bitrate' => :'Integer',
+        :'custom_1' => :'String',
+        :'custom_2' => :'String',
+        :'custom_3' => :'String',
+        :'custom_4' => :'String',
+        :'custom_5' => :'String'
       }
     end
 
@@ -617,7 +637,12 @@ module MuxRuby
         :'view_session_id',
         :'viewer_connection_type',
         :'viewer_device_model',
-        :'weighted_average_bitrate'
+        :'weighted_average_bitrate',
+        :'custom_1',
+        :'custom_2',
+        :'custom_3',
+        :'custom_4',
+        :'custom_5'
       ])
     end
 
@@ -1117,6 +1142,26 @@ module MuxRuby
       if attributes.key?(:'weighted_average_bitrate')
         self.weighted_average_bitrate = attributes[:'weighted_average_bitrate']
       end
+
+      if attributes.key?(:'custom_1')
+        self.custom_1 = attributes[:'custom_1']
+      end
+
+      if attributes.key?(:'custom_2')
+        self.custom_2 = attributes[:'custom_2']
+      end
+
+      if attributes.key?(:'custom_3')
+        self.custom_3 = attributes[:'custom_3']
+      end
+
+      if attributes.key?(:'custom_4')
+        self.custom_4 = attributes[:'custom_4']
+      end
+
+      if attributes.key?(:'custom_5')
+        self.custom_5 = attributes[:'custom_5']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -1256,7 +1301,12 @@ module MuxRuby
           view_session_id == o.view_session_id &&
           viewer_connection_type == o.viewer_connection_type &&
           viewer_device_model == o.viewer_device_model &&
-          weighted_average_bitrate == o.weighted_average_bitrate
+          weighted_average_bitrate == o.weighted_average_bitrate &&
+          custom_1 == o.custom_1 &&
+          custom_2 == o.custom_2 &&
+          custom_3 == o.custom_3 &&
+          custom_4 == o.custom_4 &&
+          custom_5 == o.custom_5
     end
 
     # @see the `==` method
@@ -1268,7 +1318,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [view_total_upscaling, preroll_ad_asset_hostname, player_source_domain, region, viewer_user_agent, preroll_requested, page_type, startup_score, view_seek_duration, country_name, player_source_height, longitude, buffering_count, video_duration, player_source_type, city, view_id, platform_description, video_startup_preroll_request_time, viewer_device_name, video_series, viewer_application_name, updated_at, view_total_content_playback_time, cdn, player_instance_id, video_language, player_source_width, player_error_message, player_mux_plugin_version, watched, playback_score, page_url, metro, view_max_request_latency, requests_for_first_preroll, view_total_downscaling, latitude, player_source_host_name, inserted_at, view_end, mux_embed_version, player_language, page_load_time, viewer_device_category, video_startup_preroll_load_time, player_version, watch_time, player_source_stream_type, preroll_ad_tag_hostname, viewer_device_manufacturer, rebuffering_score, experiment_name, viewer_os_version, player_preload, buffering_duration, player_view_count, player_software, player_load_time, platform_summary, video_encoding_variant, player_width, view_seek_count, viewer_experience_score, view_error_id, video_variant_name, preroll_played, viewer_application_engine, viewer_os_architecture, player_error_code, buffering_rate, events, player_name, view_start, view_average_request_throughput, video_producer, error_type_id, mux_viewer_id, video_id, continent_code, session_id, exit_before_video_start, video_content_type, viewer_os_family, player_poster, view_average_request_latency, video_variant_id, player_source_duration, player_source_url, mux_api_version, video_title, id, short_time, rebuffer_percentage, time_to_first_frame, viewer_user_id, video_stream_type, player_startup_time, viewer_application_version, view_max_downscale_percentage, view_max_upscale_percentage, country_code, used_fullscreen, isp, property_id, player_autoplay, player_height, asn, asn_name, quality_score, player_software_version, player_mux_plugin_name, sub_property_id, player_remote_played, view_max_playhead_position, view_playing_time, view_session_id, viewer_connection_type, viewer_device_model, weighted_average_bitrate].hash
+      [view_total_upscaling, preroll_ad_asset_hostname, player_source_domain, region, viewer_user_agent, preroll_requested, page_type, startup_score, view_seek_duration, country_name, player_source_height, longitude, buffering_count, video_duration, player_source_type, city, view_id, platform_description, video_startup_preroll_request_time, viewer_device_name, video_series, viewer_application_name, updated_at, view_total_content_playback_time, cdn, player_instance_id, video_language, player_source_width, player_error_message, player_mux_plugin_version, watched, playback_score, page_url, metro, view_max_request_latency, requests_for_first_preroll, view_total_downscaling, latitude, player_source_host_name, inserted_at, view_end, mux_embed_version, player_language, page_load_time, viewer_device_category, video_startup_preroll_load_time, player_version, watch_time, player_source_stream_type, preroll_ad_tag_hostname, viewer_device_manufacturer, rebuffering_score, experiment_name, viewer_os_version, player_preload, buffering_duration, player_view_count, player_software, player_load_time, platform_summary, video_encoding_variant, player_width, view_seek_count, viewer_experience_score, view_error_id, video_variant_name, preroll_played, viewer_application_engine, viewer_os_architecture, player_error_code, buffering_rate, events, player_name, view_start, view_average_request_throughput, video_producer, error_type_id, mux_viewer_id, video_id, continent_code, session_id, exit_before_video_start, video_content_type, viewer_os_family, player_poster, view_average_request_latency, video_variant_id, player_source_duration, player_source_url, mux_api_version, video_title, id, short_time, rebuffer_percentage, time_to_first_frame, viewer_user_id, video_stream_type, player_startup_time, viewer_application_version, view_max_downscale_percentage, view_max_upscale_percentage, country_code, used_fullscreen, isp, property_id, player_autoplay, player_height, asn, asn_name, quality_score, player_software_version, player_mux_plugin_name, sub_property_id, player_remote_played, view_max_playhead_position, view_playing_time, view_session_id, viewer_connection_type, viewer_device_model, weighted_average_bitrate, custom_1, custom_2, custom_3, custom_4, custom_5].hash
     end
 
     # Builds the object from hash

@@ -14,48 +14,34 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class UpdateLiveStreamRequest
-    # Arbitrary user-supplied metadata set for the live stream. Max 255 characters. In order to clear this value, the field should be included with an empty-string value.
+  class TranscriptionVocabulary
+    # Unique identifier for the Transcription Vocabulary
+    attr_accessor :id
+
+    # The user-supplied name of the Transcription Vocabulary.
+    attr_accessor :name
+
+    # Phrases, individual words, or proper names to include in the Transcription Vocabulary. When the Transcription Vocabulary is attached to a live stream's `generated_subtitles` configuration, the probability of successful speech recognition for these words or phrases is boosted.
+    attr_accessor :phrases
+
+    # Arbitrary user-supplied metadata set for the Transcription Vocabulary. Max 255 characters.
     attr_accessor :passthrough
 
-    # Latency is the time from when the streamer transmits a frame of video to when you see it in the player. Set this as an alternative to setting low latency or reduced latency flags. The Low Latency value is a beta feature. Note: Reconnect windows are incompatible with Reduced Latency and Low Latency and will always be set to zero (0) seconds. Read more here: https://mux.com/blog/introducing-low-latency-live-streaming/
-    attr_accessor :latency_mode
+    # Time the Transcription Vocabulary was created, defined as a Unix timestamp (seconds since epoch).
+    attr_accessor :created_at
 
-    # When live streaming software disconnects from Mux, either intentionally or due to a drop in the network, the Reconnect Window is the time in seconds that Mux should wait for the streaming software to reconnect before considering the live stream finished and completing the recorded asset.
-    attr_accessor :reconnect_window
-
-    # The time in seconds a live stream may be continuously active before being disconnected. Defaults to 12 hours.
-    attr_accessor :max_continuous_duration
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Time the Transcription Vocabulary was updated, defined as a Unix timestamp (seconds since epoch).
+    attr_accessor :updated_at
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
+        :'name' => :'name',
+        :'phrases' => :'phrases',
         :'passthrough' => :'passthrough',
-        :'latency_mode' => :'latency_mode',
-        :'reconnect_window' => :'reconnect_window',
-        :'max_continuous_duration' => :'max_continuous_duration'
+        :'created_at' => :'created_at',
+        :'updated_at' => :'updated_at'
       }
     end
 
@@ -67,10 +53,12 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'String',
+        :'name' => :'String',
+        :'phrases' => :'Array<String>',
         :'passthrough' => :'String',
-        :'latency_mode' => :'String',
-        :'reconnect_window' => :'Float',
-        :'max_continuous_duration' => :'Integer'
+        :'created_at' => :'String',
+        :'updated_at' => :'String'
       }
     end
 
@@ -84,33 +72,41 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::UpdateLiveStreamRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::TranscriptionVocabulary` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::UpdateLiveStreamRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::TranscriptionVocabulary`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'phrases')
+        if (value = attributes[:'phrases']).is_a?(Array)
+          self.phrases = value
+        end
+      end
 
       if attributes.key?(:'passthrough')
         self.passthrough = attributes[:'passthrough']
       end
 
-      if attributes.key?(:'latency_mode')
-        self.latency_mode = attributes[:'latency_mode']
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
       end
 
-      if attributes.key?(:'reconnect_window')
-        self.reconnect_window = attributes[:'reconnect_window']
-      end
-
-      if attributes.key?(:'max_continuous_duration')
-        self.max_continuous_duration = attributes[:'max_continuous_duration']
-      else
-        self.max_continuous_duration = 43200
+      if attributes.key?(:'updated_at')
+        self.updated_at = attributes[:'updated_at']
       end
     end
 
@@ -118,20 +114,8 @@ module MuxRuby
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@reconnect_window.nil? && @reconnect_window > 1800
-        invalid_properties.push('invalid value for "reconnect_window", must be smaller than or equal to 1800.')
-      end
-
-      if !@reconnect_window.nil? && @reconnect_window < 0.1
-        invalid_properties.push('invalid value for "reconnect_window", must be greater than or equal to 0.1.')
-      end
-
-      if !@max_continuous_duration.nil? && @max_continuous_duration > 43200
-        invalid_properties.push('invalid value for "max_continuous_duration", must be smaller than or equal to 43200.')
-      end
-
-      if !@max_continuous_duration.nil? && @max_continuous_duration < 60
-        invalid_properties.push('invalid value for "max_continuous_duration", must be greater than or equal to 60.')
+      if !@phrases.nil? && @phrases.length > 1000
+        invalid_properties.push('invalid value for "phrases", number of items must be less than or equal to 1000.')
       end
 
       invalid_properties
@@ -140,51 +124,18 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      latency_mode_validator = EnumAttributeValidator.new('String', ["low", "reduced", "standard"])
-      return false unless latency_mode_validator.valid?(@latency_mode)
-      return false if !@reconnect_window.nil? && @reconnect_window > 1800
-      return false if !@reconnect_window.nil? && @reconnect_window < 0.1
-      return false if !@max_continuous_duration.nil? && @max_continuous_duration > 43200
-      return false if !@max_continuous_duration.nil? && @max_continuous_duration < 60
+      return false if !@phrases.nil? && @phrases.length > 1000
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] latency_mode Object to be assigned
-    def latency_mode=(latency_mode)
-      validator = EnumAttributeValidator.new('String', ["low", "reduced", "standard"])
-      unless validator.valid?(latency_mode)
-        fail ArgumentError, "invalid value for \"latency_mode\", must be one of #{validator.allowable_values}."
-      end
-      @latency_mode = latency_mode
-    end
-
     # Custom attribute writer method with validation
-    # @param [Object] reconnect_window Value to be assigned
-    def reconnect_window=(reconnect_window)
-      if !reconnect_window.nil? && reconnect_window > 1800
-        fail ArgumentError, 'invalid value for "reconnect_window", must be smaller than or equal to 1800.'
+    # @param [Object] phrases Value to be assigned
+    def phrases=(phrases)
+      if !phrases.nil? && phrases.length > 1000
+        fail ArgumentError, 'invalid value for "phrases", number of items must be less than or equal to 1000.'
       end
 
-      if !reconnect_window.nil? && reconnect_window < 0.1
-        fail ArgumentError, 'invalid value for "reconnect_window", must be greater than or equal to 0.1.'
-      end
-
-      @reconnect_window = reconnect_window
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] max_continuous_duration Value to be assigned
-    def max_continuous_duration=(max_continuous_duration)
-      if !max_continuous_duration.nil? && max_continuous_duration > 43200
-        fail ArgumentError, 'invalid value for "max_continuous_duration", must be smaller than or equal to 43200.'
-      end
-
-      if !max_continuous_duration.nil? && max_continuous_duration < 60
-        fail ArgumentError, 'invalid value for "max_continuous_duration", must be greater than or equal to 60.'
-      end
-
-      @max_continuous_duration = max_continuous_duration
+      @phrases = phrases
     end
 
     # Checks equality by comparing each attribute.
@@ -192,10 +143,12 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
+          name == o.name &&
+          phrases == o.phrases &&
           passthrough == o.passthrough &&
-          latency_mode == o.latency_mode &&
-          reconnect_window == o.reconnect_window &&
-          max_continuous_duration == o.max_continuous_duration
+          created_at == o.created_at &&
+          updated_at == o.updated_at
     end
 
     # @see the `==` method
@@ -207,7 +160,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [passthrough, latency_mode, reconnect_window, max_continuous_duration].hash
+      [id, name, phrases, passthrough, created_at, updated_at].hash
     end
 
     # Builds the object from hash

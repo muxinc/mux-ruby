@@ -30,6 +30,9 @@ module MuxRuby
     # Describe the embedded closed caption contents of the incoming live stream.
     attr_accessor :embedded_subtitles
 
+    # Configure the incoming live stream to include subtitles created with automatic speech recognition. Each Asset created from a live stream with `generated_subtitles` configured will automatically receive two text tracks. The first of these will have a `text_source` value of `generated_live`, and will be available with `ready` status as soon as the stream is live. The second text track will have a `text_source` value of `generated_live_final` and will contain subtitles with improved accuracy, timing, and formatting. However, `generated_live_final` tracks will not be available in `ready` status until the live stream ends. If an Asset has both `generated_live` and `generated_live_final` tracks that are `ready`, then only the `generated_live_final` track will be included during playback.
+    attr_accessor :generated_subtitles
+
     # This field is deprecated. Please use latency_mode instead. Latency is the time from when the streamer transmits a frame of video to when you see it in the player. Set this if you want lower latency for your live stream. Note: Reconnect windows are incompatible with Reduced Latency and will always be set to zero (0) seconds. Read more here: https://mux.com/blog/reduced-latency-for-mux-live-streaming-now-available/
     attr_accessor :reduced_latency
 
@@ -78,6 +81,7 @@ module MuxRuby
         :'passthrough' => :'passthrough',
         :'audio_only' => :'audio_only',
         :'embedded_subtitles' => :'embedded_subtitles',
+        :'generated_subtitles' => :'generated_subtitles',
         :'reduced_latency' => :'reduced_latency',
         :'low_latency' => :'low_latency',
         :'latency_mode' => :'latency_mode',
@@ -101,6 +105,7 @@ module MuxRuby
         :'passthrough' => :'String',
         :'audio_only' => :'Boolean',
         :'embedded_subtitles' => :'Array<LiveStreamEmbeddedSubtitleSettings>',
+        :'generated_subtitles' => :'Array<LiveStreamGeneratedSubtitleSettings>',
         :'reduced_latency' => :'Boolean',
         :'low_latency' => :'Boolean',
         :'latency_mode' => :'String',
@@ -159,6 +164,12 @@ module MuxRuby
         end
       end
 
+      if attributes.key?(:'generated_subtitles')
+        if (value = attributes[:'generated_subtitles']).is_a?(Array)
+          self.generated_subtitles = value
+        end
+      end
+
       if attributes.key?(:'reduced_latency')
         self.reduced_latency = attributes[:'reduced_latency']
       end
@@ -192,8 +203,8 @@ module MuxRuby
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@reconnect_window.nil? && @reconnect_window > 300
-        invalid_properties.push('invalid value for "reconnect_window", must be smaller than or equal to 300.')
+      if !@reconnect_window.nil? && @reconnect_window > 1800
+        invalid_properties.push('invalid value for "reconnect_window", must be smaller than or equal to 1800.')
       end
 
       if !@reconnect_window.nil? && @reconnect_window < 0.1
@@ -214,7 +225,7 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@reconnect_window.nil? && @reconnect_window > 300
+      return false if !@reconnect_window.nil? && @reconnect_window > 1800
       return false if !@reconnect_window.nil? && @reconnect_window < 0.1
       latency_mode_validator = EnumAttributeValidator.new('String', ["low", "reduced", "standard"])
       return false unless latency_mode_validator.valid?(@latency_mode)
@@ -226,8 +237,8 @@ module MuxRuby
     # Custom attribute writer method with validation
     # @param [Object] reconnect_window Value to be assigned
     def reconnect_window=(reconnect_window)
-      if !reconnect_window.nil? && reconnect_window > 300
-        fail ArgumentError, 'invalid value for "reconnect_window", must be smaller than or equal to 300.'
+      if !reconnect_window.nil? && reconnect_window > 1800
+        fail ArgumentError, 'invalid value for "reconnect_window", must be smaller than or equal to 1800.'
       end
 
       if !reconnect_window.nil? && reconnect_window < 0.1
@@ -272,6 +283,7 @@ module MuxRuby
           passthrough == o.passthrough &&
           audio_only == o.audio_only &&
           embedded_subtitles == o.embedded_subtitles &&
+          generated_subtitles == o.generated_subtitles &&
           reduced_latency == o.reduced_latency &&
           low_latency == o.low_latency &&
           latency_mode == o.latency_mode &&
@@ -289,7 +301,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [playback_policy, new_asset_settings, reconnect_window, passthrough, audio_only, embedded_subtitles, reduced_latency, low_latency, latency_mode, test, simulcast_targets, max_continuous_duration].hash
+      [playback_policy, new_asset_settings, reconnect_window, passthrough, audio_only, embedded_subtitles, generated_subtitles, reduced_latency, low_latency, latency_mode, test, simulcast_targets, max_continuous_duration].hash
     end
 
     # Builds the object from hash
