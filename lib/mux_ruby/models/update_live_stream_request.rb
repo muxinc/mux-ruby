@@ -18,11 +18,17 @@ module MuxRuby
     # Arbitrary user-supplied metadata set for the live stream. Max 255 characters. In order to clear this value, the field should be included with an empty-string value.
     attr_accessor :passthrough
 
-    # Latency is the time from when the streamer transmits a frame of video to when you see it in the player. Set this as an alternative to setting low latency or reduced latency flags. The Low Latency value is a beta feature. Note: Reconnect windows are incompatible with Reduced Latency and Low Latency and will always be set to zero (0) seconds. Read more here: https://mux.com/blog/introducing-low-latency-live-streaming/
+    # Latency is the time from when the streamer transmits a frame of video to when you see it in the player. Set this as an alternative to setting low latency or reduced latency flags. The Low Latency value is a beta feature. Read more here: https://mux.com/blog/introducing-low-latency-live-streaming/
     attr_accessor :latency_mode
 
-    # When live streaming software disconnects from Mux, either intentionally or due to a drop in the network, the Reconnect Window is the time in seconds that Mux should wait for the streaming software to reconnect before considering the live stream finished and completing the recorded asset.
+    # When live streaming software disconnects from Mux, either intentionally or due to a drop in the network, the Reconnect Window is the time in seconds that Mux should wait for the streaming software to reconnect before considering the live stream finished and completing the recorded asset.  Reduced and Low Latency streams with a Reconnect Window greater than zero will insert slate media into the recorded asset while waiting for the streaming software to reconnect or when there are brief interruptions in the live stream media. When using a Reconnect Window setting higher than 60 seconds with a Standard Latency stream, we highly recommend enabling slate with the `use_slate_for_standard_latency` option. 
     attr_accessor :reconnect_window
+
+    # By default, Standard Latency live streams do not have slate media inserted while waiting for live streaming software to reconnect to Mux.  Setting this to true enables slate insertion on a Standard Latency stream.
+    attr_accessor :use_slate_for_standard_latency
+
+    # The URL of the image file that Mux should download and use as slate media during interruptions of the live stream media.  This file will be downloaded each time a new recorded asset is created from the live stream.  Set this to a blank string to clear the value so that the default slate media will be used.
+    attr_accessor :reconnect_slate_url
 
     # The time in seconds a live stream may be continuously active before being disconnected. Defaults to 12 hours.
     attr_accessor :max_continuous_duration
@@ -55,6 +61,8 @@ module MuxRuby
         :'passthrough' => :'passthrough',
         :'latency_mode' => :'latency_mode',
         :'reconnect_window' => :'reconnect_window',
+        :'use_slate_for_standard_latency' => :'use_slate_for_standard_latency',
+        :'reconnect_slate_url' => :'reconnect_slate_url',
         :'max_continuous_duration' => :'max_continuous_duration'
       }
     end
@@ -70,6 +78,8 @@ module MuxRuby
         :'passthrough' => :'String',
         :'latency_mode' => :'String',
         :'reconnect_window' => :'Float',
+        :'use_slate_for_standard_latency' => :'Boolean',
+        :'reconnect_slate_url' => :'String',
         :'max_continuous_duration' => :'Integer'
       }
     end
@@ -105,6 +115,18 @@ module MuxRuby
 
       if attributes.key?(:'reconnect_window')
         self.reconnect_window = attributes[:'reconnect_window']
+      else
+        self.reconnect_window = 60
+      end
+
+      if attributes.key?(:'use_slate_for_standard_latency')
+        self.use_slate_for_standard_latency = attributes[:'use_slate_for_standard_latency']
+      else
+        self.use_slate_for_standard_latency = false
+      end
+
+      if attributes.key?(:'reconnect_slate_url')
+        self.reconnect_slate_url = attributes[:'reconnect_slate_url']
       end
 
       if attributes.key?(:'max_continuous_duration')
@@ -122,8 +144,8 @@ module MuxRuby
         invalid_properties.push('invalid value for "reconnect_window", must be smaller than or equal to 1800.')
       end
 
-      if !@reconnect_window.nil? && @reconnect_window < 0.1
-        invalid_properties.push('invalid value for "reconnect_window", must be greater than or equal to 0.1.')
+      if !@reconnect_window.nil? && @reconnect_window < 0
+        invalid_properties.push('invalid value for "reconnect_window", must be greater than or equal to 0.')
       end
 
       if !@max_continuous_duration.nil? && @max_continuous_duration > 43200
@@ -143,7 +165,7 @@ module MuxRuby
       latency_mode_validator = EnumAttributeValidator.new('String', ["low", "reduced", "standard"])
       return false unless latency_mode_validator.valid?(@latency_mode)
       return false if !@reconnect_window.nil? && @reconnect_window > 1800
-      return false if !@reconnect_window.nil? && @reconnect_window < 0.1
+      return false if !@reconnect_window.nil? && @reconnect_window < 0
       return false if !@max_continuous_duration.nil? && @max_continuous_duration > 43200
       return false if !@max_continuous_duration.nil? && @max_continuous_duration < 60
       true
@@ -166,8 +188,8 @@ module MuxRuby
         fail ArgumentError, 'invalid value for "reconnect_window", must be smaller than or equal to 1800.'
       end
 
-      if !reconnect_window.nil? && reconnect_window < 0.1
-        fail ArgumentError, 'invalid value for "reconnect_window", must be greater than or equal to 0.1.'
+      if !reconnect_window.nil? && reconnect_window < 0
+        fail ArgumentError, 'invalid value for "reconnect_window", must be greater than or equal to 0.'
       end
 
       @reconnect_window = reconnect_window
@@ -195,6 +217,8 @@ module MuxRuby
           passthrough == o.passthrough &&
           latency_mode == o.latency_mode &&
           reconnect_window == o.reconnect_window &&
+          use_slate_for_standard_latency == o.use_slate_for_standard_latency &&
+          reconnect_slate_url == o.reconnect_slate_url &&
           max_continuous_duration == o.max_continuous_duration
     end
 
@@ -207,7 +231,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [passthrough, latency_mode, reconnect_window, max_continuous_duration].hash
+      [passthrough, latency_mode, reconnect_window, use_slate_for_standard_latency, reconnect_slate_url, max_continuous_duration].hash
     end
 
     # Builds the object from hash
