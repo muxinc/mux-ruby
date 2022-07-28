@@ -14,14 +14,10 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
       - name: Install Ruby 2.6
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7.x
-      - name: Install Bundler
-        run: gem install bundler
-      - name: Install Ruby Dependencies
-        run: bundle install --jobs 4 --retry 3
-      - name: Run Integration Tests
+          ruby-version: '2.7.4'
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
         env:
           MUX_TOKEN_ID: ${{ secrets.MUX_TOKEN_ID }}
           MUX_TOKEN_SECRET: ${{ secrets.MUX_TOKEN_SECRET }}
