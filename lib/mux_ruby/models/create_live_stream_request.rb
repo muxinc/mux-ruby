@@ -19,8 +19,14 @@ module MuxRuby
 
     attr_accessor :new_asset_settings
 
-    # When live streaming software disconnects from Mux, either intentionally or due to a drop in the network, the Reconnect Window is the time in seconds that Mux should wait for the streaming software to reconnect before considering the live stream finished and completing the recorded asset. Defaults to 60 seconds on the API if not specified.
+    # When live streaming software disconnects from Mux, either intentionally or due to a drop in the network, the Reconnect Window is the time in seconds that Mux should wait for the streaming software to reconnect before considering the live stream finished and completing the recorded asset. Defaults to 60 seconds on the API if not specified.  Reduced and Low Latency streams with a Reconnect Window greater than zero will insert slate media into the recorded asset while waiting for the streaming software to reconnect or when there are brief interruptions in the live stream media. When using a Reconnect Window setting higher than 60 seconds with a Standard Latency stream, we highly recommend enabling slate with the `use_slate_for_standard_latency` option. 
     attr_accessor :reconnect_window
+
+    # By default, Standard Latency live streams do not have slate media inserted while waiting for live streaming software to reconnect to Mux. Setting this to true enables slate insertion on a Standard Latency stream.
+    attr_accessor :use_slate_for_standard_latency
+
+    # The URL of the image file that Mux should download and use as slate media during interruptions of the live stream media. This file will be downloaded each time a new recorded asset is created from the live stream. If this is not set, the default slate media will be used.
+    attr_accessor :reconnect_slate_url
 
     attr_accessor :passthrough
 
@@ -33,13 +39,13 @@ module MuxRuby
     # Configure the incoming live stream to include subtitles created with automatic speech recognition. Each Asset created from a live stream with `generated_subtitles` configured will automatically receive two text tracks. The first of these will have a `text_source` value of `generated_live`, and will be available with `ready` status as soon as the stream is live. The second text track will have a `text_source` value of `generated_live_final` and will contain subtitles with improved accuracy, timing, and formatting. However, `generated_live_final` tracks will not be available in `ready` status until the live stream ends. If an Asset has both `generated_live` and `generated_live_final` tracks that are `ready`, then only the `generated_live_final` track will be included during playback.
     attr_accessor :generated_subtitles
 
-    # This field is deprecated. Please use latency_mode instead. Latency is the time from when the streamer transmits a frame of video to when you see it in the player. Set this if you want lower latency for your live stream. Note: Reconnect windows are incompatible with Reduced Latency and will always be set to zero (0) seconds. Read more here: https://mux.com/blog/reduced-latency-for-mux-live-streaming-now-available/
+    # This field is deprecated. Please use latency_mode instead. Latency is the time from when the streamer transmits a frame of video to when you see it in the player. Set this if you want lower latency for your live stream. Read more here: https://mux.com/blog/reduced-latency-for-mux-live-streaming-now-available/
     attr_accessor :reduced_latency
 
-    # This field is deprecated. Please use latency_mode instead. Latency is the time from when the streamer transmits a frame of video to when you see it in the player. Setting this option will enable compatibility with the LL-HLS specification for low-latency streaming. This typically has lower latency than Reduced Latency streams, and cannot be combined with Reduced Latency. Note: Reconnect windows are incompatible with Low Latency and will always be set to zero (0) seconds.
+    # This field is deprecated. Please use latency_mode instead. Latency is the time from when the streamer transmits a frame of video to when you see it in the player. Setting this option will enable compatibility with the LL-HLS specification for low-latency streaming. This typically has lower latency than Reduced Latency streams, and cannot be combined with Reduced Latency.
     attr_accessor :low_latency
 
-    # Latency is the time from when the streamer transmits a frame of video to when you see it in the player. Set this as an alternative to setting low latency or reduced latency flags. The Low Latency value is a beta feature. Note: Reconnect windows are incompatible with Reduced Latency and Low Latency and will always be set to zero (0) seconds. Read more here: https://mux.com/blog/introducing-low-latency-live-streaming/
+    # Latency is the time from when the streamer transmits a frame of video to when you see it in the player. Set this as an alternative to setting low latency or reduced latency flags. The Low Latency value is a beta feature. Read more here: https://mux.com/blog/introducing-low-latency-live-streaming/
     attr_accessor :latency_mode
 
     # Marks the live stream as a test live stream when the value is set to true. A test live stream can help evaluate the Mux Video APIs without incurring any cost. There is no limit on number of test live streams created. Test live streams are watermarked with the Mux logo and limited to 5 minutes. The test live stream is disabled after the stream is active for 5 mins and the recorded asset also deleted after 24 hours.
@@ -78,6 +84,8 @@ module MuxRuby
         :'playback_policy' => :'playback_policy',
         :'new_asset_settings' => :'new_asset_settings',
         :'reconnect_window' => :'reconnect_window',
+        :'use_slate_for_standard_latency' => :'use_slate_for_standard_latency',
+        :'reconnect_slate_url' => :'reconnect_slate_url',
         :'passthrough' => :'passthrough',
         :'audio_only' => :'audio_only',
         :'embedded_subtitles' => :'embedded_subtitles',
@@ -102,6 +110,8 @@ module MuxRuby
         :'playback_policy' => :'Array<PlaybackPolicy>',
         :'new_asset_settings' => :'CreateAssetRequest',
         :'reconnect_window' => :'Float',
+        :'use_slate_for_standard_latency' => :'Boolean',
+        :'reconnect_slate_url' => :'String',
         :'passthrough' => :'String',
         :'audio_only' => :'Boolean',
         :'embedded_subtitles' => :'Array<LiveStreamEmbeddedSubtitleSettings>',
@@ -148,6 +158,18 @@ module MuxRuby
 
       if attributes.key?(:'reconnect_window')
         self.reconnect_window = attributes[:'reconnect_window']
+      else
+        self.reconnect_window = 60
+      end
+
+      if attributes.key?(:'use_slate_for_standard_latency')
+        self.use_slate_for_standard_latency = attributes[:'use_slate_for_standard_latency']
+      else
+        self.use_slate_for_standard_latency = false
+      end
+
+      if attributes.key?(:'reconnect_slate_url')
+        self.reconnect_slate_url = attributes[:'reconnect_slate_url']
       end
 
       if attributes.key?(:'passthrough')
@@ -207,8 +229,8 @@ module MuxRuby
         invalid_properties.push('invalid value for "reconnect_window", must be smaller than or equal to 1800.')
       end
 
-      if !@reconnect_window.nil? && @reconnect_window < 0.1
-        invalid_properties.push('invalid value for "reconnect_window", must be greater than or equal to 0.1.')
+      if !@reconnect_window.nil? && @reconnect_window < 0
+        invalid_properties.push('invalid value for "reconnect_window", must be greater than or equal to 0.')
       end
 
       if !@max_continuous_duration.nil? && @max_continuous_duration > 43200
@@ -226,7 +248,7 @@ module MuxRuby
     # @return true if the model is valid
     def valid?
       return false if !@reconnect_window.nil? && @reconnect_window > 1800
-      return false if !@reconnect_window.nil? && @reconnect_window < 0.1
+      return false if !@reconnect_window.nil? && @reconnect_window < 0
       latency_mode_validator = EnumAttributeValidator.new('String', ["low", "reduced", "standard"])
       return false unless latency_mode_validator.valid?(@latency_mode)
       return false if !@max_continuous_duration.nil? && @max_continuous_duration > 43200
@@ -241,8 +263,8 @@ module MuxRuby
         fail ArgumentError, 'invalid value for "reconnect_window", must be smaller than or equal to 1800.'
       end
 
-      if !reconnect_window.nil? && reconnect_window < 0.1
-        fail ArgumentError, 'invalid value for "reconnect_window", must be greater than or equal to 0.1.'
+      if !reconnect_window.nil? && reconnect_window < 0
+        fail ArgumentError, 'invalid value for "reconnect_window", must be greater than or equal to 0.'
       end
 
       @reconnect_window = reconnect_window
@@ -280,6 +302,8 @@ module MuxRuby
           playback_policy == o.playback_policy &&
           new_asset_settings == o.new_asset_settings &&
           reconnect_window == o.reconnect_window &&
+          use_slate_for_standard_latency == o.use_slate_for_standard_latency &&
+          reconnect_slate_url == o.reconnect_slate_url &&
           passthrough == o.passthrough &&
           audio_only == o.audio_only &&
           embedded_subtitles == o.embedded_subtitles &&
@@ -301,7 +325,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [playback_policy, new_asset_settings, reconnect_window, passthrough, audio_only, embedded_subtitles, generated_subtitles, reduced_latency, low_latency, latency_mode, test, simulcast_targets, max_continuous_duration].hash
+      [playback_policy, new_asset_settings, reconnect_window, use_slate_for_standard_latency, reconnect_slate_url, passthrough, audio_only, embedded_subtitles, generated_subtitles, reduced_latency, low_latency, latency_mode, test, simulcast_targets, max_continuous_duration].hash
     end
 
     # Builds the object from hash

@@ -26,5 +26,5 @@ puts "list-video_views OK ✅"
 view = views_api.get_video_view(video_views.data.first.id)
 assert view != nil
 assert view.data != nil
-assert view.data.id != video_views.data.first.id
+assert view.data.id == video_views.data.first.id
 puts "get-video-view OK ✅"

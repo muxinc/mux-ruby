@@ -1,4 +1,5 @@
-name: Integration Test
+---
+name: Integration Test v2
 
 on:
   push:
@@ -7,21 +8,25 @@ on:
   pull_request:
 
 jobs:
-  build:
-    name: Integration Test
-    runs-on: ubuntu-latest
+  test:
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        ruby: ['2.6', '2.7']
+    runs-on: ${{ matrix.os }}
     steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-      - name: Install Ruby 2.6
-        uses: actions/setup-ruby@v1
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.6.x
-      - name: Install Bundler
-        run: gem install bundler
-      - name: Install Ruby Dependencies
-        run: bundle install --jobs 4 --retry 3
-      - name: Run Integration Tests
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true   # runs 'bundle install' and caches
+      - name: Install gems
+        run: |
+          gem install typhoeus
+          gem install solid_assert
+      - name: Run tests
         env:
           MUX_TOKEN_ID: ${{ secrets.MUX_TOKEN_ID }}
           MUX_TOKEN_SECRET: ${{ secrets.MUX_TOKEN_SECRET }}

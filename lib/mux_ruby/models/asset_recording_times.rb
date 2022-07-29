@@ -21,11 +21,37 @@ module MuxRuby
     # The duration of the live stream recorded. The time value is in seconds.
     attr_accessor :duration
 
+    # The type of media represented by the recording session, either `content` for normal stream content or `slate` for slate media inserted during stream interruptions.
+    attr_accessor :type
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'started_at' => :'started_at',
-        :'duration' => :'duration'
+        :'duration' => :'duration',
+        :'type' => :'type'
       }
     end
 
@@ -38,7 +64,8 @@ module MuxRuby
     def self.openapi_types
       {
         :'started_at' => :'Time',
-        :'duration' => :'Float'
+        :'duration' => :'Float',
+        :'type' => :'String'
       }
     end
 
@@ -70,6 +97,10 @@ module MuxRuby
       if attributes.key?(:'duration')
         self.duration = attributes[:'duration']
       end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -82,7 +113,19 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      type_validator = EnumAttributeValidator.new('String', ["content", "slate"])
+      return false unless type_validator.valid?(@type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["content", "slate"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -91,7 +134,8 @@ module MuxRuby
       return true if self.equal?(o)
       self.class == o.class &&
           started_at == o.started_at &&
-          duration == o.duration
+          duration == o.duration &&
+          type == o.type
     end
 
     # @see the `==` method
@@ -103,7 +147,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [started_at, duration].hash
+      [started_at, duration, type].hash
     end
 
     # Builds the object from hash
