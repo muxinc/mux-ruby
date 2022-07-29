@@ -61,10 +61,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ffi (>= 1.15.5)
   mux_ruby!
   pry-byebug
-  rake (~> 13.0.6)
+  rake (~> 13.0.1)
   rspec (~> 3.6, >= 3.6.0)
   rubocop (~> 0.66.0)
   solid_assert
