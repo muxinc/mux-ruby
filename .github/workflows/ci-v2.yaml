@@ -8,17 +8,18 @@ on:
 
 jobs:
   build:
-    name: Integration Test
+    name: Integration Test v2
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [ '2.6', '2.7' ]
+    name: Ruby ${{ matrix.ruby }} test
     steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-      - name: Install Ruby 2.6
-        uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-ruby@v1
         with:
-          ruby-version: '2.7.4'
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+          ruby-version: ${{ matrix.ruby }}
         env:
           MUX_TOKEN_ID: ${{ secrets.MUX_TOKEN_ID }}
           MUX_TOKEN_SECRET: ${{ secrets.MUX_TOKEN_SECRET }}
-        run: bash test.sh
+      - run: bash test.sh
