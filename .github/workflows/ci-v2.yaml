@@ -1,3 +1,4 @@
+---
 name: Integration Test v2
 
 on:
@@ -7,19 +8,21 @@ on:
   pull_request:
 
 jobs:
-  build:
-    name: Integration Test v2
-    runs-on: ubuntu-latest
+  test:
     strategy:
+      fail-fast: false
       matrix:
-        ruby: [ '2.6', '2.7' ]
-    name: Ruby ${{ matrix.ruby }} test
+        os: [ubuntu-latest, macos-latest]
+        ruby: ['2.6', '2.7']
+    runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-ruby@v1
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true   # runs 'bundle install' and caches
+      - name: Run tests
         env:
           MUX_TOKEN_ID: ${{ secrets.MUX_TOKEN_ID }}
           MUX_TOKEN_SECRET: ${{ secrets.MUX_TOKEN_SECRET }}
-      - run: bash test.sh
+        run: bash test.sh
