@@ -22,7 +22,9 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true   # runs 'bundle install' and caches
       - name: Install gems
-        run: gem install typhoeus
+        run: |
+          gem install typhoeus
+          gem install solid_assert
       - name: Run tests
         env:
           MUX_TOKEN_ID: ${{ secrets.MUX_TOKEN_ID }}
