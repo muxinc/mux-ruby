@@ -15,7 +15,7 @@ end
 exports_api = MuxRuby::ExportsApi.new
 
 # ========== list-errors ==========
-exports = exports_api.list_exports()
+exports = exports_api.list_exports_views()
 assert exports != nil
 assert exports.data != nil
 assert exports.data.length > 0
