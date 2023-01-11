@@ -38,7 +38,7 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'data' => :'Array<ListRealTimeDimensionsResponseData>',
+        :'data' => :'Array<ListMonitoringDimensionsResponseData>',
         :'total_row_count' => :'Integer',
         :'timeframe' => :'Array<Integer>'
       }

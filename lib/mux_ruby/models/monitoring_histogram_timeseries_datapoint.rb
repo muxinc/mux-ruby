@@ -14,19 +14,31 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class ListRealTimeMetricsResponse
-    attr_accessor :data
+  class MonitoringHistogramTimeseriesDatapoint
+    attr_accessor :timestamp
 
-    attr_accessor :total_row_count
+    attr_accessor :sum
 
-    attr_accessor :timeframe
+    attr_accessor :p95
+
+    attr_accessor :median
+
+    attr_accessor :max_percentage
+
+    attr_accessor :bucket_values
+
+    attr_accessor :average
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'data' => :'data',
-        :'total_row_count' => :'total_row_count',
-        :'timeframe' => :'timeframe'
+        :'timestamp' => :'timestamp',
+        :'sum' => :'sum',
+        :'p95' => :'p95',
+        :'median' => :'median',
+        :'max_percentage' => :'max_percentage',
+        :'bucket_values' => :'bucket_values',
+        :'average' => :'average'
       }
     end
 
@@ -38,9 +50,13 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'data' => :'Array<ListMonitoringDimensionsResponseData>',
-        :'total_row_count' => :'Integer',
-        :'timeframe' => :'Array<Integer>'
+        :'timestamp' => :'String',
+        :'sum' => :'Integer',
+        :'p95' => :'Float',
+        :'median' => :'Float',
+        :'max_percentage' => :'Float',
+        :'bucket_values' => :'Array<MonitoringHistogramTimeseriesBucketValues>',
+        :'average' => :'Float'
       }
     end
 
@@ -54,31 +70,45 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::ListRealTimeMetricsResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::MonitoringHistogramTimeseriesDatapoint` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::ListRealTimeMetricsResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::MonitoringHistogramTimeseriesDatapoint`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
+      if attributes.key?(:'timestamp')
+        self.timestamp = attributes[:'timestamp']
+      end
+
+      if attributes.key?(:'sum')
+        self.sum = attributes[:'sum']
+      end
+
+      if attributes.key?(:'p95')
+        self.p95 = attributes[:'p95']
+      end
+
+      if attributes.key?(:'median')
+        self.median = attributes[:'median']
+      end
+
+      if attributes.key?(:'max_percentage')
+        self.max_percentage = attributes[:'max_percentage']
+      end
+
+      if attributes.key?(:'bucket_values')
+        if (value = attributes[:'bucket_values']).is_a?(Array)
+          self.bucket_values = value
         end
       end
 
-      if attributes.key?(:'total_row_count')
-        self.total_row_count = attributes[:'total_row_count']
-      end
-
-      if attributes.key?(:'timeframe')
-        if (value = attributes[:'timeframe']).is_a?(Array)
-          self.timeframe = value
-        end
+      if attributes.key?(:'average')
+        self.average = attributes[:'average']
       end
     end
 
@@ -100,9 +130,13 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          data == o.data &&
-          total_row_count == o.total_row_count &&
-          timeframe == o.timeframe
+          timestamp == o.timestamp &&
+          sum == o.sum &&
+          p95 == o.p95 &&
+          median == o.median &&
+          max_percentage == o.max_percentage &&
+          bucket_values == o.bucket_values &&
+          average == o.average
     end
 
     # @see the `==` method
@@ -114,7 +148,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [data, total_row_count, timeframe].hash
+      [timestamp, sum, p95, median, max_percentage, bucket_values, average].hash
     end
 
     # Builds the object from hash

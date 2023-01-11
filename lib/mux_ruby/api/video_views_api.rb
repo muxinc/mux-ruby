@@ -83,7 +83,7 @@ module MuxRuby
     end
 
     # List Video Views
-    # Returns a list of video views.
+    # Returns a list of video views which match the filters and have a `view_end` within the specified timeframe.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Number of items to include in the response (default to 25)
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60; (default to 1)
@@ -99,7 +99,7 @@ module MuxRuby
     end
 
     # List Video Views
-    # Returns a list of video views.
+    # Returns a list of video views which match the filters and have a &#x60;view_end&#x60; within the specified timeframe.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Number of items to include in the response
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60;

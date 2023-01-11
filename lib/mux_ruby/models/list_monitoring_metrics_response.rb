@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class ListRealTimeMetricsResponse
+  class ListMonitoringMetricsResponse
     attr_accessor :data
 
     attr_accessor :total_row_count
@@ -54,13 +54,13 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::ListRealTimeMetricsResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::ListMonitoringMetricsResponse` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::ListRealTimeMetricsResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::ListMonitoringMetricsResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }

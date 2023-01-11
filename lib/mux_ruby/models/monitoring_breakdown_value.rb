@@ -14,16 +14,25 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class ListRealTimeDimensionsResponseData
-    attr_accessor :name
+  class MonitoringBreakdownValue
+    attr_accessor :value
 
-    attr_accessor :display_name
+    attr_accessor :negative_impact
+
+    attr_accessor :metric_value
+
+    attr_accessor :display_value
+
+    attr_accessor :concurrent_viewers
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'name' => :'name',
-        :'display_name' => :'display_name'
+        :'value' => :'value',
+        :'negative_impact' => :'negative_impact',
+        :'metric_value' => :'metric_value',
+        :'display_value' => :'display_value',
+        :'concurrent_viewers' => :'concurrent_viewers'
       }
     end
 
@@ -35,8 +44,11 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'name' => :'String',
-        :'display_name' => :'String'
+        :'value' => :'String',
+        :'negative_impact' => :'Integer',
+        :'metric_value' => :'Float',
+        :'display_value' => :'String',
+        :'concurrent_viewers' => :'Integer'
       }
     end
 
@@ -50,23 +62,35 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::ListRealTimeDimensionsResponseData` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::MonitoringBreakdownValue` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::ListRealTimeDimensionsResponseData`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::MonitoringBreakdownValue`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'value')
+        self.value = attributes[:'value']
       end
 
-      if attributes.key?(:'display_name')
-        self.display_name = attributes[:'display_name']
+      if attributes.key?(:'negative_impact')
+        self.negative_impact = attributes[:'negative_impact']
+      end
+
+      if attributes.key?(:'metric_value')
+        self.metric_value = attributes[:'metric_value']
+      end
+
+      if attributes.key?(:'display_value')
+        self.display_value = attributes[:'display_value']
+      end
+
+      if attributes.key?(:'concurrent_viewers')
+        self.concurrent_viewers = attributes[:'concurrent_viewers']
       end
     end
 
@@ -88,8 +112,11 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          name == o.name &&
-          display_name == o.display_name
+          value == o.value &&
+          negative_impact == o.negative_impact &&
+          metric_value == o.metric_value &&
+          display_value == o.display_value &&
+          concurrent_viewers == o.concurrent_viewers
     end
 
     # @see the `==` method
@@ -101,7 +128,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, display_name].hash
+      [value, negative_impact, metric_value, display_value, concurrent_viewers].hash
     end
 
     # Builds the object from hash

@@ -1,23 +1,23 @@
-# MuxRuby::RealTimeApi
+# MuxRuby::MonitoringApi
 
 All URIs are relative to *https://api.mux.com*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**get_realtime_breakdown**](RealTimeApi.md#get_realtime_breakdown) | **GET** /data/v1/realtime/metrics/{REALTIME_METRIC_ID}/breakdown | Get Real-Time Breakdown |
-| [**get_realtime_histogram_timeseries**](RealTimeApi.md#get_realtime_histogram_timeseries) | **GET** /data/v1/realtime/metrics/{REALTIME_HISTOGRAM_METRIC_ID}/histogram-timeseries | Get Real-Time Histogram Timeseries |
-| [**get_realtime_timeseries**](RealTimeApi.md#get_realtime_timeseries) | **GET** /data/v1/realtime/metrics/{REALTIME_METRIC_ID}/timeseries | Get Real-Time Timeseries |
-| [**list_realtime_dimensions**](RealTimeApi.md#list_realtime_dimensions) | **GET** /data/v1/realtime/dimensions | List Real-Time Dimensions |
-| [**list_realtime_metrics**](RealTimeApi.md#list_realtime_metrics) | **GET** /data/v1/realtime/metrics | List Real-Time Metrics |
+| [**get_monitoring_breakdown**](MonitoringApi.md#get_monitoring_breakdown) | **GET** /data/v1/monitoring/metrics/{MONITORING_METRIC_ID}/breakdown | Get Monitoring Breakdown |
+| [**get_monitoring_histogram_timeseries**](MonitoringApi.md#get_monitoring_histogram_timeseries) | **GET** /data/v1/monitoring/metrics/{MONITORING_HISTOGRAM_METRIC_ID}/histogram-timeseries | Get Monitoring Histogram Timeseries |
+| [**get_monitoring_timeseries**](MonitoringApi.md#get_monitoring_timeseries) | **GET** /data/v1/monitoring/metrics/{MONITORING_METRIC_ID}/timeseries | Get Monitoring Timeseries |
+| [**list_monitoring_dimensions**](MonitoringApi.md#list_monitoring_dimensions) | **GET** /data/v1/monitoring/dimensions | List Monitoring Dimensions |
+| [**list_monitoring_metrics**](MonitoringApi.md#list_monitoring_metrics) | **GET** /data/v1/monitoring/metrics | List Monitoring Metrics |
 
 
-## get_realtime_breakdown
+## get_monitoring_breakdown
 
-> <GetRealTimeBreakdownResponse> get_realtime_breakdown(realtime_metric_id, opts)
+> <GetMonitoringBreakdownResponse> get_monitoring_breakdown(monitoring_metric_id, opts)
 
-Get Real-Time Breakdown
+Get Monitoring Breakdown
 
-Gets breakdown information for a specific dimension and metric along with the number of concurrent viewers and negative impact score. This API is now deprecated, please use the `Get Monitoring Breakdown` API.
+Gets breakdown information for a specific dimension and metric along with the number of concurrent viewers and negative impact score.
 
 ### Examples
 
@@ -31,8 +31,8 @@ MuxRuby.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = MuxRuby::RealTimeApi.new
-realtime_metric_id = 'current-concurrent-viewers' # String | ID of the Realtime Metric
+api_instance = MuxRuby::MonitoringApi.new
+monitoring_metric_id = 'current-concurrent-viewers' # String | ID of the Monitoring Metric
 opts = {
   dimension: 'asn', # String | Dimension the specified value belongs to
   timestamp: 56, # Integer | Timestamp to limit results by. This value must be provided as a unix timestamp. Defaults to the current unix timestamp.
@@ -42,29 +42,29 @@ opts = {
 }
 
 begin
-  # Get Real-Time Breakdown
-  result = api_instance.get_realtime_breakdown(realtime_metric_id, opts)
+  # Get Monitoring Breakdown
+  result = api_instance.get_monitoring_breakdown(monitoring_metric_id, opts)
   p result
 rescue MuxRuby::ApiError => e
-  puts "Error when calling RealTimeApi->get_realtime_breakdown: #{e}"
+  puts "Error when calling MonitoringApi->get_monitoring_breakdown: #{e}"
 end
 ```
 
-#### Using the get_realtime_breakdown_with_http_info variant
+#### Using the get_monitoring_breakdown_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetRealTimeBreakdownResponse>, Integer, Hash)> get_realtime_breakdown_with_http_info(realtime_metric_id, opts)
+> <Array(<GetMonitoringBreakdownResponse>, Integer, Hash)> get_monitoring_breakdown_with_http_info(monitoring_metric_id, opts)
 
 ```ruby
 begin
-  # Get Real-Time Breakdown
-  data, status_code, headers = api_instance.get_realtime_breakdown_with_http_info(realtime_metric_id, opts)
+  # Get Monitoring Breakdown
+  data, status_code, headers = api_instance.get_monitoring_breakdown_with_http_info(monitoring_metric_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GetRealTimeBreakdownResponse>
+  p data # => <GetMonitoringBreakdownResponse>
 rescue MuxRuby::ApiError => e
-  puts "Error when calling RealTimeApi->get_realtime_breakdown_with_http_info: #{e}"
+  puts "Error when calling MonitoringApi->get_monitoring_breakdown_with_http_info: #{e}"
 end
 ```
 
@@ -72,7 +72,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **realtime_metric_id** | **String** | ID of the Realtime Metric |  |
+| **monitoring_metric_id** | **String** | ID of the Monitoring Metric |  |
 | **dimension** | **String** | Dimension the specified value belongs to | [optional] |
 | **timestamp** | **Integer** | Timestamp to limit results by. This value must be provided as a unix timestamp. Defaults to the current unix timestamp. | [optional] |
 | **filters** | [**Array&lt;String&gt;**](String.md) | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60;  | [optional] |
@@ -81,7 +81,7 @@ end
 
 ### Return type
 
-[**GetRealTimeBreakdownResponse**](GetRealTimeBreakdownResponse.md)
+[**GetMonitoringBreakdownResponse**](GetMonitoringBreakdownResponse.md)
 
 ### Authorization
 
@@ -93,13 +93,13 @@ end
 - **Accept**: application/json
 
 
-## get_realtime_histogram_timeseries
+## get_monitoring_histogram_timeseries
 
-> <GetRealTimeHistogramTimeseriesResponse> get_realtime_histogram_timeseries(realtime_histogram_metric_id, opts)
+> <GetMonitoringHistogramTimeseriesResponse> get_monitoring_histogram_timeseries(monitoring_histogram_metric_id, opts)
 
-Get Real-Time Histogram Timeseries
+Get Monitoring Histogram Timeseries
 
-Gets histogram timeseries information for a specific metric. This API is now deprecated, please use the `Get Monitoring Histogram Timeseries` API.
+Gets histogram timeseries information for a specific metric.
 
 ### Examples
 
@@ -113,36 +113,36 @@ MuxRuby.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = MuxRuby::RealTimeApi.new
-realtime_histogram_metric_id = 'video-startup-time' # String | ID of the Realtime Histogram Metric
+api_instance = MuxRuby::MonitoringApi.new
+monitoring_histogram_metric_id = 'video-startup-time' # String | ID of the Monitoring Histogram Metric
 opts = {
   filters: ['inner_example'] # Array<String> | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a `!` character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * `filters[]=operating_system:windows&filters[]=!country:US` 
 }
 
 begin
-  # Get Real-Time Histogram Timeseries
-  result = api_instance.get_realtime_histogram_timeseries(realtime_histogram_metric_id, opts)
+  # Get Monitoring Histogram Timeseries
+  result = api_instance.get_monitoring_histogram_timeseries(monitoring_histogram_metric_id, opts)
   p result
 rescue MuxRuby::ApiError => e
-  puts "Error when calling RealTimeApi->get_realtime_histogram_timeseries: #{e}"
+  puts "Error when calling MonitoringApi->get_monitoring_histogram_timeseries: #{e}"
 end
 ```
 
-#### Using the get_realtime_histogram_timeseries_with_http_info variant
+#### Using the get_monitoring_histogram_timeseries_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetRealTimeHistogramTimeseriesResponse>, Integer, Hash)> get_realtime_histogram_timeseries_with_http_info(realtime_histogram_metric_id, opts)
+> <Array(<GetMonitoringHistogramTimeseriesResponse>, Integer, Hash)> get_monitoring_histogram_timeseries_with_http_info(monitoring_histogram_metric_id, opts)
 
 ```ruby
 begin
-  # Get Real-Time Histogram Timeseries
-  data, status_code, headers = api_instance.get_realtime_histogram_timeseries_with_http_info(realtime_histogram_metric_id, opts)
+  # Get Monitoring Histogram Timeseries
+  data, status_code, headers = api_instance.get_monitoring_histogram_timeseries_with_http_info(monitoring_histogram_metric_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GetRealTimeHistogramTimeseriesResponse>
+  p data # => <GetMonitoringHistogramTimeseriesResponse>
 rescue MuxRuby::ApiError => e
-  puts "Error when calling RealTimeApi->get_realtime_histogram_timeseries_with_http_info: #{e}"
+  puts "Error when calling MonitoringApi->get_monitoring_histogram_timeseries_with_http_info: #{e}"
 end
 ```
 
@@ -150,12 +150,12 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **realtime_histogram_metric_id** | **String** | ID of the Realtime Histogram Metric |  |
+| **monitoring_histogram_metric_id** | **String** | ID of the Monitoring Histogram Metric |  |
 | **filters** | [**Array&lt;String&gt;**](String.md) | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60;  | [optional] |
 
 ### Return type
 
-[**GetRealTimeHistogramTimeseriesResponse**](GetRealTimeHistogramTimeseriesResponse.md)
+[**GetMonitoringHistogramTimeseriesResponse**](GetMonitoringHistogramTimeseriesResponse.md)
 
 ### Authorization
 
@@ -167,13 +167,13 @@ end
 - **Accept**: application/json
 
 
-## get_realtime_timeseries
+## get_monitoring_timeseries
 
-> <GetRealTimeTimeseriesResponse> get_realtime_timeseries(realtime_metric_id, opts)
+> <GetMonitoringTimeseriesResponse> get_monitoring_timeseries(monitoring_metric_id, opts)
 
-Get Real-Time Timeseries
+Get Monitoring Timeseries
 
-Gets Time series information for a specific metric along with the number of concurrent viewers. This API is now deprecated, please use the `Get Monitoring Timeseries` API.
+Gets Time series information for a specific metric along with the number of concurrent viewers.
 
 ### Examples
 
@@ -187,36 +187,36 @@ MuxRuby.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = MuxRuby::RealTimeApi.new
-realtime_metric_id = 'current-concurrent-viewers' # String | ID of the Realtime Metric
+api_instance = MuxRuby::MonitoringApi.new
+monitoring_metric_id = 'current-concurrent-viewers' # String | ID of the Monitoring Metric
 opts = {
   filters: ['inner_example'] # Array<String> | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a `!` character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * `filters[]=operating_system:windows&filters[]=!country:US` 
 }
 
 begin
-  # Get Real-Time Timeseries
-  result = api_instance.get_realtime_timeseries(realtime_metric_id, opts)
+  # Get Monitoring Timeseries
+  result = api_instance.get_monitoring_timeseries(monitoring_metric_id, opts)
   p result
 rescue MuxRuby::ApiError => e
-  puts "Error when calling RealTimeApi->get_realtime_timeseries: #{e}"
+  puts "Error when calling MonitoringApi->get_monitoring_timeseries: #{e}"
 end
 ```
 
-#### Using the get_realtime_timeseries_with_http_info variant
+#### Using the get_monitoring_timeseries_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<GetRealTimeTimeseriesResponse>, Integer, Hash)> get_realtime_timeseries_with_http_info(realtime_metric_id, opts)
+> <Array(<GetMonitoringTimeseriesResponse>, Integer, Hash)> get_monitoring_timeseries_with_http_info(monitoring_metric_id, opts)
 
 ```ruby
 begin
-  # Get Real-Time Timeseries
-  data, status_code, headers = api_instance.get_realtime_timeseries_with_http_info(realtime_metric_id, opts)
+  # Get Monitoring Timeseries
+  data, status_code, headers = api_instance.get_monitoring_timeseries_with_http_info(monitoring_metric_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <GetRealTimeTimeseriesResponse>
+  p data # => <GetMonitoringTimeseriesResponse>
 rescue MuxRuby::ApiError => e
-  puts "Error when calling RealTimeApi->get_realtime_timeseries_with_http_info: #{e}"
+  puts "Error when calling MonitoringApi->get_monitoring_timeseries_with_http_info: #{e}"
 end
 ```
 
@@ -224,12 +224,12 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **realtime_metric_id** | **String** | ID of the Realtime Metric |  |
+| **monitoring_metric_id** | **String** | ID of the Monitoring Metric |  |
 | **filters** | [**Array&lt;String&gt;**](String.md) | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60;  | [optional] |
 
 ### Return type
 
-[**GetRealTimeTimeseriesResponse**](GetRealTimeTimeseriesResponse.md)
+[**GetMonitoringTimeseriesResponse**](GetMonitoringTimeseriesResponse.md)
 
 ### Authorization
 
@@ -241,13 +241,13 @@ end
 - **Accept**: application/json
 
 
-## list_realtime_dimensions
+## list_monitoring_dimensions
 
-> <ListRealTimeDimensionsResponse> list_realtime_dimensions
+> <ListMonitoringDimensionsResponse> list_monitoring_dimensions
 
-List Real-Time Dimensions
+List Monitoring Dimensions
 
-Lists available real-time dimensions. This API is now deprecated, please use the `List Monitoring Dimensions` API.
+Lists available monitoring dimensions.
 
 ### Examples
 
@@ -261,32 +261,32 @@ MuxRuby.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = MuxRuby::RealTimeApi.new
+api_instance = MuxRuby::MonitoringApi.new
 
 begin
-  # List Real-Time Dimensions
-  result = api_instance.list_realtime_dimensions
+  # List Monitoring Dimensions
+  result = api_instance.list_monitoring_dimensions
   p result
 rescue MuxRuby::ApiError => e
-  puts "Error when calling RealTimeApi->list_realtime_dimensions: #{e}"
+  puts "Error when calling MonitoringApi->list_monitoring_dimensions: #{e}"
 end
 ```
 
-#### Using the list_realtime_dimensions_with_http_info variant
+#### Using the list_monitoring_dimensions_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ListRealTimeDimensionsResponse>, Integer, Hash)> list_realtime_dimensions_with_http_info
+> <Array(<ListMonitoringDimensionsResponse>, Integer, Hash)> list_monitoring_dimensions_with_http_info
 
 ```ruby
 begin
-  # List Real-Time Dimensions
-  data, status_code, headers = api_instance.list_realtime_dimensions_with_http_info
+  # List Monitoring Dimensions
+  data, status_code, headers = api_instance.list_monitoring_dimensions_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ListRealTimeDimensionsResponse>
+  p data # => <ListMonitoringDimensionsResponse>
 rescue MuxRuby::ApiError => e
-  puts "Error when calling RealTimeApi->list_realtime_dimensions_with_http_info: #{e}"
+  puts "Error when calling MonitoringApi->list_monitoring_dimensions_with_http_info: #{e}"
 end
 ```
 
@@ -296,7 +296,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ListRealTimeDimensionsResponse**](ListRealTimeDimensionsResponse.md)
+[**ListMonitoringDimensionsResponse**](ListMonitoringDimensionsResponse.md)
 
 ### Authorization
 
@@ -308,13 +308,13 @@ This endpoint does not need any parameter.
 - **Accept**: application/json
 
 
-## list_realtime_metrics
+## list_monitoring_metrics
 
-> <ListRealTimeMetricsResponse> list_realtime_metrics
+> <ListMonitoringMetricsResponse> list_monitoring_metrics
 
-List Real-Time Metrics
+List Monitoring Metrics
 
-Lists available real-time metrics. This API is now deprecated, please use the `List Monitoring Metrics` API.
+Lists available monitoring metrics.
 
 ### Examples
 
@@ -328,32 +328,32 @@ MuxRuby.configure do |config|
   config.password = 'YOUR PASSWORD'
 end
 
-api_instance = MuxRuby::RealTimeApi.new
+api_instance = MuxRuby::MonitoringApi.new
 
 begin
-  # List Real-Time Metrics
-  result = api_instance.list_realtime_metrics
+  # List Monitoring Metrics
+  result = api_instance.list_monitoring_metrics
   p result
 rescue MuxRuby::ApiError => e
-  puts "Error when calling RealTimeApi->list_realtime_metrics: #{e}"
+  puts "Error when calling MonitoringApi->list_monitoring_metrics: #{e}"
 end
 ```
 
-#### Using the list_realtime_metrics_with_http_info variant
+#### Using the list_monitoring_metrics_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<ListRealTimeMetricsResponse>, Integer, Hash)> list_realtime_metrics_with_http_info
+> <Array(<ListMonitoringMetricsResponse>, Integer, Hash)> list_monitoring_metrics_with_http_info
 
 ```ruby
 begin
-  # List Real-Time Metrics
-  data, status_code, headers = api_instance.list_realtime_metrics_with_http_info
+  # List Monitoring Metrics
+  data, status_code, headers = api_instance.list_monitoring_metrics_with_http_info
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <ListRealTimeMetricsResponse>
+  p data # => <ListMonitoringMetricsResponse>
 rescue MuxRuby::ApiError => e
-  puts "Error when calling RealTimeApi->list_realtime_metrics_with_http_info: #{e}"
+  puts "Error when calling MonitoringApi->list_monitoring_metrics_with_http_info: #{e}"
 end
 ```
 
@@ -363,7 +363,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ListRealTimeMetricsResponse**](ListRealTimeMetricsResponse.md)
+[**ListMonitoringMetricsResponse**](ListMonitoringMetricsResponse.md)
 
 ### Authorization
 

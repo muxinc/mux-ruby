@@ -1,10 +1,10 @@
-# MuxRuby::ListRealTimeDimensionsResponse
+# MuxRuby::GetMonitoringTimeseriesResponse
 
 ## Properties
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **data** | [**Array&lt;ListMonitoringDimensionsResponseData&gt;**](ListMonitoringDimensionsResponseData.md) |  | [optional] |
+| **data** | [**Array&lt;MonitoringTimeseriesDatapoint&gt;**](MonitoringTimeseriesDatapoint.md) |  | [optional] |
 | **total_row_count** | **Integer** |  | [optional] |
 | **timeframe** | **Array&lt;Integer&gt;** |  | [optional] |
 
@@ -13,7 +13,7 @@
 ```ruby
 require 'mux_ruby'
 
-instance = MuxRuby::ListRealTimeDimensionsResponse.new(
+instance = MuxRuby::GetMonitoringTimeseriesResponse.new(
   data: null,
   total_row_count: null,
   timeframe: null

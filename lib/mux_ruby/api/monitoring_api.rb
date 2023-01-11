@@ -13,49 +13,49 @@ OpenAPI Generator version: 5.0.1
 require 'cgi'
 
 module MuxRuby
-  class RealTimeApi
+  class MonitoringApi
     attr_accessor :api_client
 
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Get Real-Time Breakdown
-    # Gets breakdown information for a specific dimension and metric along with the number of concurrent viewers and negative impact score. This API is now deprecated, please use the `Get Monitoring Breakdown` API.
-    # @param realtime_metric_id [String] ID of the Realtime Metric
+    # Get Monitoring Breakdown
+    # Gets breakdown information for a specific dimension and metric along with the number of concurrent viewers and negative impact score.
+    # @param monitoring_metric_id [String] ID of the Monitoring Metric
     # @param [Hash] opts the optional parameters
     # @option opts [String] :dimension Dimension the specified value belongs to
     # @option opts [Integer] :timestamp Timestamp to limit results by. This value must be provided as a unix timestamp. Defaults to the current unix timestamp.
     # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
     # @option opts [String] :order_by Value to order the results by
     # @option opts [String] :order_direction Sort order.
-    # @return [GetRealTimeBreakdownResponse]
-    def get_realtime_breakdown(realtime_metric_id, opts = {})
-      data, _status_code, _headers = get_realtime_breakdown_with_http_info(realtime_metric_id, opts)
+    # @return [GetMonitoringBreakdownResponse]
+    def get_monitoring_breakdown(monitoring_metric_id, opts = {})
+      data, _status_code, _headers = get_monitoring_breakdown_with_http_info(monitoring_metric_id, opts)
       data
     end
 
-    # Get Real-Time Breakdown
-    # Gets breakdown information for a specific dimension and metric along with the number of concurrent viewers and negative impact score. This API is now deprecated, please use the &#x60;Get Monitoring Breakdown&#x60; API.
-    # @param realtime_metric_id [String] ID of the Realtime Metric
+    # Get Monitoring Breakdown
+    # Gets breakdown information for a specific dimension and metric along with the number of concurrent viewers and negative impact score.
+    # @param monitoring_metric_id [String] ID of the Monitoring Metric
     # @param [Hash] opts the optional parameters
     # @option opts [String] :dimension Dimension the specified value belongs to
     # @option opts [Integer] :timestamp Timestamp to limit results by. This value must be provided as a unix timestamp. Defaults to the current unix timestamp.
     # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
     # @option opts [String] :order_by Value to order the results by
     # @option opts [String] :order_direction Sort order.
-    # @return [Array<(GetRealTimeBreakdownResponse, Integer, Hash)>] GetRealTimeBreakdownResponse data, response status code and response headers
-    def get_realtime_breakdown_with_http_info(realtime_metric_id, opts = {})
+    # @return [Array<(GetMonitoringBreakdownResponse, Integer, Hash)>] GetMonitoringBreakdownResponse data, response status code and response headers
+    def get_monitoring_breakdown_with_http_info(monitoring_metric_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: RealTimeApi.get_realtime_breakdown ...'
+        @api_client.config.logger.debug 'Calling API: MonitoringApi.get_monitoring_breakdown ...'
       end
-      # verify the required parameter 'realtime_metric_id' is set
-      if @api_client.config.client_side_validation && realtime_metric_id.nil?
-        fail ArgumentError, "Missing the required parameter 'realtime_metric_id' when calling RealTimeApi.get_realtime_breakdown"
+      # verify the required parameter 'monitoring_metric_id' is set
+      if @api_client.config.client_side_validation && monitoring_metric_id.nil?
+        fail ArgumentError, "Missing the required parameter 'monitoring_metric_id' when calling MonitoringApi.get_monitoring_breakdown"
       end
       # verify enum value
       allowable_values = ["current-concurrent-viewers", "current-rebuffering-percentage", "exits-before-video-start", "playback-failure-percentage", "current-average-bitrate"]
-      if @api_client.config.client_side_validation && !allowable_values.include?(realtime_metric_id)
-        fail ArgumentError, "invalid value for \"realtime_metric_id\", must be one of #{allowable_values}"
+      if @api_client.config.client_side_validation && !allowable_values.include?(monitoring_metric_id)
+        fail ArgumentError, "invalid value for \"monitoring_metric_id\", must be one of #{allowable_values}"
       end
       allowable_values = ["asn", "cdn", "country", "operating_system", "player_name", "region", "stream_type", "sub_property_id", "video_series", "video_title"]
       if @api_client.config.client_side_validation && opts[:'dimension'] && !allowable_values.include?(opts[:'dimension'])
@@ -70,7 +70,7 @@ module MuxRuby
         fail ArgumentError, "invalid value for \"order_direction\", must be one of #{allowable_values}"
       end
       # resource path
-      local_var_path = '/data/v1/realtime/metrics/{REALTIME_METRIC_ID}/breakdown'.sub('{' + 'REALTIME_METRIC_ID' + '}', CGI.escape(realtime_metric_id.to_s))
+      local_var_path = '/data/v1/monitoring/metrics/{MONITORING_METRIC_ID}/breakdown'.sub('{' + 'MONITORING_METRIC_ID' + '}', CGI.escape(monitoring_metric_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -92,13 +92,13 @@ module MuxRuby
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'GetRealTimeBreakdownResponse'
+      return_type = opts[:debug_return_type] || 'GetMonitoringBreakdownResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['accessToken']
 
       new_options = opts.merge(
-        :operation => :"RealTimeApi.get_realtime_breakdown",
+        :operation => :"MonitoringApi.get_monitoring_breakdown",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -109,43 +109,43 @@ module MuxRuby
 
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RealTimeApi#get_realtime_breakdown\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: MonitoringApi#get_monitoring_breakdown\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Get Real-Time Histogram Timeseries
-    # Gets histogram timeseries information for a specific metric. This API is now deprecated, please use the `Get Monitoring Histogram Timeseries` API.
-    # @param realtime_histogram_metric_id [String] ID of the Realtime Histogram Metric
+    # Get Monitoring Histogram Timeseries
+    # Gets histogram timeseries information for a specific metric.
+    # @param monitoring_histogram_metric_id [String] ID of the Monitoring Histogram Metric
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
-    # @return [GetRealTimeHistogramTimeseriesResponse]
-    def get_realtime_histogram_timeseries(realtime_histogram_metric_id, opts = {})
-      data, _status_code, _headers = get_realtime_histogram_timeseries_with_http_info(realtime_histogram_metric_id, opts)
+    # @return [GetMonitoringHistogramTimeseriesResponse]
+    def get_monitoring_histogram_timeseries(monitoring_histogram_metric_id, opts = {})
+      data, _status_code, _headers = get_monitoring_histogram_timeseries_with_http_info(monitoring_histogram_metric_id, opts)
       data
     end
 
-    # Get Real-Time Histogram Timeseries
-    # Gets histogram timeseries information for a specific metric. This API is now deprecated, please use the &#x60;Get Monitoring Histogram Timeseries&#x60; API.
-    # @param realtime_histogram_metric_id [String] ID of the Realtime Histogram Metric
+    # Get Monitoring Histogram Timeseries
+    # Gets histogram timeseries information for a specific metric.
+    # @param monitoring_histogram_metric_id [String] ID of the Monitoring Histogram Metric
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
-    # @return [Array<(GetRealTimeHistogramTimeseriesResponse, Integer, Hash)>] GetRealTimeHistogramTimeseriesResponse data, response status code and response headers
-    def get_realtime_histogram_timeseries_with_http_info(realtime_histogram_metric_id, opts = {})
+    # @return [Array<(GetMonitoringHistogramTimeseriesResponse, Integer, Hash)>] GetMonitoringHistogramTimeseriesResponse data, response status code and response headers
+    def get_monitoring_histogram_timeseries_with_http_info(monitoring_histogram_metric_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: RealTimeApi.get_realtime_histogram_timeseries ...'
+        @api_client.config.logger.debug 'Calling API: MonitoringApi.get_monitoring_histogram_timeseries ...'
       end
-      # verify the required parameter 'realtime_histogram_metric_id' is set
-      if @api_client.config.client_side_validation && realtime_histogram_metric_id.nil?
-        fail ArgumentError, "Missing the required parameter 'realtime_histogram_metric_id' when calling RealTimeApi.get_realtime_histogram_timeseries"
+      # verify the required parameter 'monitoring_histogram_metric_id' is set
+      if @api_client.config.client_side_validation && monitoring_histogram_metric_id.nil?
+        fail ArgumentError, "Missing the required parameter 'monitoring_histogram_metric_id' when calling MonitoringApi.get_monitoring_histogram_timeseries"
       end
       # verify enum value
       allowable_values = ["video-startup-time"]
-      if @api_client.config.client_side_validation && !allowable_values.include?(realtime_histogram_metric_id)
-        fail ArgumentError, "invalid value for \"realtime_histogram_metric_id\", must be one of #{allowable_values}"
+      if @api_client.config.client_side_validation && !allowable_values.include?(monitoring_histogram_metric_id)
+        fail ArgumentError, "invalid value for \"monitoring_histogram_metric_id\", must be one of #{allowable_values}"
       end
       # resource path
-      local_var_path = '/data/v1/realtime/metrics/{REALTIME_HISTOGRAM_METRIC_ID}/histogram-timeseries'.sub('{' + 'REALTIME_HISTOGRAM_METRIC_ID' + '}', CGI.escape(realtime_histogram_metric_id.to_s))
+      local_var_path = '/data/v1/monitoring/metrics/{MONITORING_HISTOGRAM_METRIC_ID}/histogram-timeseries'.sub('{' + 'MONITORING_HISTOGRAM_METRIC_ID' + '}', CGI.escape(monitoring_histogram_metric_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -163,13 +163,13 @@ module MuxRuby
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'GetRealTimeHistogramTimeseriesResponse'
+      return_type = opts[:debug_return_type] || 'GetMonitoringHistogramTimeseriesResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['accessToken']
 
       new_options = opts.merge(
-        :operation => :"RealTimeApi.get_realtime_histogram_timeseries",
+        :operation => :"MonitoringApi.get_monitoring_histogram_timeseries",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -180,43 +180,43 @@ module MuxRuby
 
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RealTimeApi#get_realtime_histogram_timeseries\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: MonitoringApi#get_monitoring_histogram_timeseries\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # Get Real-Time Timeseries
-    # Gets Time series information for a specific metric along with the number of concurrent viewers. This API is now deprecated, please use the `Get Monitoring Timeseries` API.
-    # @param realtime_metric_id [String] ID of the Realtime Metric
+    # Get Monitoring Timeseries
+    # Gets Time series information for a specific metric along with the number of concurrent viewers.
+    # @param monitoring_metric_id [String] ID of the Monitoring Metric
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
-    # @return [GetRealTimeTimeseriesResponse]
-    def get_realtime_timeseries(realtime_metric_id, opts = {})
-      data, _status_code, _headers = get_realtime_timeseries_with_http_info(realtime_metric_id, opts)
+    # @return [GetMonitoringTimeseriesResponse]
+    def get_monitoring_timeseries(monitoring_metric_id, opts = {})
+      data, _status_code, _headers = get_monitoring_timeseries_with_http_info(monitoring_metric_id, opts)
       data
     end
 
-    # Get Real-Time Timeseries
-    # Gets Time series information for a specific metric along with the number of concurrent viewers. This API is now deprecated, please use the &#x60;Get Monitoring Timeseries&#x60; API.
-    # @param realtime_metric_id [String] ID of the Realtime Metric
+    # Get Monitoring Timeseries
+    # Gets Time series information for a specific metric along with the number of concurrent viewers.
+    # @param monitoring_metric_id [String] ID of the Monitoring Metric
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
-    # @return [Array<(GetRealTimeTimeseriesResponse, Integer, Hash)>] GetRealTimeTimeseriesResponse data, response status code and response headers
-    def get_realtime_timeseries_with_http_info(realtime_metric_id, opts = {})
+    # @return [Array<(GetMonitoringTimeseriesResponse, Integer, Hash)>] GetMonitoringTimeseriesResponse data, response status code and response headers
+    def get_monitoring_timeseries_with_http_info(monitoring_metric_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: RealTimeApi.get_realtime_timeseries ...'
+        @api_client.config.logger.debug 'Calling API: MonitoringApi.get_monitoring_timeseries ...'
       end
-      # verify the required parameter 'realtime_metric_id' is set
-      if @api_client.config.client_side_validation && realtime_metric_id.nil?
-        fail ArgumentError, "Missing the required parameter 'realtime_metric_id' when calling RealTimeApi.get_realtime_timeseries"
+      # verify the required parameter 'monitoring_metric_id' is set
+      if @api_client.config.client_side_validation && monitoring_metric_id.nil?
+        fail ArgumentError, "Missing the required parameter 'monitoring_metric_id' when calling MonitoringApi.get_monitoring_timeseries"
       end
       # verify enum value
       allowable_values = ["current-concurrent-viewers", "current-rebuffering-percentage", "exits-before-video-start", "playback-failure-percentage", "current-average-bitrate"]
-      if @api_client.config.client_side_validation && !allowable_values.include?(realtime_metric_id)
-        fail ArgumentError, "invalid value for \"realtime_metric_id\", must be one of #{allowable_values}"
+      if @api_client.config.client_side_validation && !allowable_values.include?(monitoring_metric_id)
+        fail ArgumentError, "invalid value for \"monitoring_metric_id\", must be one of #{allowable_values}"
       end
       # resource path
-      local_var_path = '/data/v1/realtime/metrics/{REALTIME_METRIC_ID}/timeseries'.sub('{' + 'REALTIME_METRIC_ID' + '}', CGI.escape(realtime_metric_id.to_s))
+      local_var_path = '/data/v1/monitoring/metrics/{MONITORING_METRIC_ID}/timeseries'.sub('{' + 'MONITORING_METRIC_ID' + '}', CGI.escape(monitoring_metric_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -234,13 +234,13 @@ module MuxRuby
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'GetRealTimeTimeseriesResponse'
+      return_type = opts[:debug_return_type] || 'GetMonitoringTimeseriesResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['accessToken']
 
       new_options = opts.merge(
-        :operation => :"RealTimeApi.get_realtime_timeseries",
+        :operation => :"MonitoringApi.get_monitoring_timeseries",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -251,30 +251,30 @@ module MuxRuby
 
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RealTimeApi#get_realtime_timeseries\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: MonitoringApi#get_monitoring_timeseries\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # List Real-Time Dimensions
-    # Lists available real-time dimensions. This API is now deprecated, please use the `List Monitoring Dimensions` API.
+    # List Monitoring Dimensions
+    # Lists available monitoring dimensions.
     # @param [Hash] opts the optional parameters
-    # @return [ListRealTimeDimensionsResponse]
-    def list_realtime_dimensions(opts = {})
-      data, _status_code, _headers = list_realtime_dimensions_with_http_info(opts)
+    # @return [ListMonitoringDimensionsResponse]
+    def list_monitoring_dimensions(opts = {})
+      data, _status_code, _headers = list_monitoring_dimensions_with_http_info(opts)
       data
     end
 
-    # List Real-Time Dimensions
-    # Lists available real-time dimensions. This API is now deprecated, please use the &#x60;List Monitoring Dimensions&#x60; API.
+    # List Monitoring Dimensions
+    # Lists available monitoring dimensions.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ListRealTimeDimensionsResponse, Integer, Hash)>] ListRealTimeDimensionsResponse data, response status code and response headers
-    def list_realtime_dimensions_with_http_info(opts = {})
+    # @return [Array<(ListMonitoringDimensionsResponse, Integer, Hash)>] ListMonitoringDimensionsResponse data, response status code and response headers
+    def list_monitoring_dimensions_with_http_info(opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: RealTimeApi.list_realtime_dimensions ...'
+        @api_client.config.logger.debug 'Calling API: MonitoringApi.list_monitoring_dimensions ...'
       end
       # resource path
-      local_var_path = '/data/v1/realtime/dimensions'
+      local_var_path = '/data/v1/monitoring/dimensions'
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -291,13 +291,13 @@ module MuxRuby
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'ListRealTimeDimensionsResponse'
+      return_type = opts[:debug_return_type] || 'ListMonitoringDimensionsResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['accessToken']
 
       new_options = opts.merge(
-        :operation => :"RealTimeApi.list_realtime_dimensions",
+        :operation => :"MonitoringApi.list_monitoring_dimensions",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -308,30 +308,30 @@ module MuxRuby
 
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RealTimeApi#list_realtime_dimensions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: MonitoringApi#list_monitoring_dimensions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
-    # List Real-Time Metrics
-    # Lists available real-time metrics. This API is now deprecated, please use the `List Monitoring Metrics` API.
+    # List Monitoring Metrics
+    # Lists available monitoring metrics.
     # @param [Hash] opts the optional parameters
-    # @return [ListRealTimeMetricsResponse]
-    def list_realtime_metrics(opts = {})
-      data, _status_code, _headers = list_realtime_metrics_with_http_info(opts)
+    # @return [ListMonitoringMetricsResponse]
+    def list_monitoring_metrics(opts = {})
+      data, _status_code, _headers = list_monitoring_metrics_with_http_info(opts)
       data
     end
 
-    # List Real-Time Metrics
-    # Lists available real-time metrics. This API is now deprecated, please use the &#x60;List Monitoring Metrics&#x60; API.
+    # List Monitoring Metrics
+    # Lists available monitoring metrics.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(ListRealTimeMetricsResponse, Integer, Hash)>] ListRealTimeMetricsResponse data, response status code and response headers
-    def list_realtime_metrics_with_http_info(opts = {})
+    # @return [Array<(ListMonitoringMetricsResponse, Integer, Hash)>] ListMonitoringMetricsResponse data, response status code and response headers
+    def list_monitoring_metrics_with_http_info(opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: RealTimeApi.list_realtime_metrics ...'
+        @api_client.config.logger.debug 'Calling API: MonitoringApi.list_monitoring_metrics ...'
       end
       # resource path
-      local_var_path = '/data/v1/realtime/metrics'
+      local_var_path = '/data/v1/monitoring/metrics'
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -348,13 +348,13 @@ module MuxRuby
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'ListRealTimeMetricsResponse'
+      return_type = opts[:debug_return_type] || 'ListMonitoringMetricsResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['accessToken']
 
       new_options = opts.merge(
-        :operation => :"RealTimeApi.list_realtime_metrics",
+        :operation => :"MonitoringApi.list_monitoring_metrics",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -365,7 +365,7 @@ module MuxRuby
 
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: RealTimeApi#list_realtime_metrics\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: MonitoringApi#list_monitoring_metrics\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
