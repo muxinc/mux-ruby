@@ -1,4 +1,4 @@
-# MuxRuby::ListRealTimeDimensionsResponseData
+# MuxRuby::ListMonitoringDimensionsResponseData
 
 ## Properties
 
@@ -12,7 +12,7 @@
 ```ruby
 require 'mux_ruby'
 
-instance = MuxRuby::ListRealTimeDimensionsResponseData.new(
+instance = MuxRuby::ListMonitoringDimensionsResponseData.new(
   name: null,
   display_name: null
 )

@@ -14,19 +14,16 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class ListRealTimeMetricsResponse
-    attr_accessor :data
+  class ListMonitoringDimensionsResponseData
+    attr_accessor :name
 
-    attr_accessor :total_row_count
-
-    attr_accessor :timeframe
+    attr_accessor :display_name
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'data' => :'data',
-        :'total_row_count' => :'total_row_count',
-        :'timeframe' => :'timeframe'
+        :'name' => :'name',
+        :'display_name' => :'display_name'
       }
     end
 
@@ -38,9 +35,8 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'data' => :'Array<ListMonitoringDimensionsResponseData>',
-        :'total_row_count' => :'Integer',
-        :'timeframe' => :'Array<Integer>'
+        :'name' => :'String',
+        :'display_name' => :'String'
       }
     end
 
@@ -54,31 +50,23 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::ListRealTimeMetricsResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::ListMonitoringDimensionsResponseData` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::ListRealTimeMetricsResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::ListMonitoringDimensionsResponseData`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
-        end
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'total_row_count')
-        self.total_row_count = attributes[:'total_row_count']
-      end
-
-      if attributes.key?(:'timeframe')
-        if (value = attributes[:'timeframe']).is_a?(Array)
-          self.timeframe = value
-        end
+      if attributes.key?(:'display_name')
+        self.display_name = attributes[:'display_name']
       end
     end
 
@@ -100,9 +88,8 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          data == o.data &&
-          total_row_count == o.total_row_count &&
-          timeframe == o.timeframe
+          name == o.name &&
+          display_name == o.display_name
     end
 
     # @see the `==` method
@@ -114,7 +101,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [data, total_row_count, timeframe].hash
+      [name, display_name].hash
     end
 
     # Builds the object from hash
