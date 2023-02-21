@@ -12,6 +12,7 @@
 | **asset_state** | **String** | The state of the asset. | [optional] |
 | **asset_duration** | **Float** | The duration of the asset in seconds. | [optional] |
 | **delivered_seconds** | **Float** | Total number of delivered seconds during this time window. | [optional] |
+| **delivered_seconds_by_resolution** | [**DeliveryReportDeliveredSecondsByResolution**](DeliveryReportDeliveredSecondsByResolution.md) |  | [optional] |
 
 ## Example
 
@@ -26,7 +27,8 @@ instance = MuxRuby::DeliveryReport.new(
   deleted_at: null,
   asset_state: null,
   asset_duration: null,
-  delivered_seconds: null
+  delivered_seconds: null,
+  delivered_seconds_by_resolution: null
 )
 ```
 

@@ -14,67 +14,23 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class DeliveryReport
-    # Unique identifier for the live stream that created the asset.
-    attr_accessor :live_stream_id
+  # Seconds delivered broken into resolution tiers. Each tier will only be displayed if there was content delivered in the tier.
+  class DeliveryReportDeliveredSecondsByResolution
+    # Total number of delivered seconds during this time window that had a resolution larger than the 720p tier (over 921,600 pixels total).
+    attr_accessor :tier_1080p
 
-    # Unique identifier for the asset.
-    attr_accessor :asset_id
+    # Total number of delivered seconds during this time window that had a resolution within the 720p tier (up to 921,600 pixels total, based on typical 1280x720).
+    attr_accessor :tier_720p
 
-    # The `passthrough` value for the asset.
-    attr_accessor :passthrough
-
-    # Time at which the asset was created. Measured in seconds since the Unix epoch.
-    attr_accessor :created_at
-
-    # If exists, time at which the asset was deleted. Measured in seconds since the Unix epoch.
-    attr_accessor :deleted_at
-
-    # The state of the asset.
-    attr_accessor :asset_state
-
-    # The duration of the asset in seconds.
-    attr_accessor :asset_duration
-
-    # Total number of delivered seconds during this time window.
-    attr_accessor :delivered_seconds
-
-    attr_accessor :delivered_seconds_by_resolution
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Total number of delivered seconds during this time window that had a resolution of audio only.
+    attr_accessor :tier_audio_only
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'live_stream_id' => :'live_stream_id',
-        :'asset_id' => :'asset_id',
-        :'passthrough' => :'passthrough',
-        :'created_at' => :'created_at',
-        :'deleted_at' => :'deleted_at',
-        :'asset_state' => :'asset_state',
-        :'asset_duration' => :'asset_duration',
-        :'delivered_seconds' => :'delivered_seconds',
-        :'delivered_seconds_by_resolution' => :'delivered_seconds_by_resolution'
+        :'tier_1080p' => :'tier_1080p',
+        :'tier_720p' => :'tier_720p',
+        :'tier_audio_only' => :'tier_audio_only'
       }
     end
 
@@ -86,15 +42,9 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'live_stream_id' => :'String',
-        :'asset_id' => :'String',
-        :'passthrough' => :'String',
-        :'created_at' => :'String',
-        :'deleted_at' => :'String',
-        :'asset_state' => :'String',
-        :'asset_duration' => :'Float',
-        :'delivered_seconds' => :'Float',
-        :'delivered_seconds_by_resolution' => :'DeliveryReportDeliveredSecondsByResolution'
+        :'tier_1080p' => :'Float',
+        :'tier_720p' => :'Float',
+        :'tier_audio_only' => :'Float'
       }
     end
 
@@ -108,51 +58,27 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::DeliveryReport` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::DeliveryReportDeliveredSecondsByResolution` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::DeliveryReport`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::DeliveryReportDeliveredSecondsByResolution`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'live_stream_id')
-        self.live_stream_id = attributes[:'live_stream_id']
+      if attributes.key?(:'tier_1080p')
+        self.tier_1080p = attributes[:'tier_1080p']
       end
 
-      if attributes.key?(:'asset_id')
-        self.asset_id = attributes[:'asset_id']
+      if attributes.key?(:'tier_720p')
+        self.tier_720p = attributes[:'tier_720p']
       end
 
-      if attributes.key?(:'passthrough')
-        self.passthrough = attributes[:'passthrough']
-      end
-
-      if attributes.key?(:'created_at')
-        self.created_at = attributes[:'created_at']
-      end
-
-      if attributes.key?(:'deleted_at')
-        self.deleted_at = attributes[:'deleted_at']
-      end
-
-      if attributes.key?(:'asset_state')
-        self.asset_state = attributes[:'asset_state']
-      end
-
-      if attributes.key?(:'asset_duration')
-        self.asset_duration = attributes[:'asset_duration']
-      end
-
-      if attributes.key?(:'delivered_seconds')
-        self.delivered_seconds = attributes[:'delivered_seconds']
-      end
-
-      if attributes.key?(:'delivered_seconds_by_resolution')
-        self.delivered_seconds_by_resolution = attributes[:'delivered_seconds_by_resolution']
+      if attributes.key?(:'tier_audio_only')
+        self.tier_audio_only = attributes[:'tier_audio_only']
       end
     end
 
@@ -166,19 +92,7 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      asset_state_validator = EnumAttributeValidator.new('String', ["ready", "errored", "deleted"])
-      return false unless asset_state_validator.valid?(@asset_state)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] asset_state Object to be assigned
-    def asset_state=(asset_state)
-      validator = EnumAttributeValidator.new('String', ["ready", "errored", "deleted"])
-      unless validator.valid?(asset_state)
-        fail ArgumentError, "invalid value for \"asset_state\", must be one of #{validator.allowable_values}."
-      end
-      @asset_state = asset_state
     end
 
     # Checks equality by comparing each attribute.
@@ -186,15 +100,9 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          live_stream_id == o.live_stream_id &&
-          asset_id == o.asset_id &&
-          passthrough == o.passthrough &&
-          created_at == o.created_at &&
-          deleted_at == o.deleted_at &&
-          asset_state == o.asset_state &&
-          asset_duration == o.asset_duration &&
-          delivered_seconds == o.delivered_seconds &&
-          delivered_seconds_by_resolution == o.delivered_seconds_by_resolution
+          tier_1080p == o.tier_1080p &&
+          tier_720p == o.tier_720p &&
+          tier_audio_only == o.tier_audio_only
     end
 
     # @see the `==` method
@@ -206,7 +114,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [live_stream_id, asset_id, passthrough, created_at, deleted_at, asset_state, asset_duration, delivered_seconds, delivered_seconds_by_resolution].hash
+      [tier_1080p, tier_720p, tier_audio_only].hash
     end
 
     # Builds the object from hash
