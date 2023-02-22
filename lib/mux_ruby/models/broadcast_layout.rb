@@ -17,6 +17,7 @@ module MuxRuby
   class BroadcastLayout
     GALLERY = "gallery".freeze
     ACTIVE_SPEAKER = "active-speaker".freeze
+    CROP = "crop".freeze
 
     # Builds the enum from string
     # @param [String] The enum value in the form of the string
