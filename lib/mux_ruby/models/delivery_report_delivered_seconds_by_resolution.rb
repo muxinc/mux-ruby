@@ -14,48 +14,31 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class LiveStreamEmbeddedSubtitleSettings
-    # A name for this live stream closed caption track.
-    attr_accessor :name
+  # Seconds delivered broken into resolution tiers. Each tier will only be displayed if there was content delivered in the tier.
+  class DeliveryReportDeliveredSecondsByResolution
+    # Total number of delivered seconds during this time window that had a resolution larger than the 1440p tier (over 4,194,304 pixels total).
+    attr_accessor :tier_2160p
 
-    # Arbitrary user-supplied metadata set for the live stream closed caption track. Max 255 characters.
-    attr_accessor :passthrough
+    # Total number of delivered seconds during this time window that had a resolution larger than the 1080p tier but less than or equal to the 2160p tier (over 2,073,600 and <= 4,194,304 pixels total).
+    attr_accessor :tier_1440p
 
-    # The language of the closed caption stream. Value must be BCP 47 compliant.
-    attr_accessor :language_code
+    # Total number of delivered seconds during this time window that had a resolution larger than the 720p tier but less than or equal to the 1440p tier (over 921,600 and <= 2,073,600 pixels total).
+    attr_accessor :tier_1080p
 
-    # CEA-608 caption channel to read data from.
-    attr_accessor :language_channel
+    # Total number of delivered seconds during this time window that had a resolution within the 720p tier (up to 921,600 pixels total, based on typical 1280x720).
+    attr_accessor :tier_720p
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Total number of delivered seconds during this time window that had a resolution of audio only.
+    attr_accessor :tier_audio_only
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'name' => :'name',
-        :'passthrough' => :'passthrough',
-        :'language_code' => :'language_code',
-        :'language_channel' => :'language_channel'
+        :'tier_2160p' => :'tier_2160p',
+        :'tier_1440p' => :'tier_1440p',
+        :'tier_1080p' => :'tier_1080p',
+        :'tier_720p' => :'tier_720p',
+        :'tier_audio_only' => :'tier_audio_only'
       }
     end
 
@@ -67,10 +50,11 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'name' => :'String',
-        :'passthrough' => :'String',
-        :'language_code' => :'String',
-        :'language_channel' => :'String'
+        :'tier_2160p' => :'Float',
+        :'tier_1440p' => :'Float',
+        :'tier_1080p' => :'Float',
+        :'tier_720p' => :'Float',
+        :'tier_audio_only' => :'Float'
       }
     end
 
@@ -84,35 +68,35 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::LiveStreamEmbeddedSubtitleSettings` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::DeliveryReportDeliveredSecondsByResolution` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::LiveStreamEmbeddedSubtitleSettings`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::DeliveryReportDeliveredSecondsByResolution`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'tier_2160p')
+        self.tier_2160p = attributes[:'tier_2160p']
       end
 
-      if attributes.key?(:'passthrough')
-        self.passthrough = attributes[:'passthrough']
+      if attributes.key?(:'tier_1440p')
+        self.tier_1440p = attributes[:'tier_1440p']
       end
 
-      if attributes.key?(:'language_code')
-        self.language_code = attributes[:'language_code']
-      else
-        self.language_code = 'en'
+      if attributes.key?(:'tier_1080p')
+        self.tier_1080p = attributes[:'tier_1080p']
       end
 
-      if attributes.key?(:'language_channel')
-        self.language_channel = attributes[:'language_channel']
-      else
-        self.language_channel = 'cc1'
+      if attributes.key?(:'tier_720p')
+        self.tier_720p = attributes[:'tier_720p']
+      end
+
+      if attributes.key?(:'tier_audio_only')
+        self.tier_audio_only = attributes[:'tier_audio_only']
       end
     end
 
@@ -126,19 +110,7 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      language_channel_validator = EnumAttributeValidator.new('String', ["cc1", "cc2", "cc3", "cc4"])
-      return false unless language_channel_validator.valid?(@language_channel)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] language_channel Object to be assigned
-    def language_channel=(language_channel)
-      validator = EnumAttributeValidator.new('String', ["cc1", "cc2", "cc3", "cc4"])
-      unless validator.valid?(language_channel)
-        fail ArgumentError, "invalid value for \"language_channel\", must be one of #{validator.allowable_values}."
-      end
-      @language_channel = language_channel
     end
 
     # Checks equality by comparing each attribute.
@@ -146,10 +118,11 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          name == o.name &&
-          passthrough == o.passthrough &&
-          language_code == o.language_code &&
-          language_channel == o.language_channel
+          tier_2160p == o.tier_2160p &&
+          tier_1440p == o.tier_1440p &&
+          tier_1080p == o.tier_1080p &&
+          tier_720p == o.tier_720p &&
+          tier_audio_only == o.tier_audio_only
     end
 
     # @see the `==` method
@@ -161,7 +134,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, passthrough, language_code, language_channel].hash
+      [tier_2160p, tier_1440p, tier_1080p, tier_720p, tier_audio_only].hash
     end
 
     # Builds the object from hash

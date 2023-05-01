@@ -129,6 +129,21 @@
 | **custom_3** | **String** |  | [optional] |
 | **custom_4** | **String** |  | [optional] |
 | **custom_5** | **String** |  | [optional] |
+| **custom_6** | **String** |  | [optional] |
+| **custom_7** | **String** |  | [optional] |
+| **custom_8** | **String** |  | [optional] |
+| **custom_9** | **String** |  | [optional] |
+| **custom_10** | **String** |  | [optional] |
+| **live_stream_latency** | **Integer** |  | [optional] |
+| **asset_id** | **String** |  | [optional] |
+| **environment_id** | **String** |  | [optional] |
+| **live_stream_id** | **String** |  | [optional] |
+| **mux_embed** | **String** |  | [optional] |
+| **playback_id** | **String** |  | [optional] |
+| **player_error_context** | **String** |  | [optional] |
+| **view_drm_type** | **String** |  | [optional] |
+| **view_dropped_frame_count** | **Integer** |  | [optional] |
+| **view_has_ad** | **Boolean** |  | [optional] |
 
 ## Example
 
@@ -260,7 +275,22 @@ instance = MuxRuby::VideoView.new(
   custom_2: null,
   custom_3: null,
   custom_4: null,
-  custom_5: null
+  custom_5: null,
+  custom_6: null,
+  custom_7: null,
+  custom_8: null,
+  custom_9: null,
+  custom_10: null,
+  live_stream_latency: null,
+  asset_id: null,
+  environment_id: null,
+  live_stream_id: null,
+  mux_embed: null,
+  playback_id: null,
+  player_error_context: null,
+  view_drm_type: null,
+  view_dropped_frame_count: null,
+  view_has_ad: null
 )
 ```
 

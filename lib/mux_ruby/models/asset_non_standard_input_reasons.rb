@@ -46,6 +46,9 @@ module MuxRuby
     # A catch-all reason when the input file in created with non-standard encoding parameters.
     attr_accessor :unexpected_media_file_parameters
 
+    # The video pixel format, as a string, returned by libav. Considered non-standard if not one of yuv420p or yuvj420p.
+    attr_accessor :unsupported_pixel_format
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -80,7 +83,8 @@ module MuxRuby
         :'pixel_aspect_ratio' => :'pixel_aspect_ratio',
         :'video_edit_list' => :'video_edit_list',
         :'audio_edit_list' => :'audio_edit_list',
-        :'unexpected_media_file_parameters' => :'unexpected_media_file_parameters'
+        :'unexpected_media_file_parameters' => :'unexpected_media_file_parameters',
+        :'unsupported_pixel_format' => :'unsupported_pixel_format'
       }
     end
 
@@ -101,7 +105,8 @@ module MuxRuby
         :'pixel_aspect_ratio' => :'String',
         :'video_edit_list' => :'String',
         :'audio_edit_list' => :'String',
-        :'unexpected_media_file_parameters' => :'String'
+        :'unexpected_media_file_parameters' => :'String',
+        :'unsupported_pixel_format' => :'String'
       }
     end
 
@@ -164,6 +169,10 @@ module MuxRuby
 
       if attributes.key?(:'unexpected_media_file_parameters')
         self.unexpected_media_file_parameters = attributes[:'unexpected_media_file_parameters']
+      end
+
+      if attributes.key?(:'unsupported_pixel_format')
+        self.unsupported_pixel_format = attributes[:'unsupported_pixel_format']
       end
     end
 
@@ -254,7 +263,8 @@ module MuxRuby
           pixel_aspect_ratio == o.pixel_aspect_ratio &&
           video_edit_list == o.video_edit_list &&
           audio_edit_list == o.audio_edit_list &&
-          unexpected_media_file_parameters == o.unexpected_media_file_parameters
+          unexpected_media_file_parameters == o.unexpected_media_file_parameters &&
+          unsupported_pixel_format == o.unsupported_pixel_format
     end
 
     # @see the `==` method
@@ -266,7 +276,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [video_codec, audio_codec, video_gop_size, video_frame_rate, video_resolution, video_bitrate, pixel_aspect_ratio, video_edit_list, audio_edit_list, unexpected_media_file_parameters].hash
+      [video_codec, audio_codec, video_gop_size, video_frame_rate, video_resolution, video_bitrate, pixel_aspect_ratio, video_edit_list, audio_edit_list, unexpected_media_file_parameters, unsupported_pixel_format].hash
     end
 
     # Builds the object from hash

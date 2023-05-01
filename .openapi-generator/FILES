@@ -33,6 +33,7 @@ docs/CreateTrackResponse.md
 docs/CreateTranscriptionVocabularyRequest.md
 docs/CreateUploadRequest.md
 docs/DeliveryReport.md
+docs/DeliveryReportDeliveredSecondsByResolution.md
 docs/DeliveryUsageApi.md
 docs/DimensionValue.md
 docs/DimensionsApi.md
@@ -134,6 +135,7 @@ docs/Score.md
 docs/SignalLiveStreamCompleteResponse.md
 docs/SigningKey.md
 docs/SigningKeyResponse.md
+docs/SigningKeysApi.md
 docs/SimulcastTarget.md
 docs/SimulcastTargetResponse.md
 docs/Space.md
@@ -178,6 +180,7 @@ lib/mux_ruby/api/monitoring_api.rb
 lib/mux_ruby/api/playback_id_api.rb
 lib/mux_ruby/api/playback_restrictions_api.rb
 lib/mux_ruby/api/real_time_api.rb
+lib/mux_ruby/api/signing_keys_api.rb
 lib/mux_ruby/api/spaces_api.rb
 lib/mux_ruby/api/transcription_vocabularies_api.rb
 lib/mux_ruby/api/url_signing_keys_api.rb
@@ -214,6 +217,7 @@ lib/mux_ruby/models/create_track_response.rb
 lib/mux_ruby/models/create_transcription_vocabulary_request.rb
 lib/mux_ruby/models/create_upload_request.rb
 lib/mux_ruby/models/delivery_report.rb
+lib/mux_ruby/models/delivery_report_delivered_seconds_by_resolution.rb
 lib/mux_ruby/models/dimension_value.rb
 lib/mux_ruby/models/disable_live_stream_response.rb
 lib/mux_ruby/models/enable_live_stream_response.rb
@@ -329,19 +333,7 @@ lib/mux_ruby/models/video_view_event.rb
 lib/mux_ruby/models/video_view_response.rb
 lib/mux_ruby/version.rb
 mux_ruby.gemspec
-spec/api/monitoring_api_spec.rb
+spec/api/signing_keys_api_spec.rb
 spec/api_client_spec.rb
 spec/configuration_spec.rb
-spec/models/get_monitoring_breakdown_response_spec.rb
-spec/models/get_monitoring_histogram_timeseries_response_meta_spec.rb
-spec/models/get_monitoring_histogram_timeseries_response_spec.rb
-spec/models/get_monitoring_timeseries_response_spec.rb
-spec/models/list_monitoring_dimensions_response_data_spec.rb
-spec/models/list_monitoring_dimensions_response_spec.rb
-spec/models/list_monitoring_metrics_response_spec.rb
-spec/models/monitoring_breakdown_value_spec.rb
-spec/models/monitoring_histogram_timeseries_bucket_spec.rb
-spec/models/monitoring_histogram_timeseries_bucket_values_spec.rb
-spec/models/monitoring_histogram_timeseries_datapoint_spec.rb
-spec/models/monitoring_timeseries_datapoint_spec.rb
 spec/spec_helper.rb

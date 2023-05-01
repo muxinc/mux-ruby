@@ -39,6 +39,8 @@ module MuxRuby
     # Total number of delivered seconds during this time window.
     attr_accessor :delivered_seconds
 
+    attr_accessor :delivered_seconds_by_resolution
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -71,7 +73,8 @@ module MuxRuby
         :'deleted_at' => :'deleted_at',
         :'asset_state' => :'asset_state',
         :'asset_duration' => :'asset_duration',
-        :'delivered_seconds' => :'delivered_seconds'
+        :'delivered_seconds' => :'delivered_seconds',
+        :'delivered_seconds_by_resolution' => :'delivered_seconds_by_resolution'
       }
     end
 
@@ -90,7 +93,8 @@ module MuxRuby
         :'deleted_at' => :'String',
         :'asset_state' => :'String',
         :'asset_duration' => :'Float',
-        :'delivered_seconds' => :'Float'
+        :'delivered_seconds' => :'Float',
+        :'delivered_seconds_by_resolution' => :'DeliveryReportDeliveredSecondsByResolution'
       }
     end
 
@@ -146,6 +150,10 @@ module MuxRuby
       if attributes.key?(:'delivered_seconds')
         self.delivered_seconds = attributes[:'delivered_seconds']
       end
+
+      if attributes.key?(:'delivered_seconds_by_resolution')
+        self.delivered_seconds_by_resolution = attributes[:'delivered_seconds_by_resolution']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -185,7 +193,8 @@ module MuxRuby
           deleted_at == o.deleted_at &&
           asset_state == o.asset_state &&
           asset_duration == o.asset_duration &&
-          delivered_seconds == o.delivered_seconds
+          delivered_seconds == o.delivered_seconds &&
+          delivered_seconds_by_resolution == o.delivered_seconds_by_resolution
     end
 
     # @see the `==` method
@@ -197,7 +206,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [live_stream_id, asset_id, passthrough, created_at, deleted_at, asset_state, asset_duration, delivered_seconds].hash
+      [live_stream_id, asset_id, passthrough, created_at, deleted_at, asset_state, asset_duration, delivered_seconds, delivered_seconds_by_resolution].hash
     end
 
     # Builds the object from hash

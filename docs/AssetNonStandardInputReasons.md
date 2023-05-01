@@ -14,6 +14,7 @@
 | **video_edit_list** | **String** | Video Edit List reason indicates that the input file&#39;s video track contains a complex Edit Decision List. | [optional] |
 | **audio_edit_list** | **String** | Audio Edit List reason indicates that the input file&#39;s audio track contains a complex Edit Decision List. | [optional] |
 | **unexpected_media_file_parameters** | **String** | A catch-all reason when the input file in created with non-standard encoding parameters. | [optional] |
+| **unsupported_pixel_format** | **String** | The video pixel format, as a string, returned by libav. Considered non-standard if not one of yuv420p or yuvj420p. | [optional] |
 
 ## Example
 
@@ -30,7 +31,8 @@ instance = MuxRuby::AssetNonStandardInputReasons.new(
   pixel_aspect_ratio: null,
   video_edit_list: null,
   audio_edit_list: null,
-  unexpected_media_file_parameters: null
+  unexpected_media_file_parameters: null,
+  unsupported_pixel_format: null
 )
 ```
 
