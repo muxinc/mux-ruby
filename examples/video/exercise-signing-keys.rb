@@ -24,9 +24,9 @@ puts "create-url-signing-key OK ✅"
 # ========== list-url-signing-keys ==========
 keys = keys_api.list_url_signing_keys()
 assert keys != nil
-assert keys.data.first != nil
-assert keys.data.first.id = key.data.id
-assert keys.data.first.private_key == nil
+assert keys.data.last != nil
+assert keys.data.last.id = key.data.id
+assert keys.data.last.private_key == nil
 puts "list-url-signing-keys OK ✅"
 
 # ========== get-url-signing-key ==========
@@ -37,6 +37,7 @@ puts "get-url-signing-key OK ✅"
 # ========== delete-url-signing-key ==========
 keys_api.delete_url_signing_key(key.data.id)
 begin
+    sleep 60
     deleted_key = keys_api.get_url_signing_key(key.data.id)
     puts 'Should have errored here.'
     exit 255
