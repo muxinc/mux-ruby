@@ -126,7 +126,7 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      language_channel_validator = EnumAttributeValidator.new('String', ["cc1"])
+      language_channel_validator = EnumAttributeValidator.new('String', ["cc1", "cc2", "cc3", "cc4"])
       return false unless language_channel_validator.valid?(@language_channel)
       true
     end
@@ -134,7 +134,7 @@ module MuxRuby
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] language_channel Object to be assigned
     def language_channel=(language_channel)
-      validator = EnumAttributeValidator.new('String', ["cc1"])
+      validator = EnumAttributeValidator.new('String', ["cc1", "cc2", "cc3", "cc4"])
       unless validator.valid?(language_channel)
         fail ArgumentError, "invalid value for \"language_channel\", must be one of #{validator.allowable_values}."
       end

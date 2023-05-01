@@ -190,6 +190,7 @@ module MuxRuby
     # @param realtime_metric_id [String] ID of the Realtime Metric
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
+    # @option opts [Integer] :timestamp Timestamp to use as the start of the timeseries data. This value must be provided as a unix timestamp. Defaults to 30 minutes ago.
     # @return [GetRealTimeTimeseriesResponse]
     def get_realtime_timeseries(realtime_metric_id, opts = {})
       data, _status_code, _headers = get_realtime_timeseries_with_http_info(realtime_metric_id, opts)
@@ -201,6 +202,7 @@ module MuxRuby
     # @param realtime_metric_id [String] ID of the Realtime Metric
     # @param [Hash] opts the optional parameters
     # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
+    # @option opts [Integer] :timestamp Timestamp to use as the start of the timeseries data. This value must be provided as a unix timestamp. Defaults to 30 minutes ago.
     # @return [Array<(GetRealTimeTimeseriesResponse, Integer, Hash)>] GetRealTimeTimeseriesResponse data, response status code and response headers
     def get_realtime_timeseries_with_http_info(realtime_metric_id, opts = {})
       if @api_client.config.debugging
@@ -221,6 +223,7 @@ module MuxRuby
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'filters[]'] = @api_client.build_collection_param(opts[:'filters'], :multi) if !opts[:'filters'].nil?
+      query_params[:'timestamp'] = opts[:'timestamp'] if !opts[:'timestamp'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

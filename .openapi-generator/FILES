@@ -135,6 +135,7 @@ docs/Score.md
 docs/SignalLiveStreamCompleteResponse.md
 docs/SigningKey.md
 docs/SigningKeyResponse.md
+docs/SigningKeysApi.md
 docs/SimulcastTarget.md
 docs/SimulcastTargetResponse.md
 docs/Space.md
@@ -179,6 +180,7 @@ lib/mux_ruby/api/monitoring_api.rb
 lib/mux_ruby/api/playback_id_api.rb
 lib/mux_ruby/api/playback_restrictions_api.rb
 lib/mux_ruby/api/real_time_api.rb
+lib/mux_ruby/api/signing_keys_api.rb
 lib/mux_ruby/api/spaces_api.rb
 lib/mux_ruby/api/transcription_vocabularies_api.rb
 lib/mux_ruby/api/url_signing_keys_api.rb
@@ -331,6 +333,7 @@ lib/mux_ruby/models/video_view_event.rb
 lib/mux_ruby/models/video_view_response.rb
 lib/mux_ruby/version.rb
 mux_ruby.gemspec
+spec/api/signing_keys_api_spec.rb
 spec/api_client_spec.rb
 spec/configuration_spec.rb
 spec/spec_helper.rb

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mux_ruby (3.9.0)
+    mux_ruby (3.10.0)
       typhoeus (~> 1.0, >= 1.0.1)
 
 GEM
@@ -69,4 +69,4 @@ DEPENDENCIES
   solid_assert
 
 BUNDLED WITH
-   2.2.25
+   2.4.4

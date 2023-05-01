@@ -16,7 +16,13 @@ require 'time'
 module MuxRuby
   # Seconds delivered broken into resolution tiers. Each tier will only be displayed if there was content delivered in the tier.
   class DeliveryReportDeliveredSecondsByResolution
-    # Total number of delivered seconds during this time window that had a resolution larger than the 720p tier (over 921,600 pixels total).
+    # Total number of delivered seconds during this time window that had a resolution larger than the 1440p tier (over 4,194,304 pixels total).
+    attr_accessor :tier_2160p
+
+    # Total number of delivered seconds during this time window that had a resolution larger than the 1080p tier but less than or equal to the 2160p tier (over 2,073,600 and <= 4,194,304 pixels total).
+    attr_accessor :tier_1440p
+
+    # Total number of delivered seconds during this time window that had a resolution larger than the 720p tier but less than or equal to the 1440p tier (over 921,600 and <= 2,073,600 pixels total).
     attr_accessor :tier_1080p
 
     # Total number of delivered seconds during this time window that had a resolution within the 720p tier (up to 921,600 pixels total, based on typical 1280x720).
@@ -28,6 +34,8 @@ module MuxRuby
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'tier_2160p' => :'tier_2160p',
+        :'tier_1440p' => :'tier_1440p',
         :'tier_1080p' => :'tier_1080p',
         :'tier_720p' => :'tier_720p',
         :'tier_audio_only' => :'tier_audio_only'
@@ -42,6 +50,8 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'tier_2160p' => :'Float',
+        :'tier_1440p' => :'Float',
         :'tier_1080p' => :'Float',
         :'tier_720p' => :'Float',
         :'tier_audio_only' => :'Float'
@@ -68,6 +78,14 @@ module MuxRuby
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'tier_2160p')
+        self.tier_2160p = attributes[:'tier_2160p']
+      end
+
+      if attributes.key?(:'tier_1440p')
+        self.tier_1440p = attributes[:'tier_1440p']
+      end
 
       if attributes.key?(:'tier_1080p')
         self.tier_1080p = attributes[:'tier_1080p']
@@ -100,6 +118,8 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          tier_2160p == o.tier_2160p &&
+          tier_1440p == o.tier_1440p &&
           tier_1080p == o.tier_1080p &&
           tier_720p == o.tier_720p &&
           tier_audio_only == o.tier_audio_only
@@ -114,7 +134,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [tier_1080p, tier_720p, tier_audio_only].hash
+      [tier_2160p, tier_1440p, tier_1080p, tier_720p, tier_audio_only].hash
     end
 
     # Builds the object from hash

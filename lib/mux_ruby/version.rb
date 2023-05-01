@@ -11,5 +11,5 @@ OpenAPI Generator version: 5.0.1
 =end
 
 module MuxRuby
-  VERSION = '3.9.0'
+  VERSION = '3.10.0'
 end
