@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mux_ruby (3.10.0)
+    mux_ruby (3.11.0)
       typhoeus (~> 1.0, >= 1.0.1)
 
 GEM
