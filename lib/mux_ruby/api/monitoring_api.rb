@@ -25,7 +25,7 @@ module MuxRuby
     # @param [Hash] opts the optional parameters
     # @option opts [String] :dimension Dimension the specified value belongs to
     # @option opts [Integer] :timestamp Timestamp to limit results by. This value must be provided as a unix timestamp. Defaults to the current unix timestamp.
-    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
+    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Monitoring Dimensions endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
     # @option opts [String] :order_by Value to order the results by
     # @option opts [String] :order_direction Sort order.
     # @return [GetMonitoringBreakdownResponse]
@@ -40,7 +40,7 @@ module MuxRuby
     # @param [Hash] opts the optional parameters
     # @option opts [String] :dimension Dimension the specified value belongs to
     # @option opts [Integer] :timestamp Timestamp to limit results by. This value must be provided as a unix timestamp. Defaults to the current unix timestamp.
-    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
+    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Monitoring Dimensions endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
     # @option opts [String] :order_by Value to order the results by
     # @option opts [String] :order_direction Sort order.
     # @return [Array<(GetMonitoringBreakdownResponse, Integer, Hash)>] GetMonitoringBreakdownResponse data, response status code and response headers
@@ -53,7 +53,7 @@ module MuxRuby
         fail ArgumentError, "Missing the required parameter 'monitoring_metric_id' when calling MonitoringApi.get_monitoring_breakdown"
       end
       # verify enum value
-      allowable_values = ["current-concurrent-viewers", "current-rebuffering-percentage", "exits-before-video-start", "playback-failure-percentage", "current-average-bitrate"]
+      allowable_values = ["current-concurrent-viewers", "current-rebuffering-percentage", "exits-before-video-start", "playback-failure-percentage", "current-average-bitrate", "video-startup-failure-percentage"]
       if @api_client.config.client_side_validation && !allowable_values.include?(monitoring_metric_id)
         fail ArgumentError, "invalid value for \"monitoring_metric_id\", must be one of #{allowable_values}"
       end
@@ -114,11 +114,109 @@ module MuxRuby
       return data, status_code, headers
     end
 
+    # Get Monitoring Breakdown Timeseries
+    # Gets timeseries of breakdown information for a specific dimension and metric. Each datapoint in the response represents 5 seconds worth of data.
+    # @param monitoring_metric_id [String] ID of the Monitoring Metric
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :dimension Dimension the specified value belongs to
+    # @option opts [Array<String>] :timeframe Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]&#x3D;).  The default for this is the last 60 seconds of available data. Timeframes larger than 10 minutes are not allowed, and must be within the last 24 hours. 
+    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Monitoring Dimensions endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
+    # @option opts [Integer] :limit Number of items to include in each timestamp&#39;s &#x60;value&#x60; list.  The default is 10, and the maximum is 100.  (default to 10)
+    # @option opts [String] :order_by Value to order the results by
+    # @option opts [String] :order_direction Sort order.
+    # @return [GetMonitoringBreakdownTimeseriesResponse]
+    def get_monitoring_breakdown_timeseries(monitoring_metric_id, opts = {})
+      data, _status_code, _headers = get_monitoring_breakdown_timeseries_with_http_info(monitoring_metric_id, opts)
+      data
+    end
+
+    # Get Monitoring Breakdown Timeseries
+    # Gets timeseries of breakdown information for a specific dimension and metric. Each datapoint in the response represents 5 seconds worth of data.
+    # @param monitoring_metric_id [String] ID of the Monitoring Metric
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :dimension Dimension the specified value belongs to
+    # @option opts [Array<String>] :timeframe Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]&#x3D;).  The default for this is the last 60 seconds of available data. Timeframes larger than 10 minutes are not allowed, and must be within the last 24 hours. 
+    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Monitoring Dimensions endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
+    # @option opts [Integer] :limit Number of items to include in each timestamp&#39;s &#x60;value&#x60; list.  The default is 10, and the maximum is 100. 
+    # @option opts [String] :order_by Value to order the results by
+    # @option opts [String] :order_direction Sort order.
+    # @return [Array<(GetMonitoringBreakdownTimeseriesResponse, Integer, Hash)>] GetMonitoringBreakdownTimeseriesResponse data, response status code and response headers
+    def get_monitoring_breakdown_timeseries_with_http_info(monitoring_metric_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: MonitoringApi.get_monitoring_breakdown_timeseries ...'
+      end
+      # verify the required parameter 'monitoring_metric_id' is set
+      if @api_client.config.client_side_validation && monitoring_metric_id.nil?
+        fail ArgumentError, "Missing the required parameter 'monitoring_metric_id' when calling MonitoringApi.get_monitoring_breakdown_timeseries"
+      end
+      # verify enum value
+      allowable_values = ["current-concurrent-viewers", "current-rebuffering-percentage", "exits-before-video-start", "playback-failure-percentage", "current-average-bitrate", "video-startup-failure-percentage"]
+      if @api_client.config.client_side_validation && !allowable_values.include?(monitoring_metric_id)
+        fail ArgumentError, "invalid value for \"monitoring_metric_id\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["asn", "cdn", "country", "operating_system", "player_name", "region", "stream_type", "sub_property_id", "video_series", "video_title", "view_has_ad"]
+      if @api_client.config.client_side_validation && opts[:'dimension'] && !allowable_values.include?(opts[:'dimension'])
+        fail ArgumentError, "invalid value for \"dimension\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["negative_impact", "value", "views", "field"]
+      if @api_client.config.client_side_validation && opts[:'order_by'] && !allowable_values.include?(opts[:'order_by'])
+        fail ArgumentError, "invalid value for \"order_by\", must be one of #{allowable_values}"
+      end
+      allowable_values = ["asc", "desc"]
+      if @api_client.config.client_side_validation && opts[:'order_direction'] && !allowable_values.include?(opts[:'order_direction'])
+        fail ArgumentError, "invalid value for \"order_direction\", must be one of #{allowable_values}"
+      end
+      # resource path
+      local_var_path = '/data/v1/monitoring/metrics/{MONITORING_METRIC_ID}/breakdown-timeseries'.sub('{' + 'MONITORING_METRIC_ID' + '}', CGI.escape(monitoring_metric_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'dimension'] = opts[:'dimension'] if !opts[:'dimension'].nil?
+      query_params[:'timeframe[]'] = @api_client.build_collection_param(opts[:'timeframe'], :multi) if !opts[:'timeframe'].nil?
+      query_params[:'filters[]'] = @api_client.build_collection_param(opts[:'filters'], :multi) if !opts[:'filters'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'order_by'] = opts[:'order_by'] if !opts[:'order_by'].nil?
+      query_params[:'order_direction'] = opts[:'order_direction'] if !opts[:'order_direction'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GetMonitoringBreakdownTimeseriesResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['accessToken']
+
+      new_options = opts.merge(
+        :operation => :"MonitoringApi.get_monitoring_breakdown_timeseries",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: MonitoringApi#get_monitoring_breakdown_timeseries\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get Monitoring Histogram Timeseries
     # Gets histogram timeseries information for a specific metric.
     # @param monitoring_histogram_metric_id [String] ID of the Monitoring Histogram Metric
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
+    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Monitoring Dimensions endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
     # @return [GetMonitoringHistogramTimeseriesResponse]
     def get_monitoring_histogram_timeseries(monitoring_histogram_metric_id, opts = {})
       data, _status_code, _headers = get_monitoring_histogram_timeseries_with_http_info(monitoring_histogram_metric_id, opts)
@@ -129,7 +227,7 @@ module MuxRuby
     # Gets histogram timeseries information for a specific metric.
     # @param monitoring_histogram_metric_id [String] ID of the Monitoring Histogram Metric
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
+    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Monitoring Dimensions endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
     # @return [Array<(GetMonitoringHistogramTimeseriesResponse, Integer, Hash)>] GetMonitoringHistogramTimeseriesResponse data, response status code and response headers
     def get_monitoring_histogram_timeseries_with_http_info(monitoring_histogram_metric_id, opts = {})
       if @api_client.config.debugging
@@ -189,7 +287,7 @@ module MuxRuby
     # Gets Time series information for a specific metric along with the number of concurrent viewers.
     # @param monitoring_metric_id [String] ID of the Monitoring Metric
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
+    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Monitoring Dimensions endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
     # @option opts [Integer] :timestamp Timestamp to use as the start of the timeseries data. This value must be provided as a unix timestamp. Defaults to 30 minutes ago.
     # @return [GetMonitoringTimeseriesResponse]
     def get_monitoring_timeseries(monitoring_metric_id, opts = {})
@@ -201,7 +299,7 @@ module MuxRuby
     # Gets Time series information for a specific metric along with the number of concurrent viewers.
     # @param monitoring_metric_id [String] ID of the Monitoring Metric
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
+    # @option opts [Array<String>] :filters Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Monitoring Dimensions endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60; 
     # @option opts [Integer] :timestamp Timestamp to use as the start of the timeseries data. This value must be provided as a unix timestamp. Defaults to 30 minutes ago.
     # @return [Array<(GetMonitoringTimeseriesResponse, Integer, Hash)>] GetMonitoringTimeseriesResponse data, response status code and response headers
     def get_monitoring_timeseries_with_http_info(monitoring_metric_id, opts = {})
@@ -213,7 +311,7 @@ module MuxRuby
         fail ArgumentError, "Missing the required parameter 'monitoring_metric_id' when calling MonitoringApi.get_monitoring_timeseries"
       end
       # verify enum value
-      allowable_values = ["current-concurrent-viewers", "current-rebuffering-percentage", "exits-before-video-start", "playback-failure-percentage", "current-average-bitrate"]
+      allowable_values = ["current-concurrent-viewers", "current-rebuffering-percentage", "exits-before-video-start", "playback-failure-percentage", "current-average-bitrate", "video-startup-failure-percentage"]
       if @api_client.config.client_side_validation && !allowable_values.include?(monitoring_metric_id)
         fail ArgumentError, "invalid value for \"monitoring_metric_id\", must be one of #{allowable_values}"
       end

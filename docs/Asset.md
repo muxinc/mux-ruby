@@ -8,7 +8,10 @@
 | **created_at** | **String** | Time the Asset was created, defined as a Unix timestamp (seconds since epoch). | [optional] |
 | **status** | **String** | The status of the asset. | [optional] |
 | **duration** | **Float** | The duration of the asset in seconds (max duration for a single asset is 12 hours). | [optional] |
-| **max_stored_resolution** | **String** | The maximum resolution that has been stored for the asset. The asset may be delivered at lower resolutions depending on the device and bandwidth, however it cannot be delivered at a higher value than is stored. | [optional] |
+| **max_stored_resolution** | **String** | This field is deprecated. Please use &#x60;resolution_tier&#x60; instead. The maximum resolution that has been stored for the asset. The asset may be delivered at lower resolutions depending on the device and bandwidth, however it cannot be delivered at a higher value than is stored. | [optional] |
+| **resolution_tier** | **String** | The resolution tier that the asset was ingested at, affecting billing for ingest &amp; storage. This field also represents the highest resolution tier that the content can be delivered at, however the actual resolution may be lower depending on the device, bandwidth, and exact resolution of the uploaded asset. | [optional] |
+| **max_resolution_tier** | **String** | Max resolution tier can be used to control the maximum &#x60;resolution_tier&#x60; your asset is encoded, stored, and streamed at. If not set, this defaults to &#x60;1080p&#x60;. | [optional] |
+| **encoding_tier** | **String** | The encoding tier informs the cost, quality, and available platform features for the asset. By default the &#x60;smart&#x60; encoding tier is used. | [optional] |
 | **max_stored_frame_rate** | **Float** | The maximum frame rate that has been stored for the asset. The asset may be delivered at lower frame rates depending on the device and bandwidth, however it cannot be delivered at a higher value than is stored. This field may return -1 if the frame rate of the input cannot be reliably determined. | [optional] |
 | **aspect_ratio** | **String** | The aspect ratio of the asset in the form of &#x60;width:height&#x60;, for example &#x60;16:9&#x60;. | [optional] |
 | **playback_ids** | [**Array&lt;PlaybackID&gt;**](PlaybackID.md) | An array of Playback ID objects. Use these to create HLS playback URLs. See [Play your videos](https://docs.mux.com/guides/video/play-your-videos) for more details. | [optional] |
@@ -40,6 +43,9 @@ instance = MuxRuby::Asset.new(
   status: null,
   duration: null,
   max_stored_resolution: null,
+  resolution_tier: null,
+  max_resolution_tier: null,
+  encoding_tier: null,
   max_stored_frame_rate: null,
   aspect_ratio: null,
   playback_ids: null,

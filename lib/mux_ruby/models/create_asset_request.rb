@@ -38,6 +38,12 @@ module MuxRuby
     # Marks the asset as a test asset when the value is set to true. A Test asset can help evaluate the Mux Video APIs without incurring any cost. There is no limit on number of test assets created. Test asset are watermarked with the Mux logo, limited to 10 seconds, deleted after 24 hrs.
     attr_accessor :test
 
+    # Max resolution tier can be used to control the maximum `resolution_tier` your asset is encoded, stored, and streamed at. If not set, this defaults to `1080p`.
+    attr_accessor :max_resolution_tier
+
+    # The encoding tier informs the cost, quality, and available platform features for the asset. By default the `smart` encoding tier is used.
+    attr_accessor :encoding_tier
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -70,7 +76,9 @@ module MuxRuby
         :'mp4_support' => :'mp4_support',
         :'normalize_audio' => :'normalize_audio',
         :'master_access' => :'master_access',
-        :'test' => :'test'
+        :'test' => :'test',
+        :'max_resolution_tier' => :'max_resolution_tier',
+        :'encoding_tier' => :'encoding_tier'
       }
     end
 
@@ -89,7 +97,9 @@ module MuxRuby
         :'mp4_support' => :'String',
         :'normalize_audio' => :'Boolean',
         :'master_access' => :'String',
-        :'test' => :'Boolean'
+        :'test' => :'Boolean',
+        :'max_resolution_tier' => :'String',
+        :'encoding_tier' => :'String'
       }
     end
 
@@ -151,6 +161,14 @@ module MuxRuby
       if attributes.key?(:'test')
         self.test = attributes[:'test']
       end
+
+      if attributes.key?(:'max_resolution_tier')
+        self.max_resolution_tier = attributes[:'max_resolution_tier']
+      end
+
+      if attributes.key?(:'encoding_tier')
+        self.encoding_tier = attributes[:'encoding_tier']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -167,6 +185,10 @@ module MuxRuby
       return false unless mp4_support_validator.valid?(@mp4_support)
       master_access_validator = EnumAttributeValidator.new('String', ["none", "temporary"])
       return false unless master_access_validator.valid?(@master_access)
+      max_resolution_tier_validator = EnumAttributeValidator.new('String', ["1080p", "1440p", "2160p"])
+      return false unless max_resolution_tier_validator.valid?(@max_resolution_tier)
+      encoding_tier_validator = EnumAttributeValidator.new('String', ["smart", "baseline"])
+      return false unless encoding_tier_validator.valid?(@encoding_tier)
       true
     end
 
@@ -190,6 +212,26 @@ module MuxRuby
       @master_access = master_access
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] max_resolution_tier Object to be assigned
+    def max_resolution_tier=(max_resolution_tier)
+      validator = EnumAttributeValidator.new('String', ["1080p", "1440p", "2160p"])
+      unless validator.valid?(max_resolution_tier)
+        fail ArgumentError, "invalid value for \"max_resolution_tier\", must be one of #{validator.allowable_values}."
+      end
+      @max_resolution_tier = max_resolution_tier
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] encoding_tier Object to be assigned
+    def encoding_tier=(encoding_tier)
+      validator = EnumAttributeValidator.new('String', ["smart", "baseline"])
+      unless validator.valid?(encoding_tier)
+        fail ArgumentError, "invalid value for \"encoding_tier\", must be one of #{validator.allowable_values}."
+      end
+      @encoding_tier = encoding_tier
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -202,7 +244,9 @@ module MuxRuby
           mp4_support == o.mp4_support &&
           normalize_audio == o.normalize_audio &&
           master_access == o.master_access &&
-          test == o.test
+          test == o.test &&
+          max_resolution_tier == o.max_resolution_tier &&
+          encoding_tier == o.encoding_tier
     end
 
     # @see the `==` method
@@ -214,7 +258,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [input, playback_policy, per_title_encode, passthrough, mp4_support, normalize_audio, master_access, test].hash
+      [input, playback_policy, per_title_encode, passthrough, mp4_support, normalize_audio, master_access, test, max_resolution_tier, encoding_tier].hash
     end
 
     # Builds the object from hash

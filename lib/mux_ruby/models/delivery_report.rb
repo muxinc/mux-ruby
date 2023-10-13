@@ -36,6 +36,9 @@ module MuxRuby
     # The duration of the asset in seconds.
     attr_accessor :asset_duration
 
+    # The resolution tier that the asset was ingested at, affecting billing for ingest & storage
+    attr_accessor :asset_resolution_tier
+
     # Total number of delivered seconds during this time window.
     attr_accessor :delivered_seconds
 
@@ -73,6 +76,7 @@ module MuxRuby
         :'deleted_at' => :'deleted_at',
         :'asset_state' => :'asset_state',
         :'asset_duration' => :'asset_duration',
+        :'asset_resolution_tier' => :'asset_resolution_tier',
         :'delivered_seconds' => :'delivered_seconds',
         :'delivered_seconds_by_resolution' => :'delivered_seconds_by_resolution'
       }
@@ -93,6 +97,7 @@ module MuxRuby
         :'deleted_at' => :'String',
         :'asset_state' => :'String',
         :'asset_duration' => :'Float',
+        :'asset_resolution_tier' => :'String',
         :'delivered_seconds' => :'Float',
         :'delivered_seconds_by_resolution' => :'DeliveryReportDeliveredSecondsByResolution'
       }
@@ -147,6 +152,10 @@ module MuxRuby
         self.asset_duration = attributes[:'asset_duration']
       end
 
+      if attributes.key?(:'asset_resolution_tier')
+        self.asset_resolution_tier = attributes[:'asset_resolution_tier']
+      end
+
       if attributes.key?(:'delivered_seconds')
         self.delivered_seconds = attributes[:'delivered_seconds']
       end
@@ -168,6 +177,8 @@ module MuxRuby
     def valid?
       asset_state_validator = EnumAttributeValidator.new('String', ["ready", "errored", "deleted"])
       return false unless asset_state_validator.valid?(@asset_state)
+      asset_resolution_tier_validator = EnumAttributeValidator.new('String', ["audio-only", "720p", "1080p", "1440p", "2160p"])
+      return false unless asset_resolution_tier_validator.valid?(@asset_resolution_tier)
       true
     end
 
@@ -179,6 +190,16 @@ module MuxRuby
         fail ArgumentError, "invalid value for \"asset_state\", must be one of #{validator.allowable_values}."
       end
       @asset_state = asset_state
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] asset_resolution_tier Object to be assigned
+    def asset_resolution_tier=(asset_resolution_tier)
+      validator = EnumAttributeValidator.new('String', ["audio-only", "720p", "1080p", "1440p", "2160p"])
+      unless validator.valid?(asset_resolution_tier)
+        fail ArgumentError, "invalid value for \"asset_resolution_tier\", must be one of #{validator.allowable_values}."
+      end
+      @asset_resolution_tier = asset_resolution_tier
     end
 
     # Checks equality by comparing each attribute.
@@ -193,6 +214,7 @@ module MuxRuby
           deleted_at == o.deleted_at &&
           asset_state == o.asset_state &&
           asset_duration == o.asset_duration &&
+          asset_resolution_tier == o.asset_resolution_tier &&
           delivered_seconds == o.delivered_seconds &&
           delivered_seconds_by_resolution == o.delivered_seconds_by_resolution
     end
@@ -206,7 +228,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [live_stream_id, asset_id, passthrough, created_at, deleted_at, asset_state, asset_duration, delivered_seconds, delivered_seconds_by_resolution].hash
+      [live_stream_id, asset_id, passthrough, created_at, deleted_at, asset_state, asset_duration, asset_resolution_tier, delivered_seconds, delivered_seconds_by_resolution].hash
     end
 
     # Builds the object from hash
