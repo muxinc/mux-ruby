@@ -5,6 +5,7 @@ All URIs are relative to *https://api.mux.com*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**get_monitoring_breakdown**](MonitoringApi.md#get_monitoring_breakdown) | **GET** /data/v1/monitoring/metrics/{MONITORING_METRIC_ID}/breakdown | Get Monitoring Breakdown |
+| [**get_monitoring_breakdown_timeseries**](MonitoringApi.md#get_monitoring_breakdown_timeseries) | **GET** /data/v1/monitoring/metrics/{MONITORING_METRIC_ID}/breakdown-timeseries | Get Monitoring Breakdown Timeseries |
 | [**get_monitoring_histogram_timeseries**](MonitoringApi.md#get_monitoring_histogram_timeseries) | **GET** /data/v1/monitoring/metrics/{MONITORING_HISTOGRAM_METRIC_ID}/histogram-timeseries | Get Monitoring Histogram Timeseries |
 | [**get_monitoring_timeseries**](MonitoringApi.md#get_monitoring_timeseries) | **GET** /data/v1/monitoring/metrics/{MONITORING_METRIC_ID}/timeseries | Get Monitoring Timeseries |
 | [**list_monitoring_dimensions**](MonitoringApi.md#list_monitoring_dimensions) | **GET** /data/v1/monitoring/dimensions | List Monitoring Dimensions |
@@ -36,7 +37,7 @@ monitoring_metric_id = 'current-concurrent-viewers' # String | ID of the Monitor
 opts = {
   dimension: 'asn', # String | Dimension the specified value belongs to
   timestamp: 56, # Integer | Timestamp to limit results by. This value must be provided as a unix timestamp. Defaults to the current unix timestamp.
-  filters: ['inner_example'], # Array<String> | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a `!` character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * `filters[]=operating_system:windows&filters[]=!country:US` 
+  filters: ['inner_example'], # Array<String> | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a `!` character to the dimension.  Possible filter names are the same as returned by the List Monitoring Dimensions endpoint.  Example:    * `filters[]=operating_system:windows&filters[]=!country:US` 
   order_by: 'negative_impact', # String | Value to order the results by
   order_direction: 'asc' # String | Sort order.
 }
@@ -75,13 +76,97 @@ end
 | **monitoring_metric_id** | **String** | ID of the Monitoring Metric |  |
 | **dimension** | **String** | Dimension the specified value belongs to | [optional] |
 | **timestamp** | **Integer** | Timestamp to limit results by. This value must be provided as a unix timestamp. Defaults to the current unix timestamp. | [optional] |
-| **filters** | [**Array&lt;String&gt;**](String.md) | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60;  | [optional] |
+| **filters** | [**Array&lt;String&gt;**](String.md) | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Monitoring Dimensions endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60;  | [optional] |
 | **order_by** | **String** | Value to order the results by | [optional] |
 | **order_direction** | **String** | Sort order. | [optional] |
 
 ### Return type
 
 [**GetMonitoringBreakdownResponse**](GetMonitoringBreakdownResponse.md)
+
+### Authorization
+
+[accessToken](../README.md#accessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_monitoring_breakdown_timeseries
+
+> <GetMonitoringBreakdownTimeseriesResponse> get_monitoring_breakdown_timeseries(monitoring_metric_id, opts)
+
+Get Monitoring Breakdown Timeseries
+
+Gets timeseries of breakdown information for a specific dimension and metric. Each datapoint in the response represents 5 seconds worth of data.
+
+### Examples
+
+```ruby
+require 'time'
+require 'mux_ruby'
+# setup authorization
+MuxRuby.configure do |config|
+  # Configure HTTP basic authorization: accessToken
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = MuxRuby::MonitoringApi.new
+monitoring_metric_id = 'current-concurrent-viewers' # String | ID of the Monitoring Metric
+opts = {
+  dimension: 'asn', # String | Dimension the specified value belongs to
+  timeframe: ['inner_example'], # Array<String> | Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]=).  The default for this is the last 60 seconds of available data. Timeframes larger than 10 minutes are not allowed, and must be within the last 24 hours. 
+  filters: ['inner_example'], # Array<String> | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a `!` character to the dimension.  Possible filter names are the same as returned by the List Monitoring Dimensions endpoint.  Example:    * `filters[]=operating_system:windows&filters[]=!country:US` 
+  limit: 56, # Integer | Number of items to include in each timestamp's `value` list.  The default is 10, and the maximum is 100. 
+  order_by: 'negative_impact', # String | Value to order the results by
+  order_direction: 'asc' # String | Sort order.
+}
+
+begin
+  # Get Monitoring Breakdown Timeseries
+  result = api_instance.get_monitoring_breakdown_timeseries(monitoring_metric_id, opts)
+  p result
+rescue MuxRuby::ApiError => e
+  puts "Error when calling MonitoringApi->get_monitoring_breakdown_timeseries: #{e}"
+end
+```
+
+#### Using the get_monitoring_breakdown_timeseries_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GetMonitoringBreakdownTimeseriesResponse>, Integer, Hash)> get_monitoring_breakdown_timeseries_with_http_info(monitoring_metric_id, opts)
+
+```ruby
+begin
+  # Get Monitoring Breakdown Timeseries
+  data, status_code, headers = api_instance.get_monitoring_breakdown_timeseries_with_http_info(monitoring_metric_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GetMonitoringBreakdownTimeseriesResponse>
+rescue MuxRuby::ApiError => e
+  puts "Error when calling MonitoringApi->get_monitoring_breakdown_timeseries_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **monitoring_metric_id** | **String** | ID of the Monitoring Metric |  |
+| **dimension** | **String** | Dimension the specified value belongs to | [optional] |
+| **timeframe** | [**Array&lt;String&gt;**](String.md) | Timeframe window to limit results by. Must be provided as an array query string parameter (e.g. timeframe[]&#x3D;).  The default for this is the last 60 seconds of available data. Timeframes larger than 10 minutes are not allowed, and must be within the last 24 hours.  | [optional] |
+| **filters** | [**Array&lt;String&gt;**](String.md) | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Monitoring Dimensions endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60;  | [optional] |
+| **limit** | **Integer** | Number of items to include in each timestamp&#39;s &#x60;value&#x60; list.  The default is 10, and the maximum is 100.  | [optional][default to 10] |
+| **order_by** | **String** | Value to order the results by | [optional] |
+| **order_direction** | **String** | Sort order. | [optional] |
+
+### Return type
+
+[**GetMonitoringBreakdownTimeseriesResponse**](GetMonitoringBreakdownTimeseriesResponse.md)
 
 ### Authorization
 
@@ -116,7 +201,7 @@ end
 api_instance = MuxRuby::MonitoringApi.new
 monitoring_histogram_metric_id = 'video-startup-time' # String | ID of the Monitoring Histogram Metric
 opts = {
-  filters: ['inner_example'] # Array<String> | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a `!` character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * `filters[]=operating_system:windows&filters[]=!country:US` 
+  filters: ['inner_example'] # Array<String> | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a `!` character to the dimension.  Possible filter names are the same as returned by the List Monitoring Dimensions endpoint.  Example:    * `filters[]=operating_system:windows&filters[]=!country:US` 
 }
 
 begin
@@ -151,7 +236,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **monitoring_histogram_metric_id** | **String** | ID of the Monitoring Histogram Metric |  |
-| **filters** | [**Array&lt;String&gt;**](String.md) | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60;  | [optional] |
+| **filters** | [**Array&lt;String&gt;**](String.md) | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Monitoring Dimensions endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60;  | [optional] |
 
 ### Return type
 
@@ -190,7 +275,7 @@ end
 api_instance = MuxRuby::MonitoringApi.new
 monitoring_metric_id = 'current-concurrent-viewers' # String | ID of the Monitoring Metric
 opts = {
-  filters: ['inner_example'], # Array<String> | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a `!` character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * `filters[]=operating_system:windows&filters[]=!country:US` 
+  filters: ['inner_example'], # Array<String> | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a `!` character to the dimension.  Possible filter names are the same as returned by the List Monitoring Dimensions endpoint.  Example:    * `filters[]=operating_system:windows&filters[]=!country:US` 
   timestamp: 56 # Integer | Timestamp to use as the start of the timeseries data. This value must be provided as a unix timestamp. Defaults to 30 minutes ago.
 }
 
@@ -226,7 +311,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **monitoring_metric_id** | **String** | ID of the Monitoring Metric |  |
-| **filters** | [**Array&lt;String&gt;**](String.md) | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Filters endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60;  | [optional] |
+| **filters** | [**Array&lt;String&gt;**](String.md) | Limit the results to rows that match conditions from provided key:value pairs. Must be provided as an array query string parameter.  To exclude rows that match a certain condition, prepend a &#x60;!&#x60; character to the dimension.  Possible filter names are the same as returned by the List Monitoring Dimensions endpoint.  Example:    * &#x60;filters[]&#x3D;operating_system:windows&amp;filters[]&#x3D;!country:US&#x60;  | [optional] |
 | **timestamp** | **Integer** | Timestamp to use as the start of the timeseries data. This value must be provided as a unix timestamp. Defaults to 30 minutes ago. | [optional] |
 
 ### Return type

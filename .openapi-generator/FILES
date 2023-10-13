@@ -7,6 +7,7 @@ Rakefile
 docs/AbridgedVideoView.md
 docs/Asset.md
 docs/AssetErrors.md
+docs/AssetGeneratedSubtitleSettings.md
 docs/AssetMaster.md
 docs/AssetNonStandardInputReasons.md
 docs/AssetRecordingTimes.md
@@ -55,6 +56,7 @@ docs/GetAssetPlaybackIDResponse.md
 docs/GetLiveStreamPlaybackIDResponse.md
 docs/GetMetricTimeseriesDataResponse.md
 docs/GetMonitoringBreakdownResponse.md
+docs/GetMonitoringBreakdownTimeseriesResponse.md
 docs/GetMonitoringHistogramTimeseriesResponse.md
 docs/GetMonitoringHistogramTimeseriesResponseMeta.md
 docs/GetMonitoringTimeseriesResponse.md
@@ -111,6 +113,8 @@ docs/LiveStreamsApi.md
 docs/Metric.md
 docs/MetricsApi.md
 docs/MonitoringApi.md
+docs/MonitoringBreakdownTimeseriesDatapoint.md
+docs/MonitoringBreakdownTimeseriesValues.md
 docs/MonitoringBreakdownValue.md
 docs/MonitoringHistogramTimeseriesBucket.md
 docs/MonitoringHistogramTimeseriesBucketValues.md
@@ -192,6 +196,7 @@ lib/mux_ruby/configuration.rb
 lib/mux_ruby/models/abridged_video_view.rb
 lib/mux_ruby/models/asset.rb
 lib/mux_ruby/models/asset_errors.rb
+lib/mux_ruby/models/asset_generated_subtitle_settings.rb
 lib/mux_ruby/models/asset_master.rb
 lib/mux_ruby/models/asset_non_standard_input_reasons.rb
 lib/mux_ruby/models/asset_recording_times.rb
@@ -233,6 +238,7 @@ lib/mux_ruby/models/get_asset_playback_id_response.rb
 lib/mux_ruby/models/get_live_stream_playback_id_response.rb
 lib/mux_ruby/models/get_metric_timeseries_data_response.rb
 lib/mux_ruby/models/get_monitoring_breakdown_response.rb
+lib/mux_ruby/models/get_monitoring_breakdown_timeseries_response.rb
 lib/mux_ruby/models/get_monitoring_histogram_timeseries_response.rb
 lib/mux_ruby/models/get_monitoring_histogram_timeseries_response_meta.rb
 lib/mux_ruby/models/get_monitoring_timeseries_response.rb
@@ -285,6 +291,8 @@ lib/mux_ruby/models/live_stream_generated_subtitle_settings.rb
 lib/mux_ruby/models/live_stream_response.rb
 lib/mux_ruby/models/live_stream_status.rb
 lib/mux_ruby/models/metric.rb
+lib/mux_ruby/models/monitoring_breakdown_timeseries_datapoint.rb
+lib/mux_ruby/models/monitoring_breakdown_timeseries_values.rb
 lib/mux_ruby/models/monitoring_breakdown_value.rb
 lib/mux_ruby/models/monitoring_histogram_timeseries_bucket.rb
 lib/mux_ruby/models/monitoring_histogram_timeseries_bucket_values.rb
@@ -333,7 +341,10 @@ lib/mux_ruby/models/video_view_event.rb
 lib/mux_ruby/models/video_view_response.rb
 lib/mux_ruby/version.rb
 mux_ruby.gemspec
-spec/api/signing_keys_api_spec.rb
 spec/api_client_spec.rb
 spec/configuration_spec.rb
+spec/models/asset_generated_subtitle_settings_spec.rb
+spec/models/get_monitoring_breakdown_timeseries_response_spec.rb
+spec/models/monitoring_breakdown_timeseries_datapoint_spec.rb
+spec/models/monitoring_breakdown_timeseries_values_spec.rb
 spec/spec_helper.rb

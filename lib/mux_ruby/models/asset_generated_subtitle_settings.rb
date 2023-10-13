@@ -14,25 +14,15 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class CreateTrackRequest
-    # The URL of the file that Mux should download and use. * For `audio` tracks, the URL is the location of the audio file for Mux to download, for example an M4A, WAV, or MP3 file. Mux supports most audio file formats and codecs, but for fastest processing, you should [use standard inputs wherever possible](https://docs.mux.com/guides/video/minimize-processing-time). * For `text` tracks, the URL is the location of subtitle/captions file. Mux supports [SubRip Text (SRT)](https://en.wikipedia.org/wiki/SubRip) and [Web Video Text Tracks](https://www.w3.org/TR/webvtt1/) formats for ingesting Subtitles and Closed Captions. 
-    attr_accessor :url
-
-    attr_accessor :type
-
-    attr_accessor :text_type
-
-    # The language code value must be a valid BCP 47 specification compliant value. For example, en for English or en-US for the US version of English.
-    attr_accessor :language_code
-
-    # The name of the track containing a human-readable description. This value must be unique within each group of `text` or `audio` track types. The HLS manifest will associate the `text` or `audio` track with this value. For example, set the value to \"English\" for subtitles text track with `language_code` as en-US. If this parameter is not included, Mux will auto-populate a value based on the `language_code` value.
+  class AssetGeneratedSubtitleSettings
+    # A name for this subtitle track.
     attr_accessor :name
 
-    # Indicates the track provides Subtitles for the Deaf or Hard-of-hearing (SDH).
-    attr_accessor :closed_captions
-
-    # Arbitrary user-supplied metadata set for the track either when creating the asset or track.
+    # Arbitrary metadata set for the subtitle track. Max 255 characters.
     attr_accessor :passthrough
+
+    # The language to generate subtitles in.
+    attr_accessor :language_code
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -59,13 +49,9 @@ module MuxRuby
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'url' => :'url',
-        :'type' => :'type',
-        :'text_type' => :'text_type',
-        :'language_code' => :'language_code',
         :'name' => :'name',
-        :'closed_captions' => :'closed_captions',
-        :'passthrough' => :'passthrough'
+        :'passthrough' => :'passthrough',
+        :'language_code' => :'language_code'
       }
     end
 
@@ -77,13 +63,9 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'url' => :'String',
-        :'type' => :'String',
-        :'text_type' => :'String',
-        :'language_code' => :'String',
         :'name' => :'String',
-        :'closed_captions' => :'Boolean',
-        :'passthrough' => :'String'
+        :'passthrough' => :'String',
+        :'language_code' => :'String'
       }
     end
 
@@ -97,43 +79,29 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::CreateTrackRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::AssetGeneratedSubtitleSettings` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::CreateTrackRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::AssetGeneratedSubtitleSettings`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
-
-      if attributes.key?(:'url')
-        self.url = attributes[:'url']
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.key?(:'text_type')
-        self.text_type = attributes[:'text_type']
-      end
-
-      if attributes.key?(:'language_code')
-        self.language_code = attributes[:'language_code']
-      end
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'closed_captions')
-        self.closed_captions = attributes[:'closed_captions']
-      end
-
       if attributes.key?(:'passthrough')
         self.passthrough = attributes[:'passthrough']
+      end
+
+      if attributes.key?(:'language_code')
+        self.language_code = attributes[:'language_code']
+      else
+        self.language_code = 'en'
       end
     end
 
@@ -141,57 +109,25 @@ module MuxRuby
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @url.nil?
-        invalid_properties.push('invalid value for "url", url cannot be nil.')
-      end
-
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
-      if @text_type.nil?
-        invalid_properties.push('invalid value for "text_type", text_type cannot be nil.')
-      end
-
-      if @language_code.nil?
-        invalid_properties.push('invalid value for "language_code", language_code cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @url.nil?
-      return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["text", "audio"])
-      return false unless type_validator.valid?(@type)
-      return false if @text_type.nil?
-      text_type_validator = EnumAttributeValidator.new('String', ["subtitles"])
-      return false unless text_type_validator.valid?(@text_type)
-      return false if @language_code.nil?
+      language_code_validator = EnumAttributeValidator.new('String', ["en", "en-US"])
+      return false unless language_code_validator.valid?(@language_code)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["text", "audio"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+    # @param [Object] language_code Object to be assigned
+    def language_code=(language_code)
+      validator = EnumAttributeValidator.new('String', ["en", "en-US"])
+      unless validator.valid?(language_code)
+        fail ArgumentError, "invalid value for \"language_code\", must be one of #{validator.allowable_values}."
       end
-      @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] text_type Object to be assigned
-    def text_type=(text_type)
-      validator = EnumAttributeValidator.new('String', ["subtitles"])
-      unless validator.valid?(text_type)
-        fail ArgumentError, "invalid value for \"text_type\", must be one of #{validator.allowable_values}."
-      end
-      @text_type = text_type
+      @language_code = language_code
     end
 
     # Checks equality by comparing each attribute.
@@ -199,13 +135,9 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          url == o.url &&
-          type == o.type &&
-          text_type == o.text_type &&
-          language_code == o.language_code &&
           name == o.name &&
-          closed_captions == o.closed_captions &&
-          passthrough == o.passthrough
+          passthrough == o.passthrough &&
+          language_code == o.language_code
     end
 
     # @see the `==` method
@@ -217,7 +149,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [url, type, text_type, language_code, name, closed_captions, passthrough].hash
+      [name, passthrough, language_code].hash
     end
 
     # Builds the object from hash
