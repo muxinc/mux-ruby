@@ -343,8 +343,4 @@ lib/mux_ruby/version.rb
 mux_ruby.gemspec
 spec/api_client_spec.rb
 spec/configuration_spec.rb
-spec/models/asset_generated_subtitle_settings_spec.rb
-spec/models/get_monitoring_breakdown_timeseries_response_spec.rb
-spec/models/monitoring_breakdown_timeseries_datapoint_spec.rb
-spec/models/monitoring_breakdown_timeseries_values_spec.rb
 spec/spec_helper.rb

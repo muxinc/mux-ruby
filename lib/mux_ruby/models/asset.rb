@@ -36,7 +36,7 @@ module MuxRuby
     # Max resolution tier can be used to control the maximum `resolution_tier` your asset is encoded, stored, and streamed at. If not set, this defaults to `1080p`.
     attr_accessor :max_resolution_tier
 
-    # The encoding tier informs the cost, quality, and available platform features for the asset. By default the `smart` encoding tier is used.
+    # The encoding tier informs the cost, quality, and available platform features for the asset. By default the `smart` encoding tier is used. [See the guide for more details.](https://docs.mux.com/guides/video/use-encoding-tiers)
     attr_accessor :encoding_tier
 
     # The maximum frame rate that has been stored for the asset. The asset may be delivered at lower frame rates depending on the device and bandwidth, however it cannot be delivered at a higher value than is stored. This field may return -1 if the frame rate of the input cannot be reliably determined.
