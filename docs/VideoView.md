@@ -145,6 +145,8 @@
 | **view_dropped_frame_count** | **Integer** |  | [optional] |
 | **view_has_ad** | **Boolean** |  | [optional] |
 | **video_startup_failure** | **Boolean** |  | [optional] |
+| **long_resume** | **Boolean** |  | [optional] |
+| **long_rebuffering** | **Boolean** |  | [optional] |
 
 ## Example
 
@@ -292,7 +294,9 @@ instance = MuxRuby::VideoView.new(
   view_drm_type: null,
   view_dropped_frame_count: null,
   view_has_ad: null,
-  video_startup_failure: null
+  video_startup_failure: null,
+  long_resume: null,
+  long_rebuffering: null
 )
 ```
 

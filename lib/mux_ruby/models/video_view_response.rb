@@ -19,11 +19,14 @@ module MuxRuby
 
     attr_accessor :timeframe
 
+    attr_accessor :total_row_count
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'data' => :'data',
-        :'timeframe' => :'timeframe'
+        :'timeframe' => :'timeframe',
+        :'total_row_count' => :'total_row_count'
       }
     end
 
@@ -36,13 +39,15 @@ module MuxRuby
     def self.openapi_types
       {
         :'data' => :'VideoView',
-        :'timeframe' => :'Array<Integer>'
+        :'timeframe' => :'Array<Integer>',
+        :'total_row_count' => :'Integer'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'total_row_count'
       ])
     end
 
@@ -70,6 +75,10 @@ module MuxRuby
           self.timeframe = value
         end
       end
+
+      if attributes.key?(:'total_row_count')
+        self.total_row_count = attributes[:'total_row_count']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -91,7 +100,8 @@ module MuxRuby
       return true if self.equal?(o)
       self.class == o.class &&
           data == o.data &&
-          timeframe == o.timeframe
+          timeframe == o.timeframe &&
+          total_row_count == o.total_row_count
     end
 
     # @see the `==` method
@@ -103,7 +113,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [data, timeframe].hash
+      [data, timeframe, total_row_count].hash
     end
 
     # Builds the object from hash

@@ -33,7 +33,7 @@ module MuxRuby
     # Description of the error.
     attr_accessor :description
 
-    # The total number of views that experiend this error.
+    # The total number of views that experienced this error.
     attr_accessor :count
 
     # The error code
@@ -75,6 +75,10 @@ module MuxRuby
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'notes',
+        :'message',
+        :'description',
+        :'code'
       ])
     end
 

@@ -187,7 +187,7 @@ end
 
 api_instance = MuxRuby::LiveStreamsApi.new
 live_stream_id = 'live_stream_id_example' # String | The live stream ID
-create_simulcast_target_request = MuxRuby::CreateSimulcastTargetRequest.new({url: 'url_example'}) # CreateSimulcastTargetRequest | 
+create_simulcast_target_request = MuxRuby::CreateSimulcastTargetRequest.new # CreateSimulcastTargetRequest | 
 
 begin
   # Create a live stream simulcast target

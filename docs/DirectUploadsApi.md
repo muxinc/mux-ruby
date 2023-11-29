@@ -101,7 +101,7 @@ MuxRuby.configure do |config|
 end
 
 api_instance = MuxRuby::DirectUploadsApi.new
-create_upload_request = MuxRuby::CreateUploadRequest.new({new_asset_settings: MuxRuby::CreateAssetRequest.new}) # CreateUploadRequest | 
+create_upload_request = MuxRuby::CreateUploadRequest.new # CreateUploadRequest | 
 
 begin
   # Create a new direct upload URL

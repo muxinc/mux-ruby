@@ -63,6 +63,9 @@ module MuxRuby
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'p95',
+        :'median',
+        :'average'
       ])
     end
 

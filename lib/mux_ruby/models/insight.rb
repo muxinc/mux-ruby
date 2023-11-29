@@ -17,6 +17,8 @@ module MuxRuby
   class Insight
     attr_accessor :total_watch_time
 
+    attr_accessor :total_playing_time
+
     attr_accessor :total_views
 
     attr_accessor :negative_impact_score
@@ -31,6 +33,7 @@ module MuxRuby
     def self.attribute_map
       {
         :'total_watch_time' => :'total_watch_time',
+        :'total_playing_time' => :'total_playing_time',
         :'total_views' => :'total_views',
         :'negative_impact_score' => :'negative_impact_score',
         :'metric' => :'metric',
@@ -48,6 +51,7 @@ module MuxRuby
     def self.openapi_types
       {
         :'total_watch_time' => :'Integer',
+        :'total_playing_time' => :'Integer',
         :'total_views' => :'Integer',
         :'negative_impact_score' => :'Float',
         :'metric' => :'Float',
@@ -59,6 +63,9 @@ module MuxRuby
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'total_watch_time',
+        :'total_playing_time',
+        :'filter_value',
       ])
     end
 
@@ -79,6 +86,10 @@ module MuxRuby
 
       if attributes.key?(:'total_watch_time')
         self.total_watch_time = attributes[:'total_watch_time']
+      end
+
+      if attributes.key?(:'total_playing_time')
+        self.total_playing_time = attributes[:'total_playing_time']
       end
 
       if attributes.key?(:'total_views')
@@ -121,6 +132,7 @@ module MuxRuby
       return true if self.equal?(o)
       self.class == o.class &&
           total_watch_time == o.total_watch_time &&
+          total_playing_time == o.total_playing_time &&
           total_views == o.total_views &&
           negative_impact_score == o.negative_impact_score &&
           metric == o.metric &&
@@ -137,7 +149,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [total_watch_time, total_views, negative_impact_score, metric, filter_value, filter_column].hash
+      [total_watch_time, total_playing_time, total_views, negative_impact_score, metric, filter_value, filter_column].hash
     end
 
     # Builds the object from hash

@@ -5,6 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **total_watch_time** | **Integer** |  | [optional] |
+| **total_playing_time** | **Integer** |  | [optional] |
 | **total_views** | **Integer** |  | [optional] |
 | **negative_impact_score** | **Float** |  | [optional] |
 | **metric** | **Float** |  | [optional] |
@@ -18,6 +19,7 @@ require 'mux_ruby'
 
 instance = MuxRuby::Insight.new(
   total_watch_time: null,
+  total_playing_time: null,
   total_views: null,
   negative_impact_score: null,
   metric: null,

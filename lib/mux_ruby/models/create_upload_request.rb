@@ -102,10 +102,6 @@ module MuxRuby
         invalid_properties.push('invalid value for "timeout", must be greater than or equal to 60.')
       end
 
-      if @new_asset_settings.nil?
-        invalid_properties.push('invalid value for "new_asset_settings", new_asset_settings cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -114,7 +110,6 @@ module MuxRuby
     def valid?
       return false if !@timeout.nil? && @timeout > 604800
       return false if !@timeout.nil? && @timeout < 60
-      return false if @new_asset_settings.nil?
       true
     end
 

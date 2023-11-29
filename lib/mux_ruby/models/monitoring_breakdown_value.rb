@@ -25,6 +25,8 @@ module MuxRuby
 
     attr_accessor :concurrent_viewers
 
+    attr_accessor :starting_up_viewers
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -32,7 +34,8 @@ module MuxRuby
         :'negative_impact' => :'negative_impact',
         :'metric_value' => :'metric_value',
         :'display_value' => :'display_value',
-        :'concurrent_viewers' => :'concurrent_viewers'
+        :'concurrent_viewers' => :'concurrent_viewers',
+        :'starting_up_viewers' => :'starting_up_viewers'
       }
     end
 
@@ -48,13 +51,16 @@ module MuxRuby
         :'negative_impact' => :'Integer',
         :'metric_value' => :'Float',
         :'display_value' => :'String',
-        :'concurrent_viewers' => :'Integer'
+        :'concurrent_viewers' => :'Integer',
+        :'starting_up_viewers' => :'Integer'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'value',
+        :'metric_value',
       ])
     end
 
@@ -92,6 +98,10 @@ module MuxRuby
       if attributes.key?(:'concurrent_viewers')
         self.concurrent_viewers = attributes[:'concurrent_viewers']
       end
+
+      if attributes.key?(:'starting_up_viewers')
+        self.starting_up_viewers = attributes[:'starting_up_viewers']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -116,7 +126,8 @@ module MuxRuby
           negative_impact == o.negative_impact &&
           metric_value == o.metric_value &&
           display_value == o.display_value &&
-          concurrent_viewers == o.concurrent_viewers
+          concurrent_viewers == o.concurrent_viewers &&
+          starting_up_viewers == o.starting_up_viewers
     end
 
     # @see the `==` method
@@ -128,7 +139,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [value, negative_impact, metric_value, display_value, concurrent_viewers].hash
+      [value, negative_impact, metric_value, display_value, concurrent_viewers, starting_up_viewers].hash
     end
 
     # Builds the object from hash

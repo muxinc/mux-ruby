@@ -17,12 +17,15 @@ module MuxRuby
   class IncidentResponse
     attr_accessor :data
 
+    attr_accessor :total_row_count
+
     attr_accessor :timeframe
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'data' => :'data',
+        :'total_row_count' => :'total_row_count',
         :'timeframe' => :'timeframe'
       }
     end
@@ -36,6 +39,7 @@ module MuxRuby
     def self.openapi_types
       {
         :'data' => :'Incident',
+        :'total_row_count' => :'Integer',
         :'timeframe' => :'Array<Integer>'
       }
     end
@@ -43,6 +47,7 @@ module MuxRuby
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'total_row_count',
       ])
     end
 
@@ -63,6 +68,10 @@ module MuxRuby
 
       if attributes.key?(:'data')
         self.data = attributes[:'data']
+      end
+
+      if attributes.key?(:'total_row_count')
+        self.total_row_count = attributes[:'total_row_count']
       end
 
       if attributes.key?(:'timeframe')
@@ -91,6 +100,7 @@ module MuxRuby
       return true if self.equal?(o)
       self.class == o.class &&
           data == o.data &&
+          total_row_count == o.total_row_count &&
           timeframe == o.timeframe
     end
 
@@ -103,7 +113,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [data, timeframe].hash
+      [data, total_row_count, timeframe].hash
     end
 
     # Builds the object from hash

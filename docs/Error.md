@@ -10,7 +10,7 @@
 | **message** | **String** | The error message. | [optional] |
 | **last_seen** | **String** | The last time this error was seen (ISO 8601 timestamp). | [optional] |
 | **description** | **String** | Description of the error. | [optional] |
-| **count** | **Integer** | The total number of views that experiend this error. | [optional] |
+| **count** | **Integer** | The total number of views that experienced this error. | [optional] |
 | **code** | **Integer** | The error code | [optional] |
 
 ## Example
