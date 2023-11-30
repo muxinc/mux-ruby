@@ -361,16 +361,6 @@ lib/mux_ruby/models/web_input.rb
 lib/mux_ruby/models/web_input_response.rb
 lib/mux_ruby/version.rb
 mux_ruby.gemspec
-spec/api/web_inputs_api_spec.rb
 spec/api_client_spec.rb
 spec/configuration_spec.rb
-spec/models/create_web_input_request_spec.rb
-spec/models/launch_web_input_response_spec.rb
-spec/models/list_breakdown_values_response_meta_spec.rb
-spec/models/list_web_inputs_response_spec.rb
-spec/models/reload_web_input_response_spec.rb
-spec/models/shutdown_web_input_response_spec.rb
-spec/models/update_web_input_url_request_spec.rb
-spec/models/web_input_response_spec.rb
-spec/models/web_input_spec.rb
 spec/spec_helper.rb
