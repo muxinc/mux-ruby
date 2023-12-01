@@ -33,6 +33,7 @@ docs/CreateTrackRequest.md
 docs/CreateTrackResponse.md
 docs/CreateTranscriptionVocabularyRequest.md
 docs/CreateUploadRequest.md
+docs/CreateWebInputRequest.md
 docs/DeliveryReport.md
 docs/DeliveryReportDeliveredSecondsByResolution.md
 docs/DeliveryUsageApi.md
@@ -77,9 +78,11 @@ docs/InputSettings.md
 docs/InputSettingsOverlaySettings.md
 docs/InputTrack.md
 docs/Insight.md
+docs/LaunchWebInputResponse.md
 docs/ListAllMetricValuesResponse.md
 docs/ListAssetsResponse.md
 docs/ListBreakdownValuesResponse.md
+docs/ListBreakdownValuesResponseMeta.md
 docs/ListDeliveryUsageResponse.md
 docs/ListDimensionValuesResponse.md
 docs/ListDimensionsResponse.md
@@ -104,6 +107,7 @@ docs/ListTranscriptionVocabulariesResponse.md
 docs/ListUploadsResponse.md
 docs/ListVideoViewExportsResponse.md
 docs/ListVideoViewsResponse.md
+docs/ListWebInputsResponse.md
 docs/LiveStream.md
 docs/LiveStreamEmbeddedSubtitleSettings.md
 docs/LiveStreamGeneratedSubtitleSettings.md
@@ -135,7 +139,9 @@ docs/RealTimeHistogramTimeseriesBucketValues.md
 docs/RealTimeHistogramTimeseriesDatapoint.md
 docs/RealTimeTimeseriesDatapoint.md
 docs/ReferrerDomainRestriction.md
+docs/ReloadWebInputResponse.md
 docs/Score.md
+docs/ShutdownWebInputResponse.md
 docs/SignalLiveStreamCompleteResponse.md
 docs/SigningKey.md
 docs/SigningKeyResponse.md
@@ -162,6 +168,7 @@ docs/UpdateLiveStreamGeneratedSubtitlesRequest.md
 docs/UpdateLiveStreamRequest.md
 docs/UpdateReferrerDomainRestrictionRequest.md
 docs/UpdateTranscriptionVocabularyRequest.md
+docs/UpdateWebInputUrlRequest.md
 docs/Upload.md
 docs/UploadError.md
 docs/UploadResponse.md
@@ -169,6 +176,9 @@ docs/VideoView.md
 docs/VideoViewEvent.md
 docs/VideoViewResponse.md
 docs/VideoViewsApi.md
+docs/WebInput.md
+docs/WebInputResponse.md
+docs/WebInputsApi.md
 lib/mux_ruby.rb
 lib/mux_ruby/api/assets_api.rb
 lib/mux_ruby/api/delivery_usage_api.rb
@@ -189,6 +199,7 @@ lib/mux_ruby/api/spaces_api.rb
 lib/mux_ruby/api/transcription_vocabularies_api.rb
 lib/mux_ruby/api/url_signing_keys_api.rb
 lib/mux_ruby/api/video_views_api.rb
+lib/mux_ruby/api/web_inputs_api.rb
 lib/mux_ruby/api_client.rb
 lib/mux_ruby/api_error.rb
 lib/mux_ruby/configuration.rb
@@ -221,6 +232,7 @@ lib/mux_ruby/models/create_track_request.rb
 lib/mux_ruby/models/create_track_response.rb
 lib/mux_ruby/models/create_transcription_vocabulary_request.rb
 lib/mux_ruby/models/create_upload_request.rb
+lib/mux_ruby/models/create_web_input_request.rb
 lib/mux_ruby/models/delivery_report.rb
 lib/mux_ruby/models/delivery_report_delivered_seconds_by_resolution.rb
 lib/mux_ruby/models/dimension_value.rb
@@ -258,9 +270,11 @@ lib/mux_ruby/models/input_settings.rb
 lib/mux_ruby/models/input_settings_overlay_settings.rb
 lib/mux_ruby/models/input_track.rb
 lib/mux_ruby/models/insight.rb
+lib/mux_ruby/models/launch_web_input_response.rb
 lib/mux_ruby/models/list_all_metric_values_response.rb
 lib/mux_ruby/models/list_assets_response.rb
 lib/mux_ruby/models/list_breakdown_values_response.rb
+lib/mux_ruby/models/list_breakdown_values_response_meta.rb
 lib/mux_ruby/models/list_delivery_usage_response.rb
 lib/mux_ruby/models/list_dimension_values_response.rb
 lib/mux_ruby/models/list_dimensions_response.rb
@@ -285,6 +299,7 @@ lib/mux_ruby/models/list_transcription_vocabularies_response.rb
 lib/mux_ruby/models/list_uploads_response.rb
 lib/mux_ruby/models/list_video_view_exports_response.rb
 lib/mux_ruby/models/list_video_views_response.rb
+lib/mux_ruby/models/list_web_inputs_response.rb
 lib/mux_ruby/models/live_stream.rb
 lib/mux_ruby/models/live_stream_embedded_subtitle_settings.rb
 lib/mux_ruby/models/live_stream_generated_subtitle_settings.rb
@@ -310,7 +325,9 @@ lib/mux_ruby/models/real_time_histogram_timeseries_bucket_values.rb
 lib/mux_ruby/models/real_time_histogram_timeseries_datapoint.rb
 lib/mux_ruby/models/real_time_timeseries_datapoint.rb
 lib/mux_ruby/models/referrer_domain_restriction.rb
+lib/mux_ruby/models/reload_web_input_response.rb
 lib/mux_ruby/models/score.rb
+lib/mux_ruby/models/shutdown_web_input_response.rb
 lib/mux_ruby/models/signal_live_stream_complete_response.rb
 lib/mux_ruby/models/signing_key.rb
 lib/mux_ruby/models/signing_key_response.rb
@@ -333,12 +350,15 @@ lib/mux_ruby/models/update_live_stream_generated_subtitles_request.rb
 lib/mux_ruby/models/update_live_stream_request.rb
 lib/mux_ruby/models/update_referrer_domain_restriction_request.rb
 lib/mux_ruby/models/update_transcription_vocabulary_request.rb
+lib/mux_ruby/models/update_web_input_url_request.rb
 lib/mux_ruby/models/upload.rb
 lib/mux_ruby/models/upload_error.rb
 lib/mux_ruby/models/upload_response.rb
 lib/mux_ruby/models/video_view.rb
 lib/mux_ruby/models/video_view_event.rb
 lib/mux_ruby/models/video_view_response.rb
+lib/mux_ruby/models/web_input.rb
+lib/mux_ruby/models/web_input_response.rb
 lib/mux_ruby/version.rb
 mux_ruby.gemspec
 spec/api_client_spec.rb

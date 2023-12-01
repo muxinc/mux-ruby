@@ -21,6 +21,8 @@ module MuxRuby
 
     attr_accessor :total_views
 
+    attr_accessor :total_playing_time
+
     attr_accessor :global_value
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -29,6 +31,7 @@ module MuxRuby
         :'value' => :'value',
         :'total_watch_time' => :'total_watch_time',
         :'total_views' => :'total_views',
+        :'total_playing_time' => :'total_playing_time',
         :'global_value' => :'global_value'
       }
     end
@@ -44,6 +47,7 @@ module MuxRuby
         :'value' => :'Float',
         :'total_watch_time' => :'Integer',
         :'total_views' => :'Integer',
+        :'total_playing_time' => :'Integer',
         :'global_value' => :'Float'
       }
     end
@@ -51,6 +55,9 @@ module MuxRuby
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'total_watch_time',
+        :'total_playing_time',
+        :'global_value'
       ])
     end
 
@@ -81,6 +88,10 @@ module MuxRuby
         self.total_views = attributes[:'total_views']
       end
 
+      if attributes.key?(:'total_playing_time')
+        self.total_playing_time = attributes[:'total_playing_time']
+      end
+
       if attributes.key?(:'global_value')
         self.global_value = attributes[:'global_value']
       end
@@ -107,6 +118,7 @@ module MuxRuby
           value == o.value &&
           total_watch_time == o.total_watch_time &&
           total_views == o.total_views &&
+          total_playing_time == o.total_playing_time &&
           global_value == o.global_value
     end
 
@@ -119,7 +131,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [value, total_watch_time, total_views, global_value].hash
+      [value, total_watch_time, total_views, total_playing_time, global_value].hash
     end
 
     # Builds the object from hash

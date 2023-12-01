@@ -23,13 +23,16 @@ module MuxRuby
 
     attr_accessor :event_time
 
+    attr_accessor :details
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'viewer_time' => :'viewer_time',
         :'playback_time' => :'playback_time',
         :'name' => :'name',
-        :'event_time' => :'event_time'
+        :'event_time' => :'event_time',
+        :'details' => :'details'
       }
     end
 
@@ -44,7 +47,8 @@ module MuxRuby
         :'viewer_time' => :'Integer',
         :'playback_time' => :'Integer',
         :'name' => :'String',
-        :'event_time' => :'Integer'
+        :'event_time' => :'Integer',
+        :'details' => :'Hash<String, Object>'
       }
     end
 
@@ -84,6 +88,12 @@ module MuxRuby
       if attributes.key?(:'event_time')
         self.event_time = attributes[:'event_time']
       end
+
+      if attributes.key?(:'details')
+        if (value = attributes[:'details']).is_a?(Hash)
+          self.details = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -107,7 +117,8 @@ module MuxRuby
           viewer_time == o.viewer_time &&
           playback_time == o.playback_time &&
           name == o.name &&
-          event_time == o.event_time
+          event_time == o.event_time &&
+          details == o.details
     end
 
     # @see the `==` method
@@ -119,7 +130,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [viewer_time, playback_time, name, event_time].hash
+      [viewer_time, playback_time, name, event_time, details].hash
     end
 
     # Builds the object from hash

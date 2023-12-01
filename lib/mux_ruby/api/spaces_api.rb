@@ -416,7 +416,7 @@ module MuxRuby
     end
 
     # List spaces
-    # List all spaces in the current enviroment.
+    # List all spaces in the current environment.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Number of items to include in the response (default to 25)
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60; (default to 1)
@@ -427,7 +427,7 @@ module MuxRuby
     end
 
     # List spaces
-    # List all spaces in the current enviroment.
+    # List all spaces in the current environment.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Number of items to include in the response
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60;

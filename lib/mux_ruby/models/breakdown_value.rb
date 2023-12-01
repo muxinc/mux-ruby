@@ -21,6 +21,8 @@ module MuxRuby
 
     attr_accessor :total_watch_time
 
+    attr_accessor :total_playing_time
+
     attr_accessor :negative_impact
 
     attr_accessor :field
@@ -31,6 +33,7 @@ module MuxRuby
         :'views' => :'views',
         :'value' => :'value',
         :'total_watch_time' => :'total_watch_time',
+        :'total_playing_time' => :'total_playing_time',
         :'negative_impact' => :'negative_impact',
         :'field' => :'field'
       }
@@ -47,6 +50,7 @@ module MuxRuby
         :'views' => :'Integer',
         :'value' => :'Float',
         :'total_watch_time' => :'Integer',
+        :'total_playing_time' => :'Integer',
         :'negative_impact' => :'Integer',
         :'field' => :'String'
       }
@@ -55,6 +59,9 @@ module MuxRuby
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'total_watch_time',
+        :'total_playing_time',
+        :'field'
       ])
     end
 
@@ -83,6 +90,10 @@ module MuxRuby
 
       if attributes.key?(:'total_watch_time')
         self.total_watch_time = attributes[:'total_watch_time']
+      end
+
+      if attributes.key?(:'total_playing_time')
+        self.total_playing_time = attributes[:'total_playing_time']
       end
 
       if attributes.key?(:'negative_impact')
@@ -115,6 +126,7 @@ module MuxRuby
           views == o.views &&
           value == o.value &&
           total_watch_time == o.total_watch_time &&
+          total_playing_time == o.total_playing_time &&
           negative_impact == o.negative_impact &&
           field == o.field
     end
@@ -128,7 +140,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [views, value, total_watch_time, negative_impact, field].hash
+      [views, value, total_watch_time, total_playing_time, negative_impact, field].hash
     end
 
     # Builds the object from hash

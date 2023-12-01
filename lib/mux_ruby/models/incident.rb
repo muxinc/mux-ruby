@@ -119,6 +119,9 @@ module MuxRuby
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'resolved_at',
+        :'measured_value_on_close',
+        :'measured_value',
       ])
     end
 

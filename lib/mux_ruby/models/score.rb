@@ -19,9 +19,19 @@ module MuxRuby
 
     attr_accessor :view_count
 
+    attr_accessor :unique_viewers
+
+    attr_accessor :started_views
+
+    attr_accessor :total_playing_time
+
     attr_accessor :name
 
+    attr_accessor :ended_views
+
     attr_accessor :value
+
+    attr_accessor :type
 
     attr_accessor :metric
 
@@ -32,8 +42,13 @@ module MuxRuby
       {
         :'watch_time' => :'watch_time',
         :'view_count' => :'view_count',
+        :'unique_viewers' => :'unique_viewers',
+        :'started_views' => :'started_views',
+        :'total_playing_time' => :'total_playing_time',
         :'name' => :'name',
+        :'ended_views' => :'ended_views',
         :'value' => :'value',
+        :'type' => :'type',
         :'metric' => :'metric',
         :'items' => :'items'
       }
@@ -49,8 +64,13 @@ module MuxRuby
       {
         :'watch_time' => :'Integer',
         :'view_count' => :'Integer',
+        :'unique_viewers' => :'Integer',
+        :'started_views' => :'Integer',
+        :'total_playing_time' => :'Integer',
         :'name' => :'String',
+        :'ended_views' => :'Integer',
         :'value' => :'Float',
+        :'type' => :'String',
         :'metric' => :'String',
         :'items' => :'Array<Metric>'
       }
@@ -59,6 +79,8 @@ module MuxRuby
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'watch_time',
+        :'total_playing_time',
       ])
     end
 
@@ -85,12 +107,32 @@ module MuxRuby
         self.view_count = attributes[:'view_count']
       end
 
+      if attributes.key?(:'unique_viewers')
+        self.unique_viewers = attributes[:'unique_viewers']
+      end
+
+      if attributes.key?(:'started_views')
+        self.started_views = attributes[:'started_views']
+      end
+
+      if attributes.key?(:'total_playing_time')
+        self.total_playing_time = attributes[:'total_playing_time']
+      end
+
       if attributes.key?(:'name')
         self.name = attributes[:'name']
       end
 
+      if attributes.key?(:'ended_views')
+        self.ended_views = attributes[:'ended_views']
+      end
+
       if attributes.key?(:'value')
         self.value = attributes[:'value']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
 
       if attributes.key?(:'metric')
@@ -124,8 +166,13 @@ module MuxRuby
       self.class == o.class &&
           watch_time == o.watch_time &&
           view_count == o.view_count &&
+          unique_viewers == o.unique_viewers &&
+          started_views == o.started_views &&
+          total_playing_time == o.total_playing_time &&
           name == o.name &&
+          ended_views == o.ended_views &&
           value == o.value &&
+          type == o.type &&
           metric == o.metric &&
           items == o.items
     end
@@ -139,7 +186,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [watch_time, view_count, name, value, metric, items].hash
+      [watch_time, view_count, unique_viewers, started_views, total_playing_time, name, ended_views, value, type, metric, items].hash
     end
 
     # Builds the object from hash

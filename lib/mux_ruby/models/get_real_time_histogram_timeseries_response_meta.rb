@@ -15,11 +15,14 @@ require 'time'
 
 module MuxRuby
   class GetRealTimeHistogramTimeseriesResponseMeta
+    attr_accessor :bucket_unit
+
     attr_accessor :buckets
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'bucket_unit' => :'bucket_unit',
         :'buckets' => :'buckets'
       }
     end
@@ -32,6 +35,7 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'bucket_unit' => :'String',
         :'buckets' => :'Array<RealTimeHistogramTimeseriesBucket>'
       }
     end
@@ -56,6 +60,10 @@ module MuxRuby
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'bucket_unit')
+        self.bucket_unit = attributes[:'bucket_unit']
+      end
 
       if attributes.key?(:'buckets')
         if (value = attributes[:'buckets']).is_a?(Array)
@@ -82,6 +90,7 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          bucket_unit == o.bucket_unit &&
           buckets == o.buckets
     end
 
@@ -94,7 +103,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [buckets].hash
+      [bucket_unit, buckets].hash
     end
 
     # Builds the object from hash

@@ -7,6 +7,7 @@
 | **views** | **Integer** |  | [optional] |
 | **value** | **Float** |  | [optional] |
 | **total_watch_time** | **Integer** |  | [optional] |
+| **total_playing_time** | **Integer** |  | [optional] |
 | **negative_impact** | **Integer** |  | [optional] |
 | **field** | **String** |  | [optional] |
 
@@ -19,6 +20,7 @@ instance = MuxRuby::BreakdownValue.new(
   views: null,
   value: null,
   total_watch_time: null,
+  total_playing_time: null,
   negative_impact: null,
   field: null
 )
