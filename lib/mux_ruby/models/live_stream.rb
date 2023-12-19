@@ -76,6 +76,9 @@ module MuxRuby
     # The time in seconds a live stream may be continuously active before being disconnected. Defaults to 12 hours.
     attr_accessor :max_continuous_duration
 
+    # Unique key used for encrypting a stream to a Mux SRT endpoint.
+    attr_accessor :srt_passphrase
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -121,7 +124,8 @@ module MuxRuby
         :'simulcast_targets' => :'simulcast_targets',
         :'latency_mode' => :'latency_mode',
         :'test' => :'test',
-        :'max_continuous_duration' => :'max_continuous_duration'
+        :'max_continuous_duration' => :'max_continuous_duration',
+        :'srt_passphrase' => :'srt_passphrase'
       }
     end
 
@@ -153,7 +157,8 @@ module MuxRuby
         :'simulcast_targets' => :'Array<SimulcastTarget>',
         :'latency_mode' => :'String',
         :'test' => :'Boolean',
-        :'max_continuous_duration' => :'Integer'
+        :'max_continuous_duration' => :'Integer',
+        :'srt_passphrase' => :'String'
       }
     end
 
@@ -277,6 +282,10 @@ module MuxRuby
       else
         self.max_continuous_duration = 43200
       end
+
+      if attributes.key?(:'srt_passphrase')
+        self.srt_passphrase = attributes[:'srt_passphrase']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -377,7 +386,8 @@ module MuxRuby
           simulcast_targets == o.simulcast_targets &&
           latency_mode == o.latency_mode &&
           test == o.test &&
-          max_continuous_duration == o.max_continuous_duration
+          max_continuous_duration == o.max_continuous_duration &&
+          srt_passphrase == o.srt_passphrase
     end
 
     # @see the `==` method
@@ -389,7 +399,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, stream_key, active_asset_id, recent_asset_ids, status, playback_ids, new_asset_settings, passthrough, audio_only, embedded_subtitles, generated_subtitles, reconnect_window, use_slate_for_standard_latency, reconnect_slate_url, reduced_latency, low_latency, simulcast_targets, latency_mode, test, max_continuous_duration].hash
+      [id, created_at, stream_key, active_asset_id, recent_asset_ids, status, playback_ids, new_asset_settings, passthrough, audio_only, embedded_subtitles, generated_subtitles, reconnect_window, use_slate_for_standard_latency, reconnect_slate_url, reduced_latency, low_latency, simulcast_targets, latency_mode, test, max_continuous_duration, srt_passphrase].hash
     end
 
     # Builds the object from hash

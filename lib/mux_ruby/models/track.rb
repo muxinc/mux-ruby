@@ -60,6 +60,9 @@ module MuxRuby
     # The status of the track. This parameter is only set for `text` type tracks.
     attr_accessor :status
 
+    # For an audio track, indicates that this is the primary audio track, ingested from the main input for this asset. The primary audio track cannot be deleted.
+    attr_accessor :primary
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -99,7 +102,8 @@ module MuxRuby
         :'name' => :'name',
         :'closed_captions' => :'closed_captions',
         :'passthrough' => :'passthrough',
-        :'status' => :'status'
+        :'status' => :'status',
+        :'primary' => :'primary'
       }
     end
 
@@ -125,7 +129,8 @@ module MuxRuby
         :'name' => :'String',
         :'closed_captions' => :'Boolean',
         :'passthrough' => :'String',
-        :'status' => :'String'
+        :'status' => :'String',
+        :'primary' => :'Boolean'
       }
     end
 
@@ -209,6 +214,10 @@ module MuxRuby
       if attributes.key?(:'status')
         self.status = attributes[:'status']
       end
+
+      if attributes.key?(:'primary')
+        self.primary = attributes[:'primary']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -291,7 +300,8 @@ module MuxRuby
           name == o.name &&
           closed_captions == o.closed_captions &&
           passthrough == o.passthrough &&
-          status == o.status
+          status == o.status &&
+          primary == o.primary
     end
 
     # @see the `==` method
@@ -303,7 +313,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, type, duration, max_width, max_height, max_frame_rate, max_channels, max_channel_layout, text_type, text_source, language_code, name, closed_captions, passthrough, status].hash
+      [id, type, duration, max_width, max_height, max_frame_rate, max_channels, max_channel_layout, text_type, text_source, language_code, name, closed_captions, passthrough, status, primary].hash
     end
 
     # Builds the object from hash

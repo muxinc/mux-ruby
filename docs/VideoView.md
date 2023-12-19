@@ -123,7 +123,7 @@
 | **view_session_id** | **String** |  | [optional] |
 | **viewer_connection_type** | **String** |  | [optional] |
 | **viewer_device_model** | **String** |  | [optional] |
-| **weighted_average_bitrate** | **Integer** |  | [optional] |
+| **weighted_average_bitrate** | **Float** |  | [optional] |
 | **custom_1** | **String** |  | [optional] |
 | **custom_2** | **String** |  | [optional] |
 | **custom_3** | **String** |  | [optional] |
@@ -145,6 +145,17 @@
 | **view_dropped_frame_count** | **Integer** |  | [optional] |
 | **view_has_ad** | **Boolean** |  | [optional] |
 | **video_startup_failure** | **Boolean** |  | [optional] |
+| **ad_attempt_count** | **Integer** |  | [optional] |
+| **ad_break_count** | **Integer** |  | [optional] |
+| **ad_break_error_count** | **Integer** |  | [optional] |
+| **ad_break_error_percentage** | **String** |  | [optional] |
+| **ad_error_count** | **Integer** |  | [optional] |
+| **ad_error_percentage** | **String** |  | [optional] |
+| **ad_impression_count** | **Integer** |  | [optional] |
+| **ad_startup_error_count** | **Integer** |  | [optional] |
+| **ad_startup_error_percentage** | **String** |  | [optional] |
+| **ad_exit_before_start_count** | **Integer** |  | [optional] |
+| **ad_exit_before_start_percentage** | **String** |  | [optional] |
 | **long_resume** | **Boolean** |  | [optional] |
 | **long_rebuffering** | **Boolean** |  | [optional] |
 
@@ -295,6 +306,17 @@ instance = MuxRuby::VideoView.new(
   view_dropped_frame_count: null,
   view_has_ad: null,
   video_startup_failure: null,
+  ad_attempt_count: null,
+  ad_break_count: null,
+  ad_break_error_count: null,
+  ad_break_error_percentage: null,
+  ad_error_count: null,
+  ad_error_percentage: null,
+  ad_impression_count: null,
+  ad_startup_error_count: null,
+  ad_startup_error_percentage: null,
+  ad_exit_before_start_count: null,
+  ad_exit_before_start_percentage: null,
   long_resume: null,
   long_rebuffering: null
 )
