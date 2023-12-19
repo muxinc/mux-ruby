@@ -37,6 +37,10 @@ module MuxRuby
 
     attr_accessor :view_end
 
+    attr_accessor :viewer_experience_score
+
+    attr_accessor :watch_time
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -50,7 +54,9 @@ module MuxRuby
         :'error_type_id' => :'error_type_id',
         :'country_code' => :'country_code',
         :'view_start' => :'view_start',
-        :'view_end' => :'view_end'
+        :'view_end' => :'view_end',
+        :'viewer_experience_score' => :'viewer_experience_score',
+        :'watch_time' => :'watch_time'
       }
     end
 
@@ -72,7 +78,9 @@ module MuxRuby
         :'error_type_id' => :'Integer',
         :'country_code' => :'String',
         :'view_start' => :'String',
-        :'view_end' => :'String'
+        :'view_end' => :'String',
+        :'viewer_experience_score' => :'Float',
+        :'watch_time' => :'Integer'
       }
     end
 
@@ -86,6 +94,8 @@ module MuxRuby
         :'player_error_code',
         :'error_type_id',
         :'country_code',
+        :'viewer_experience_score',
+        :'watch_time'
       ])
     end
 
@@ -147,6 +157,14 @@ module MuxRuby
       if attributes.key?(:'view_end')
         self.view_end = attributes[:'view_end']
       end
+
+      if attributes.key?(:'viewer_experience_score')
+        self.viewer_experience_score = attributes[:'viewer_experience_score']
+      end
+
+      if attributes.key?(:'watch_time')
+        self.watch_time = attributes[:'watch_time']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -177,7 +195,9 @@ module MuxRuby
           error_type_id == o.error_type_id &&
           country_code == o.country_code &&
           view_start == o.view_start &&
-          view_end == o.view_end
+          view_end == o.view_end &&
+          viewer_experience_score == o.viewer_experience_score &&
+          watch_time == o.watch_time
     end
 
     # @see the `==` method
@@ -189,7 +209,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, viewer_os_family, viewer_application_name, video_title, total_row_count, player_error_message, player_error_code, error_type_id, country_code, view_start, view_end].hash
+      [id, viewer_os_family, viewer_application_name, video_title, total_row_count, player_error_message, player_error_code, error_type_id, country_code, view_start, view_end, viewer_experience_score, watch_time].hash
     end
 
     # Builds the object from hash
