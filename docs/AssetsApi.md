@@ -10,11 +10,12 @@ All URIs are relative to *https://api.mux.com*
 | [**delete_asset**](AssetsApi.md#delete_asset) | **DELETE** /video/v1/assets/{ASSET_ID} | Delete an asset |
 | [**delete_asset_playback_id**](AssetsApi.md#delete_asset_playback_id) | **DELETE** /video/v1/assets/{ASSET_ID}/playback-ids/{PLAYBACK_ID} | Delete a playback ID |
 | [**delete_asset_track**](AssetsApi.md#delete_asset_track) | **DELETE** /video/v1/assets/{ASSET_ID}/tracks/{TRACK_ID} | Delete an asset track |
+| [**generate_asset_track_subtitles**](AssetsApi.md#generate_asset_track_subtitles) | **POST** /video/v1/assets/{ASSET_ID}/tracks/{TRACK_ID}/generate-subtitles | Generate track subtitles |
 | [**get_asset**](AssetsApi.md#get_asset) | **GET** /video/v1/assets/{ASSET_ID} | Retrieve an asset |
 | [**get_asset_input_info**](AssetsApi.md#get_asset_input_info) | **GET** /video/v1/assets/{ASSET_ID}/input-info | Retrieve asset input info |
 | [**get_asset_playback_id**](AssetsApi.md#get_asset_playback_id) | **GET** /video/v1/assets/{ASSET_ID}/playback-ids/{PLAYBACK_ID} | Retrieve a playback ID |
 | [**list_assets**](AssetsApi.md#list_assets) | **GET** /video/v1/assets | List assets |
-| [**update_asset**](AssetsApi.md#update_asset) | **PATCH** /video/v1/assets/{ASSET_ID} | Update an Asset |
+| [**update_asset**](AssetsApi.md#update_asset) | **PATCH** /video/v1/assets/{ASSET_ID} | Update an asset |
 | [**update_asset_master_access**](AssetsApi.md#update_asset_master_access) | **PUT** /video/v1/assets/{ASSET_ID}/master-access | Update master access |
 | [**update_asset_mp4_support**](AssetsApi.md#update_asset_mp4_support) | **PUT** /video/v1/assets/{ASSET_ID}/mp4-support | Update MP4 support |
 
@@ -444,6 +445,80 @@ nil (empty response body)
 - **Accept**: Not defined
 
 
+## generate_asset_track_subtitles
+
+> <GenerateTrackSubtitlesResponse> generate_asset_track_subtitles(asset_id, track_id, generate_track_subtitles_request)
+
+Generate track subtitles
+
+Generates subtitles (captions) for a given audio track. This API can be used for up to 7 days after an asset is created.
+
+### Examples
+
+```ruby
+require 'time'
+require 'mux_ruby'
+# setup authorization
+MuxRuby.configure do |config|
+  # Configure HTTP basic authorization: accessToken
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = MuxRuby::AssetsApi.new
+asset_id = 'asset_id_example' # String | The asset ID.
+track_id = 'track_id_example' # String | The track ID.
+generate_track_subtitles_request = MuxRuby::GenerateTrackSubtitlesRequest.new # GenerateTrackSubtitlesRequest | 
+
+begin
+  # Generate track subtitles
+  result = api_instance.generate_asset_track_subtitles(asset_id, track_id, generate_track_subtitles_request)
+  p result
+rescue MuxRuby::ApiError => e
+  puts "Error when calling AssetsApi->generate_asset_track_subtitles: #{e}"
+end
+```
+
+#### Using the generate_asset_track_subtitles_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<GenerateTrackSubtitlesResponse>, Integer, Hash)> generate_asset_track_subtitles_with_http_info(asset_id, track_id, generate_track_subtitles_request)
+
+```ruby
+begin
+  # Generate track subtitles
+  data, status_code, headers = api_instance.generate_asset_track_subtitles_with_http_info(asset_id, track_id, generate_track_subtitles_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <GenerateTrackSubtitlesResponse>
+rescue MuxRuby::ApiError => e
+  puts "Error when calling AssetsApi->generate_asset_track_subtitles_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **asset_id** | **String** | The asset ID. |  |
+| **track_id** | **String** | The track ID. |  |
+| **generate_track_subtitles_request** | [**GenerateTrackSubtitlesRequest**](GenerateTrackSubtitlesRequest.md) |  |  |
+
+### Return type
+
+[**GenerateTrackSubtitlesResponse**](GenerateTrackSubtitlesResponse.md)
+
+### Authorization
+
+[accessToken](../README.md#accessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## get_asset
 
 > <AssetResponse> get_asset(asset_id)
@@ -738,7 +813,7 @@ end
 
 > <AssetResponse> update_asset(asset_id, update_asset_request)
 
-Update an Asset
+Update an asset
 
 Updates the details of an already-created Asset with the provided Asset ID. This currently supports only the `passthrough` field.
 
@@ -759,7 +834,7 @@ asset_id = 'asset_id_example' # String | The asset ID.
 update_asset_request = MuxRuby::UpdateAssetRequest.new # UpdateAssetRequest | 
 
 begin
-  # Update an Asset
+  # Update an asset
   result = api_instance.update_asset(asset_id, update_asset_request)
   p result
 rescue MuxRuby::ApiError => e
@@ -775,7 +850,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Update an Asset
+  # Update an asset
   data, status_code, headers = api_instance.update_asset_with_http_info(asset_id, update_asset_request)
   p status_code # => 2xx
   p headers # => { ... }

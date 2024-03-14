@@ -18,10 +18,10 @@ module MuxRuby
     # Arbitrary user-supplied metadata set by you when creating a simulcast target.
     attr_accessor :passthrough
 
-    # Stream Key represents a stream identifier on the third party live streaming service to send the parent live stream to.
+    # Stream Key represents a stream identifier on the third party live streaming service to send the parent live stream to. Only used for RTMP(s) simulcast destinations.
     attr_accessor :stream_key
 
-    # RTMP hostname including application name for the third party live streaming service. Example: `rtmp://live.example.com/app`.
+    # The RTMP(s) or SRT endpoint for a simulcast destination. * For RTMP(s) destinations, this should include the application name for the third party live streaming service, for example: `rtmp://live.example.com/app`. * For SRT destinations, this should be a fully formed SRT connection string, for example: `srt://srt-live.example.com:1234?streamid={stream_key}&passphrase={srt_passphrase}`.  Note: SRT simulcast targets can only be used when an source is connected over SRT. 
     attr_accessor :url
 
     # Attribute mapping from ruby-style variable name to JSON key.

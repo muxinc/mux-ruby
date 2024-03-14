@@ -21,14 +21,17 @@ module MuxRuby
     # Arbitrary user-supplied metadata set when creating a simulcast target.
     attr_accessor :passthrough
 
-    # The current status of the simulcast target. See Statuses below for detailed description.   * `idle`: Default status. When the parent live stream is in disconnected status, simulcast targets will be idle state.   * `starting`: The simulcast target transitions into this state when the parent live stream transition into connected state.   * `broadcasting`: The simulcast target has successfully connected to the third party live streaming service and is pushing video to that service.   * `errored`: The simulcast target encountered an error either while attempting to connect to the third party live streaming service, or mid-broadcasting. Compared to other errored statuses in the Mux Video API, a simulcast may transition back into the broadcasting state if a connection with the service can be re-established. 
+    # The current status of the simulcast target. See Statuses below for detailed description.   * `idle`: Default status. When the parent live stream is in disconnected status, simulcast targets will be idle state.   * `starting`: The simulcast target transitions into this state when the parent live stream transition into connected state.   * `broadcasting`: The simulcast target has successfully connected to the third party live streaming service and is pushing video to that service.   * `errored`: The simulcast target encountered an error either while attempting to connect to the third party live streaming service, or mid-broadcasting. When a simulcast target has this status it will have an `error_severity` field with more details about the error. 
     attr_accessor :status
 
-    # Stream Key represents an stream identifier for the third party live streaming service to simulcast the parent live stream too.
+    # Stream Key represents a stream identifier on the third party live streaming service to send the parent live stream to. Only used for RTMP(s) simulcast destinations.
     attr_accessor :stream_key
 
-    # RTMP hostname including the application name for the third party live streaming service.
+    # The RTMP(s) or SRT endpoint for a simulcast destination. * For RTMP(s) destinations, this should include the application name for the third party live streaming service, for example: `rtmp://live.example.com/app`. * For SRT destinations, this should be a fully formed SRT connection string, for example: `srt://srt-live.example.com:1234?streamid={stream_key}&passphrase={srt_passphrase}`.  Note: SRT simulcast targets can only be used when an source is connected over SRT. 
     attr_accessor :url
+
+    # The severity of the error encountered by the simulcast target. This field is only set when the simulcast target is in the `errored` status. See the values of severities below and their descriptions.   * `normal`: The simulcast target encountered an error either while attempting to connect to the third party live streaming service, or mid-broadcasting. A simulcast may transition back into the broadcasting state if a connection with the service can be re-established.   * `fatal`: The simulcast target is incompatible with the current input to the parent live stream. No further attempts to this simulcast target will be made for the current live stream asset. 
+    attr_accessor :error_severity
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -59,7 +62,8 @@ module MuxRuby
         :'passthrough' => :'passthrough',
         :'status' => :'status',
         :'stream_key' => :'stream_key',
-        :'url' => :'url'
+        :'url' => :'url',
+        :'error_severity' => :'error_severity'
       }
     end
 
@@ -75,7 +79,8 @@ module MuxRuby
         :'passthrough' => :'String',
         :'status' => :'String',
         :'stream_key' => :'String',
-        :'url' => :'String'
+        :'url' => :'String',
+        :'error_severity' => :'String'
       }
     end
 
@@ -119,6 +124,10 @@ module MuxRuby
       if attributes.key?(:'url')
         self.url = attributes[:'url']
       end
+
+      if attributes.key?(:'error_severity')
+        self.error_severity = attributes[:'error_severity']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -133,6 +142,8 @@ module MuxRuby
     def valid?
       status_validator = EnumAttributeValidator.new('String', ["idle", "starting", "broadcasting", "errored"])
       return false unless status_validator.valid?(@status)
+      error_severity_validator = EnumAttributeValidator.new('String', ["normal", "fatal"])
+      return false unless error_severity_validator.valid?(@error_severity)
       true
     end
 
@@ -146,6 +157,16 @@ module MuxRuby
       @status = status
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] error_severity Object to be assigned
+    def error_severity=(error_severity)
+      validator = EnumAttributeValidator.new('String', ["normal", "fatal"])
+      unless validator.valid?(error_severity)
+        fail ArgumentError, "invalid value for \"error_severity\", must be one of #{validator.allowable_values}."
+      end
+      @error_severity = error_severity
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -155,7 +176,8 @@ module MuxRuby
           passthrough == o.passthrough &&
           status == o.status &&
           stream_key == o.stream_key &&
-          url == o.url
+          url == o.url &&
+          error_severity == o.error_severity
     end
 
     # @see the `==` method
@@ -167,7 +189,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, passthrough, status, stream_key, url].hash
+      [id, passthrough, status, stream_key, url, error_severity].hash
     end
 
     # Builds the object from hash

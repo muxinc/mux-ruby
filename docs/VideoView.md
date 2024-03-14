@@ -158,6 +158,9 @@
 | **ad_exit_before_start_percentage** | **String** |  | [optional] |
 | **long_resume** | **Boolean** |  | [optional] |
 | **long_rebuffering** | **Boolean** |  | [optional] |
+| **playback_failure_error_type_id** | **Integer** |  | [optional] |
+| **playback_business_exception_error_type_id** | **Integer** |  | [optional] |
+| **video_startup_business_exception_error_type_id** | **Integer** |  | [optional] |
 
 ## Example
 
@@ -318,7 +321,10 @@ instance = MuxRuby::VideoView.new(
   ad_exit_before_start_count: null,
   ad_exit_before_start_percentage: null,
   long_resume: null,
-  long_rebuffering: null
+  long_rebuffering: null,
+  playback_failure_error_type_id: null,
+  playback_business_exception_error_type_id: null,
+  video_startup_business_exception_error_type_id: null
 )
 ```
 

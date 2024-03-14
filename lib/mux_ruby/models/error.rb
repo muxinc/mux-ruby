@@ -39,6 +39,9 @@ module MuxRuby
     # The error code
     attr_accessor :code
 
+    # The string version of the error code
+    attr_accessor :player_error_code
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -49,7 +52,8 @@ module MuxRuby
         :'last_seen' => :'last_seen',
         :'description' => :'description',
         :'count' => :'count',
-        :'code' => :'code'
+        :'code' => :'code',
+        :'player_error_code' => :'player_error_code'
       }
     end
 
@@ -68,7 +72,8 @@ module MuxRuby
         :'last_seen' => :'String',
         :'description' => :'String',
         :'count' => :'Integer',
-        :'code' => :'Integer'
+        :'code' => :'Integer',
+        :'player_error_code' => :'String'
       }
     end
 
@@ -78,7 +83,8 @@ module MuxRuby
         :'notes',
         :'message',
         :'description',
-        :'code'
+        :'code',
+        :'player_error_code'
       ])
     end
 
@@ -128,6 +134,10 @@ module MuxRuby
       if attributes.key?(:'code')
         self.code = attributes[:'code']
       end
+
+      if attributes.key?(:'player_error_code')
+        self.player_error_code = attributes[:'player_error_code']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -155,7 +165,8 @@ module MuxRuby
           last_seen == o.last_seen &&
           description == o.description &&
           count == o.count &&
-          code == o.code
+          code == o.code &&
+          player_error_code == o.player_error_code
     end
 
     # @see the `==` method
@@ -167,7 +178,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, percentage, notes, message, last_seen, description, count, code].hash
+      [id, percentage, notes, message, last_seen, description, count, code, player_error_code].hash
     end
 
     # Builds the object from hash

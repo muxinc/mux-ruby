@@ -12,6 +12,7 @@
 | **description** | **String** | Description of the error. | [optional] |
 | **count** | **Integer** | The total number of views that experienced this error. | [optional] |
 | **code** | **Integer** | The error code | [optional] |
+| **player_error_code** | **String** | The string version of the error code | [optional] |
 
 ## Example
 
@@ -26,7 +27,8 @@ instance = MuxRuby::Error.new(
   last_seen: null,
   description: null,
   count: null,
-  code: null
+  code: null,
+  player_error_code: null
 )
 ```
 
