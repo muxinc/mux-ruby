@@ -79,6 +79,9 @@ module MuxRuby
     # Unique key used for encrypting a stream to a Mux SRT endpoint.
     attr_accessor :srt_passphrase
 
+    # The protocol used for the active ingest stream. This is only set when the live stream is active.
+    attr_accessor :active_ingest_protocol
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -125,7 +128,8 @@ module MuxRuby
         :'latency_mode' => :'latency_mode',
         :'test' => :'test',
         :'max_continuous_duration' => :'max_continuous_duration',
-        :'srt_passphrase' => :'srt_passphrase'
+        :'srt_passphrase' => :'srt_passphrase',
+        :'active_ingest_protocol' => :'active_ingest_protocol'
       }
     end
 
@@ -158,7 +162,8 @@ module MuxRuby
         :'latency_mode' => :'String',
         :'test' => :'Boolean',
         :'max_continuous_duration' => :'Integer',
-        :'srt_passphrase' => :'String'
+        :'srt_passphrase' => :'String',
+        :'active_ingest_protocol' => :'String'
       }
     end
 
@@ -286,6 +291,10 @@ module MuxRuby
       if attributes.key?(:'srt_passphrase')
         self.srt_passphrase = attributes[:'srt_passphrase']
       end
+
+      if attributes.key?(:'active_ingest_protocol')
+        self.active_ingest_protocol = attributes[:'active_ingest_protocol']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -320,6 +329,8 @@ module MuxRuby
       return false unless latency_mode_validator.valid?(@latency_mode)
       return false if !@max_continuous_duration.nil? && @max_continuous_duration > 43200
       return false if !@max_continuous_duration.nil? && @max_continuous_duration < 60
+      active_ingest_protocol_validator = EnumAttributeValidator.new('String', ["rtmp", "srt"])
+      return false unless active_ingest_protocol_validator.valid?(@active_ingest_protocol)
       true
     end
 
@@ -361,6 +372,16 @@ module MuxRuby
       @max_continuous_duration = max_continuous_duration
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] active_ingest_protocol Object to be assigned
+    def active_ingest_protocol=(active_ingest_protocol)
+      validator = EnumAttributeValidator.new('String', ["rtmp", "srt"])
+      unless validator.valid?(active_ingest_protocol)
+        fail ArgumentError, "invalid value for \"active_ingest_protocol\", must be one of #{validator.allowable_values}."
+      end
+      @active_ingest_protocol = active_ingest_protocol
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -387,7 +408,8 @@ module MuxRuby
           latency_mode == o.latency_mode &&
           test == o.test &&
           max_continuous_duration == o.max_continuous_duration &&
-          srt_passphrase == o.srt_passphrase
+          srt_passphrase == o.srt_passphrase &&
+          active_ingest_protocol == o.active_ingest_protocol
     end
 
     # @see the `==` method
@@ -399,7 +421,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, stream_key, active_asset_id, recent_asset_ids, status, playback_ids, new_asset_settings, passthrough, audio_only, embedded_subtitles, generated_subtitles, reconnect_window, use_slate_for_standard_latency, reconnect_slate_url, reduced_latency, low_latency, simulcast_targets, latency_mode, test, max_continuous_duration, srt_passphrase].hash
+      [id, created_at, stream_key, active_asset_id, recent_asset_ids, status, playback_ids, new_asset_settings, passthrough, audio_only, embedded_subtitles, generated_subtitles, reconnect_window, use_slate_for_standard_latency, reconnect_slate_url, reduced_latency, low_latency, simulcast_targets, latency_mode, test, max_continuous_duration, srt_passphrase, active_ingest_protocol].hash
     end
 
     # Builds the object from hash

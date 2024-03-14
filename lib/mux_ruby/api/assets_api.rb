@@ -421,6 +421,83 @@ module MuxRuby
       return data, status_code, headers
     end
 
+    # Generate track subtitles
+    # Generates subtitles (captions) for a given audio track. This API can be used for up to 7 days after an asset is created.
+    # @param asset_id [String] The asset ID.
+    # @param track_id [String] The track ID.
+    # @param generate_track_subtitles_request [GenerateTrackSubtitlesRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [GenerateTrackSubtitlesResponse]
+    def generate_asset_track_subtitles(asset_id, track_id, generate_track_subtitles_request, opts = {})
+      data, _status_code, _headers = generate_asset_track_subtitles_with_http_info(asset_id, track_id, generate_track_subtitles_request, opts)
+      data
+    end
+
+    # Generate track subtitles
+    # Generates subtitles (captions) for a given audio track. This API can be used for up to 7 days after an asset is created.
+    # @param asset_id [String] The asset ID.
+    # @param track_id [String] The track ID.
+    # @param generate_track_subtitles_request [GenerateTrackSubtitlesRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(GenerateTrackSubtitlesResponse, Integer, Hash)>] GenerateTrackSubtitlesResponse data, response status code and response headers
+    def generate_asset_track_subtitles_with_http_info(asset_id, track_id, generate_track_subtitles_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AssetsApi.generate_asset_track_subtitles ...'
+      end
+      # verify the required parameter 'asset_id' is set
+      if @api_client.config.client_side_validation && asset_id.nil?
+        fail ArgumentError, "Missing the required parameter 'asset_id' when calling AssetsApi.generate_asset_track_subtitles"
+      end
+      # verify the required parameter 'track_id' is set
+      if @api_client.config.client_side_validation && track_id.nil?
+        fail ArgumentError, "Missing the required parameter 'track_id' when calling AssetsApi.generate_asset_track_subtitles"
+      end
+      # verify the required parameter 'generate_track_subtitles_request' is set
+      if @api_client.config.client_side_validation && generate_track_subtitles_request.nil?
+        fail ArgumentError, "Missing the required parameter 'generate_track_subtitles_request' when calling AssetsApi.generate_asset_track_subtitles"
+      end
+      # resource path
+      local_var_path = '/video/v1/assets/{ASSET_ID}/tracks/{TRACK_ID}/generate-subtitles'.sub('{' + 'ASSET_ID' + '}', CGI.escape(asset_id.to_s)).sub('{' + 'TRACK_ID' + '}', CGI.escape(track_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(generate_track_subtitles_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'GenerateTrackSubtitlesResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['accessToken']
+
+      new_options = opts.merge(
+        :operation => :"AssetsApi.generate_asset_track_subtitles",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AssetsApi#generate_asset_track_subtitles\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Retrieve an asset
     # Retrieves the details of an asset that has previously been created. Supply the unique asset ID that was returned from your previous request, and Mux will return the corresponding asset information. The same information is returned when creating an asset.
     # @param asset_id [String] The asset ID.
@@ -685,7 +762,7 @@ module MuxRuby
       return data, status_code, headers
     end
 
-    # Update an Asset
+    # Update an asset
     # Updates the details of an already-created Asset with the provided Asset ID. This currently supports only the `passthrough` field.
     # @param asset_id [String] The asset ID.
     # @param update_asset_request [UpdateAssetRequest] 
@@ -696,7 +773,7 @@ module MuxRuby
       data
     end
 
-    # Update an Asset
+    # Update an asset
     # Updates the details of an already-created Asset with the provided Asset ID. This currently supports only the &#x60;passthrough&#x60; field.
     # @param asset_id [String] The asset ID.
     # @param update_asset_request [UpdateAssetRequest] 

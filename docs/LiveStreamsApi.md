@@ -9,12 +9,12 @@ All URIs are relative to *https://api.mux.com*
 | [**create_live_stream_simulcast_target**](LiveStreamsApi.md#create_live_stream_simulcast_target) | **POST** /video/v1/live-streams/{LIVE_STREAM_ID}/simulcast-targets | Create a live stream simulcast target |
 | [**delete_live_stream**](LiveStreamsApi.md#delete_live_stream) | **DELETE** /video/v1/live-streams/{LIVE_STREAM_ID} | Delete a live stream |
 | [**delete_live_stream_playback_id**](LiveStreamsApi.md#delete_live_stream_playback_id) | **DELETE** /video/v1/live-streams/{LIVE_STREAM_ID}/playback-ids/{PLAYBACK_ID} | Delete a live stream playback ID |
-| [**delete_live_stream_simulcast_target**](LiveStreamsApi.md#delete_live_stream_simulcast_target) | **DELETE** /video/v1/live-streams/{LIVE_STREAM_ID}/simulcast-targets/{SIMULCAST_TARGET_ID} | Delete a Live Stream Simulcast Target |
+| [**delete_live_stream_simulcast_target**](LiveStreamsApi.md#delete_live_stream_simulcast_target) | **DELETE** /video/v1/live-streams/{LIVE_STREAM_ID}/simulcast-targets/{SIMULCAST_TARGET_ID} | Delete a live stream simulcast target |
 | [**disable_live_stream**](LiveStreamsApi.md#disable_live_stream) | **PUT** /video/v1/live-streams/{LIVE_STREAM_ID}/disable | Disable a live stream |
 | [**enable_live_stream**](LiveStreamsApi.md#enable_live_stream) | **PUT** /video/v1/live-streams/{LIVE_STREAM_ID}/enable | Enable a live stream |
 | [**get_live_stream**](LiveStreamsApi.md#get_live_stream) | **GET** /video/v1/live-streams/{LIVE_STREAM_ID} | Retrieve a live stream |
 | [**get_live_stream_playback_id**](LiveStreamsApi.md#get_live_stream_playback_id) | **GET** /video/v1/live-streams/{LIVE_STREAM_ID}/playback-ids/{PLAYBACK_ID} | Retrieve a live stream playback ID |
-| [**get_live_stream_simulcast_target**](LiveStreamsApi.md#get_live_stream_simulcast_target) | **GET** /video/v1/live-streams/{LIVE_STREAM_ID}/simulcast-targets/{SIMULCAST_TARGET_ID} | Retrieve a Live Stream Simulcast Target |
+| [**get_live_stream_simulcast_target**](LiveStreamsApi.md#get_live_stream_simulcast_target) | **GET** /video/v1/live-streams/{LIVE_STREAM_ID}/simulcast-targets/{SIMULCAST_TARGET_ID} | Retrieve a live stream simulcast target |
 | [**list_live_streams**](LiveStreamsApi.md#list_live_streams) | **GET** /video/v1/live-streams | List live streams |
 | [**reset_stream_key**](LiveStreamsApi.md#reset_stream_key) | **POST** /video/v1/live-streams/{LIVE_STREAM_ID}/reset-stream-key | Reset a live stream&#39;s stream key |
 | [**signal_live_stream_complete**](LiveStreamsApi.md#signal_live_stream_complete) | **PUT** /video/v1/live-streams/{LIVE_STREAM_ID}/complete | Signal a live stream is finished |
@@ -381,7 +381,7 @@ nil (empty response body)
 
 > delete_live_stream_simulcast_target(live_stream_id, simulcast_target_id)
 
-Delete a Live Stream Simulcast Target
+Delete a live stream simulcast target
 
 Delete the simulcast target using the simulcast target ID returned when creating the simulcast target. Simulcast Target can only be deleted when the parent live stream is in idle state.
 
@@ -402,7 +402,7 @@ live_stream_id = 'live_stream_id_example' # String | The live stream ID
 simulcast_target_id = 'simulcast_target_id_example' # String | The ID of the simulcast target.
 
 begin
-  # Delete a Live Stream Simulcast Target
+  # Delete a live stream simulcast target
   api_instance.delete_live_stream_simulcast_target(live_stream_id, simulcast_target_id)
 rescue MuxRuby::ApiError => e
   puts "Error when calling LiveStreamsApi->delete_live_stream_simulcast_target: #{e}"
@@ -417,7 +417,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  # Delete a Live Stream Simulcast Target
+  # Delete a live stream simulcast target
   data, status_code, headers = api_instance.delete_live_stream_simulcast_target_with_http_info(live_stream_id, simulcast_target_id)
   p status_code # => 2xx
   p headers # => { ... }
@@ -734,7 +734,7 @@ end
 
 > <SimulcastTargetResponse> get_live_stream_simulcast_target(live_stream_id, simulcast_target_id)
 
-Retrieve a Live Stream Simulcast Target
+Retrieve a live stream simulcast target
 
 Retrieves the details of the simulcast target created for the parent live stream. Supply the unique live stream ID and simulcast target ID that was returned in the response of create simulcast target request, and Mux will return the corresponding information.
 
@@ -755,7 +755,7 @@ live_stream_id = 'live_stream_id_example' # String | The live stream ID
 simulcast_target_id = 'simulcast_target_id_example' # String | The ID of the simulcast target.
 
 begin
-  # Retrieve a Live Stream Simulcast Target
+  # Retrieve a live stream simulcast target
   result = api_instance.get_live_stream_simulcast_target(live_stream_id, simulcast_target_id)
   p result
 rescue MuxRuby::ApiError => e
@@ -771,7 +771,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Retrieve a Live Stream Simulcast Target
+  # Retrieve a live stream simulcast target
   data, status_code, headers = api_instance.get_live_stream_simulcast_target_with_http_info(live_stream_id, simulcast_target_id)
   p status_code # => 2xx
   p headers # => { ... }

@@ -14,22 +14,14 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class MonitoringBreakdownTimeseriesDatapoint
-    attr_accessor :value
-
-    attr_accessor :metric_value
-
-    attr_accessor :concurrent_viewers
-
-    attr_accessor :starting_up_viewers
+  class GenerateTrackSubtitlesRequest
+    # Generate subtitle tracks using automatic speech recognition with this configuration.
+    attr_accessor :generated_subtitles
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'value' => :'value',
-        :'metric_value' => :'metric_value',
-        :'concurrent_viewers' => :'concurrent_viewers',
-        :'starting_up_viewers' => :'starting_up_viewers'
+        :'generated_subtitles' => :'generated_subtitles'
       }
     end
 
@@ -41,18 +33,13 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'value' => :'String',
-        :'metric_value' => :'Float',
-        :'concurrent_viewers' => :'Integer',
-        :'starting_up_viewers' => :'Integer'
+        :'generated_subtitles' => :'Array<AssetGeneratedSubtitleSettings>'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'value',
-        :'metric_value',
       ])
     end
 
@@ -60,31 +47,21 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::MonitoringBreakdownTimeseriesDatapoint` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::GenerateTrackSubtitlesRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::MonitoringBreakdownTimeseriesDatapoint`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::GenerateTrackSubtitlesRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'value')
-        self.value = attributes[:'value']
-      end
-
-      if attributes.key?(:'metric_value')
-        self.metric_value = attributes[:'metric_value']
-      end
-
-      if attributes.key?(:'concurrent_viewers')
-        self.concurrent_viewers = attributes[:'concurrent_viewers']
-      end
-
-      if attributes.key?(:'starting_up_viewers')
-        self.starting_up_viewers = attributes[:'starting_up_viewers']
+      if attributes.key?(:'generated_subtitles')
+        if (value = attributes[:'generated_subtitles']).is_a?(Array)
+          self.generated_subtitles = value
+        end
       end
     end
 
@@ -106,10 +83,7 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          value == o.value &&
-          metric_value == o.metric_value &&
-          concurrent_viewers == o.concurrent_viewers &&
-          starting_up_viewers == o.starting_up_viewers
+          generated_subtitles == o.generated_subtitles
     end
 
     # @see the `==` method
@@ -121,7 +95,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [value, metric_value, concurrent_viewers, starting_up_viewers].hash
+      [generated_subtitles].hash
     end
 
     # Builds the object from hash

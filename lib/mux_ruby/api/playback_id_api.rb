@@ -19,7 +19,7 @@ module MuxRuby
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Retrieve an Asset or Live Stream ID
+    # Retrieve an asset or live stream ID
     # Retrieves the Identifier of the Asset or Live Stream associated with the Playback ID.
     # @param playback_id [String] The live stream&#39;s playback ID.
     # @param [Hash] opts the optional parameters
@@ -29,7 +29,7 @@ module MuxRuby
       data
     end
 
-    # Retrieve an Asset or Live Stream ID
+    # Retrieve an asset or live stream ID
     # Retrieves the Identifier of the Asset or Live Stream associated with the Playback ID.
     # @param playback_id [String] The live stream&#39;s playback ID.
     # @param [Hash] opts the optional parameters

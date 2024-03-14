@@ -89,6 +89,9 @@ module MuxRuby
     # True means this live stream is a test asset. A test asset can help evaluate the Mux Video APIs without incurring any cost. There is no limit on number of test assets created. Test assets are watermarked with the Mux logo, limited to 10 seconds, and deleted after 24 hrs.
     attr_accessor :test
 
+    # The type of ingest used to create the asset.
+    attr_accessor :ingest_type
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -140,7 +143,8 @@ module MuxRuby
         :'static_renditions' => :'static_renditions',
         :'recording_times' => :'recording_times',
         :'non_standard_input_reasons' => :'non_standard_input_reasons',
-        :'test' => :'test'
+        :'test' => :'test',
+        :'ingest_type' => :'ingest_type'
       }
     end
 
@@ -178,7 +182,8 @@ module MuxRuby
         :'static_renditions' => :'AssetStaticRenditions',
         :'recording_times' => :'Array<AssetRecordingTimes>',
         :'non_standard_input_reasons' => :'AssetNonStandardInputReasons',
-        :'test' => :'Boolean'
+        :'test' => :'Boolean',
+        :'ingest_type' => :'String'
       }
     end
 
@@ -322,6 +327,10 @@ module MuxRuby
       if attributes.key?(:'test')
         self.test = attributes[:'test']
       end
+
+      if attributes.key?(:'ingest_type')
+        self.ingest_type = attributes[:'ingest_type']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -348,6 +357,8 @@ module MuxRuby
       return false unless master_access_validator.valid?(@master_access)
       mp4_support_validator = EnumAttributeValidator.new('String', ["standard", "none"])
       return false unless mp4_support_validator.valid?(@mp4_support)
+      ingest_type_validator = EnumAttributeValidator.new('String', ["on_demand_url", "on_demand_direct_upload", "on_demand_clip", "live_rtmp", "live_srt"])
+      return false unless ingest_type_validator.valid?(@ingest_type)
       true
     end
 
@@ -421,6 +432,16 @@ module MuxRuby
       @mp4_support = mp4_support
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] ingest_type Object to be assigned
+    def ingest_type=(ingest_type)
+      validator = EnumAttributeValidator.new('String', ["on_demand_url", "on_demand_direct_upload", "on_demand_clip", "live_rtmp", "live_srt"])
+      unless validator.valid?(ingest_type)
+        fail ArgumentError, "invalid value for \"ingest_type\", must be one of #{validator.allowable_values}."
+      end
+      @ingest_type = ingest_type
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -452,7 +473,8 @@ module MuxRuby
           static_renditions == o.static_renditions &&
           recording_times == o.recording_times &&
           non_standard_input_reasons == o.non_standard_input_reasons &&
-          test == o.test
+          test == o.test &&
+          ingest_type == o.ingest_type
     end
 
     # @see the `==` method
@@ -464,7 +486,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, status, duration, max_stored_resolution, resolution_tier, max_resolution_tier, encoding_tier, max_stored_frame_rate, aspect_ratio, playback_ids, tracks, errors, per_title_encode, upload_id, is_live, passthrough, live_stream_id, master, master_access, mp4_support, source_asset_id, normalize_audio, static_renditions, recording_times, non_standard_input_reasons, test].hash
+      [id, created_at, status, duration, max_stored_resolution, resolution_tier, max_resolution_tier, encoding_tier, max_stored_frame_rate, aspect_ratio, playback_ids, tracks, errors, per_title_encode, upload_id, is_live, passthrough, live_stream_id, master, master_access, mp4_support, source_asset_id, normalize_audio, static_renditions, recording_times, non_standard_input_reasons, test, ingest_type].hash
     end
 
     # Builds the object from hash

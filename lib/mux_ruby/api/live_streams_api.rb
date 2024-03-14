@@ -354,7 +354,7 @@ module MuxRuby
       return data, status_code, headers
     end
 
-    # Delete a Live Stream Simulcast Target
+    # Delete a live stream simulcast target
     # Delete the simulcast target using the simulcast target ID returned when creating the simulcast target. Simulcast Target can only be deleted when the parent live stream is in idle state.
     # @param live_stream_id [String] The live stream ID
     # @param simulcast_target_id [String] The ID of the simulcast target.
@@ -365,7 +365,7 @@ module MuxRuby
       nil
     end
 
-    # Delete a Live Stream Simulcast Target
+    # Delete a live stream simulcast target
     # Delete the simulcast target using the simulcast target ID returned when creating the simulcast target. Simulcast Target can only be deleted when the parent live stream is in idle state.
     # @param live_stream_id [String] The live stream ID
     # @param simulcast_target_id [String] The ID of the simulcast target.
@@ -679,7 +679,7 @@ module MuxRuby
       return data, status_code, headers
     end
 
-    # Retrieve a Live Stream Simulcast Target
+    # Retrieve a live stream simulcast target
     # Retrieves the details of the simulcast target created for the parent live stream. Supply the unique live stream ID and simulcast target ID that was returned in the response of create simulcast target request, and Mux will return the corresponding information.
     # @param live_stream_id [String] The live stream ID
     # @param simulcast_target_id [String] The ID of the simulcast target.
@@ -690,7 +690,7 @@ module MuxRuby
       data
     end
 
-    # Retrieve a Live Stream Simulcast Target
+    # Retrieve a live stream simulcast target
     # Retrieves the details of the simulcast target created for the parent live stream. Supply the unique live stream ID and simulcast target ID that was returned in the response of create simulcast target request, and Mux will return the corresponding information.
     # @param live_stream_id [String] The live stream ID
     # @param simulcast_target_id [String] The ID of the simulcast target.
