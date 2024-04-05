@@ -26,7 +26,7 @@ module MuxRuby
     # Arbitrary user-supplied metadata that will be included in the asset details and related webhooks. Can be used to store your own ID for a video along with the asset. **Max: 255 characters**.
     attr_accessor :passthrough
 
-    # Specify what level (if any) of support for mp4 playback. In most cases you should use our default HLS-based streaming playback ({playback_id}.m3u8) which can automatically adjust to viewers' connection speeds, but an mp4 can be useful for some legacy devices or downloading for offline playback. See the [Download your videos guide](https://docs.mux.com/guides/enable-static-mp4-renditions) for more information.
+    # Specify what level of support for mp4 playback.  * The `capped-1080p` option produces a single MP4 file, called `capped-1080p.mp4`, with the video resolution capped at 1080p. This option produces an `audio.m4a` file for an audio-only asset. * The `audio-only` option produces a single M4A file, called `audio.m4a` for a video or an audio-only asset. MP4 generation will error when this option is specified for a video-only asset. * The `audio-only,capped-1080p` option produces both the `audio.m4a` and `capped-1080p.mp4` files. Only the `capped-1080p.mp4` file is produced for a video-only asset, while only the `audio.m4a` file is produced for an audio-only asset.  The `standard`(deprecated) option produces up to three MP4 files with different levels of resolution (`high.mp4`, `medium.mp4`, `low.mp4`, or `audio.m4a` for an audio-only asset).  MP4 files are not produced for `none` (default).  In most cases you should use our default HLS-based streaming playback (`{playback_id}.m3u8`) which can automatically adjust to viewers' connection speeds, but an mp4 can be useful for some legacy devices or downloading for offline playback. See the [Download your videos guide](https://docs.mux.com/guides/enable-static-mp4-renditions) for more information. 
     attr_accessor :mp4_support
 
     # Normalize the audio track loudness level. This parameter is only applicable to on-demand (not live) assets.
@@ -181,7 +181,7 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      mp4_support_validator = EnumAttributeValidator.new('String', ["none", "standard"])
+      mp4_support_validator = EnumAttributeValidator.new('String', ["none", "standard", "capped-1080p", "audio-only", "audio-only,capped-1080p"])
       return false unless mp4_support_validator.valid?(@mp4_support)
       master_access_validator = EnumAttributeValidator.new('String', ["none", "temporary"])
       return false unless master_access_validator.valid?(@master_access)
@@ -195,7 +195,7 @@ module MuxRuby
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mp4_support Object to be assigned
     def mp4_support=(mp4_support)
-      validator = EnumAttributeValidator.new('String', ["none", "standard"])
+      validator = EnumAttributeValidator.new('String', ["none", "standard", "capped-1080p", "audio-only", "audio-only,capped-1080p"])
       unless validator.valid?(mp4_support)
         fail ArgumentError, "invalid value for \"mp4_support\", must be one of #{validator.allowable_values}."
       end

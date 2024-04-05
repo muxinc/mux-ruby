@@ -15,7 +15,7 @@ require 'time'
 
 module MuxRuby
   class UpdateAssetMP4SupportRequest
-    # String value for the level of mp4 support
+    # Specify what level of support for mp4 playback.  * The `capped-1080p` option produces a single MP4 file, called `capped-1080p.mp4`, with the video resolution capped at 1080p. This option produces an `audio.m4a` file for an audio-only asset. * The `audio-only` option produces a single M4A file, called `audio.m4a` for a video or an audio-only asset. MP4 generation will error when this option is specified for a video-only asset. * The `audio-only,capped-1080p` option produces both the `audio.m4a` and `capped-1080p.mp4` files. Only the `capped-1080p.mp4` file is produced for a video-only asset, while only the `audio.m4a` file is produced for an audio-only asset.  The `standard`(deprecated) option produces up to three MP4 files with different levels of resolution (`high.mp4`, `medium.mp4`, `low.mp4`, or `audio.m4a` for an audio-only asset).  `none` will delete the MP4s from the asset in question. 
     attr_accessor :mp4_support
 
     class EnumAttributeValidator
@@ -95,7 +95,7 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      mp4_support_validator = EnumAttributeValidator.new('String', ["standard", "none"])
+      mp4_support_validator = EnumAttributeValidator.new('String', ["standard", "none", "capped-1080p", "audio-only", "audio-only,capped-1080p"])
       return false unless mp4_support_validator.valid?(@mp4_support)
       true
     end
@@ -103,7 +103,7 @@ module MuxRuby
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mp4_support Object to be assigned
     def mp4_support=(mp4_support)
-      validator = EnumAttributeValidator.new('String', ["standard", "none"])
+      validator = EnumAttributeValidator.new('String', ["standard", "none", "capped-1080p", "audio-only", "audio-only,capped-1080p"])
       unless validator.valid?(mp4_support)
         fail ArgumentError, "invalid value for \"mp4_support\", must be one of #{validator.allowable_values}."
       end

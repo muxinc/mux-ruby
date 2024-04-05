@@ -139,7 +139,7 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      name_validator = EnumAttributeValidator.new('String', ["low.mp4", "medium.mp4", "high.mp4", "audio.m4a"])
+      name_validator = EnumAttributeValidator.new('String', ["low.mp4", "medium.mp4", "high.mp4", "audio.m4a", "capped-1080p.mp4"])
       return false unless name_validator.valid?(@name)
       ext_validator = EnumAttributeValidator.new('String', ["mp4", "m4a"])
       return false unless ext_validator.valid?(@ext)
@@ -149,7 +149,7 @@ module MuxRuby
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
     def name=(name)
-      validator = EnumAttributeValidator.new('String', ["low.mp4", "medium.mp4", "high.mp4", "audio.m4a"])
+      validator = EnumAttributeValidator.new('String', ["low.mp4", "medium.mp4", "high.mp4", "audio.m4a", "capped-1080p.mp4"])
       unless validator.valid?(name)
         fail ArgumentError, "invalid value for \"name\", must be one of #{validator.allowable_values}."
       end

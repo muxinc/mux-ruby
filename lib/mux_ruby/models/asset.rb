@@ -355,7 +355,7 @@ module MuxRuby
       return false unless encoding_tier_validator.valid?(@encoding_tier)
       master_access_validator = EnumAttributeValidator.new('String', ["temporary", "none"])
       return false unless master_access_validator.valid?(@master_access)
-      mp4_support_validator = EnumAttributeValidator.new('String', ["standard", "none"])
+      mp4_support_validator = EnumAttributeValidator.new('String', ["standard", "none", "capped-1080p", "audio-only", "audio-only,capped-1080p"])
       return false unless mp4_support_validator.valid?(@mp4_support)
       ingest_type_validator = EnumAttributeValidator.new('String', ["on_demand_url", "on_demand_direct_upload", "on_demand_clip", "live_rtmp", "live_srt"])
       return false unless ingest_type_validator.valid?(@ingest_type)
@@ -425,7 +425,7 @@ module MuxRuby
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mp4_support Object to be assigned
     def mp4_support=(mp4_support)
-      validator = EnumAttributeValidator.new('String', ["standard", "none"])
+      validator = EnumAttributeValidator.new('String', ["standard", "none", "capped-1080p", "audio-only", "audio-only,capped-1080p"])
       unless validator.valid?(mp4_support)
         fail ArgumentError, "invalid value for \"mp4_support\", must be one of #{validator.allowable_values}."
       end
