@@ -905,7 +905,7 @@ module MuxRuby
     end
 
     # Update MP4 support
-    # Allows you to add or remove mp4 support for assets that were created without it. Currently there are two values supported in this request, `standard` and `none`. `none` means that an asset *does not* have mp4 support, so submitting a request with `mp4_support` set to `none` will delete the mp4 assets from the asset in question.
+    # Allows you to add or remove mp4 support for assets that were created without it. The values supported are `capped-1080p`, `audio-only`, `audio-only,capped-1080p`, `standard`(deprecated),  and `none`. `none` means that an asset *does not* have mp4 support, so submitting a request with `mp4_support` set to `none` will delete the mp4 assets from the asset in question.
     # @param asset_id [String] The asset ID.
     # @param update_asset_mp4_support_request [UpdateAssetMP4SupportRequest] 
     # @param [Hash] opts the optional parameters
@@ -916,7 +916,7 @@ module MuxRuby
     end
 
     # Update MP4 support
-    # Allows you to add or remove mp4 support for assets that were created without it. Currently there are two values supported in this request, &#x60;standard&#x60; and &#x60;none&#x60;. &#x60;none&#x60; means that an asset *does not* have mp4 support, so submitting a request with &#x60;mp4_support&#x60; set to &#x60;none&#x60; will delete the mp4 assets from the asset in question.
+    # Allows you to add or remove mp4 support for assets that were created without it. The values supported are &#x60;capped-1080p&#x60;, &#x60;audio-only&#x60;, &#x60;audio-only,capped-1080p&#x60;, &#x60;standard&#x60;(deprecated),  and &#x60;none&#x60;. &#x60;none&#x60; means that an asset *does not* have mp4 support, so submitting a request with &#x60;mp4_support&#x60; set to &#x60;none&#x60; will delete the mp4 assets from the asset in question.
     # @param asset_id [String] The asset ID.
     # @param update_asset_mp4_support_request [UpdateAssetMP4SupportRequest] 
     # @param [Hash] opts the optional parameters
