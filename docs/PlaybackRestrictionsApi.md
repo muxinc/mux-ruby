@@ -9,6 +9,7 @@ All URIs are relative to *https://api.mux.com*
 | [**get_playback_restriction**](PlaybackRestrictionsApi.md#get_playback_restriction) | **GET** /video/v1/playback-restrictions/{PLAYBACK_RESTRICTION_ID} | Retrieve a Playback Restriction |
 | [**list_playback_restrictions**](PlaybackRestrictionsApi.md#list_playback_restrictions) | **GET** /video/v1/playback-restrictions | List Playback Restrictions |
 | [**update_referrer_domain_restriction**](PlaybackRestrictionsApi.md#update_referrer_domain_restriction) | **PUT** /video/v1/playback-restrictions/{PLAYBACK_RESTRICTION_ID}/referrer | Update the Referrer Playback Restriction |
+| [**update_user_agent_restriction**](PlaybackRestrictionsApi.md#update_user_agent_restriction) | **PUT** /video/v1/playback-restrictions/{PLAYBACK_RESTRICTION_ID}/user_agent | Update the User Agent Restriction |
 
 
 ## create_playback_restriction
@@ -351,6 +352,78 @@ end
 | ---- | ---- | ----------- | ----- |
 | **playback_restriction_id** | **String** | ID of the Playback Restriction. |  |
 | **update_referrer_domain_restriction_request** | [**UpdateReferrerDomainRestrictionRequest**](UpdateReferrerDomainRestrictionRequest.md) |  |  |
+
+### Return type
+
+[**PlaybackRestrictionResponse**](PlaybackRestrictionResponse.md)
+
+### Authorization
+
+[accessToken](../README.md#accessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_user_agent_restriction
+
+> <PlaybackRestrictionResponse> update_user_agent_restriction(playback_restriction_id, update_user_agent_restriction_request)
+
+Update the User Agent Restriction
+
+Allows you to modify how Mux validates playback requests with different user agents.  Please see [Using User-Agent HTTP header for validation](https://docs.mux.com/guides/secure-video-playback#using-user-agent-http-header-for-validation) for more details on this feature.
+
+### Examples
+
+```ruby
+require 'time'
+require 'mux_ruby'
+# setup authorization
+MuxRuby.configure do |config|
+  # Configure HTTP basic authorization: accessToken
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = MuxRuby::PlaybackRestrictionsApi.new
+playback_restriction_id = 'playback_restriction_id_example' # String | ID of the Playback Restriction.
+update_user_agent_restriction_request = MuxRuby::UpdateUserAgentRestrictionRequest.new # UpdateUserAgentRestrictionRequest | 
+
+begin
+  # Update the User Agent Restriction
+  result = api_instance.update_user_agent_restriction(playback_restriction_id, update_user_agent_restriction_request)
+  p result
+rescue MuxRuby::ApiError => e
+  puts "Error when calling PlaybackRestrictionsApi->update_user_agent_restriction: #{e}"
+end
+```
+
+#### Using the update_user_agent_restriction_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<PlaybackRestrictionResponse>, Integer, Hash)> update_user_agent_restriction_with_http_info(playback_restriction_id, update_user_agent_restriction_request)
+
+```ruby
+begin
+  # Update the User Agent Restriction
+  data, status_code, headers = api_instance.update_user_agent_restriction_with_http_info(playback_restriction_id, update_user_agent_restriction_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <PlaybackRestrictionResponse>
+rescue MuxRuby::ApiError => e
+  puts "Error when calling PlaybackRestrictionsApi->update_user_agent_restriction_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **playback_restriction_id** | **String** | ID of the Playback Restriction. |  |
+| **update_user_agent_restriction_request** | [**UpdateUserAgentRestrictionRequest**](UpdateUserAgentRestrictionRequest.md) |  |  |
 
 ### Return type
 

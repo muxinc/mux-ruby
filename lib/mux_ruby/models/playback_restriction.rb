@@ -26,13 +26,16 @@ module MuxRuby
 
     attr_accessor :referrer
 
+    attr_accessor :user_agent
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'created_at' => :'created_at',
         :'updated_at' => :'updated_at',
-        :'referrer' => :'referrer'
+        :'referrer' => :'referrer',
+        :'user_agent' => :'user_agent'
       }
     end
 
@@ -47,7 +50,8 @@ module MuxRuby
         :'id' => :'String',
         :'created_at' => :'String',
         :'updated_at' => :'String',
-        :'referrer' => :'ReferrerDomainRestriction'
+        :'referrer' => :'ReferrerDomainRestriction',
+        :'user_agent' => :'UserAgentRestrictionSettings'
       }
     end
 
@@ -87,6 +91,10 @@ module MuxRuby
       if attributes.key?(:'referrer')
         self.referrer = attributes[:'referrer']
       end
+
+      if attributes.key?(:'user_agent')
+        self.user_agent = attributes[:'user_agent']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -110,7 +118,8 @@ module MuxRuby
           id == o.id &&
           created_at == o.created_at &&
           updated_at == o.updated_at &&
-          referrer == o.referrer
+          referrer == o.referrer &&
+          user_agent == o.user_agent
     end
 
     # @see the `==` method
@@ -122,7 +131,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, updated_at, referrer].hash
+      [id, created_at, updated_at, referrer, user_agent].hash
     end
 
     # Builds the object from hash

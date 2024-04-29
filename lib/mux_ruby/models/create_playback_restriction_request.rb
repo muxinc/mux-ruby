@@ -17,10 +17,13 @@ module MuxRuby
   class CreatePlaybackRestrictionRequest
     attr_accessor :referrer
 
+    attr_accessor :user_agent
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'referrer' => :'referrer'
+        :'referrer' => :'referrer',
+        :'user_agent' => :'user_agent'
       }
     end
 
@@ -32,7 +35,8 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'referrer' => :'ReferrerDomainRestriction'
+        :'referrer' => :'ReferrerDomainRestriction',
+        :'user_agent' => :'UserAgentRestrictionRequest'
       }
     end
 
@@ -60,6 +64,10 @@ module MuxRuby
       if attributes.key?(:'referrer')
         self.referrer = attributes[:'referrer']
       end
+
+      if attributes.key?(:'user_agent')
+        self.user_agent = attributes[:'user_agent']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -80,7 +88,8 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          referrer == o.referrer
+          referrer == o.referrer &&
+          user_agent == o.user_agent
     end
 
     # @see the `==` method
@@ -92,7 +101,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [referrer].hash
+      [referrer, user_agent].hash
     end
 
     # Builds the object from hash

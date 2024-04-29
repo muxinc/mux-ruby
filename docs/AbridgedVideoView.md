@@ -17,6 +17,7 @@
 | **view_end** | **String** |  | [optional] |
 | **viewer_experience_score** | **Float** |  | [optional] |
 | **watch_time** | **Integer** |  | [optional] |
+| **playback_failure** | **Boolean** |  | [optional] |
 
 ## Example
 
@@ -36,7 +37,8 @@ instance = MuxRuby::AbridgedVideoView.new(
   view_start: null,
   view_end: null,
   viewer_experience_score: null,
-  watch_time: null
+  watch_time: null,
+  playback_failure: null
 )
 ```
 

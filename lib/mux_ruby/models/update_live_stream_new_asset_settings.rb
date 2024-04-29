@@ -14,52 +14,37 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class AbridgedVideoView
-    attr_accessor :id
+  # Updates the new asset settings to use to generate a new asset for this live stream. Only the `mp4_support` setting may be updated. 
+  class UpdateLiveStreamNewAssetSettings
+    # Specify what level of support for mp4 playback should be added to new assets generated from this live stream. * The `none` option disables MP4 support for new assets. MP4 files will not be produced for an asset generated from this live stream. * The `capped-1080p` option produces a single MP4 file, called `capped-1080p.mp4`, with the video resolution capped at 1080p. This option produces an `audio.m4a` file for an audio-only asset. * The `audio-only` option produces a single M4A file, called `audio.m4a` for a video or an audio-only asset. MP4 generation will error when this option is specified for a video-only asset. * The `audio-only,capped-1080p` option produces both the `audio.m4a` and `capped-1080p.mp4` files. Only the `capped-1080p.mp4` file is produced for a video-only asset, while only the `audio.m4a` file is produced for an audio-only asset. * The `standard`(deprecated) option produces up to three MP4 files with different levels of resolution (`high.mp4`, `medium.mp4`, `low.mp4`, or `audio.m4a` for an audio-only asset). 
+    attr_accessor :mp4_support
 
-    attr_accessor :viewer_os_family
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    attr_accessor :viewer_application_name
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
 
-    attr_accessor :video_title
-
-    attr_accessor :total_row_count
-
-    attr_accessor :player_error_message
-
-    attr_accessor :player_error_code
-
-    attr_accessor :error_type_id
-
-    attr_accessor :country_code
-
-    attr_accessor :view_start
-
-    attr_accessor :view_end
-
-    attr_accessor :viewer_experience_score
-
-    attr_accessor :watch_time
-
-    attr_accessor :playback_failure
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'viewer_os_family' => :'viewer_os_family',
-        :'viewer_application_name' => :'viewer_application_name',
-        :'video_title' => :'video_title',
-        :'total_row_count' => :'total_row_count',
-        :'player_error_message' => :'player_error_message',
-        :'player_error_code' => :'player_error_code',
-        :'error_type_id' => :'error_type_id',
-        :'country_code' => :'country_code',
-        :'view_start' => :'view_start',
-        :'view_end' => :'view_end',
-        :'viewer_experience_score' => :'viewer_experience_score',
-        :'watch_time' => :'watch_time',
-        :'playback_failure' => :'playback_failure'
+        :'mp4_support' => :'mp4_support'
       }
     end
 
@@ -71,35 +56,13 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'viewer_os_family' => :'String',
-        :'viewer_application_name' => :'String',
-        :'video_title' => :'String',
-        :'total_row_count' => :'Integer',
-        :'player_error_message' => :'String',
-        :'player_error_code' => :'String',
-        :'error_type_id' => :'Integer',
-        :'country_code' => :'String',
-        :'view_start' => :'String',
-        :'view_end' => :'String',
-        :'viewer_experience_score' => :'Float',
-        :'watch_time' => :'Integer',
-        :'playback_failure' => :'Boolean'
+        :'mp4_support' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'viewer_os_family',
-        :'viewer_application_name',
-        :'video_title',
-        :'player_error_message',
-        :'player_error_code',
-        :'error_type_id',
-        :'country_code',
-        :'viewer_experience_score',
-        :'watch_time',
       ])
     end
 
@@ -107,71 +70,19 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::AbridgedVideoView` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::UpdateLiveStreamNewAssetSettings` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::AbridgedVideoView`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::UpdateLiveStreamNewAssetSettings`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.key?(:'viewer_os_family')
-        self.viewer_os_family = attributes[:'viewer_os_family']
-      end
-
-      if attributes.key?(:'viewer_application_name')
-        self.viewer_application_name = attributes[:'viewer_application_name']
-      end
-
-      if attributes.key?(:'video_title')
-        self.video_title = attributes[:'video_title']
-      end
-
-      if attributes.key?(:'total_row_count')
-        self.total_row_count = attributes[:'total_row_count']
-      end
-
-      if attributes.key?(:'player_error_message')
-        self.player_error_message = attributes[:'player_error_message']
-      end
-
-      if attributes.key?(:'player_error_code')
-        self.player_error_code = attributes[:'player_error_code']
-      end
-
-      if attributes.key?(:'error_type_id')
-        self.error_type_id = attributes[:'error_type_id']
-      end
-
-      if attributes.key?(:'country_code')
-        self.country_code = attributes[:'country_code']
-      end
-
-      if attributes.key?(:'view_start')
-        self.view_start = attributes[:'view_start']
-      end
-
-      if attributes.key?(:'view_end')
-        self.view_end = attributes[:'view_end']
-      end
-
-      if attributes.key?(:'viewer_experience_score')
-        self.viewer_experience_score = attributes[:'viewer_experience_score']
-      end
-
-      if attributes.key?(:'watch_time')
-        self.watch_time = attributes[:'watch_time']
-      end
-
-      if attributes.key?(:'playback_failure')
-        self.playback_failure = attributes[:'playback_failure']
+      if attributes.key?(:'mp4_support')
+        self.mp4_support = attributes[:'mp4_support']
       end
     end
 
@@ -185,7 +96,19 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      mp4_support_validator = EnumAttributeValidator.new('String', ["none", "standard", "capped-1080p", "audio-only", "audio-only,capped-1080p"])
+      return false unless mp4_support_validator.valid?(@mp4_support)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] mp4_support Object to be assigned
+    def mp4_support=(mp4_support)
+      validator = EnumAttributeValidator.new('String', ["none", "standard", "capped-1080p", "audio-only", "audio-only,capped-1080p"])
+      unless validator.valid?(mp4_support)
+        fail ArgumentError, "invalid value for \"mp4_support\", must be one of #{validator.allowable_values}."
+      end
+      @mp4_support = mp4_support
     end
 
     # Checks equality by comparing each attribute.
@@ -193,20 +116,7 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          viewer_os_family == o.viewer_os_family &&
-          viewer_application_name == o.viewer_application_name &&
-          video_title == o.video_title &&
-          total_row_count == o.total_row_count &&
-          player_error_message == o.player_error_message &&
-          player_error_code == o.player_error_code &&
-          error_type_id == o.error_type_id &&
-          country_code == o.country_code &&
-          view_start == o.view_start &&
-          view_end == o.view_end &&
-          viewer_experience_score == o.viewer_experience_score &&
-          watch_time == o.watch_time &&
-          playback_failure == o.playback_failure
+          mp4_support == o.mp4_support
     end
 
     # @see the `==` method
@@ -218,7 +128,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, viewer_os_family, viewer_application_name, video_title, total_row_count, player_error_message, player_error_code, error_type_id, country_code, view_start, view_end, viewer_experience_score, watch_time, playback_failure].hash
+      [mp4_support].hash
     end
 
     # Builds the object from hash

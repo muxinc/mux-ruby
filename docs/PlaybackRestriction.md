@@ -8,6 +8,7 @@
 | **created_at** | **String** | Time the Playback Restriction was created, defined as a Unix timestamp (seconds since epoch). | [optional] |
 | **updated_at** | **String** | Time the Playback Restriction was last updated, defined as a Unix timestamp (seconds since epoch). | [optional] |
 | **referrer** | [**ReferrerDomainRestriction**](ReferrerDomainRestriction.md) |  | [optional] |
+| **user_agent** | [**UserAgentRestrictionSettings**](UserAgentRestrictionSettings.md) |  | [optional] |
 
 ## Example
 
@@ -18,7 +19,8 @@ instance = MuxRuby::PlaybackRestriction.new(
   id: null,
   created_at: null,
   updated_at: null,
-  referrer: null
+  referrer: null,
+  user_agent: null
 )
 ```
 

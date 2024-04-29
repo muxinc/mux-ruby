@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **data** | [**Track**](Track.md) |  | [optional] |
+| **data** | [**Array&lt;Track&gt;**](Track.md) |  | [optional] |
 
 ## Example
 
