@@ -32,7 +32,7 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'data' => :'Track'
+        :'data' => :'Array<Track>'
       }
     end
 
@@ -58,7 +58,9 @@ module MuxRuby
       }
 
       if attributes.key?(:'data')
-        self.data = attributes[:'data']
+        if (value = attributes[:'data']).is_a?(Array)
+          self.data = value
+        end
       end
     end
 

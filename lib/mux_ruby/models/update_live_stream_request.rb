@@ -33,6 +33,8 @@ module MuxRuby
     # The time in seconds a live stream may be continuously active before being disconnected. Defaults to 12 hours.
     attr_accessor :max_continuous_duration
 
+    attr_accessor :new_asset_settings
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -63,7 +65,8 @@ module MuxRuby
         :'reconnect_window' => :'reconnect_window',
         :'use_slate_for_standard_latency' => :'use_slate_for_standard_latency',
         :'reconnect_slate_url' => :'reconnect_slate_url',
-        :'max_continuous_duration' => :'max_continuous_duration'
+        :'max_continuous_duration' => :'max_continuous_duration',
+        :'new_asset_settings' => :'new_asset_settings'
       }
     end
 
@@ -80,7 +83,8 @@ module MuxRuby
         :'reconnect_window' => :'Float',
         :'use_slate_for_standard_latency' => :'Boolean',
         :'reconnect_slate_url' => :'String',
-        :'max_continuous_duration' => :'Integer'
+        :'max_continuous_duration' => :'Integer',
+        :'new_asset_settings' => :'UpdateLiveStreamNewAssetSettings'
       }
     end
 
@@ -133,6 +137,10 @@ module MuxRuby
         self.max_continuous_duration = attributes[:'max_continuous_duration']
       else
         self.max_continuous_duration = 43200
+      end
+
+      if attributes.key?(:'new_asset_settings')
+        self.new_asset_settings = attributes[:'new_asset_settings']
       end
     end
 
@@ -219,7 +227,8 @@ module MuxRuby
           reconnect_window == o.reconnect_window &&
           use_slate_for_standard_latency == o.use_slate_for_standard_latency &&
           reconnect_slate_url == o.reconnect_slate_url &&
-          max_continuous_duration == o.max_continuous_duration
+          max_continuous_duration == o.max_continuous_duration &&
+          new_asset_settings == o.new_asset_settings
     end
 
     # @see the `==` method
@@ -231,7 +240,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [passthrough, latency_mode, reconnect_window, use_slate_for_standard_latency, reconnect_slate_url, max_continuous_duration].hash
+      [passthrough, latency_mode, reconnect_window, use_slate_for_standard_latency, reconnect_slate_url, max_continuous_duration, new_asset_settings].hash
     end
 
     # Builds the object from hash

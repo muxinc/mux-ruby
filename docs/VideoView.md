@@ -161,6 +161,12 @@
 | **playback_failure_error_type_id** | **Integer** |  | [optional] |
 | **playback_business_exception_error_type_id** | **Integer** |  | [optional] |
 | **video_startup_business_exception_error_type_id** | **Integer** |  | [optional] |
+| **playback_failure** | **Boolean** |  | [optional] |
+| **ad_playback_failure_error_type_id** | **Integer** |  | [optional] |
+| **view_content_startup_time** | **Integer** |  | [optional] |
+| **ad_preroll_startup_time** | **Integer** |  | [optional] |
+| **ad_watch_time** | **Integer** |  | [optional] |
+| **view_content_watch_time** | **Integer** |  | [optional] |
 
 ## Example
 
@@ -324,7 +330,13 @@ instance = MuxRuby::VideoView.new(
   long_rebuffering: null,
   playback_failure_error_type_id: null,
   playback_business_exception_error_type_id: null,
-  video_startup_business_exception_error_type_id: null
+  video_startup_business_exception_error_type_id: null,
+  playback_failure: null,
+  ad_playback_failure_error_type_id: null,
+  view_content_startup_time: null,
+  ad_preroll_startup_time: null,
+  ad_watch_time: null,
+  view_content_watch_time: null
 )
 ```
 

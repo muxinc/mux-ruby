@@ -341,5 +341,76 @@ module MuxRuby
       end
       return data, status_code, headers
     end
+
+    # Update the User Agent Restriction
+    # Allows you to modify how Mux validates playback requests with different user agents.  Please see [Using User-Agent HTTP header for validation](https://docs.mux.com/guides/secure-video-playback#using-user-agent-http-header-for-validation) for more details on this feature.
+    # @param playback_restriction_id [String] ID of the Playback Restriction.
+    # @param update_user_agent_restriction_request [UpdateUserAgentRestrictionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [PlaybackRestrictionResponse]
+    def update_user_agent_restriction(playback_restriction_id, update_user_agent_restriction_request, opts = {})
+      data, _status_code, _headers = update_user_agent_restriction_with_http_info(playback_restriction_id, update_user_agent_restriction_request, opts)
+      data
+    end
+
+    # Update the User Agent Restriction
+    # Allows you to modify how Mux validates playback requests with different user agents.  Please see [Using User-Agent HTTP header for validation](https://docs.mux.com/guides/secure-video-playback#using-user-agent-http-header-for-validation) for more details on this feature.
+    # @param playback_restriction_id [String] ID of the Playback Restriction.
+    # @param update_user_agent_restriction_request [UpdateUserAgentRestrictionRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(PlaybackRestrictionResponse, Integer, Hash)>] PlaybackRestrictionResponse data, response status code and response headers
+    def update_user_agent_restriction_with_http_info(playback_restriction_id, update_user_agent_restriction_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PlaybackRestrictionsApi.update_user_agent_restriction ...'
+      end
+      # verify the required parameter 'playback_restriction_id' is set
+      if @api_client.config.client_side_validation && playback_restriction_id.nil?
+        fail ArgumentError, "Missing the required parameter 'playback_restriction_id' when calling PlaybackRestrictionsApi.update_user_agent_restriction"
+      end
+      # verify the required parameter 'update_user_agent_restriction_request' is set
+      if @api_client.config.client_side_validation && update_user_agent_restriction_request.nil?
+        fail ArgumentError, "Missing the required parameter 'update_user_agent_restriction_request' when calling PlaybackRestrictionsApi.update_user_agent_restriction"
+      end
+      # resource path
+      local_var_path = '/video/v1/playback-restrictions/{PLAYBACK_RESTRICTION_ID}/user_agent'.sub('{' + 'PLAYBACK_RESTRICTION_ID' + '}', CGI.escape(playback_restriction_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(update_user_agent_restriction_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'PlaybackRestrictionResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['accessToken']
+
+      new_options = opts.merge(
+        :operation => :"PlaybackRestrictionsApi.update_user_agent_restriction",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PlaybackRestrictionsApi#update_user_agent_restriction\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
   end
 end

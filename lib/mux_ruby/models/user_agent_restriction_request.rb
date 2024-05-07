@@ -14,52 +14,19 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class AbridgedVideoView
-    attr_accessor :id
+  # Rules that control what user agents are allowed to play your videos. Please see [Using User-Agent HTTP header for validation](https://docs.mux.com/guides/secure-video-playback#using-user-agent-http-header-for-validation) for more details on this feature.
+  class UserAgentRestrictionRequest
+    # Whether or not to allow views without a `User-Agent` HTTP request header.
+    attr_accessor :allow_no_user_agent
 
-    attr_accessor :viewer_os_family
-
-    attr_accessor :viewer_application_name
-
-    attr_accessor :video_title
-
-    attr_accessor :total_row_count
-
-    attr_accessor :player_error_message
-
-    attr_accessor :player_error_code
-
-    attr_accessor :error_type_id
-
-    attr_accessor :country_code
-
-    attr_accessor :view_start
-
-    attr_accessor :view_end
-
-    attr_accessor :viewer_experience_score
-
-    attr_accessor :watch_time
-
-    attr_accessor :playback_failure
+    # Whether or not to allow high risk user agents. The high risk user agents are defined by Mux.
+    attr_accessor :allow_high_risk_user_agent
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'viewer_os_family' => :'viewer_os_family',
-        :'viewer_application_name' => :'viewer_application_name',
-        :'video_title' => :'video_title',
-        :'total_row_count' => :'total_row_count',
-        :'player_error_message' => :'player_error_message',
-        :'player_error_code' => :'player_error_code',
-        :'error_type_id' => :'error_type_id',
-        :'country_code' => :'country_code',
-        :'view_start' => :'view_start',
-        :'view_end' => :'view_end',
-        :'viewer_experience_score' => :'viewer_experience_score',
-        :'watch_time' => :'watch_time',
-        :'playback_failure' => :'playback_failure'
+        :'allow_no_user_agent' => :'allow_no_user_agent',
+        :'allow_high_risk_user_agent' => :'allow_high_risk_user_agent'
       }
     end
 
@@ -71,35 +38,14 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'viewer_os_family' => :'String',
-        :'viewer_application_name' => :'String',
-        :'video_title' => :'String',
-        :'total_row_count' => :'Integer',
-        :'player_error_message' => :'String',
-        :'player_error_code' => :'String',
-        :'error_type_id' => :'Integer',
-        :'country_code' => :'String',
-        :'view_start' => :'String',
-        :'view_end' => :'String',
-        :'viewer_experience_score' => :'Float',
-        :'watch_time' => :'Integer',
-        :'playback_failure' => :'Boolean'
+        :'allow_no_user_agent' => :'Boolean',
+        :'allow_high_risk_user_agent' => :'Boolean'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'viewer_os_family',
-        :'viewer_application_name',
-        :'video_title',
-        :'player_error_message',
-        :'player_error_code',
-        :'error_type_id',
-        :'country_code',
-        :'viewer_experience_score',
-        :'watch_time',
       ])
     end
 
@@ -107,71 +53,27 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::AbridgedVideoView` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::UserAgentRestrictionRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::AbridgedVideoView`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::UserAgentRestrictionRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'allow_no_user_agent')
+        self.allow_no_user_agent = attributes[:'allow_no_user_agent']
+      else
+        self.allow_no_user_agent = true
       end
 
-      if attributes.key?(:'viewer_os_family')
-        self.viewer_os_family = attributes[:'viewer_os_family']
-      end
-
-      if attributes.key?(:'viewer_application_name')
-        self.viewer_application_name = attributes[:'viewer_application_name']
-      end
-
-      if attributes.key?(:'video_title')
-        self.video_title = attributes[:'video_title']
-      end
-
-      if attributes.key?(:'total_row_count')
-        self.total_row_count = attributes[:'total_row_count']
-      end
-
-      if attributes.key?(:'player_error_message')
-        self.player_error_message = attributes[:'player_error_message']
-      end
-
-      if attributes.key?(:'player_error_code')
-        self.player_error_code = attributes[:'player_error_code']
-      end
-
-      if attributes.key?(:'error_type_id')
-        self.error_type_id = attributes[:'error_type_id']
-      end
-
-      if attributes.key?(:'country_code')
-        self.country_code = attributes[:'country_code']
-      end
-
-      if attributes.key?(:'view_start')
-        self.view_start = attributes[:'view_start']
-      end
-
-      if attributes.key?(:'view_end')
-        self.view_end = attributes[:'view_end']
-      end
-
-      if attributes.key?(:'viewer_experience_score')
-        self.viewer_experience_score = attributes[:'viewer_experience_score']
-      end
-
-      if attributes.key?(:'watch_time')
-        self.watch_time = attributes[:'watch_time']
-      end
-
-      if attributes.key?(:'playback_failure')
-        self.playback_failure = attributes[:'playback_failure']
+      if attributes.key?(:'allow_high_risk_user_agent')
+        self.allow_high_risk_user_agent = attributes[:'allow_high_risk_user_agent']
+      else
+        self.allow_high_risk_user_agent = true
       end
     end
 
@@ -193,20 +95,8 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          viewer_os_family == o.viewer_os_family &&
-          viewer_application_name == o.viewer_application_name &&
-          video_title == o.video_title &&
-          total_row_count == o.total_row_count &&
-          player_error_message == o.player_error_message &&
-          player_error_code == o.player_error_code &&
-          error_type_id == o.error_type_id &&
-          country_code == o.country_code &&
-          view_start == o.view_start &&
-          view_end == o.view_end &&
-          viewer_experience_score == o.viewer_experience_score &&
-          watch_time == o.watch_time &&
-          playback_failure == o.playback_failure
+          allow_no_user_agent == o.allow_no_user_agent &&
+          allow_high_risk_user_agent == o.allow_high_risk_user_agent
     end
 
     # @see the `==` method
@@ -218,7 +108,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, viewer_os_family, viewer_application_name, video_title, total_row_count, player_error_message, player_error_code, error_type_id, country_code, view_start, view_end, viewer_experience_score, watch_time, playback_failure].hash
+      [allow_no_user_agent, allow_high_risk_user_agent].hash
     end
 
     # Builds the object from hash
