@@ -61,6 +61,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ffi (~> 1.16.3)
   mux_ruby!
   pry-byebug
   rake (~> 13.0.1)
