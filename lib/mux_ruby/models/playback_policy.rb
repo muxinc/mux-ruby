@@ -17,6 +17,7 @@ module MuxRuby
   class PlaybackPolicy
     PUBLIC = "public".freeze
     SIGNED = "signed".freeze
+    DRM = "drm".freeze
 
     # Builds the enum from string
     # @param [String] The enum value in the form of the string

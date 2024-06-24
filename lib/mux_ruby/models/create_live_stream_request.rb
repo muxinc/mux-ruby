@@ -17,6 +17,9 @@ module MuxRuby
   class CreateLiveStreamRequest
     attr_accessor :playback_policy
 
+    # An array of playback policy objects that you want applied to this asset and available through `playback_ids`. `advanced_playback_policies` must be used instead of `playback_policy` when creating a DRM playback ID. 
+    attr_accessor :advanced_playback_policies
+
     attr_accessor :new_asset_settings
 
     # When live streaming software disconnects from Mux, either intentionally or due to a drop in the network, the Reconnect Window is the time in seconds that Mux should wait for the streaming software to reconnect before considering the live stream finished and completing the recorded asset. Defaults to 60 seconds on the API if not specified.  If not specified directly, Standard Latency streams have a Reconnect Window of 60 seconds; Reduced and Low Latency streams have a default of 0 seconds, or no Reconnect Window. For that reason, we suggest specifying a value other than zero for Reduced and Low Latency streams.  Reduced and Low Latency streams with a Reconnect Window greater than zero will insert slate media into the recorded asset while waiting for the streaming software to reconnect or when there are brief interruptions in the live stream media. When using a Reconnect Window setting higher than 60 seconds with a Standard Latency stream, we highly recommend enabling slate with the `use_slate_for_standard_latency` option. 
@@ -82,6 +85,7 @@ module MuxRuby
     def self.attribute_map
       {
         :'playback_policy' => :'playback_policy',
+        :'advanced_playback_policies' => :'advanced_playback_policies',
         :'new_asset_settings' => :'new_asset_settings',
         :'reconnect_window' => :'reconnect_window',
         :'use_slate_for_standard_latency' => :'use_slate_for_standard_latency',
@@ -108,6 +112,7 @@ module MuxRuby
     def self.openapi_types
       {
         :'playback_policy' => :'Array<PlaybackPolicy>',
+        :'advanced_playback_policies' => :'Array<CreatePlaybackIDRequest>',
         :'new_asset_settings' => :'CreateAssetRequest',
         :'reconnect_window' => :'Float',
         :'use_slate_for_standard_latency' => :'Boolean',
@@ -149,6 +154,12 @@ module MuxRuby
       if attributes.key?(:'playback_policy')
         if (value = attributes[:'playback_policy']).is_a?(Array)
           self.playback_policy = value
+        end
+      end
+
+      if attributes.key?(:'advanced_playback_policies')
+        if (value = attributes[:'advanced_playback_policies']).is_a?(Array)
+          self.advanced_playback_policies = value
         end
       end
 
@@ -300,6 +311,7 @@ module MuxRuby
       return true if self.equal?(o)
       self.class == o.class &&
           playback_policy == o.playback_policy &&
+          advanced_playback_policies == o.advanced_playback_policies &&
           new_asset_settings == o.new_asset_settings &&
           reconnect_window == o.reconnect_window &&
           use_slate_for_standard_latency == o.use_slate_for_standard_latency &&
@@ -325,7 +337,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [playback_policy, new_asset_settings, reconnect_window, use_slate_for_standard_latency, reconnect_slate_url, passthrough, audio_only, embedded_subtitles, generated_subtitles, reduced_latency, low_latency, latency_mode, test, simulcast_targets, max_continuous_duration].hash
+      [playback_policy, advanced_playback_policies, new_asset_settings, reconnect_window, use_slate_for_standard_latency, reconnect_slate_url, passthrough, audio_only, embedded_subtitles, generated_subtitles, reduced_latency, low_latency, latency_mode, test, simulcast_targets, max_continuous_duration].hash
     end
 
     # Builds the object from hash

@@ -34,6 +34,9 @@ docs/CreateTrackResponse.md
 docs/CreateTranscriptionVocabularyRequest.md
 docs/CreateUploadRequest.md
 docs/CreateWebInputRequest.md
+docs/DRMConfiguration.md
+docs/DRMConfigurationResponse.md
+docs/DRMConfigurationsApi.md
 docs/DeliveryReport.md
 docs/DeliveryReportDeliveredSecondsByResolution.md
 docs/DeliveryUsageApi.md
@@ -85,6 +88,7 @@ docs/ListAllMetricValuesResponse.md
 docs/ListAssetsResponse.md
 docs/ListBreakdownValuesResponse.md
 docs/ListBreakdownValuesResponseMeta.md
+docs/ListDRMConfigurationsResponse.md
 docs/ListDeliveryUsageResponse.md
 docs/ListDimensionValuesResponse.md
 docs/ListDimensionsResponse.md
@@ -190,6 +194,7 @@ lib/mux_ruby/api/assets_api.rb
 lib/mux_ruby/api/delivery_usage_api.rb
 lib/mux_ruby/api/dimensions_api.rb
 lib/mux_ruby/api/direct_uploads_api.rb
+lib/mux_ruby/api/drm_configurations_api.rb
 lib/mux_ruby/api/errors_api.rb
 lib/mux_ruby/api/exports_api.rb
 lib/mux_ruby/api/filters_api.rb
@@ -243,6 +248,8 @@ lib/mux_ruby/models/delivery_report.rb
 lib/mux_ruby/models/delivery_report_delivered_seconds_by_resolution.rb
 lib/mux_ruby/models/dimension_value.rb
 lib/mux_ruby/models/disable_live_stream_response.rb
+lib/mux_ruby/models/drm_configuration.rb
+lib/mux_ruby/models/drm_configuration_response.rb
 lib/mux_ruby/models/enable_live_stream_response.rb
 lib/mux_ruby/models/error.rb
 lib/mux_ruby/models/export_date.rb
@@ -286,6 +293,7 @@ lib/mux_ruby/models/list_breakdown_values_response_meta.rb
 lib/mux_ruby/models/list_delivery_usage_response.rb
 lib/mux_ruby/models/list_dimension_values_response.rb
 lib/mux_ruby/models/list_dimensions_response.rb
+lib/mux_ruby/models/list_drm_configurations_response.rb
 lib/mux_ruby/models/list_errors_response.rb
 lib/mux_ruby/models/list_exports_response.rb
 lib/mux_ruby/models/list_filter_values_response.rb
@@ -373,10 +381,10 @@ lib/mux_ruby/models/web_input.rb
 lib/mux_ruby/models/web_input_response.rb
 lib/mux_ruby/version.rb
 mux_ruby.gemspec
+spec/api/drm_configurations_api_spec.rb
 spec/api_client_spec.rb
 spec/configuration_spec.rb
-spec/models/update_live_stream_new_asset_settings_spec.rb
-spec/models/update_user_agent_restriction_request_spec.rb
-spec/models/user_agent_restriction_request_spec.rb
-spec/models/user_agent_restriction_settings_spec.rb
+spec/models/drm_configuration_response_spec.rb
+spec/models/drm_configuration_spec.rb
+spec/models/list_drm_configurations_response_spec.rb
 spec/spec_helper.rb

@@ -23,6 +23,7 @@ module MuxRuby
 
     attr_accessor :new_asset_settings
 
+    # Indicates if this is a test Direct Upload, in which case the Asset that gets created will be a `test` Asset.
     attr_accessor :test
 
     # Attribute mapping from ruby-style variable name to JSON key.
