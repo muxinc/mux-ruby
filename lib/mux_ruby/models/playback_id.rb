@@ -20,11 +20,15 @@ module MuxRuby
 
     attr_accessor :policy
 
+    # The DRM configuration used by this playback ID. Must only be set when `policy` is set to `drm`.
+    attr_accessor :drm_configuration_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'policy' => :'policy'
+        :'policy' => :'policy',
+        :'drm_configuration_id' => :'drm_configuration_id'
       }
     end
 
@@ -37,7 +41,8 @@ module MuxRuby
     def self.openapi_types
       {
         :'id' => :'String',
-        :'policy' => :'PlaybackPolicy'
+        :'policy' => :'PlaybackPolicy',
+        :'drm_configuration_id' => :'String'
       }
     end
 
@@ -69,6 +74,10 @@ module MuxRuby
       if attributes.key?(:'policy')
         self.policy = attributes[:'policy']
       end
+
+      if attributes.key?(:'drm_configuration_id')
+        self.drm_configuration_id = attributes[:'drm_configuration_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -90,7 +99,8 @@ module MuxRuby
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          policy == o.policy
+          policy == o.policy &&
+          drm_configuration_id == o.drm_configuration_id
     end
 
     # @see the `==` method
@@ -102,7 +112,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, policy].hash
+      [id, policy, drm_configuration_id].hash
     end
 
     # Builds the object from hash

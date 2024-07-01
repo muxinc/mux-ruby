@@ -18,8 +18,11 @@ module MuxRuby
     # An array of objects that each describe an input file to be used to create the asset. As a shortcut, input can also be a string URL for a file when only one input file is used. See `input[].url` for requirements.
     attr_accessor :input
 
-    # An array of playback policy names that you want applied to this asset and available through `playback_ids`. Options include: `\"public\"` (anyone with the playback URL can stream the asset). And `\"signed\"` (an additional access token is required to play the asset). If no playback_policy is set, the asset will have no playback IDs and will therefore not be playable. For simplicity, a single string name can be used in place of the array in the case of only one playback policy.
+    # An array of playback policy names that you want applied to this asset and available through `playback_ids`. Options include:  * `\"public\"` (anyone with the playback URL can stream the asset). * `\"signed\"` (an additional access token is required to play the asset).  If no `playback_policy` is set, the asset will have no playback IDs and will therefore not be playable. For simplicity, a single string name can be used in place of the array in the case of only one playback policy. 
     attr_accessor :playback_policy
+
+    # An array of playback policy objects that you want applied to this asset and available through `playback_ids`. `advanced_playback_policies` must be used instead of `playback_policy` when creating a DRM playback ID. 
+    attr_accessor :advanced_playback_policies
 
     attr_accessor :per_title_encode
 
@@ -71,6 +74,7 @@ module MuxRuby
       {
         :'input' => :'input',
         :'playback_policy' => :'playback_policy',
+        :'advanced_playback_policies' => :'advanced_playback_policies',
         :'per_title_encode' => :'per_title_encode',
         :'passthrough' => :'passthrough',
         :'mp4_support' => :'mp4_support',
@@ -92,6 +96,7 @@ module MuxRuby
       {
         :'input' => :'Array<InputSettings>',
         :'playback_policy' => :'Array<PlaybackPolicy>',
+        :'advanced_playback_policies' => :'Array<CreatePlaybackIDRequest>',
         :'per_title_encode' => :'Boolean',
         :'passthrough' => :'String',
         :'mp4_support' => :'String',
@@ -133,6 +138,12 @@ module MuxRuby
       if attributes.key?(:'playback_policy')
         if (value = attributes[:'playback_policy']).is_a?(Array)
           self.playback_policy = value
+        end
+      end
+
+      if attributes.key?(:'advanced_playback_policies')
+        if (value = attributes[:'advanced_playback_policies']).is_a?(Array)
+          self.advanced_playback_policies = value
         end
       end
 
@@ -239,6 +250,7 @@ module MuxRuby
       self.class == o.class &&
           input == o.input &&
           playback_policy == o.playback_policy &&
+          advanced_playback_policies == o.advanced_playback_policies &&
           per_title_encode == o.per_title_encode &&
           passthrough == o.passthrough &&
           mp4_support == o.mp4_support &&
@@ -258,7 +270,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [input, playback_policy, per_title_encode, passthrough, mp4_support, normalize_audio, master_access, test, max_resolution_tier, encoding_tier].hash
+      [input, playback_policy, advanced_playback_policies, per_title_encode, passthrough, mp4_support, normalize_audio, master_access, test, max_resolution_tier, encoding_tier].hash
     end
 
     # Builds the object from hash

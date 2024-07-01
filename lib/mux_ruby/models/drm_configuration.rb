@@ -14,17 +14,14 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class CreatePlaybackIDRequest
-    attr_accessor :policy
-
-    # The DRM configuration used by this playback ID. Must only be set when `policy` is set to `drm`.
-    attr_accessor :drm_configuration_id
+  class DRMConfiguration
+    # Unique identifier for the DRM Configuration. Max 255 characters.
+    attr_accessor :id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'policy' => :'policy',
-        :'drm_configuration_id' => :'drm_configuration_id'
+        :'id' => :'id'
       }
     end
 
@@ -36,8 +33,7 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'policy' => :'PlaybackPolicy',
-        :'drm_configuration_id' => :'String'
+        :'id' => :'String'
       }
     end
 
@@ -51,23 +47,19 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::CreatePlaybackIDRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::DRMConfiguration` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::CreatePlaybackIDRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::DRMConfiguration`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'policy')
-        self.policy = attributes[:'policy']
-      end
-
-      if attributes.key?(:'drm_configuration_id')
-        self.drm_configuration_id = attributes[:'drm_configuration_id']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
     end
 
@@ -89,8 +81,7 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          policy == o.policy &&
-          drm_configuration_id == o.drm_configuration_id
+          id == o.id
     end
 
     # @see the `==` method
@@ -102,7 +93,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [policy, drm_configuration_id].hash
+      [id].hash
     end
 
     # Builds the object from hash
