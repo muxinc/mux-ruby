@@ -39,8 +39,11 @@ module MuxRuby
     # The resolution tier that the asset was ingested at, affecting billing for ingest & storage
     attr_accessor :asset_resolution_tier
 
-    # The encoding tier that the asset was ingested at. [See the encoding tiers guide for more details.](https://docs.mux.com/guides/use-encoding-tiers)
+    # This field is deprecated. Please use `asset_video_quality` instead. The encoding tier that the asset was ingested at. [See the video quality guide for more details.](https://docs.mux.com/guides/use-encoding-tiers)
     attr_accessor :asset_encoding_tier
+
+    # The video quality that the asset was ingested at. This field replaces `asset_encoding_tier`. [See the video quality guide for more details.](https://docs.mux.com/guides/use-encoding-tiers)
+    attr_accessor :asset_video_quality
 
     # Total number of delivered seconds during this time window.
     attr_accessor :delivered_seconds
@@ -81,6 +84,7 @@ module MuxRuby
         :'asset_duration' => :'asset_duration',
         :'asset_resolution_tier' => :'asset_resolution_tier',
         :'asset_encoding_tier' => :'asset_encoding_tier',
+        :'asset_video_quality' => :'asset_video_quality',
         :'delivered_seconds' => :'delivered_seconds',
         :'delivered_seconds_by_resolution' => :'delivered_seconds_by_resolution'
       }
@@ -103,6 +107,7 @@ module MuxRuby
         :'asset_duration' => :'Float',
         :'asset_resolution_tier' => :'String',
         :'asset_encoding_tier' => :'String',
+        :'asset_video_quality' => :'String',
         :'delivered_seconds' => :'Float',
         :'delivered_seconds_by_resolution' => :'DeliveryReportDeliveredSecondsByResolution'
       }
@@ -165,6 +170,10 @@ module MuxRuby
         self.asset_encoding_tier = attributes[:'asset_encoding_tier']
       end
 
+      if attributes.key?(:'asset_video_quality')
+        self.asset_video_quality = attributes[:'asset_video_quality']
+      end
+
       if attributes.key?(:'delivered_seconds')
         self.delivered_seconds = attributes[:'delivered_seconds']
       end
@@ -190,6 +199,8 @@ module MuxRuby
       return false unless asset_resolution_tier_validator.valid?(@asset_resolution_tier)
       asset_encoding_tier_validator = EnumAttributeValidator.new('String', ["smart", "baseline"])
       return false unless asset_encoding_tier_validator.valid?(@asset_encoding_tier)
+      asset_video_quality_validator = EnumAttributeValidator.new('String', ["basic", "plus"])
+      return false unless asset_video_quality_validator.valid?(@asset_video_quality)
       true
     end
 
@@ -223,6 +234,16 @@ module MuxRuby
       @asset_encoding_tier = asset_encoding_tier
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] asset_video_quality Object to be assigned
+    def asset_video_quality=(asset_video_quality)
+      validator = EnumAttributeValidator.new('String', ["basic", "plus"])
+      unless validator.valid?(asset_video_quality)
+        fail ArgumentError, "invalid value for \"asset_video_quality\", must be one of #{validator.allowable_values}."
+      end
+      @asset_video_quality = asset_video_quality
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -237,6 +258,7 @@ module MuxRuby
           asset_duration == o.asset_duration &&
           asset_resolution_tier == o.asset_resolution_tier &&
           asset_encoding_tier == o.asset_encoding_tier &&
+          asset_video_quality == o.asset_video_quality &&
           delivered_seconds == o.delivered_seconds &&
           delivered_seconds_by_resolution == o.delivered_seconds_by_resolution
     end
@@ -250,7 +272,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [live_stream_id, asset_id, passthrough, created_at, deleted_at, asset_state, asset_duration, asset_resolution_tier, asset_encoding_tier, delivered_seconds, delivered_seconds_by_resolution].hash
+      [live_stream_id, asset_id, passthrough, created_at, deleted_at, asset_state, asset_duration, asset_resolution_tier, asset_encoding_tier, asset_video_quality, delivered_seconds, delivered_seconds_by_resolution].hash
     end
 
     # Builds the object from hash

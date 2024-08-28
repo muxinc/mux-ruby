@@ -44,8 +44,11 @@ module MuxRuby
     # Max resolution tier can be used to control the maximum `resolution_tier` your asset is encoded, stored, and streamed at. If not set, this defaults to `1080p`.
     attr_accessor :max_resolution_tier
 
-    # The encoding tier informs the cost, quality, and available platform features for the asset. By default the `smart` encoding tier is used. [See the guide for more details.](https://docs.mux.com/guides/use-encoding-tiers)
+    # This field is deprecated. Please use `video_quality` instead. The encoding tier informs the cost, quality, and available platform features for the asset. By default the `smart` encoding tier is used. [See the video quality guide for more details.](https://docs.mux.com/guides/use-encoding-tiers)
     attr_accessor :encoding_tier
+
+    # The video quality controls the cost, quality, and available platform features for the asset. By default the `plus` video quality is used. This field replaces the deprecated `encoding_tier` value. [See the video quality guide for more details.](https://docs.mux.com/guides/use-encoding-tiers)
+    attr_accessor :video_quality
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -82,7 +85,8 @@ module MuxRuby
         :'master_access' => :'master_access',
         :'test' => :'test',
         :'max_resolution_tier' => :'max_resolution_tier',
-        :'encoding_tier' => :'encoding_tier'
+        :'encoding_tier' => :'encoding_tier',
+        :'video_quality' => :'video_quality'
       }
     end
 
@@ -104,7 +108,8 @@ module MuxRuby
         :'master_access' => :'String',
         :'test' => :'Boolean',
         :'max_resolution_tier' => :'String',
-        :'encoding_tier' => :'String'
+        :'encoding_tier' => :'String',
+        :'video_quality' => :'String'
       }
     end
 
@@ -180,6 +185,10 @@ module MuxRuby
       if attributes.key?(:'encoding_tier')
         self.encoding_tier = attributes[:'encoding_tier']
       end
+
+      if attributes.key?(:'video_quality')
+        self.video_quality = attributes[:'video_quality']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -200,6 +209,8 @@ module MuxRuby
       return false unless max_resolution_tier_validator.valid?(@max_resolution_tier)
       encoding_tier_validator = EnumAttributeValidator.new('String', ["smart", "baseline"])
       return false unless encoding_tier_validator.valid?(@encoding_tier)
+      video_quality_validator = EnumAttributeValidator.new('String', ["basic", "plus"])
+      return false unless video_quality_validator.valid?(@video_quality)
       true
     end
 
@@ -243,6 +254,16 @@ module MuxRuby
       @encoding_tier = encoding_tier
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] video_quality Object to be assigned
+    def video_quality=(video_quality)
+      validator = EnumAttributeValidator.new('String', ["basic", "plus"])
+      unless validator.valid?(video_quality)
+        fail ArgumentError, "invalid value for \"video_quality\", must be one of #{validator.allowable_values}."
+      end
+      @video_quality = video_quality
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -258,7 +279,8 @@ module MuxRuby
           master_access == o.master_access &&
           test == o.test &&
           max_resolution_tier == o.max_resolution_tier &&
-          encoding_tier == o.encoding_tier
+          encoding_tier == o.encoding_tier &&
+          video_quality == o.video_quality
     end
 
     # @see the `==` method
@@ -270,7 +292,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [input, playback_policy, advanced_playback_policies, per_title_encode, passthrough, mp4_support, normalize_audio, master_access, test, max_resolution_tier, encoding_tier].hash
+      [input, playback_policy, advanced_playback_policies, per_title_encode, passthrough, mp4_support, normalize_audio, master_access, test, max_resolution_tier, encoding_tier, video_quality].hash
     end
 
     # Builds the object from hash
