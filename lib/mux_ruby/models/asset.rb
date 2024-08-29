@@ -36,8 +36,11 @@ module MuxRuby
     # Max resolution tier can be used to control the maximum `resolution_tier` your asset is encoded, stored, and streamed at. If not set, this defaults to `1080p`.
     attr_accessor :max_resolution_tier
 
-    # The encoding tier informs the cost, quality, and available platform features for the asset. By default the `smart` encoding tier is used. [See the guide for more details.](https://docs.mux.com/guides/use-encoding-tiers)
+    # This field is deprecated. Please use `video_quality` instead. The encoding tier informs the cost, quality, and available platform features for the asset. By default the `smart` encoding tier is used. [See the video quality guide for more details.](https://docs.mux.com/guides/use-encoding-tiers)
     attr_accessor :encoding_tier
+
+    # The video quality controls the cost, quality, and available platform features for the asset. By default the `plus` video quality is used. This field replaces the deprecated `encoding_tier` value. [See the video quality guide for more details.](https://docs.mux.com/guides/use-encoding-tiers)
+    attr_accessor :video_quality
 
     # The maximum frame rate that has been stored for the asset. The asset may be delivered at lower frame rates depending on the device and bandwidth, however it cannot be delivered at a higher value than is stored. This field may return -1 if the frame rate of the input cannot be reliably determined.
     attr_accessor :max_stored_frame_rate
@@ -125,6 +128,7 @@ module MuxRuby
         :'resolution_tier' => :'resolution_tier',
         :'max_resolution_tier' => :'max_resolution_tier',
         :'encoding_tier' => :'encoding_tier',
+        :'video_quality' => :'video_quality',
         :'max_stored_frame_rate' => :'max_stored_frame_rate',
         :'aspect_ratio' => :'aspect_ratio',
         :'playback_ids' => :'playback_ids',
@@ -164,6 +168,7 @@ module MuxRuby
         :'resolution_tier' => :'String',
         :'max_resolution_tier' => :'String',
         :'encoding_tier' => :'String',
+        :'video_quality' => :'String',
         :'max_stored_frame_rate' => :'Float',
         :'aspect_ratio' => :'String',
         :'playback_ids' => :'Array<PlaybackID>',
@@ -238,6 +243,10 @@ module MuxRuby
 
       if attributes.key?(:'encoding_tier')
         self.encoding_tier = attributes[:'encoding_tier']
+      end
+
+      if attributes.key?(:'video_quality')
+        self.video_quality = attributes[:'video_quality']
       end
 
       if attributes.key?(:'max_stored_frame_rate')
@@ -353,6 +362,8 @@ module MuxRuby
       return false unless max_resolution_tier_validator.valid?(@max_resolution_tier)
       encoding_tier_validator = EnumAttributeValidator.new('String', ["smart", "baseline"])
       return false unless encoding_tier_validator.valid?(@encoding_tier)
+      video_quality_validator = EnumAttributeValidator.new('String', ["basic", "plus"])
+      return false unless video_quality_validator.valid?(@video_quality)
       master_access_validator = EnumAttributeValidator.new('String', ["temporary", "none"])
       return false unless master_access_validator.valid?(@master_access)
       mp4_support_validator = EnumAttributeValidator.new('String', ["standard", "none", "capped-1080p", "audio-only", "audio-only,capped-1080p"])
@@ -413,6 +424,16 @@ module MuxRuby
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] video_quality Object to be assigned
+    def video_quality=(video_quality)
+      validator = EnumAttributeValidator.new('String', ["basic", "plus"])
+      unless validator.valid?(video_quality)
+        fail ArgumentError, "invalid value for \"video_quality\", must be one of #{validator.allowable_values}."
+      end
+      @video_quality = video_quality
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] master_access Object to be assigned
     def master_access=(master_access)
       validator = EnumAttributeValidator.new('String', ["temporary", "none"])
@@ -455,6 +476,7 @@ module MuxRuby
           resolution_tier == o.resolution_tier &&
           max_resolution_tier == o.max_resolution_tier &&
           encoding_tier == o.encoding_tier &&
+          video_quality == o.video_quality &&
           max_stored_frame_rate == o.max_stored_frame_rate &&
           aspect_ratio == o.aspect_ratio &&
           playback_ids == o.playback_ids &&
@@ -486,7 +508,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, status, duration, max_stored_resolution, resolution_tier, max_resolution_tier, encoding_tier, max_stored_frame_rate, aspect_ratio, playback_ids, tracks, errors, per_title_encode, upload_id, is_live, passthrough, live_stream_id, master, master_access, mp4_support, source_asset_id, normalize_audio, static_renditions, recording_times, non_standard_input_reasons, test, ingest_type].hash
+      [id, created_at, status, duration, max_stored_resolution, resolution_tier, max_resolution_tier, encoding_tier, video_quality, max_stored_frame_rate, aspect_ratio, playback_ids, tracks, errors, per_title_encode, upload_id, is_live, passthrough, live_stream_id, master, master_access, mp4_support, source_asset_id, normalize_audio, static_renditions, recording_times, non_standard_input_reasons, test, ingest_type].hash
     end
 
     # Builds the object from hash

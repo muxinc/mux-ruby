@@ -381,10 +381,6 @@ lib/mux_ruby/models/web_input.rb
 lib/mux_ruby/models/web_input_response.rb
 lib/mux_ruby/version.rb
 mux_ruby.gemspec
-spec/api/drm_configurations_api_spec.rb
 spec/api_client_spec.rb
 spec/configuration_spec.rb
-spec/models/drm_configuration_response_spec.rb
-spec/models/drm_configuration_spec.rb
-spec/models/list_drm_configurations_response_spec.rb
 spec/spec_helper.rb
