@@ -167,6 +167,7 @@
 | **ad_preroll_startup_time** | **Integer** |  | [optional] |
 | **ad_watch_time** | **Integer** |  | [optional] |
 | **view_content_watch_time** | **Integer** |  | [optional] |
+| **view_dropped** | **Boolean** |  | [optional] |
 
 ## Example
 
@@ -336,7 +337,8 @@ instance = MuxRuby::VideoView.new(
   view_content_startup_time: null,
   ad_preroll_startup_time: null,
   ad_watch_time: null,
-  view_content_watch_time: null
+  view_content_watch_time: null,
+  view_dropped: null
 )
 ```
 
