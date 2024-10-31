@@ -44,10 +44,10 @@ module MuxRuby
     # Max resolution tier can be used to control the maximum `resolution_tier` your asset is encoded, stored, and streamed at. If not set, this defaults to `1080p`.
     attr_accessor :max_resolution_tier
 
-    # This field is deprecated. Please use `video_quality` instead. The encoding tier informs the cost, quality, and available platform features for the asset. By default the `smart` encoding tier is used. [See the video quality guide for more details.](https://docs.mux.com/guides/use-encoding-tiers)
+    # This field is deprecated. Please use `video_quality` instead. The encoding tier informs the cost, quality, and available platform features for the asset. The default encoding tier for an account can be set in the Mux Dashboard. [See the video quality guide for more details.](https://docs.mux.com/guides/use-video-quality-levels)
     attr_accessor :encoding_tier
 
-    # The video quality controls the cost, quality, and available platform features for the asset. By default the `plus` video quality is used. This field replaces the deprecated `encoding_tier` value. [See the video quality guide for more details.](https://docs.mux.com/guides/use-encoding-tiers)
+    # The video quality controls the cost, quality, and available platform features for the asset. The default video quality for an account can be set in the Mux Dashboard. This field replaces the deprecated `encoding_tier` value. [See the video quality guide for more details.](https://docs.mux.com/guides/use-video-quality-levels)
     attr_accessor :video_quality
 
     class EnumAttributeValidator
@@ -207,9 +207,9 @@ module MuxRuby
       return false unless master_access_validator.valid?(@master_access)
       max_resolution_tier_validator = EnumAttributeValidator.new('String', ["1080p", "1440p", "2160p"])
       return false unless max_resolution_tier_validator.valid?(@max_resolution_tier)
-      encoding_tier_validator = EnumAttributeValidator.new('String', ["smart", "baseline"])
+      encoding_tier_validator = EnumAttributeValidator.new('String', ["smart", "baseline", "premium"])
       return false unless encoding_tier_validator.valid?(@encoding_tier)
-      video_quality_validator = EnumAttributeValidator.new('String', ["basic", "plus"])
+      video_quality_validator = EnumAttributeValidator.new('String', ["basic", "plus", "premium"])
       return false unless video_quality_validator.valid?(@video_quality)
       true
     end
@@ -247,7 +247,7 @@ module MuxRuby
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] encoding_tier Object to be assigned
     def encoding_tier=(encoding_tier)
-      validator = EnumAttributeValidator.new('String', ["smart", "baseline"])
+      validator = EnumAttributeValidator.new('String', ["smart", "baseline", "premium"])
       unless validator.valid?(encoding_tier)
         fail ArgumentError, "invalid value for \"encoding_tier\", must be one of #{validator.allowable_values}."
       end
@@ -257,7 +257,7 @@ module MuxRuby
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] video_quality Object to be assigned
     def video_quality=(video_quality)
-      validator = EnumAttributeValidator.new('String', ["basic", "plus"])
+      validator = EnumAttributeValidator.new('String', ["basic", "plus", "premium"])
       unless validator.valid?(video_quality)
         fail ArgumentError, "invalid value for \"video_quality\", must be one of #{validator.allowable_values}."
       end

@@ -14,10 +14,13 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  # Updates the new asset settings to use to generate a new asset for this live stream. Only the `mp4_support` setting may be updated. 
+  # Updates the new asset settings to use to generate a new asset for this live stream. Only the `mp4_support` and `master_access` settings may be updated. 
   class UpdateLiveStreamNewAssetSettings
     # Specify what level of support for mp4 playback should be added to new assets generated from this live stream. * The `none` option disables MP4 support for new assets. MP4 files will not be produced for an asset generated from this live stream. * The `capped-1080p` option produces a single MP4 file, called `capped-1080p.mp4`, with the video resolution capped at 1080p. This option produces an `audio.m4a` file for an audio-only asset. * The `audio-only` option produces a single M4A file, called `audio.m4a` for a video or an audio-only asset. MP4 generation will error when this option is specified for a video-only asset. * The `audio-only,capped-1080p` option produces both the `audio.m4a` and `capped-1080p.mp4` files. Only the `capped-1080p.mp4` file is produced for a video-only asset, while only the `audio.m4a` file is produced for an audio-only asset. * The `standard`(deprecated) option produces up to three MP4 files with different levels of resolution (`high.mp4`, `medium.mp4`, `low.mp4`, or `audio.m4a` for an audio-only asset). 
     attr_accessor :mp4_support
+
+    # Add or remove access to the master version of the video.
+    attr_accessor :master_access
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -44,7 +47,8 @@ module MuxRuby
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'mp4_support' => :'mp4_support'
+        :'mp4_support' => :'mp4_support',
+        :'master_access' => :'master_access'
       }
     end
 
@@ -56,7 +60,8 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'mp4_support' => :'String'
+        :'mp4_support' => :'String',
+        :'master_access' => :'String'
       }
     end
 
@@ -84,6 +89,10 @@ module MuxRuby
       if attributes.key?(:'mp4_support')
         self.mp4_support = attributes[:'mp4_support']
       end
+
+      if attributes.key?(:'master_access')
+        self.master_access = attributes[:'master_access']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -98,6 +107,8 @@ module MuxRuby
     def valid?
       mp4_support_validator = EnumAttributeValidator.new('String', ["none", "standard", "capped-1080p", "audio-only", "audio-only,capped-1080p"])
       return false unless mp4_support_validator.valid?(@mp4_support)
+      master_access_validator = EnumAttributeValidator.new('String', ["temporary", "none"])
+      return false unless master_access_validator.valid?(@master_access)
       true
     end
 
@@ -111,12 +122,23 @@ module MuxRuby
       @mp4_support = mp4_support
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] master_access Object to be assigned
+    def master_access=(master_access)
+      validator = EnumAttributeValidator.new('String', ["temporary", "none"])
+      unless validator.valid?(master_access)
+        fail ArgumentError, "invalid value for \"master_access\", must be one of #{validator.allowable_values}."
+      end
+      @master_access = master_access
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          mp4_support == o.mp4_support
+          mp4_support == o.mp4_support &&
+          master_access == o.master_access
     end
 
     # @see the `==` method
@@ -128,7 +150,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [mp4_support].hash
+      [mp4_support, master_access].hash
     end
 
     # Builds the object from hash
