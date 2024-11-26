@@ -28,6 +28,12 @@ assert stream.data != nil
 assert stream.data.id != nil
 puts "create-live-stream OK ✅"
 
+# ========== update-live-stream ==========
+updated_stream = live_api.update_live_stream(stream.data.id, { latency_mode: 'standard', reconnect_window: 35 })
+assert updated_stream.data.latency_mode == 'standard'
+assert updated_stream.data.reconnect_window == 35
+puts "update-live-stream OK ✅"
+
 # ========== list-live-streams ==========
 streams = live_api.list_live_streams()
 assert streams != nil
