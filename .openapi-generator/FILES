@@ -13,7 +13,6 @@ docs/AssetNonStandardInputReasons.md
 docs/AssetRecordingTimes.md
 docs/AssetResponse.md
 docs/AssetStaticRenditions.md
-docs/AssetStaticRenditionsFiles.md
 docs/AssetsApi.md
 docs/BreakdownValue.md
 docs/Broadcast.md
@@ -29,6 +28,8 @@ docs/CreatePlaybackIDResponse.md
 docs/CreatePlaybackRestrictionRequest.md
 docs/CreateSimulcastTargetRequest.md
 docs/CreateSpaceRequest.md
+docs/CreateStaticRenditionRequest.md
+docs/CreateStaticRenditionResponse.md
 docs/CreateTrackRequest.md
 docs/CreateTrackResponse.md
 docs/CreateTranscriptionVocabularyRequest.md
@@ -160,6 +161,7 @@ docs/SpaceStatus.md
 docs/SpaceType.md
 docs/SpacesApi.md
 docs/StartSpaceBroadcastResponse.md
+docs/StaticRendition.md
 docs/StopSpaceBroadcastResponse.md
 docs/Track.md
 docs/TranscriptionVocabulariesApi.md
@@ -172,6 +174,7 @@ docs/UpdateAssetRequest.md
 docs/UpdateLiveStreamEmbeddedSubtitlesRequest.md
 docs/UpdateLiveStreamGeneratedSubtitlesRequest.md
 docs/UpdateLiveStreamNewAssetSettings.md
+docs/UpdateLiveStreamNewAssetSettingsStaticRenditionsRequest.md
 docs/UpdateLiveStreamRequest.md
 docs/UpdateReferrerDomainRestrictionRequest.md
 docs/UpdateTranscriptionVocabularyRequest.md
@@ -224,7 +227,6 @@ lib/mux_ruby/models/asset_non_standard_input_reasons.rb
 lib/mux_ruby/models/asset_recording_times.rb
 lib/mux_ruby/models/asset_response.rb
 lib/mux_ruby/models/asset_static_renditions.rb
-lib/mux_ruby/models/asset_static_renditions_files.rb
 lib/mux_ruby/models/breakdown_value.rb
 lib/mux_ruby/models/broadcast.rb
 lib/mux_ruby/models/broadcast_layout.rb
@@ -239,6 +241,8 @@ lib/mux_ruby/models/create_playback_id_response.rb
 lib/mux_ruby/models/create_playback_restriction_request.rb
 lib/mux_ruby/models/create_simulcast_target_request.rb
 lib/mux_ruby/models/create_space_request.rb
+lib/mux_ruby/models/create_static_rendition_request.rb
+lib/mux_ruby/models/create_static_rendition_response.rb
 lib/mux_ruby/models/create_track_request.rb
 lib/mux_ruby/models/create_track_response.rb
 lib/mux_ruby/models/create_transcription_vocabulary_request.rb
@@ -354,6 +358,7 @@ lib/mux_ruby/models/space_response.rb
 lib/mux_ruby/models/space_status.rb
 lib/mux_ruby/models/space_type.rb
 lib/mux_ruby/models/start_space_broadcast_response.rb
+lib/mux_ruby/models/static_rendition.rb
 lib/mux_ruby/models/stop_space_broadcast_response.rb
 lib/mux_ruby/models/track.rb
 lib/mux_ruby/models/transcription_vocabulary.rb
@@ -364,6 +369,7 @@ lib/mux_ruby/models/update_asset_request.rb
 lib/mux_ruby/models/update_live_stream_embedded_subtitles_request.rb
 lib/mux_ruby/models/update_live_stream_generated_subtitles_request.rb
 lib/mux_ruby/models/update_live_stream_new_asset_settings.rb
+lib/mux_ruby/models/update_live_stream_new_asset_settings_static_renditions_request.rb
 lib/mux_ruby/models/update_live_stream_request.rb
 lib/mux_ruby/models/update_referrer_domain_restriction_request.rb
 lib/mux_ruby/models/update_transcription_vocabulary_request.rb
@@ -383,4 +389,8 @@ lib/mux_ruby/version.rb
 mux_ruby.gemspec
 spec/api_client_spec.rb
 spec/configuration_spec.rb
+spec/models/create_static_rendition_request_spec.rb
+spec/models/create_static_rendition_response_spec.rb
+spec/models/static_rendition_spec.rb
+spec/models/update_live_stream_new_asset_settings_static_renditions_request_spec.rb
 spec/spec_helper.rb
