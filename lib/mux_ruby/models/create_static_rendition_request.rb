@@ -17,6 +17,9 @@ module MuxRuby
   class CreateStaticRenditionRequest
     attr_accessor :resolution
 
+    # Arbitrary user-supplied metadata set for the static rendition. Max 255 characters.
+    attr_accessor :passthrough
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -42,7 +45,8 @@ module MuxRuby
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'resolution' => :'resolution'
+        :'resolution' => :'resolution',
+        :'passthrough' => :'passthrough'
       }
     end
 
@@ -54,7 +58,8 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'resolution' => :'String'
+        :'resolution' => :'String',
+        :'passthrough' => :'String'
       }
     end
 
@@ -81,6 +86,10 @@ module MuxRuby
 
       if attributes.key?(:'resolution')
         self.resolution = attributes[:'resolution']
+      end
+
+      if attributes.key?(:'passthrough')
+        self.passthrough = attributes[:'passthrough']
       end
     end
 
@@ -114,7 +123,8 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          resolution == o.resolution
+          resolution == o.resolution &&
+          passthrough == o.passthrough
     end
 
     # @see the `==` method
@@ -126,7 +136,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [resolution].hash
+      [resolution, passthrough].hash
     end
 
     # Builds the object from hash

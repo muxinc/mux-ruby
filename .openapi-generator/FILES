@@ -389,8 +389,4 @@ lib/mux_ruby/version.rb
 mux_ruby.gemspec
 spec/api_client_spec.rb
 spec/configuration_spec.rb
-spec/models/create_static_rendition_request_spec.rb
-spec/models/create_static_rendition_response_spec.rb
-spec/models/static_rendition_spec.rb
-spec/models/update_live_stream_new_asset_settings_static_renditions_request_spec.rb
 spec/spec_helper.rb

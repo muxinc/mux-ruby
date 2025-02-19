@@ -166,6 +166,22 @@
 | **view_content_startup_time** | **Integer** |  | [optional] |
 | **ad_preroll_startup_time** | **Integer** |  | [optional] |
 | **view_dropped** | **Boolean** |  | [optional] |
+| **client_application_name** | **String** |  | [optional] |
+| **client_application_version** | **String** |  | [optional] |
+| **video_affiliate** | **String** |  | [optional] |
+| **viewer_plan** | **String** |  | [optional] |
+| **viewer_plan_status** | **String** |  | [optional] |
+| **viewer_plan_category** | **String** |  | [optional] |
+| **view_drm_level** | **String** |  | [optional] |
+| **video_brand** | **String** |  | [optional] |
+| **used_pip** | **Boolean** |  | [optional] |
+| **time_shift_enabled** | **Boolean** |  | [optional] |
+| **used_captions** | **Boolean** |  | [optional] |
+| **video_codec** | **String** |  | [optional] |
+| **audio_codec** | **String** |  | [optional] |
+| **video_dynamic_range_type** | **String** |  | [optional] |
+| **view_cdn_edge_pop** | **String** |  | [optional] |
+| **view_cdn_origin** | **String** |  | [optional] |
 
 ## Example
 
@@ -334,7 +350,23 @@ instance = MuxRuby::VideoView.new(
   ad_playback_failure_error_type_id: null,
   view_content_startup_time: null,
   ad_preroll_startup_time: null,
-  view_dropped: null
+  view_dropped: null,
+  client_application_name: null,
+  client_application_version: null,
+  video_affiliate: null,
+  viewer_plan: null,
+  viewer_plan_status: null,
+  viewer_plan_category: null,
+  view_drm_level: null,
+  video_brand: null,
+  used_pip: null,
+  time_shift_enabled: null,
+  used_captions: null,
+  video_codec: null,
+  audio_codec: null,
+  video_dynamic_range_type: null,
+  view_cdn_edge_pop: null,
+  view_cdn_origin: null
 )
 ```
 

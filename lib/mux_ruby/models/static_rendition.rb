@@ -48,6 +48,9 @@ module MuxRuby
     # The ID of this static rendition, used in managing this static rendition. This field is only valid for `static_renditions`, not for `mp4_support`.
     attr_accessor :id
 
+    # Arbitrary user-supplied metadata set for the static rendition. Max 255 characters.
+    attr_accessor :passthrough
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -83,7 +86,8 @@ module MuxRuby
         :'status' => :'status',
         :'resolution_tier' => :'resolution_tier',
         :'resolution' => :'resolution',
-        :'id' => :'id'
+        :'id' => :'id',
+        :'passthrough' => :'passthrough'
       }
     end
 
@@ -105,7 +109,8 @@ module MuxRuby
         :'status' => :'String',
         :'resolution_tier' => :'String',
         :'resolution' => :'String',
-        :'id' => :'String'
+        :'id' => :'String',
+        :'passthrough' => :'String'
       }
     end
 
@@ -172,6 +177,10 @@ module MuxRuby
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'passthrough')
+        self.passthrough = attributes[:'passthrough']
       end
     end
 
@@ -275,7 +284,8 @@ module MuxRuby
           status == o.status &&
           resolution_tier == o.resolution_tier &&
           resolution == o.resolution &&
-          id == o.id
+          id == o.id &&
+          passthrough == o.passthrough
     end
 
     # @see the `==` method
@@ -287,7 +297,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, ext, height, width, bitrate, filesize, type, status, resolution_tier, resolution, id].hash
+      [name, ext, height, width, bitrate, filesize, type, status, resolution_tier, resolution, id, passthrough].hash
     end
 
     # Builds the object from hash
