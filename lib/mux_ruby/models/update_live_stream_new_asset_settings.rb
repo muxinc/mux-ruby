@@ -14,13 +14,16 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  # Updates the new asset settings to use to generate a new asset for this live stream. Only the `mp4_support` and `master_access` settings may be updated. 
+  # Updates the new asset settings to use to generate a new asset for this live stream. Only the `mp4_support`, `master_access`, and `video_quality` settings may be updated. 
   class UpdateLiveStreamNewAssetSettings
-    # Specify what level of support for mp4 playback should be added to new assets generated from this live stream. * The `none` option disables MP4 support for new assets. MP4 files will not be produced for an asset generated from this live stream. * The `capped-1080p` option produces a single MP4 file, called `capped-1080p.mp4`, with the video resolution capped at 1080p. This option produces an `audio.m4a` file for an audio-only asset. * The `audio-only` option produces a single M4A file, called `audio.m4a` for a video or an audio-only asset. MP4 generation will error when this option is specified for a video-only asset. * The `audio-only,capped-1080p` option produces both the `audio.m4a` and `capped-1080p.mp4` files. Only the `capped-1080p.mp4` file is produced for a video-only asset, while only the `audio.m4a` file is produced for an audio-only asset. * The `standard`(deprecated) option produces up to three MP4 files with different levels of resolution (`high.mp4`, `medium.mp4`, `low.mp4`, or `audio.m4a` for an audio-only asset). 
+    # Deprecated. See the [Static Renditions API](https://www.mux.com/docs/guides/enable-static-mp4-renditions#during-live-stream-creation) for the updated API. Specify what level of support for mp4 playback should be added to new assets generated from this live stream. * The `none` option disables MP4 support for new assets. MP4 files will not be produced for an asset generated from this live stream. * The `capped-1080p` option produces a single MP4 file, called `capped-1080p.mp4`, with the video resolution capped at 1080p. This option produces an `audio.m4a` file for an audio-only asset. * The `audio-only` option produces a single M4A file, called `audio.m4a` for a video or an audio-only asset. MP4 generation will error when this option is specified for a video-only asset. * The `audio-only,capped-1080p` option produces both the `audio.m4a` and `capped-1080p.mp4` files. Only the `capped-1080p.mp4` file is produced for a video-only asset, while only the `audio.m4a` file is produced for an audio-only asset. * The `standard`(deprecated) option produces up to three MP4 files with different levels of resolution (`high.mp4`, `medium.mp4`, `low.mp4`, or `audio.m4a` for an audio-only asset). 
     attr_accessor :mp4_support
 
     # Add or remove access to the master version of the video.
     attr_accessor :master_access
+
+    # The video quality controls the cost, quality, and available platform features for the asset. [See the video quality guide for more details.](https://docs.mux.com/guides/use-video-quality-levels)
+    attr_accessor :video_quality
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -48,7 +51,8 @@ module MuxRuby
     def self.attribute_map
       {
         :'mp4_support' => :'mp4_support',
-        :'master_access' => :'master_access'
+        :'master_access' => :'master_access',
+        :'video_quality' => :'video_quality'
       }
     end
 
@@ -61,7 +65,8 @@ module MuxRuby
     def self.openapi_types
       {
         :'mp4_support' => :'String',
-        :'master_access' => :'String'
+        :'master_access' => :'String',
+        :'video_quality' => :'String'
       }
     end
 
@@ -93,6 +98,10 @@ module MuxRuby
       if attributes.key?(:'master_access')
         self.master_access = attributes[:'master_access']
       end
+
+      if attributes.key?(:'video_quality')
+        self.video_quality = attributes[:'video_quality']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -109,6 +118,8 @@ module MuxRuby
       return false unless mp4_support_validator.valid?(@mp4_support)
       master_access_validator = EnumAttributeValidator.new('String', ["temporary", "none"])
       return false unless master_access_validator.valid?(@master_access)
+      video_quality_validator = EnumAttributeValidator.new('String', ["plus", "premium"])
+      return false unless video_quality_validator.valid?(@video_quality)
       true
     end
 
@@ -132,13 +143,24 @@ module MuxRuby
       @master_access = master_access
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] video_quality Object to be assigned
+    def video_quality=(video_quality)
+      validator = EnumAttributeValidator.new('String', ["plus", "premium"])
+      unless validator.valid?(video_quality)
+        fail ArgumentError, "invalid value for \"video_quality\", must be one of #{validator.allowable_values}."
+      end
+      @video_quality = video_quality
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           mp4_support == o.mp4_support &&
-          master_access == o.master_access
+          master_access == o.master_access &&
+          video_quality == o.video_quality
     end
 
     # @see the `==` method
@@ -150,7 +172,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [mp4_support, master_access].hash
+      [mp4_support, master_access, video_quality].hash
     end
 
     # Builds the object from hash

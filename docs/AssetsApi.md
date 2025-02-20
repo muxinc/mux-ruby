@@ -6,9 +6,11 @@ All URIs are relative to *https://api.mux.com*
 | ------ | ------------ | ----------- |
 | [**create_asset**](AssetsApi.md#create_asset) | **POST** /video/v1/assets | Create an asset |
 | [**create_asset_playback_id**](AssetsApi.md#create_asset_playback_id) | **POST** /video/v1/assets/{ASSET_ID}/playback-ids | Create a playback ID |
+| [**create_asset_static_rendition**](AssetsApi.md#create_asset_static_rendition) | **POST** /video/v1/assets/{ASSET_ID}/static-renditions | Create a static rendition for an asset |
 | [**create_asset_track**](AssetsApi.md#create_asset_track) | **POST** /video/v1/assets/{ASSET_ID}/tracks | Create an asset track |
 | [**delete_asset**](AssetsApi.md#delete_asset) | **DELETE** /video/v1/assets/{ASSET_ID} | Delete an asset |
 | [**delete_asset_playback_id**](AssetsApi.md#delete_asset_playback_id) | **DELETE** /video/v1/assets/{ASSET_ID}/playback-ids/{PLAYBACK_ID} | Delete a playback ID |
+| [**delete_asset_static_rendition**](AssetsApi.md#delete_asset_static_rendition) | **DELETE** /video/v1/assets/{ASSET_ID}/static-renditions/{STATIC_RENDITION_ID} | Delete a single static rendition for an asset |
 | [**delete_asset_track**](AssetsApi.md#delete_asset_track) | **DELETE** /video/v1/assets/{ASSET_ID}/tracks/{TRACK_ID} | Delete an asset track |
 | [**generate_asset_track_subtitles**](AssetsApi.md#generate_asset_track_subtitles) | **POST** /video/v1/assets/{ASSET_ID}/tracks/{TRACK_ID}/generate-subtitles | Generate track subtitles |
 | [**get_asset**](AssetsApi.md#get_asset) | **GET** /video/v1/assets/{ASSET_ID} | Retrieve an asset |
@@ -151,6 +153,78 @@ end
 ### Return type
 
 [**CreatePlaybackIDResponse**](CreatePlaybackIDResponse.md)
+
+### Authorization
+
+[accessToken](../README.md#accessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_asset_static_rendition
+
+> <CreateStaticRenditionResponse> create_asset_static_rendition(asset_id, create_static_rendition_request)
+
+Create a static rendition for an asset
+
+Creates a static rendition (i.e. MP4) for an asset
+
+### Examples
+
+```ruby
+require 'time'
+require 'mux_ruby'
+# setup authorization
+MuxRuby.configure do |config|
+  # Configure HTTP basic authorization: accessToken
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = MuxRuby::AssetsApi.new
+asset_id = 'asset_id_example' # String | The asset ID.
+create_static_rendition_request = MuxRuby::CreateStaticRenditionRequest.new # CreateStaticRenditionRequest | 
+
+begin
+  # Create a static rendition for an asset
+  result = api_instance.create_asset_static_rendition(asset_id, create_static_rendition_request)
+  p result
+rescue MuxRuby::ApiError => e
+  puts "Error when calling AssetsApi->create_asset_static_rendition: #{e}"
+end
+```
+
+#### Using the create_asset_static_rendition_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CreateStaticRenditionResponse>, Integer, Hash)> create_asset_static_rendition_with_http_info(asset_id, create_static_rendition_request)
+
+```ruby
+begin
+  # Create a static rendition for an asset
+  data, status_code, headers = api_instance.create_asset_static_rendition_with_http_info(asset_id, create_static_rendition_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CreateStaticRenditionResponse>
+rescue MuxRuby::ApiError => e
+  puts "Error when calling AssetsApi->create_asset_static_rendition_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **asset_id** | **String** | The asset ID. |  |
+| **create_static_rendition_request** | [**CreateStaticRenditionRequest**](CreateStaticRenditionRequest.md) |  |  |
+
+### Return type
+
+[**CreateStaticRenditionResponse**](CreateStaticRenditionResponse.md)
 
 ### Authorization
 
@@ -359,6 +433,77 @@ end
 | ---- | ---- | ----------- | ----- |
 | **asset_id** | **String** | The asset ID. |  |
 | **playback_id** | **String** | The live stream&#39;s playback ID. |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[accessToken](../README.md#accessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+
+## delete_asset_static_rendition
+
+> delete_asset_static_rendition(asset_id, static_rendition_id)
+
+Delete a single static rendition for an asset
+
+Deletes a single static rendition for an asset
+
+### Examples
+
+```ruby
+require 'time'
+require 'mux_ruby'
+# setup authorization
+MuxRuby.configure do |config|
+  # Configure HTTP basic authorization: accessToken
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = MuxRuby::AssetsApi.new
+asset_id = 'asset_id_example' # String | The asset ID.
+static_rendition_id = 'static_rendition_id_example' # String | The static rendition ID.
+
+begin
+  # Delete a single static rendition for an asset
+  api_instance.delete_asset_static_rendition(asset_id, static_rendition_id)
+rescue MuxRuby::ApiError => e
+  puts "Error when calling AssetsApi->delete_asset_static_rendition: #{e}"
+end
+```
+
+#### Using the delete_asset_static_rendition_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> delete_asset_static_rendition_with_http_info(asset_id, static_rendition_id)
+
+```ruby
+begin
+  # Delete a single static rendition for an asset
+  data, status_code, headers = api_instance.delete_asset_static_rendition_with_http_info(asset_id, static_rendition_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue MuxRuby::ApiError => e
+  puts "Error when calling AssetsApi->delete_asset_static_rendition_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **asset_id** | **String** | The asset ID. |  |
+| **static_rendition_id** | **String** | The static rendition ID. |  |
 
 ### Return type
 
@@ -959,7 +1104,7 @@ end
 
 Update MP4 support
 
-Allows you to add or remove mp4 support for assets that were created without it. The values supported are `capped-1080p`, `audio-only`, `audio-only,capped-1080p`, `standard`(deprecated),  and `none`. `none` means that an asset *does not* have mp4 support, so submitting a request with `mp4_support` set to `none` will delete the mp4 assets from the asset in question.
+This method has been deprecated. Please see the [Static Rendition API](https://www.mux.com/docs/guides/enable-static-mp4-renditions#after-asset-creation). Allows you to add or remove mp4 support for assets that were created without it. The values supported are `capped-1080p`, `audio-only`, `audio-only,capped-1080p`, `standard`(deprecated),  and `none`. `none` means that an asset *does not* have mp4 support, so submitting a request with `mp4_support` set to `none` will delete the mp4 assets from the asset in question. 
 
 ### Examples
 

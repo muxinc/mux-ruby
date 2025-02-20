@@ -45,7 +45,7 @@ module MuxRuby
     # Indicates the track provides Subtitles for the Deaf or Hard-of-hearing (SDH). This optional parameter should be used for tracks with `type` of `text` and `text_type` set to `subtitles`.
     attr_accessor :closed_captions
 
-    # This optional parameter should be used tracks with `type` of `text` and `text_type` set to `subtitles`.
+    # This optional parameter should be used for tracks with `type` of `text` and `text_type` set to `subtitles`.
     attr_accessor :passthrough
 
     class EnumAttributeValidator
