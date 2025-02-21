@@ -287,6 +287,67 @@ module MuxRuby
       return data, status_code, headers
     end
 
+    # Delete a live stream's static renditions setting for new assets
+    # Deletes a live stream's static renditions settings for new assets. Further assets made via this live stream will not create static renditions unless re-added.
+    # @param live_stream_id [String] The live stream ID
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def delete_live_stream_new_asset_settings_static_renditions(live_stream_id, opts = {})
+      delete_live_stream_new_asset_settings_static_renditions_with_http_info(live_stream_id, opts)
+      nil
+    end
+
+    # Delete a live stream&#39;s static renditions setting for new assets
+    # Deletes a live stream&#39;s static renditions settings for new assets. Further assets made via this live stream will not create static renditions unless re-added.
+    # @param live_stream_id [String] The live stream ID
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def delete_live_stream_new_asset_settings_static_renditions_with_http_info(live_stream_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LiveStreamsApi.delete_live_stream_new_asset_settings_static_renditions ...'
+      end
+      # verify the required parameter 'live_stream_id' is set
+      if @api_client.config.client_side_validation && live_stream_id.nil?
+        fail ArgumentError, "Missing the required parameter 'live_stream_id' when calling LiveStreamsApi.delete_live_stream_new_asset_settings_static_renditions"
+      end
+      # resource path
+      local_var_path = '/video/v1/live-streams/{LIVE_STREAM_ID}/new-asset-settings/static-renditions'.sub('{' + 'LIVE_STREAM_ID' + '}', CGI.escape(live_stream_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['accessToken']
+
+      new_options = opts.merge(
+        :operation => :"LiveStreamsApi.delete_live_stream_new_asset_settings_static_renditions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LiveStreamsApi#delete_live_stream_new_asset_settings_static_renditions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Delete a live stream playback ID
     # Deletes the playback ID for the live stream. This will not disable ingest (as the live stream still exists). New attempts to play back the live stream will fail immediately. However, current viewers will be able to continue watching the stream for some period of time.
     # @param live_stream_id [String] The live stream ID
@@ -417,67 +478,6 @@ module MuxRuby
       data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: LiveStreamsApi#delete_live_stream_simulcast_target\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
-    # Delete a live stream's static renditions setting for new assets
-    # Deletes a live stream's static renditions settings for new assets. Further assets made via this live stream will not create static renditions unless re-added.
-    # @param live_stream_id [String] The live stream ID
-    # @param [Hash] opts the optional parameters
-    # @return [nil]
-    def delete_live_stream_static_renditions(live_stream_id, opts = {})
-      delete_live_stream_static_renditions_with_http_info(live_stream_id, opts)
-      nil
-    end
-
-    # Delete a live stream&#39;s static renditions setting for new assets
-    # Deletes a live stream&#39;s static renditions settings for new assets. Further assets made via this live stream will not create static renditions unless re-added.
-    # @param live_stream_id [String] The live stream ID
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    def delete_live_stream_static_renditions_with_http_info(live_stream_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: LiveStreamsApi.delete_live_stream_static_renditions ...'
-      end
-      # verify the required parameter 'live_stream_id' is set
-      if @api_client.config.client_side_validation && live_stream_id.nil?
-        fail ArgumentError, "Missing the required parameter 'live_stream_id' when calling LiveStreamsApi.delete_live_stream_static_renditions"
-      end
-      # resource path
-      local_var_path = '/video/v1/live-streams/{LIVE_STREAM_ID}/new-asset-settings/static-renditions'.sub('{' + 'LIVE_STREAM_ID' + '}', CGI.escape(live_stream_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type]
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['accessToken']
-
-      new_options = opts.merge(
-        :operation => :"LiveStreamsApi.delete_live_stream_static_renditions",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: LiveStreamsApi#delete_live_stream_static_renditions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1223,8 +1223,8 @@ module MuxRuby
     # @param update_live_stream_new_asset_settings_static_renditions_request [UpdateLiveStreamNewAssetSettingsStaticRenditionsRequest] 
     # @param [Hash] opts the optional parameters
     # @return [LiveStreamResponse]
-    def update_live_stream_static_renditions(live_stream_id, update_live_stream_new_asset_settings_static_renditions_request, opts = {})
-      data, _status_code, _headers = update_live_stream_static_renditions_with_http_info(live_stream_id, update_live_stream_new_asset_settings_static_renditions_request, opts)
+    def update_live_stream_new_asset_settings_static_renditions(live_stream_id, update_live_stream_new_asset_settings_static_renditions_request, opts = {})
+      data, _status_code, _headers = update_live_stream_new_asset_settings_static_renditions_with_http_info(live_stream_id, update_live_stream_new_asset_settings_static_renditions_request, opts)
       data
     end
 
@@ -1234,17 +1234,17 @@ module MuxRuby
     # @param update_live_stream_new_asset_settings_static_renditions_request [UpdateLiveStreamNewAssetSettingsStaticRenditionsRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(LiveStreamResponse, Integer, Hash)>] LiveStreamResponse data, response status code and response headers
-    def update_live_stream_static_renditions_with_http_info(live_stream_id, update_live_stream_new_asset_settings_static_renditions_request, opts = {})
+    def update_live_stream_new_asset_settings_static_renditions_with_http_info(live_stream_id, update_live_stream_new_asset_settings_static_renditions_request, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: LiveStreamsApi.update_live_stream_static_renditions ...'
+        @api_client.config.logger.debug 'Calling API: LiveStreamsApi.update_live_stream_new_asset_settings_static_renditions ...'
       end
       # verify the required parameter 'live_stream_id' is set
       if @api_client.config.client_side_validation && live_stream_id.nil?
-        fail ArgumentError, "Missing the required parameter 'live_stream_id' when calling LiveStreamsApi.update_live_stream_static_renditions"
+        fail ArgumentError, "Missing the required parameter 'live_stream_id' when calling LiveStreamsApi.update_live_stream_new_asset_settings_static_renditions"
       end
       # verify the required parameter 'update_live_stream_new_asset_settings_static_renditions_request' is set
       if @api_client.config.client_side_validation && update_live_stream_new_asset_settings_static_renditions_request.nil?
-        fail ArgumentError, "Missing the required parameter 'update_live_stream_new_asset_settings_static_renditions_request' when calling LiveStreamsApi.update_live_stream_static_renditions"
+        fail ArgumentError, "Missing the required parameter 'update_live_stream_new_asset_settings_static_renditions_request' when calling LiveStreamsApi.update_live_stream_new_asset_settings_static_renditions"
       end
       # resource path
       local_var_path = '/video/v1/live-streams/{LIVE_STREAM_ID}/new-asset-settings/static-renditions'.sub('{' + 'LIVE_STREAM_ID' + '}', CGI.escape(live_stream_id.to_s))
@@ -1272,7 +1272,7 @@ module MuxRuby
       auth_names = opts[:debug_auth_names] || ['accessToken']
 
       new_options = opts.merge(
-        :operation => :"LiveStreamsApi.update_live_stream_static_renditions",
+        :operation => :"LiveStreamsApi.update_live_stream_new_asset_settings_static_renditions",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -1283,7 +1283,7 @@ module MuxRuby
 
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: LiveStreamsApi#update_live_stream_static_renditions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: LiveStreamsApi#update_live_stream_new_asset_settings_static_renditions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
