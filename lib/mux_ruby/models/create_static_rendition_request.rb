@@ -14,28 +14,39 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class CreateBroadcastRequest
-    # Arbitrary user-supplied metadata that will be included in the broadcast details and related webhooks. Max: 255 characters.
+  class CreateStaticRenditionRequest
+    attr_accessor :resolution
+
+    # Arbitrary user-supplied metadata set for the static rendition. Max 255 characters.
     attr_accessor :passthrough
 
-    # The ID of the live stream that you want to broadcast to.
-    attr_accessor :live_stream_id
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    attr_accessor :layout
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
 
-    # URL of an image to display as the background of the broadcast. Its dimensions should match the provided resolution.
-    attr_accessor :background
-
-    attr_accessor :resolution
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'passthrough' => :'passthrough',
-        :'live_stream_id' => :'live_stream_id',
-        :'layout' => :'layout',
-        :'background' => :'background',
-        :'resolution' => :'resolution'
+        :'resolution' => :'resolution',
+        :'passthrough' => :'passthrough'
       }
     end
 
@@ -47,11 +58,8 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'passthrough' => :'String',
-        :'live_stream_id' => :'String',
-        :'layout' => :'BroadcastLayout',
-        :'background' => :'String',
-        :'resolution' => :'BroadcastResolution'
+        :'resolution' => :'String',
+        :'passthrough' => :'String'
       }
     end
 
@@ -65,39 +73,23 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::CreateBroadcastRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::CreateStaticRenditionRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::CreateBroadcastRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::CreateStaticRenditionRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'passthrough')
-        self.passthrough = attributes[:'passthrough']
-      end
-
-      if attributes.key?(:'live_stream_id')
-        self.live_stream_id = attributes[:'live_stream_id']
-      end
-
-      if attributes.key?(:'layout')
-        self.layout = attributes[:'layout']
-      else
-        self.layout = 'gallery'
-      end
-
-      if attributes.key?(:'background')
-        self.background = attributes[:'background']
-      end
-
       if attributes.key?(:'resolution')
         self.resolution = attributes[:'resolution']
-      else
-        self.resolution = '1920x1080'
+      end
+
+      if attributes.key?(:'passthrough')
+        self.passthrough = attributes[:'passthrough']
       end
     end
 
@@ -105,18 +97,25 @@ module MuxRuby
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @live_stream_id.nil?
-        invalid_properties.push('invalid value for "live_stream_id", live_stream_id cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @live_stream_id.nil?
+      resolution_validator = EnumAttributeValidator.new('String', ["highest", "audio-only", "2160p", "1440p", "1080p", "720p", "540p", "480p", "360p", "270p"])
+      return false unless resolution_validator.valid?(@resolution)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] resolution Object to be assigned
+    def resolution=(resolution)
+      validator = EnumAttributeValidator.new('String', ["highest", "audio-only", "2160p", "1440p", "1080p", "720p", "540p", "480p", "360p", "270p"])
+      unless validator.valid?(resolution)
+        fail ArgumentError, "invalid value for \"resolution\", must be one of #{validator.allowable_values}."
+      end
+      @resolution = resolution
     end
 
     # Checks equality by comparing each attribute.
@@ -124,11 +123,8 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          passthrough == o.passthrough &&
-          live_stream_id == o.live_stream_id &&
-          layout == o.layout &&
-          background == o.background &&
-          resolution == o.resolution
+          resolution == o.resolution &&
+          passthrough == o.passthrough
     end
 
     # @see the `==` method
@@ -140,7 +136,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [passthrough, live_stream_id, layout, background, resolution].hash
+      [resolution, passthrough].hash
     end
 
     # Builds the object from hash

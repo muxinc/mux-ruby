@@ -8,6 +8,7 @@ All URIs are relative to *https://api.mux.com*
 | [**create_live_stream_playback_id**](LiveStreamsApi.md#create_live_stream_playback_id) | **POST** /video/v1/live-streams/{LIVE_STREAM_ID}/playback-ids | Create a live stream playback ID |
 | [**create_live_stream_simulcast_target**](LiveStreamsApi.md#create_live_stream_simulcast_target) | **POST** /video/v1/live-streams/{LIVE_STREAM_ID}/simulcast-targets | Create a live stream simulcast target |
 | [**delete_live_stream**](LiveStreamsApi.md#delete_live_stream) | **DELETE** /video/v1/live-streams/{LIVE_STREAM_ID} | Delete a live stream |
+| [**delete_live_stream_new_asset_settings_static_renditions**](LiveStreamsApi.md#delete_live_stream_new_asset_settings_static_renditions) | **DELETE** /video/v1/live-streams/{LIVE_STREAM_ID}/new-asset-settings/static-renditions | Delete a live stream&#39;s static renditions setting for new assets |
 | [**delete_live_stream_playback_id**](LiveStreamsApi.md#delete_live_stream_playback_id) | **DELETE** /video/v1/live-streams/{LIVE_STREAM_ID}/playback-ids/{PLAYBACK_ID} | Delete a live stream playback ID |
 | [**delete_live_stream_simulcast_target**](LiveStreamsApi.md#delete_live_stream_simulcast_target) | **DELETE** /video/v1/live-streams/{LIVE_STREAM_ID}/simulcast-targets/{SIMULCAST_TARGET_ID} | Delete a live stream simulcast target |
 | [**disable_live_stream**](LiveStreamsApi.md#disable_live_stream) | **PUT** /video/v1/live-streams/{LIVE_STREAM_ID}/disable | Disable a live stream |
@@ -21,6 +22,7 @@ All URIs are relative to *https://api.mux.com*
 | [**update_live_stream**](LiveStreamsApi.md#update_live_stream) | **PATCH** /video/v1/live-streams/{LIVE_STREAM_ID} | Update a live stream |
 | [**update_live_stream_embedded_subtitles**](LiveStreamsApi.md#update_live_stream_embedded_subtitles) | **PUT** /video/v1/live-streams/{LIVE_STREAM_ID}/embedded-subtitles | Update a live stream&#39;s embedded subtitles |
 | [**update_live_stream_generated_subtitles**](LiveStreamsApi.md#update_live_stream_generated_subtitles) | **PUT** /video/v1/live-streams/{LIVE_STREAM_ID}/generated-subtitles | Update a live stream&#39;s generated subtitles |
+| [**update_live_stream_new_asset_settings_static_renditions**](LiveStreamsApi.md#update_live_stream_new_asset_settings_static_renditions) | **PUT** /video/v1/live-streams/{LIVE_STREAM_ID}/new-asset-settings/static-renditions | Update live stream static renditions for new assets |
 
 
 ## create_live_stream
@@ -283,6 +285,75 @@ begin
   p data # => nil
 rescue MuxRuby::ApiError => e
   puts "Error when calling LiveStreamsApi->delete_live_stream_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **live_stream_id** | **String** | The live stream ID |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[accessToken](../README.md#accessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+
+## delete_live_stream_new_asset_settings_static_renditions
+
+> delete_live_stream_new_asset_settings_static_renditions(live_stream_id)
+
+Delete a live stream's static renditions setting for new assets
+
+Deletes a live stream's static renditions settings for new assets. Further assets made via this live stream will not create static renditions unless re-added.
+
+### Examples
+
+```ruby
+require 'time'
+require 'mux_ruby'
+# setup authorization
+MuxRuby.configure do |config|
+  # Configure HTTP basic authorization: accessToken
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = MuxRuby::LiveStreamsApi.new
+live_stream_id = 'live_stream_id_example' # String | The live stream ID
+
+begin
+  # Delete a live stream's static renditions setting for new assets
+  api_instance.delete_live_stream_new_asset_settings_static_renditions(live_stream_id)
+rescue MuxRuby::ApiError => e
+  puts "Error when calling LiveStreamsApi->delete_live_stream_new_asset_settings_static_renditions: #{e}"
+end
+```
+
+#### Using the delete_live_stream_new_asset_settings_static_renditions_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> delete_live_stream_new_asset_settings_static_renditions_with_http_info(live_stream_id)
+
+```ruby
+begin
+  # Delete a live stream's static renditions setting for new assets
+  data, status_code, headers = api_instance.delete_live_stream_new_asset_settings_static_renditions_with_http_info(live_stream_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue MuxRuby::ApiError => e
+  puts "Error when calling LiveStreamsApi->delete_live_stream_new_asset_settings_static_renditions_with_http_info: #{e}"
 end
 ```
 
@@ -1221,6 +1292,78 @@ end
 | ---- | ---- | ----------- | ----- |
 | **live_stream_id** | **String** | The live stream ID |  |
 | **update_live_stream_generated_subtitles_request** | [**UpdateLiveStreamGeneratedSubtitlesRequest**](UpdateLiveStreamGeneratedSubtitlesRequest.md) |  |  |
+
+### Return type
+
+[**LiveStreamResponse**](LiveStreamResponse.md)
+
+### Authorization
+
+[accessToken](../README.md#accessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_live_stream_new_asset_settings_static_renditions
+
+> <LiveStreamResponse> update_live_stream_new_asset_settings_static_renditions(live_stream_id, update_live_stream_new_asset_settings_static_renditions_request)
+
+Update live stream static renditions for new assets
+
+Updates a live stream's static renditions settings for new assets. Further assets made via this live stream will create static renditions per the settings provided. You must provide all static renditions desired.
+
+### Examples
+
+```ruby
+require 'time'
+require 'mux_ruby'
+# setup authorization
+MuxRuby.configure do |config|
+  # Configure HTTP basic authorization: accessToken
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = MuxRuby::LiveStreamsApi.new
+live_stream_id = 'live_stream_id_example' # String | The live stream ID
+update_live_stream_new_asset_settings_static_renditions_request = MuxRuby::UpdateLiveStreamNewAssetSettingsStaticRenditionsRequest.new # UpdateLiveStreamNewAssetSettingsStaticRenditionsRequest | 
+
+begin
+  # Update live stream static renditions for new assets
+  result = api_instance.update_live_stream_new_asset_settings_static_renditions(live_stream_id, update_live_stream_new_asset_settings_static_renditions_request)
+  p result
+rescue MuxRuby::ApiError => e
+  puts "Error when calling LiveStreamsApi->update_live_stream_new_asset_settings_static_renditions: #{e}"
+end
+```
+
+#### Using the update_live_stream_new_asset_settings_static_renditions_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LiveStreamResponse>, Integer, Hash)> update_live_stream_new_asset_settings_static_renditions_with_http_info(live_stream_id, update_live_stream_new_asset_settings_static_renditions_request)
+
+```ruby
+begin
+  # Update live stream static renditions for new assets
+  data, status_code, headers = api_instance.update_live_stream_new_asset_settings_static_renditions_with_http_info(live_stream_id, update_live_stream_new_asset_settings_static_renditions_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LiveStreamResponse>
+rescue MuxRuby::ApiError => e
+  puts "Error when calling LiveStreamsApi->update_live_stream_new_asset_settings_static_renditions_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **live_stream_id** | **String** | The live stream ID |  |
+| **update_live_stream_new_asset_settings_static_renditions_request** | [**UpdateLiveStreamNewAssetSettingsStaticRenditionsRequest**](UpdateLiveStreamNewAssetSettingsStaticRenditionsRequest.md) |  |  |
 
 ### Return type
 

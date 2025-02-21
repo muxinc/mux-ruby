@@ -339,6 +339,38 @@ module MuxRuby
 
     attr_accessor :view_dropped
 
+    attr_accessor :client_application_name
+
+    attr_accessor :client_application_version
+
+    attr_accessor :video_affiliate
+
+    attr_accessor :viewer_plan
+
+    attr_accessor :viewer_plan_status
+
+    attr_accessor :viewer_plan_category
+
+    attr_accessor :view_drm_level
+
+    attr_accessor :video_brand
+
+    attr_accessor :used_pip
+
+    attr_accessor :time_shift_enabled
+
+    attr_accessor :used_captions
+
+    attr_accessor :video_codec
+
+    attr_accessor :audio_codec
+
+    attr_accessor :video_dynamic_range_type
+
+    attr_accessor :view_cdn_edge_pop
+
+    attr_accessor :view_cdn_origin
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -503,7 +535,23 @@ module MuxRuby
         :'ad_playback_failure_error_type_id' => :'ad_playback_failure_error_type_id',
         :'view_content_startup_time' => :'view_content_startup_time',
         :'ad_preroll_startup_time' => :'ad_preroll_startup_time',
-        :'view_dropped' => :'view_dropped'
+        :'view_dropped' => :'view_dropped',
+        :'client_application_name' => :'client_application_name',
+        :'client_application_version' => :'client_application_version',
+        :'video_affiliate' => :'video_affiliate',
+        :'viewer_plan' => :'viewer_plan',
+        :'viewer_plan_status' => :'viewer_plan_status',
+        :'viewer_plan_category' => :'viewer_plan_category',
+        :'view_drm_level' => :'view_drm_level',
+        :'video_brand' => :'video_brand',
+        :'used_pip' => :'used_pip',
+        :'time_shift_enabled' => :'time_shift_enabled',
+        :'used_captions' => :'used_captions',
+        :'video_codec' => :'video_codec',
+        :'audio_codec' => :'audio_codec',
+        :'video_dynamic_range_type' => :'video_dynamic_range_type',
+        :'view_cdn_edge_pop' => :'view_cdn_edge_pop',
+        :'view_cdn_origin' => :'view_cdn_origin'
       }
     end
 
@@ -676,7 +724,23 @@ module MuxRuby
         :'ad_playback_failure_error_type_id' => :'Integer',
         :'view_content_startup_time' => :'Integer',
         :'ad_preroll_startup_time' => :'Integer',
-        :'view_dropped' => :'Boolean'
+        :'view_dropped' => :'Boolean',
+        :'client_application_name' => :'String',
+        :'client_application_version' => :'String',
+        :'video_affiliate' => :'String',
+        :'viewer_plan' => :'String',
+        :'viewer_plan_status' => :'String',
+        :'viewer_plan_category' => :'String',
+        :'view_drm_level' => :'String',
+        :'video_brand' => :'String',
+        :'used_pip' => :'Boolean',
+        :'time_shift_enabled' => :'Boolean',
+        :'used_captions' => :'Boolean',
+        :'video_codec' => :'String',
+        :'audio_codec' => :'String',
+        :'video_dynamic_range_type' => :'String',
+        :'view_cdn_edge_pop' => :'String',
+        :'view_cdn_origin' => :'String'
       }
     end
 
@@ -821,6 +885,19 @@ module MuxRuby
         :'ad_playback_failure_error_type_id',
         :'view_content_startup_time',
         :'ad_preroll_startup_time',
+        :'client_application_name',
+        :'client_application_version',
+        :'video_affiliate',
+        :'viewer_plan',
+        :'viewer_plan_status',
+        :'viewer_plan_category',
+        :'view_drm_level',
+        :'video_brand',
+        :'video_codec',
+        :'audio_codec',
+        :'video_dynamic_range_type',
+        :'view_cdn_edge_pop',
+        :'view_cdn_origin'
       ])
     end
 
@@ -1488,6 +1565,70 @@ module MuxRuby
       if attributes.key?(:'view_dropped')
         self.view_dropped = attributes[:'view_dropped']
       end
+
+      if attributes.key?(:'client_application_name')
+        self.client_application_name = attributes[:'client_application_name']
+      end
+
+      if attributes.key?(:'client_application_version')
+        self.client_application_version = attributes[:'client_application_version']
+      end
+
+      if attributes.key?(:'video_affiliate')
+        self.video_affiliate = attributes[:'video_affiliate']
+      end
+
+      if attributes.key?(:'viewer_plan')
+        self.viewer_plan = attributes[:'viewer_plan']
+      end
+
+      if attributes.key?(:'viewer_plan_status')
+        self.viewer_plan_status = attributes[:'viewer_plan_status']
+      end
+
+      if attributes.key?(:'viewer_plan_category')
+        self.viewer_plan_category = attributes[:'viewer_plan_category']
+      end
+
+      if attributes.key?(:'view_drm_level')
+        self.view_drm_level = attributes[:'view_drm_level']
+      end
+
+      if attributes.key?(:'video_brand')
+        self.video_brand = attributes[:'video_brand']
+      end
+
+      if attributes.key?(:'used_pip')
+        self.used_pip = attributes[:'used_pip']
+      end
+
+      if attributes.key?(:'time_shift_enabled')
+        self.time_shift_enabled = attributes[:'time_shift_enabled']
+      end
+
+      if attributes.key?(:'used_captions')
+        self.used_captions = attributes[:'used_captions']
+      end
+
+      if attributes.key?(:'video_codec')
+        self.video_codec = attributes[:'video_codec']
+      end
+
+      if attributes.key?(:'audio_codec')
+        self.audio_codec = attributes[:'audio_codec']
+      end
+
+      if attributes.key?(:'video_dynamic_range_type')
+        self.video_dynamic_range_type = attributes[:'video_dynamic_range_type']
+      end
+
+      if attributes.key?(:'view_cdn_edge_pop')
+        self.view_cdn_edge_pop = attributes[:'view_cdn_edge_pop']
+      end
+
+      if attributes.key?(:'view_cdn_origin')
+        self.view_cdn_origin = attributes[:'view_cdn_origin']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -1669,7 +1810,23 @@ module MuxRuby
           ad_playback_failure_error_type_id == o.ad_playback_failure_error_type_id &&
           view_content_startup_time == o.view_content_startup_time &&
           ad_preroll_startup_time == o.ad_preroll_startup_time &&
-          view_dropped == o.view_dropped
+          view_dropped == o.view_dropped &&
+          client_application_name == o.client_application_name &&
+          client_application_version == o.client_application_version &&
+          video_affiliate == o.video_affiliate &&
+          viewer_plan == o.viewer_plan &&
+          viewer_plan_status == o.viewer_plan_status &&
+          viewer_plan_category == o.viewer_plan_category &&
+          view_drm_level == o.view_drm_level &&
+          video_brand == o.video_brand &&
+          used_pip == o.used_pip &&
+          time_shift_enabled == o.time_shift_enabled &&
+          used_captions == o.used_captions &&
+          video_codec == o.video_codec &&
+          audio_codec == o.audio_codec &&
+          video_dynamic_range_type == o.video_dynamic_range_type &&
+          view_cdn_edge_pop == o.view_cdn_edge_pop &&
+          view_cdn_origin == o.view_cdn_origin
     end
 
     # @see the `==` method
@@ -1681,7 +1838,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [view_total_upscaling, preroll_ad_asset_hostname, player_source_domain, region, viewer_user_agent, preroll_requested, page_type, startup_score, view_seek_duration, country_name, player_source_height, longitude, buffering_count, video_duration, player_source_type, city, view_id, platform_description, video_startup_preroll_request_time, viewer_device_name, video_series, viewer_application_name, updated_at, view_total_content_playback_time, cdn, player_instance_id, video_language, player_source_width, player_error_message, player_mux_plugin_version, watched, playback_score, page_url, metro, view_max_request_latency, requests_for_first_preroll, view_total_downscaling, latitude, player_source_host_name, inserted_at, view_end, mux_embed_version, player_language, page_load_time, viewer_device_category, video_startup_preroll_load_time, player_version, watch_time, player_source_stream_type, preroll_ad_tag_hostname, viewer_device_manufacturer, rebuffering_score, experiment_name, viewer_os_version, player_preload, buffering_duration, player_view_count, player_software, player_load_time, platform_summary, video_encoding_variant, player_width, view_seek_count, viewer_experience_score, view_error_id, video_variant_name, preroll_played, viewer_application_engine, viewer_os_architecture, player_error_code, buffering_rate, events, player_name, view_start, view_average_request_throughput, video_producer, error_type_id, mux_viewer_id, video_id, continent_code, session_id, exit_before_video_start, video_content_type, viewer_os_family, player_poster, view_average_request_latency, video_variant_id, player_source_duration, player_source_url, mux_api_version, video_title, id, short_time, rebuffer_percentage, time_to_first_frame, viewer_user_id, video_stream_type, player_startup_time, viewer_application_version, view_max_downscale_percentage, view_max_upscale_percentage, country_code, used_fullscreen, isp, property_id, player_autoplay, player_height, asn, asn_name, quality_score, player_software_version, player_mux_plugin_name, sub_property_id, player_remote_played, view_max_playhead_position, view_playing_time, view_session_id, viewer_connection_type, viewer_device_model, weighted_average_bitrate, custom_1, custom_2, custom_3, custom_4, custom_5, custom_6, custom_7, custom_8, custom_9, custom_10, live_stream_latency, asset_id, environment_id, live_stream_id, mux_embed, playback_id, player_error_context, view_drm_type, view_dropped_frame_count, view_has_ad, video_startup_failure, ad_attempt_count, ad_break_count, ad_break_error_count, ad_break_error_percentage, ad_error_count, ad_error_percentage, ad_impression_count, ad_startup_error_count, ad_startup_error_percentage, ad_exit_before_start_count, ad_exit_before_start_percentage, long_resume, long_rebuffering, playback_failure_error_type_id, playback_business_exception_error_type_id, video_startup_business_exception_error_type_id, playback_failure, ad_playback_failure_error_type_id, view_content_startup_time, ad_preroll_startup_time, view_dropped].hash
+      [view_total_upscaling, preroll_ad_asset_hostname, player_source_domain, region, viewer_user_agent, preroll_requested, page_type, startup_score, view_seek_duration, country_name, player_source_height, longitude, buffering_count, video_duration, player_source_type, city, view_id, platform_description, video_startup_preroll_request_time, viewer_device_name, video_series, viewer_application_name, updated_at, view_total_content_playback_time, cdn, player_instance_id, video_language, player_source_width, player_error_message, player_mux_plugin_version, watched, playback_score, page_url, metro, view_max_request_latency, requests_for_first_preroll, view_total_downscaling, latitude, player_source_host_name, inserted_at, view_end, mux_embed_version, player_language, page_load_time, viewer_device_category, video_startup_preroll_load_time, player_version, watch_time, player_source_stream_type, preroll_ad_tag_hostname, viewer_device_manufacturer, rebuffering_score, experiment_name, viewer_os_version, player_preload, buffering_duration, player_view_count, player_software, player_load_time, platform_summary, video_encoding_variant, player_width, view_seek_count, viewer_experience_score, view_error_id, video_variant_name, preroll_played, viewer_application_engine, viewer_os_architecture, player_error_code, buffering_rate, events, player_name, view_start, view_average_request_throughput, video_producer, error_type_id, mux_viewer_id, video_id, continent_code, session_id, exit_before_video_start, video_content_type, viewer_os_family, player_poster, view_average_request_latency, video_variant_id, player_source_duration, player_source_url, mux_api_version, video_title, id, short_time, rebuffer_percentage, time_to_first_frame, viewer_user_id, video_stream_type, player_startup_time, viewer_application_version, view_max_downscale_percentage, view_max_upscale_percentage, country_code, used_fullscreen, isp, property_id, player_autoplay, player_height, asn, asn_name, quality_score, player_software_version, player_mux_plugin_name, sub_property_id, player_remote_played, view_max_playhead_position, view_playing_time, view_session_id, viewer_connection_type, viewer_device_model, weighted_average_bitrate, custom_1, custom_2, custom_3, custom_4, custom_5, custom_6, custom_7, custom_8, custom_9, custom_10, live_stream_latency, asset_id, environment_id, live_stream_id, mux_embed, playback_id, player_error_context, view_drm_type, view_dropped_frame_count, view_has_ad, video_startup_failure, ad_attempt_count, ad_break_count, ad_break_error_count, ad_break_error_percentage, ad_error_count, ad_error_percentage, ad_impression_count, ad_startup_error_count, ad_startup_error_percentage, ad_exit_before_start_count, ad_exit_before_start_percentage, long_resume, long_rebuffering, playback_failure_error_type_id, playback_business_exception_error_type_id, video_startup_business_exception_error_type_id, playback_failure, ad_playback_failure_error_type_id, view_content_startup_time, ad_preroll_startup_time, view_dropped, client_application_name, client_application_version, video_affiliate, viewer_plan, viewer_plan_status, viewer_plan_category, view_drm_level, video_brand, used_pip, time_shift_enabled, used_captions, video_codec, audio_codec, video_dynamic_range_type, view_cdn_edge_pop, view_cdn_origin].hash
     end
 
     # Builds the object from hash

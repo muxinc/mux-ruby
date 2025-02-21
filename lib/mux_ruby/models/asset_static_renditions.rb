@@ -16,7 +16,7 @@ require 'time'
 module MuxRuby
   # An object containing the current status of any static renditions (mp4s). The object does not exist if no static renditions have been requested. See [Download your videos](https://docs.mux.com/guides/enable-static-mp4-renditions) for more information.
   class AssetStaticRenditions
-    # Indicates the status of downloadable MP4 versions of this asset.
+    # Indicates the status of downloadable MP4 versions of this asset. This field is only valid when `mp4_support` is enabled
     attr_accessor :status
 
     # Array of file objects.
@@ -61,7 +61,7 @@ module MuxRuby
     def self.openapi_types
       {
         :'status' => :'String',
-        :'files' => :'Array<AssetStaticRenditionsFiles>'
+        :'files' => :'Array<StaticRendition>'
       }
     end
 

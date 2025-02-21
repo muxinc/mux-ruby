@@ -29,7 +29,7 @@ module MuxRuby
     # Arbitrary user-supplied metadata that will be included in the asset details and related webhooks. Can be used to store your own ID for a video along with the asset. **Max: 255 characters**.
     attr_accessor :passthrough
 
-    # Specify what level of support for mp4 playback.  * The `capped-1080p` option produces a single MP4 file, called `capped-1080p.mp4`, with the video resolution capped at 1080p. This option produces an `audio.m4a` file for an audio-only asset. * The `audio-only` option produces a single M4A file, called `audio.m4a` for a video or an audio-only asset. MP4 generation will error when this option is specified for a video-only asset. * The `audio-only,capped-1080p` option produces both the `audio.m4a` and `capped-1080p.mp4` files. Only the `capped-1080p.mp4` file is produced for a video-only asset, while only the `audio.m4a` file is produced for an audio-only asset.  The `standard`(deprecated) option produces up to three MP4 files with different levels of resolution (`high.mp4`, `medium.mp4`, `low.mp4`, or `audio.m4a` for an audio-only asset).  MP4 files are not produced for `none` (default).  In most cases you should use our default HLS-based streaming playback (`{playback_id}.m3u8`) which can automatically adjust to viewers' connection speeds, but an mp4 can be useful for some legacy devices or downloading for offline playback. See the [Download your videos guide](https://docs.mux.com/guides/enable-static-mp4-renditions) for more information. 
+    # Deprecated. See the [Static Renditions API](https://www.mux.com/docs/guides/enable-static-mp4-renditions) for the updated API.  Specify what level of support for mp4 playback. You may not enable both `mp4_support` and  `static_renditions`.  * The `capped-1080p` option produces a single MP4 file, called `capped-1080p.mp4`, with the video resolution capped at 1080p. This option produces an `audio.m4a` file for an audio-only asset. * The `audio-only` option produces a single M4A file, called `audio.m4a` for a video or an audio-only asset. MP4 generation will error when this option is specified for a video-only asset. * The `audio-only,capped-1080p` option produces both the `audio.m4a` and `capped-1080p.mp4` files. Only the `capped-1080p.mp4` file is produced for a video-only asset, while only the `audio.m4a` file is produced for an audio-only asset.  The `standard`(deprecated) option produces up to three MP4 files with different levels of resolution (`high.mp4`, `medium.mp4`, `low.mp4`, or `audio.m4a` for an audio-only asset).  MP4 files are not produced for `none` (default).  In most cases you should use our default HLS-based streaming playback (`{playback_id}.m3u8`) which can automatically adjust to viewers' connection speeds, but an mp4 can be useful for some legacy devices or downloading for offline playback. See the [Download your videos guide](https://docs.mux.com/guides/enable-static-mp4-renditions) for more information. 
     attr_accessor :mp4_support
 
     # Normalize the audio track loudness level. This parameter is only applicable to on-demand (not live) assets.
@@ -49,6 +49,9 @@ module MuxRuby
 
     # The video quality controls the cost, quality, and available platform features for the asset. The default video quality for an account can be set in the Mux Dashboard. This field replaces the deprecated `encoding_tier` value. [See the video quality guide for more details.](https://docs.mux.com/guides/use-video-quality-levels)
     attr_accessor :video_quality
+
+    # An array of static renditions to create for this asset. You may not enable both `static_renditions` and `mp4_support (the latter being deprecated)`
+    attr_accessor :static_renditions
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -86,7 +89,8 @@ module MuxRuby
         :'test' => :'test',
         :'max_resolution_tier' => :'max_resolution_tier',
         :'encoding_tier' => :'encoding_tier',
-        :'video_quality' => :'video_quality'
+        :'video_quality' => :'video_quality',
+        :'static_renditions' => :'static_renditions'
       }
     end
 
@@ -109,7 +113,8 @@ module MuxRuby
         :'test' => :'Boolean',
         :'max_resolution_tier' => :'String',
         :'encoding_tier' => :'String',
-        :'video_quality' => :'String'
+        :'video_quality' => :'String',
+        :'static_renditions' => :'Array<CreateStaticRenditionRequest>'
       }
     end
 
@@ -188,6 +193,12 @@ module MuxRuby
 
       if attributes.key?(:'video_quality')
         self.video_quality = attributes[:'video_quality']
+      end
+
+      if attributes.key?(:'static_renditions')
+        if (value = attributes[:'static_renditions']).is_a?(Array)
+          self.static_renditions = value
+        end
       end
     end
 
@@ -280,7 +291,8 @@ module MuxRuby
           test == o.test &&
           max_resolution_tier == o.max_resolution_tier &&
           encoding_tier == o.encoding_tier &&
-          video_quality == o.video_quality
+          video_quality == o.video_quality &&
+          static_renditions == o.static_renditions
     end
 
     # @see the `==` method
@@ -292,7 +304,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [input, playback_policy, advanced_playback_policies, per_title_encode, passthrough, mp4_support, normalize_audio, master_access, test, max_resolution_tier, encoding_tier, video_quality].hash
+      [input, playback_policy, advanced_playback_policies, per_title_encode, passthrough, mp4_support, normalize_audio, master_access, test, max_resolution_tier, encoding_tier, video_quality, static_renditions].hash
     end
 
     # Builds the object from hash

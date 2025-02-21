@@ -14,7 +14,8 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class AssetStaticRenditionsFiles
+  class StaticRendition
+    # Name of the static rendition file
     attr_accessor :name
 
     # Extension of the static rendition file
@@ -31,6 +32,24 @@ module MuxRuby
 
     # The file size in bytes
     attr_accessor :filesize
+
+    # Indicates the static rendition type of this specific MP4 version of this asset. This field is only valid for `static_renditions`, not for `mp4_support`.
+    attr_accessor :type
+
+    # Indicates the status of this specific MP4 version of this asset. This field is only valid for `static_renditions`, not for `mp4_support`. * `ready` indicates the MP4 has been generated and is ready for download * `preparing` indicates the asset has not been ingested or the static rendition is still being generated after an asset is ready * `skipped` indicates the static rendition will not be generated because the requested resolution conflicts with the asset attributes after the asset has been ingested * `errored` indicates the static rendition cannot be generated. For example, an asset could not be ingested 
+    attr_accessor :status
+
+    # Indicates the resolution tier of this specific MP4 version of this asset. This field is only valid for `static_renditions`, not for `mp4_support`.
+    attr_accessor :resolution_tier
+
+    # Indicates the resolution of this specific MP4 version of this asset. This field is only valid for `static_renditions`, not for `mp4_support`.
+    attr_accessor :resolution
+
+    # The ID of this static rendition, used in managing this static rendition. This field is only valid for `static_renditions`, not for `mp4_support`.
+    attr_accessor :id
+
+    # Arbitrary user-supplied metadata set for the static rendition. Max 255 characters.
+    attr_accessor :passthrough
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -62,7 +81,13 @@ module MuxRuby
         :'height' => :'height',
         :'width' => :'width',
         :'bitrate' => :'bitrate',
-        :'filesize' => :'filesize'
+        :'filesize' => :'filesize',
+        :'type' => :'type',
+        :'status' => :'status',
+        :'resolution_tier' => :'resolution_tier',
+        :'resolution' => :'resolution',
+        :'id' => :'id',
+        :'passthrough' => :'passthrough'
       }
     end
 
@@ -79,7 +104,13 @@ module MuxRuby
         :'height' => :'Integer',
         :'width' => :'Integer',
         :'bitrate' => :'Integer',
-        :'filesize' => :'String'
+        :'filesize' => :'String',
+        :'type' => :'String',
+        :'status' => :'String',
+        :'resolution_tier' => :'String',
+        :'resolution' => :'String',
+        :'id' => :'String',
+        :'passthrough' => :'String'
       }
     end
 
@@ -93,13 +124,13 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::AssetStaticRenditionsFiles` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::StaticRendition` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::AssetStaticRenditionsFiles`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::StaticRendition`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -127,6 +158,30 @@ module MuxRuby
       if attributes.key?(:'filesize')
         self.filesize = attributes[:'filesize']
       end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'resolution_tier')
+        self.resolution_tier = attributes[:'resolution_tier']
+      end
+
+      if attributes.key?(:'resolution')
+        self.resolution = attributes[:'resolution']
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'passthrough')
+        self.passthrough = attributes[:'passthrough']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -139,17 +194,25 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      name_validator = EnumAttributeValidator.new('String', ["low.mp4", "medium.mp4", "high.mp4", "audio.m4a", "capped-1080p.mp4"])
+      name_validator = EnumAttributeValidator.new('String', ["low.mp4", "medium.mp4", "high.mp4", "highest.mp4", "audio.m4a", "capped-1080p.mp4", "2160p.mp4", "1440p.mp4", "1080p.mp4", "720p.mp4", "540p.mp4", "480p.mp4", "360p.mp4", "270p.mp4"])
       return false unless name_validator.valid?(@name)
       ext_validator = EnumAttributeValidator.new('String', ["mp4", "m4a"])
       return false unless ext_validator.valid?(@ext)
+      type_validator = EnumAttributeValidator.new('String', ["standard", "advanced"])
+      return false unless type_validator.valid?(@type)
+      status_validator = EnumAttributeValidator.new('String', ["ready", "preparing", "skipped", "errored"])
+      return false unless status_validator.valid?(@status)
+      resolution_tier_validator = EnumAttributeValidator.new('String', ["2160p", "1440p", "1080p", "720p"])
+      return false unless resolution_tier_validator.valid?(@resolution_tier)
+      resolution_validator = EnumAttributeValidator.new('String', ["highest", "audio-only", "2160p", "1440p", "1080p", "720p", "540p", "480p", "360p", "270p"])
+      return false unless resolution_validator.valid?(@resolution)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] name Object to be assigned
     def name=(name)
-      validator = EnumAttributeValidator.new('String', ["low.mp4", "medium.mp4", "high.mp4", "audio.m4a", "capped-1080p.mp4"])
+      validator = EnumAttributeValidator.new('String', ["low.mp4", "medium.mp4", "high.mp4", "highest.mp4", "audio.m4a", "capped-1080p.mp4", "2160p.mp4", "1440p.mp4", "1080p.mp4", "720p.mp4", "540p.mp4", "480p.mp4", "360p.mp4", "270p.mp4"])
       unless validator.valid?(name)
         fail ArgumentError, "invalid value for \"name\", must be one of #{validator.allowable_values}."
       end
@@ -166,6 +229,46 @@ module MuxRuby
       @ext = ext
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["standard", "advanced"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ["ready", "preparing", "skipped", "errored"])
+      unless validator.valid?(status)
+        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
+      end
+      @status = status
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] resolution_tier Object to be assigned
+    def resolution_tier=(resolution_tier)
+      validator = EnumAttributeValidator.new('String', ["2160p", "1440p", "1080p", "720p"])
+      unless validator.valid?(resolution_tier)
+        fail ArgumentError, "invalid value for \"resolution_tier\", must be one of #{validator.allowable_values}."
+      end
+      @resolution_tier = resolution_tier
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] resolution Object to be assigned
+    def resolution=(resolution)
+      validator = EnumAttributeValidator.new('String', ["highest", "audio-only", "2160p", "1440p", "1080p", "720p", "540p", "480p", "360p", "270p"])
+      unless validator.valid?(resolution)
+        fail ArgumentError, "invalid value for \"resolution\", must be one of #{validator.allowable_values}."
+      end
+      @resolution = resolution
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -176,7 +279,13 @@ module MuxRuby
           height == o.height &&
           width == o.width &&
           bitrate == o.bitrate &&
-          filesize == o.filesize
+          filesize == o.filesize &&
+          type == o.type &&
+          status == o.status &&
+          resolution_tier == o.resolution_tier &&
+          resolution == o.resolution &&
+          id == o.id &&
+          passthrough == o.passthrough
     end
 
     # @see the `==` method
@@ -188,7 +297,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, ext, height, width, bitrate, filesize].hash
+      [name, ext, height, width, bitrate, filesize, type, status, resolution_tier, resolution, id, passthrough].hash
     end
 
     # Builds the object from hash

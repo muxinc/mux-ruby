@@ -14,13 +14,13 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class BroadcastResponse
-    attr_accessor :data
+  class UpdateLiveStreamNewAssetSettingsStaticRenditionsRequest
+    attr_accessor :static_renditions
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'data' => :'data'
+        :'static_renditions' => :'static_renditions'
       }
     end
 
@@ -32,7 +32,7 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'data' => :'Broadcast'
+        :'static_renditions' => :'Array<CreateStaticRenditionRequest>'
       }
     end
 
@@ -46,19 +46,21 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::BroadcastResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::UpdateLiveStreamNewAssetSettingsStaticRenditionsRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::BroadcastResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::UpdateLiveStreamNewAssetSettingsStaticRenditionsRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'data')
-        self.data = attributes[:'data']
+      if attributes.key?(:'static_renditions')
+        if (value = attributes[:'static_renditions']).is_a?(Array)
+          self.static_renditions = value
+        end
       end
     end
 
@@ -66,17 +68,12 @@ module MuxRuby
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @data.nil?
-        invalid_properties.push('invalid value for "data", data cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @data.nil?
       true
     end
 
@@ -85,7 +82,7 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          data == o.data
+          static_renditions == o.static_renditions
     end
 
     # @see the `==` method
@@ -97,7 +94,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [data].hash
+      [static_renditions].hash
     end
 
     # Builds the object from hash
