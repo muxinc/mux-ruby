@@ -15,13 +15,16 @@ require 'time'
 
 module MuxRuby
   class UpdateAssetRequest
-    # Arbitrary metadata set for the Asset. Max 255 characters. In order to clear this value, the field should be included with an empty string value.
+    # You can set this field to anything you want. It will be included in the asset details and related webhooks. If you're looking for more structured metadata, such as `title` or `external_id` , you can use the `meta` object instead. **Max: 255 characters**. In order to clear this value, the field should be included with an empty string value.
     attr_accessor :passthrough
+
+    attr_accessor :meta
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'passthrough' => :'passthrough'
+        :'passthrough' => :'passthrough',
+        :'meta' => :'meta'
       }
     end
 
@@ -33,7 +36,8 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'passthrough' => :'String'
+        :'passthrough' => :'String',
+        :'meta' => :'AssetMetadata'
       }
     end
 
@@ -61,6 +65,10 @@ module MuxRuby
       if attributes.key?(:'passthrough')
         self.passthrough = attributes[:'passthrough']
       end
+
+      if attributes.key?(:'meta')
+        self.meta = attributes[:'meta']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -81,7 +89,8 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          passthrough == o.passthrough
+          passthrough == o.passthrough &&
+          meta == o.meta
     end
 
     # @see the `==` method
@@ -93,7 +102,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [passthrough].hash
+      [passthrough, meta].hash
     end
 
     # Builds the object from hash

@@ -9,6 +9,7 @@ docs/Asset.md
 docs/AssetErrors.md
 docs/AssetGeneratedSubtitleSettings.md
 docs/AssetMaster.md
+docs/AssetMetadata.md
 docs/AssetNonStandardInputReasons.md
 docs/AssetRecordingTimes.md
 docs/AssetResponse.md
@@ -207,6 +208,7 @@ lib/mux_ruby/models/asset.rb
 lib/mux_ruby/models/asset_errors.rb
 lib/mux_ruby/models/asset_generated_subtitle_settings.rb
 lib/mux_ruby/models/asset_master.rb
+lib/mux_ruby/models/asset_metadata.rb
 lib/mux_ruby/models/asset_non_standard_input_reasons.rb
 lib/mux_ruby/models/asset_recording_times.rb
 lib/mux_ruby/models/asset_response.rb
@@ -359,4 +361,5 @@ lib/mux_ruby/version.rb
 mux_ruby.gemspec
 spec/api_client_spec.rb
 spec/configuration_spec.rb
+spec/models/asset_metadata_spec.rb
 spec/spec_helper.rb
