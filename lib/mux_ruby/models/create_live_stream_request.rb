@@ -15,9 +15,13 @@ require 'time'
 
 module MuxRuby
   class CreateLiveStreamRequest
+    # Deprecated. Use `playback_policies` instead, which accepts an identical type.
     attr_accessor :playback_policy
 
-    # An array of playback policy objects that you want applied to this asset and available through `playback_ids`. `advanced_playback_policies` must be used instead of `playback_policy` when creating a DRM playback ID. 
+    # An array of playback policy names that you want applied to this live stream and available through `playback_ids`. Options include:  * `\"public\"` (anyone with the playback URL can stream the live stream). * `\"signed\"` (an additional access token is required to play the live stream).  If no `playback_policies` is set, the live stream will have no playback IDs and will therefore not be playable. For simplicity, a single string name can be used in place of the array in the case of only one playback policy. 
+    attr_accessor :playback_policies
+
+    # An array of playback policy objects that you want applied on this live stream and available through `playback_ids`. `advanced_playback_policies` must be used instead of `playback_policies` when creating a DRM playback ID. 
     attr_accessor :advanced_playback_policies
 
     attr_accessor :new_asset_settings
@@ -85,6 +89,7 @@ module MuxRuby
     def self.attribute_map
       {
         :'playback_policy' => :'playback_policy',
+        :'playback_policies' => :'playback_policies',
         :'advanced_playback_policies' => :'advanced_playback_policies',
         :'new_asset_settings' => :'new_asset_settings',
         :'reconnect_window' => :'reconnect_window',
@@ -112,6 +117,7 @@ module MuxRuby
     def self.openapi_types
       {
         :'playback_policy' => :'Array<PlaybackPolicy>',
+        :'playback_policies' => :'Array<PlaybackPolicy>',
         :'advanced_playback_policies' => :'Array<CreatePlaybackIDRequest>',
         :'new_asset_settings' => :'CreateAssetRequest',
         :'reconnect_window' => :'Float',
@@ -154,6 +160,12 @@ module MuxRuby
       if attributes.key?(:'playback_policy')
         if (value = attributes[:'playback_policy']).is_a?(Array)
           self.playback_policy = value
+        end
+      end
+
+      if attributes.key?(:'playback_policies')
+        if (value = attributes[:'playback_policies']).is_a?(Array)
+          self.playback_policies = value
         end
       end
 
@@ -311,6 +323,7 @@ module MuxRuby
       return true if self.equal?(o)
       self.class == o.class &&
           playback_policy == o.playback_policy &&
+          playback_policies == o.playback_policies &&
           advanced_playback_policies == o.advanced_playback_policies &&
           new_asset_settings == o.new_asset_settings &&
           reconnect_window == o.reconnect_window &&
@@ -337,7 +350,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [playback_policy, advanced_playback_policies, new_asset_settings, reconnect_window, use_slate_for_standard_latency, reconnect_slate_url, passthrough, audio_only, embedded_subtitles, generated_subtitles, reduced_latency, low_latency, latency_mode, test, simulcast_targets, max_continuous_duration].hash
+      [playback_policy, playback_policies, advanced_playback_policies, new_asset_settings, reconnect_window, use_slate_for_standard_latency, reconnect_slate_url, passthrough, audio_only, embedded_subtitles, generated_subtitles, reduced_latency, low_latency, latency_mode, test, simulcast_targets, max_continuous_duration].hash
     end
 
     # Builds the object from hash
