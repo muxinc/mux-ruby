@@ -25,6 +25,8 @@ module MuxRuby
     # The video quality controls the cost, quality, and available platform features for the asset. [See the video quality guide for more details.](https://docs.mux.com/guides/use-video-quality-levels)
     attr_accessor :video_quality
 
+    attr_accessor :meta
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -52,7 +54,8 @@ module MuxRuby
       {
         :'mp4_support' => :'mp4_support',
         :'master_access' => :'master_access',
-        :'video_quality' => :'video_quality'
+        :'video_quality' => :'video_quality',
+        :'meta' => :'meta'
       }
     end
 
@@ -66,7 +69,8 @@ module MuxRuby
       {
         :'mp4_support' => :'String',
         :'master_access' => :'String',
-        :'video_quality' => :'String'
+        :'video_quality' => :'String',
+        :'meta' => :'AssetMetadata'
       }
     end
 
@@ -101,6 +105,10 @@ module MuxRuby
 
       if attributes.key?(:'video_quality')
         self.video_quality = attributes[:'video_quality']
+      end
+
+      if attributes.key?(:'meta')
+        self.meta = attributes[:'meta']
       end
     end
 
@@ -160,7 +168,8 @@ module MuxRuby
       self.class == o.class &&
           mp4_support == o.mp4_support &&
           master_access == o.master_access &&
-          video_quality == o.video_quality
+          video_quality == o.video_quality &&
+          meta == o.meta
     end
 
     # @see the `==` method
@@ -172,7 +181,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [mp4_support, master_access, video_quality].hash
+      [mp4_support, master_access, video_quality, meta].hash
     end
 
     # Builds the object from hash

@@ -87,7 +87,7 @@ module MuxRuby
         :'id' => :'String',
         :'timeout' => :'Integer',
         :'status' => :'String',
-        :'new_asset_settings' => :'Asset',
+        :'new_asset_settings' => :'CreateAssetRequest',
         :'asset_id' => :'String',
         :'error' => :'UploadError',
         :'cors_origin' => :'String',
