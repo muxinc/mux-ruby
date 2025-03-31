@@ -317,7 +317,7 @@ end
 
 api_instance = MuxRuby::PlaybackRestrictionsApi.new
 playback_restriction_id = 'playback_restriction_id_example' # String | ID of the Playback Restriction.
-update_referrer_domain_restriction_request = MuxRuby::ReferrerDomainRestriction.new # UpdateReferrerDomainRestrictionRequest | 
+update_referrer_domain_restriction_request = MuxRuby::UpdateReferrerDomainRestrictionRequest.new # UpdateReferrerDomainRestrictionRequest | 
 
 begin
   # Update the Referrer Playback Restriction

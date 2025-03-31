@@ -14,48 +14,22 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  # Updates the new asset settings to use to generate a new asset for this live stream. Only the `mp4_support`, `master_access`, and `video_quality` settings may be updated. 
-  class UpdateLiveStreamNewAssetSettings
-    # Deprecated. See the [Static Renditions API](https://www.mux.com/docs/guides/enable-static-mp4-renditions#during-live-stream-creation) for the updated API. Specify what level of support for mp4 playback should be added to new assets generated from this live stream. * The `none` option disables MP4 support for new assets. MP4 files will not be produced for an asset generated from this live stream. * The `capped-1080p` option produces a single MP4 file, called `capped-1080p.mp4`, with the video resolution capped at 1080p. This option produces an `audio.m4a` file for an audio-only asset. * The `audio-only` option produces a single M4A file, called `audio.m4a` for a video or an audio-only asset. MP4 generation will error when this option is specified for a video-only asset. * The `audio-only,capped-1080p` option produces both the `audio.m4a` and `capped-1080p.mp4` files. Only the `capped-1080p.mp4` file is produced for a video-only asset, while only the `audio.m4a` file is produced for an audio-only asset. * The `standard`(deprecated) option produces up to three MP4 files with different levels of resolution (`high.mp4`, `medium.mp4`, `low.mp4`, or `audio.m4a` for an audio-only asset). 
-    attr_accessor :mp4_support
+  class AssetMetadata
+    # The video title. Max 512 code points.
+    attr_accessor :title
 
-    # Add or remove access to the master version of the video.
-    attr_accessor :master_access
+    # This is an identifier you provide to keep track of the creator of the video. Max 128 code points.
+    attr_accessor :creator_id
 
-    # The video quality controls the cost, quality, and available platform features for the asset. [See the video quality guide for more details.](https://docs.mux.com/guides/use-video-quality-levels)
-    attr_accessor :video_quality
-
-    attr_accessor :meta
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # This is an identifier you provide to link the video to your own data. Max 128 code points.
+    attr_accessor :external_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'mp4_support' => :'mp4_support',
-        :'master_access' => :'master_access',
-        :'video_quality' => :'video_quality',
-        :'meta' => :'meta'
+        :'title' => :'title',
+        :'creator_id' => :'creator_id',
+        :'external_id' => :'external_id'
       }
     end
 
@@ -67,10 +41,9 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'mp4_support' => :'String',
-        :'master_access' => :'String',
-        :'video_quality' => :'String',
-        :'meta' => :'AssetMetadata'
+        :'title' => :'String',
+        :'creator_id' => :'String',
+        :'external_id' => :'String'
       }
     end
 
@@ -84,31 +57,27 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::UpdateLiveStreamNewAssetSettings` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::AssetMetadata` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::UpdateLiveStreamNewAssetSettings`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::AssetMetadata`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'mp4_support')
-        self.mp4_support = attributes[:'mp4_support']
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
       end
 
-      if attributes.key?(:'master_access')
-        self.master_access = attributes[:'master_access']
+      if attributes.key?(:'creator_id')
+        self.creator_id = attributes[:'creator_id']
       end
 
-      if attributes.key?(:'video_quality')
-        self.video_quality = attributes[:'video_quality']
-      end
-
-      if attributes.key?(:'meta')
-        self.meta = attributes[:'meta']
+      if attributes.key?(:'external_id')
+        self.external_id = attributes[:'external_id']
       end
     end
 
@@ -116,49 +85,58 @@ module MuxRuby
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@title.nil? && @title.to_s.length > 512
+        invalid_properties.push('invalid value for "title", the character length must be smaller than or equal to 512.')
+      end
+
+      if !@creator_id.nil? && @creator_id.to_s.length > 128
+        invalid_properties.push('invalid value for "creator_id", the character length must be smaller than or equal to 128.')
+      end
+
+      if !@external_id.nil? && @external_id.to_s.length > 128
+        invalid_properties.push('invalid value for "external_id", the character length must be smaller than or equal to 128.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      mp4_support_validator = EnumAttributeValidator.new('String', ["none", "standard", "capped-1080p", "audio-only", "audio-only,capped-1080p"])
-      return false unless mp4_support_validator.valid?(@mp4_support)
-      master_access_validator = EnumAttributeValidator.new('String', ["temporary", "none"])
-      return false unless master_access_validator.valid?(@master_access)
-      video_quality_validator = EnumAttributeValidator.new('String', ["plus", "premium"])
-      return false unless video_quality_validator.valid?(@video_quality)
+      return false if !@title.nil? && @title.to_s.length > 512
+      return false if !@creator_id.nil? && @creator_id.to_s.length > 128
+      return false if !@external_id.nil? && @external_id.to_s.length > 128
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] mp4_support Object to be assigned
-    def mp4_support=(mp4_support)
-      validator = EnumAttributeValidator.new('String', ["none", "standard", "capped-1080p", "audio-only", "audio-only,capped-1080p"])
-      unless validator.valid?(mp4_support)
-        fail ArgumentError, "invalid value for \"mp4_support\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] title Value to be assigned
+    def title=(title)
+      if !title.nil? && title.to_s.length > 512
+        fail ArgumentError, 'invalid value for "title", the character length must be smaller than or equal to 512.'
       end
-      @mp4_support = mp4_support
+
+      @title = title
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] master_access Object to be assigned
-    def master_access=(master_access)
-      validator = EnumAttributeValidator.new('String', ["temporary", "none"])
-      unless validator.valid?(master_access)
-        fail ArgumentError, "invalid value for \"master_access\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] creator_id Value to be assigned
+    def creator_id=(creator_id)
+      if !creator_id.nil? && creator_id.to_s.length > 128
+        fail ArgumentError, 'invalid value for "creator_id", the character length must be smaller than or equal to 128.'
       end
-      @master_access = master_access
+
+      @creator_id = creator_id
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] video_quality Object to be assigned
-    def video_quality=(video_quality)
-      validator = EnumAttributeValidator.new('String', ["plus", "premium"])
-      unless validator.valid?(video_quality)
-        fail ArgumentError, "invalid value for \"video_quality\", must be one of #{validator.allowable_values}."
+    # Custom attribute writer method with validation
+    # @param [Object] external_id Value to be assigned
+    def external_id=(external_id)
+      if !external_id.nil? && external_id.to_s.length > 128
+        fail ArgumentError, 'invalid value for "external_id", the character length must be smaller than or equal to 128.'
       end
-      @video_quality = video_quality
+
+      @external_id = external_id
     end
 
     # Checks equality by comparing each attribute.
@@ -166,10 +144,9 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          mp4_support == o.mp4_support &&
-          master_access == o.master_access &&
-          video_quality == o.video_quality &&
-          meta == o.meta
+          title == o.title &&
+          creator_id == o.creator_id &&
+          external_id == o.external_id
     end
 
     # @see the `==` method
@@ -181,7 +158,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [mp4_support, master_access, video_quality, meta].hash
+      [title, creator_id, external_id].hash
     end
 
     # Builds the object from hash

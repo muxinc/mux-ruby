@@ -64,7 +64,7 @@ module MuxRuby
     # Indicates whether the live stream that created this asset is currently `active` and not in `idle` state. This is an optional parameter added when the asset is created from a live stream.
     attr_accessor :is_live
 
-    # Arbitrary user-supplied metadata set for the asset. Max 255 characters.
+    # You can set this field to anything you want. It will be included in the asset details and related webhooks. If you're looking for more structured metadata, such as `title` or `external_id` , you can use the `meta` object instead. **Max: 255 characters**.
     attr_accessor :passthrough
 
     # Unique identifier for the live stream. This is an optional parameter added when the asset is created from a live stream.
@@ -94,6 +94,8 @@ module MuxRuby
 
     # The type of ingest used to create the asset.
     attr_accessor :ingest_type
+
+    attr_accessor :meta
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -148,7 +150,8 @@ module MuxRuby
         :'recording_times' => :'recording_times',
         :'non_standard_input_reasons' => :'non_standard_input_reasons',
         :'test' => :'test',
-        :'ingest_type' => :'ingest_type'
+        :'ingest_type' => :'ingest_type',
+        :'meta' => :'meta'
       }
     end
 
@@ -188,7 +191,8 @@ module MuxRuby
         :'recording_times' => :'Array<AssetRecordingTimes>',
         :'non_standard_input_reasons' => :'AssetNonStandardInputReasons',
         :'test' => :'Boolean',
-        :'ingest_type' => :'String'
+        :'ingest_type' => :'String',
+        :'meta' => :'AssetMetadata'
       }
     end
 
@@ -339,6 +343,10 @@ module MuxRuby
 
       if attributes.key?(:'ingest_type')
         self.ingest_type = attributes[:'ingest_type']
+      end
+
+      if attributes.key?(:'meta')
+        self.meta = attributes[:'meta']
       end
     end
 
@@ -496,7 +504,8 @@ module MuxRuby
           recording_times == o.recording_times &&
           non_standard_input_reasons == o.non_standard_input_reasons &&
           test == o.test &&
-          ingest_type == o.ingest_type
+          ingest_type == o.ingest_type &&
+          meta == o.meta
     end
 
     # @see the `==` method
@@ -508,7 +517,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, status, duration, max_stored_resolution, resolution_tier, max_resolution_tier, encoding_tier, video_quality, max_stored_frame_rate, aspect_ratio, playback_ids, tracks, errors, per_title_encode, upload_id, is_live, passthrough, live_stream_id, master, master_access, mp4_support, source_asset_id, normalize_audio, static_renditions, recording_times, non_standard_input_reasons, test, ingest_type].hash
+      [id, created_at, status, duration, max_stored_resolution, resolution_tier, max_resolution_tier, encoding_tier, video_quality, max_stored_frame_rate, aspect_ratio, playback_ids, tracks, errors, per_title_encode, upload_id, is_live, passthrough, live_stream_id, master, master_access, mp4_support, source_asset_id, normalize_audio, static_renditions, recording_times, non_standard_input_reasons, test, ingest_type, meta].hash
     end
 
     # Builds the object from hash
