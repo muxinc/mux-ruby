@@ -227,7 +227,7 @@ module MuxRuby
     end
 
     # Create an asset track
-    # Adds an asset track (for example, subtitles, or an alternate audio track) to an asset.
+    # Adds an asset track (for example, subtitles, or an alternate audio track) to an asset. Assets must be in the `ready` state before tracks can be added.
     # @param asset_id [String] The asset ID.
     # @param create_track_request [CreateTrackRequest] 
     # @param [Hash] opts the optional parameters
@@ -238,7 +238,7 @@ module MuxRuby
     end
 
     # Create an asset track
-    # Adds an asset track (for example, subtitles, or an alternate audio track) to an asset.
+    # Adds an asset track (for example, subtitles, or an alternate audio track) to an asset. Assets must be in the &#x60;ready&#x60; state before tracks can be added.
     # @param asset_id [String] The asset ID.
     # @param create_track_request [CreateTrackRequest] 
     # @param [Hash] opts the optional parameters
