@@ -202,7 +202,7 @@ module MuxRuby
       return false unless type_validator.valid?(@type)
       status_validator = EnumAttributeValidator.new('String', ["ready", "preparing", "skipped", "errored"])
       return false unless status_validator.valid?(@status)
-      resolution_tier_validator = EnumAttributeValidator.new('String', ["2160p", "1440p", "1080p", "720p"])
+      resolution_tier_validator = EnumAttributeValidator.new('String', ["2160p", "1440p", "1080p", "720p", "audio-only"])
       return false unless resolution_tier_validator.valid?(@resolution_tier)
       resolution_validator = EnumAttributeValidator.new('String', ["highest", "audio-only", "2160p", "1440p", "1080p", "720p", "540p", "480p", "360p", "270p"])
       return false unless resolution_validator.valid?(@resolution)
@@ -252,7 +252,7 @@ module MuxRuby
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] resolution_tier Object to be assigned
     def resolution_tier=(resolution_tier)
-      validator = EnumAttributeValidator.new('String', ["2160p", "1440p", "1080p", "720p"])
+      validator = EnumAttributeValidator.new('String', ["2160p", "1440p", "1080p", "720p", "audio-only"])
       unless validator.valid?(resolution_tier)
         fail ArgumentError, "invalid value for \"resolution_tier\", must be one of #{validator.allowable_values}."
       end

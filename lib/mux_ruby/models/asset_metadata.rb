@@ -15,13 +15,13 @@ require 'time'
 
 module MuxRuby
   class AssetMetadata
-    # The video title. Max 512 code points.
+    # The asset title. Max 512 code points.
     attr_accessor :title
 
-    # This is an identifier you provide to keep track of the creator of the video. Max 128 code points.
+    # This is an identifier you provide to keep track of the creator of the asset. Max 128 code points.
     attr_accessor :creator_id
 
-    # This is an identifier you provide to link the video to your own data. Max 128 code points.
+    # This is an identifier you provide to link the asset to your own data. Max 128 code points.
     attr_accessor :external_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
