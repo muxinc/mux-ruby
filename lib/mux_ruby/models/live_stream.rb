@@ -21,7 +21,7 @@ module MuxRuby
     # Time the Live Stream was created, defined as a Unix timestamp (seconds since epoch).
     attr_accessor :created_at
 
-    # Unique key used for streaming to a Mux RTMP endpoint. This should be considered as sensitive as credentials, anyone with this stream key can begin streaming.
+    # Unique key used for streaming to a Mux RTMP endpoint. This should be considered as sensitive as credentials, anyone with this stream key can begin streaming. Max 64 characters.
     attr_accessor :stream_key
 
     # The Asset that is currently being created if there is an active broadcast.
@@ -76,11 +76,13 @@ module MuxRuby
     # The time in seconds a live stream may be continuously active before being disconnected. Defaults to 12 hours.
     attr_accessor :max_continuous_duration
 
-    # Unique key used for encrypting a stream to a Mux SRT endpoint.
+    # Unique key used for encrypting a stream to a Mux SRT endpoint. Max 64 characters.
     attr_accessor :srt_passphrase
 
     # The protocol used for the active ingest stream. This is only set when the live stream is active.
     attr_accessor :active_ingest_protocol
+
+    attr_accessor :meta
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -129,7 +131,8 @@ module MuxRuby
         :'test' => :'test',
         :'max_continuous_duration' => :'max_continuous_duration',
         :'srt_passphrase' => :'srt_passphrase',
-        :'active_ingest_protocol' => :'active_ingest_protocol'
+        :'active_ingest_protocol' => :'active_ingest_protocol',
+        :'meta' => :'meta'
       }
     end
 
@@ -163,7 +166,8 @@ module MuxRuby
         :'test' => :'Boolean',
         :'max_continuous_duration' => :'Integer',
         :'srt_passphrase' => :'String',
-        :'active_ingest_protocol' => :'String'
+        :'active_ingest_protocol' => :'String',
+        :'meta' => :'LiveStreamMetadata'
       }
     end
 
@@ -295,6 +299,10 @@ module MuxRuby
       if attributes.key?(:'active_ingest_protocol')
         self.active_ingest_protocol = attributes[:'active_ingest_protocol']
       end
+
+      if attributes.key?(:'meta')
+        self.meta = attributes[:'meta']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -409,7 +417,8 @@ module MuxRuby
           test == o.test &&
           max_continuous_duration == o.max_continuous_duration &&
           srt_passphrase == o.srt_passphrase &&
-          active_ingest_protocol == o.active_ingest_protocol
+          active_ingest_protocol == o.active_ingest_protocol &&
+          meta == o.meta
     end
 
     # @see the `==` method
@@ -421,7 +430,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, stream_key, active_asset_id, recent_asset_ids, status, playback_ids, new_asset_settings, passthrough, audio_only, embedded_subtitles, generated_subtitles, reconnect_window, use_slate_for_standard_latency, reconnect_slate_url, reduced_latency, low_latency, simulcast_targets, latency_mode, test, max_continuous_duration, srt_passphrase, active_ingest_protocol].hash
+      [id, created_at, stream_key, active_asset_id, recent_asset_ids, status, playback_ids, new_asset_settings, passthrough, audio_only, embedded_subtitles, generated_subtitles, reconnect_window, use_slate_for_standard_latency, reconnect_slate_url, reduced_latency, low_latency, simulcast_targets, latency_mode, test, max_continuous_duration, srt_passphrase, active_ingest_protocol, meta].hash
     end
 
     # Builds the object from hash

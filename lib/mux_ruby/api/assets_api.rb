@@ -493,7 +493,7 @@ module MuxRuby
     end
 
     # Delete an asset track
-    # Removes a text track from an asset. Audio and video tracks on assets cannot be removed.
+    # Removes a text or additional audio track from an asset. Neither video nor the primary audio track can be removed.
     # @param asset_id [String] The asset ID.
     # @param track_id [String] The track ID.
     # @param [Hash] opts the optional parameters
@@ -504,7 +504,7 @@ module MuxRuby
     end
 
     # Delete an asset track
-    # Removes a text track from an asset. Audio and video tracks on assets cannot be removed.
+    # Removes a text or additional audio track from an asset. Neither video nor the primary audio track can be removed.
     # @param asset_id [String] The asset ID.
     # @param track_id [String] The track ID.
     # @param [Hash] opts the optional parameters
@@ -836,6 +836,7 @@ module MuxRuby
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Number of items to include in the response (default to 25)
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60; (default to 1)
+    # @option opts [String] :cursor This parameter is used to request pages beyond the first. You can find the cursor value in the &#x60;next_cursor&#x60; field of paginated responses.
     # @option opts [String] :live_stream_id Filter response to return all the assets for this live stream only
     # @option opts [String] :upload_id Filter response to return an asset created from this direct upload only
     # @return [ListAssetsResponse]
@@ -849,6 +850,7 @@ module MuxRuby
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Number of items to include in the response
     # @option opts [Integer] :page Offset by this many pages, of the size of &#x60;limit&#x60;
+    # @option opts [String] :cursor This parameter is used to request pages beyond the first. You can find the cursor value in the &#x60;next_cursor&#x60; field of paginated responses.
     # @option opts [String] :live_stream_id Filter response to return all the assets for this live stream only
     # @option opts [String] :upload_id Filter response to return an asset created from this direct upload only
     # @return [Array<(ListAssetsResponse, Integer, Hash)>] ListAssetsResponse data, response status code and response headers
@@ -863,6 +865,7 @@ module MuxRuby
       query_params = opts[:query_params] || {}
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
       query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
+      query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
       query_params[:'live_stream_id'] = opts[:'live_stream_id'] if !opts[:'live_stream_id'].nil?
       query_params[:'upload_id'] = opts[:'upload_id'] if !opts[:'upload_id'].nil?
 

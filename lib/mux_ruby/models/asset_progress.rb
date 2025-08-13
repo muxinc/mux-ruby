@@ -14,17 +14,41 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class ListAssetsResponse
-    # If there are more pages of data, this field will contain a string that can be used with the `cursor` querystring parameter to fetch the next page of data.
-    attr_accessor :next_cursor
+  # Detailed state information about the asset ingest process.
+  class AssetProgress
+    # The detailed state of the asset ingest process. This field is useful for relaying more granular processing information to end users when a [non-standard input is encountered](https://www.mux.com/docs/guides/minimize-processing-time#non-standard-input).  - `ingesting`: Asset is being ingested (initial processing before or after transcoding). While in this state, the `progress` percentage will be 0. - `transcoding`: Asset is undergoing non-standard transcoding. - `completed`: Asset processing is complete (`status` is `ready`). While in this state, the `progress` percentage will be 100. - `live`: Asset is a live stream currently in progress. While in this state, the `progress` percentage will be -1. - `errored`: Asset has encountered an error (`status` is `errored`). While in this state, the `progress` percentage will be -1. 
+    attr_accessor :state
 
-    attr_accessor :data
+    # Represents the estimated completion percentage. Returns `0 - 100` when in `ingesting`, `transcoding`, or `completed` state, and `-1` when in `live` or `errored` state.
+    attr_accessor :progress
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'next_cursor' => :'next_cursor',
-        :'data' => :'data'
+        :'state' => :'state',
+        :'progress' => :'progress'
       }
     end
 
@@ -36,15 +60,14 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'next_cursor' => :'String',
-        :'data' => :'Array<Asset>'
+        :'state' => :'String',
+        :'progress' => :'Float'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'next_cursor',
       ])
     end
 
@@ -52,25 +75,23 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::ListAssetsResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::AssetProgress` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::ListAssetsResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::AssetProgress`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'next_cursor')
-        self.next_cursor = attributes[:'next_cursor']
+      if attributes.key?(:'state')
+        self.state = attributes[:'state']
       end
 
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
-        end
+      if attributes.key?(:'progress')
+        self.progress = attributes[:'progress']
       end
     end
 
@@ -78,13 +99,49 @@ module MuxRuby
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@progress.nil? && @progress > 100
+        invalid_properties.push('invalid value for "progress", must be smaller than or equal to 100.')
+      end
+
+      if !@progress.nil? && @progress < -1
+        invalid_properties.push('invalid value for "progress", must be greater than or equal to -1.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      state_validator = EnumAttributeValidator.new('String', ["ingesting", "transcoding", "completed", "live", "errored"])
+      return false unless state_validator.valid?(@state)
+      return false if !@progress.nil? && @progress > 100
+      return false if !@progress.nil? && @progress < -1
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] state Object to be assigned
+    def state=(state)
+      validator = EnumAttributeValidator.new('String', ["ingesting", "transcoding", "completed", "live", "errored"])
+      unless validator.valid?(state)
+        fail ArgumentError, "invalid value for \"state\", must be one of #{validator.allowable_values}."
+      end
+      @state = state
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] progress Value to be assigned
+    def progress=(progress)
+      if !progress.nil? && progress > 100
+        fail ArgumentError, 'invalid value for "progress", must be smaller than or equal to 100.'
+      end
+
+      if !progress.nil? && progress < -1
+        fail ArgumentError, 'invalid value for "progress", must be greater than or equal to -1.'
+      end
+
+      @progress = progress
     end
 
     # Checks equality by comparing each attribute.
@@ -92,8 +149,8 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          next_cursor == o.next_cursor &&
-          data == o.data
+          state == o.state &&
+          progress == o.progress
     end
 
     # @see the `==` method
@@ -105,7 +162,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [next_cursor, data].hash
+      [state, progress].hash
     end
 
     # Builds the object from hash

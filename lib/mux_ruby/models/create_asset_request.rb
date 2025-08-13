@@ -61,6 +61,9 @@ module MuxRuby
 
     attr_accessor :meta
 
+    # If the created asset is a clip, this controls whether overlays are copied from the source asset.
+    attr_accessor :copy_overlays
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -101,7 +104,8 @@ module MuxRuby
         :'encoding_tier' => :'encoding_tier',
         :'video_quality' => :'video_quality',
         :'static_renditions' => :'static_renditions',
-        :'meta' => :'meta'
+        :'meta' => :'meta',
+        :'copy_overlays' => :'copy_overlays'
       }
     end
 
@@ -128,7 +132,8 @@ module MuxRuby
         :'encoding_tier' => :'String',
         :'video_quality' => :'String',
         :'static_renditions' => :'Array<CreateStaticRenditionRequest>',
-        :'meta' => :'AssetMetadata'
+        :'meta' => :'AssetMetadata',
+        :'copy_overlays' => :'Boolean'
       }
     end
 
@@ -230,6 +235,12 @@ module MuxRuby
       if attributes.key?(:'meta')
         self.meta = attributes[:'meta']
       end
+
+      if attributes.key?(:'copy_overlays')
+        self.copy_overlays = attributes[:'copy_overlays']
+      else
+        self.copy_overlays = true
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -325,7 +336,8 @@ module MuxRuby
           encoding_tier == o.encoding_tier &&
           video_quality == o.video_quality &&
           static_renditions == o.static_renditions &&
-          meta == o.meta
+          meta == o.meta &&
+          copy_overlays == o.copy_overlays
     end
 
     # @see the `==` method
@@ -337,7 +349,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [input, inputs, playback_policy, playback_policies, advanced_playback_policies, per_title_encode, passthrough, mp4_support, normalize_audio, master_access, test, max_resolution_tier, encoding_tier, video_quality, static_renditions, meta].hash
+      [input, inputs, playback_policy, playback_policies, advanced_playback_policies, per_title_encode, passthrough, mp4_support, normalize_audio, master_access, test, max_resolution_tier, encoding_tier, video_quality, static_renditions, meta, copy_overlays].hash
     end
 
     # Builds the object from hash

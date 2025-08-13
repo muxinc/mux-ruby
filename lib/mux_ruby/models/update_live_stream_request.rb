@@ -35,6 +35,8 @@ module MuxRuby
 
     attr_accessor :new_asset_settings
 
+    attr_accessor :meta
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -66,7 +68,8 @@ module MuxRuby
         :'use_slate_for_standard_latency' => :'use_slate_for_standard_latency',
         :'reconnect_slate_url' => :'reconnect_slate_url',
         :'max_continuous_duration' => :'max_continuous_duration',
-        :'new_asset_settings' => :'new_asset_settings'
+        :'new_asset_settings' => :'new_asset_settings',
+        :'meta' => :'meta'
       }
     end
 
@@ -84,7 +87,8 @@ module MuxRuby
         :'use_slate_for_standard_latency' => :'Boolean',
         :'reconnect_slate_url' => :'String',
         :'max_continuous_duration' => :'Integer',
-        :'new_asset_settings' => :'UpdateLiveStreamNewAssetSettings'
+        :'new_asset_settings' => :'UpdateLiveStreamNewAssetSettings',
+        :'meta' => :'LiveStreamMetadata'
       }
     end
 
@@ -141,6 +145,10 @@ module MuxRuby
 
       if attributes.key?(:'new_asset_settings')
         self.new_asset_settings = attributes[:'new_asset_settings']
+      end
+
+      if attributes.key?(:'meta')
+        self.meta = attributes[:'meta']
       end
     end
 
@@ -228,7 +236,8 @@ module MuxRuby
           use_slate_for_standard_latency == o.use_slate_for_standard_latency &&
           reconnect_slate_url == o.reconnect_slate_url &&
           max_continuous_duration == o.max_continuous_duration &&
-          new_asset_settings == o.new_asset_settings
+          new_asset_settings == o.new_asset_settings &&
+          meta == o.meta
     end
 
     # @see the `==` method
@@ -240,7 +249,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [passthrough, latency_mode, reconnect_window, use_slate_for_standard_latency, reconnect_slate_url, max_continuous_duration, new_asset_settings].hash
+      [passthrough, latency_mode, reconnect_window, use_slate_for_standard_latency, reconnect_slate_url, max_continuous_duration, new_asset_settings, meta].hash
     end
 
     # Builds the object from hash
