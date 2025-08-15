@@ -183,6 +183,7 @@
 | **view_cdn_edge_pop** | **String** |  | [optional] |
 | **view_cdn_origin** | **String** |  | [optional] |
 | **video_creator_id** | **String** |  | [optional] |
+| **video_cdn_trace** | **Array&lt;String&gt;** |  | [optional] |
 
 ## Example
 
@@ -368,7 +369,8 @@ instance = MuxRuby::VideoView.new(
   video_dynamic_range_type: null,
   view_cdn_edge_pop: null,
   view_cdn_origin: null,
-  video_creator_id: null
+  video_creator_id: null,
+  video_cdn_trace: null
 )
 ```
 

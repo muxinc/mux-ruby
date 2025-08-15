@@ -373,13 +373,6 @@ lib/mux_ruby/models/web_input.rb
 lib/mux_ruby/models/web_input_response.rb
 lib/mux_ruby/version.rb
 mux_ruby.gemspec
-spec/api/annotations_api_spec.rb
 spec/api_client_spec.rb
 spec/configuration_spec.rb
-spec/models/annotation_input_spec.rb
-spec/models/annotation_response_spec.rb
-spec/models/annotation_spec.rb
-spec/models/asset_progress_spec.rb
-spec/models/list_annotations_response_spec.rb
-spec/models/live_stream_metadata_spec.rb
 spec/spec_helper.rb
