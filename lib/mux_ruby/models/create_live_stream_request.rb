@@ -63,6 +63,8 @@ module MuxRuby
     # The time in seconds a live stream may be continuously active before being disconnected. Defaults to 12 hours.
     attr_accessor :max_continuous_duration
 
+    attr_accessor :meta
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -104,7 +106,8 @@ module MuxRuby
         :'latency_mode' => :'latency_mode',
         :'test' => :'test',
         :'simulcast_targets' => :'simulcast_targets',
-        :'max_continuous_duration' => :'max_continuous_duration'
+        :'max_continuous_duration' => :'max_continuous_duration',
+        :'meta' => :'meta'
       }
     end
 
@@ -132,7 +135,8 @@ module MuxRuby
         :'latency_mode' => :'String',
         :'test' => :'Boolean',
         :'simulcast_targets' => :'Array<CreateSimulcastTargetRequest>',
-        :'max_continuous_duration' => :'Integer'
+        :'max_continuous_duration' => :'Integer',
+        :'meta' => :'LiveStreamMetadata'
       }
     end
 
@@ -242,6 +246,10 @@ module MuxRuby
       else
         self.max_continuous_duration = 43200
       end
+
+      if attributes.key?(:'meta')
+        self.meta = attributes[:'meta']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -338,7 +346,8 @@ module MuxRuby
           latency_mode == o.latency_mode &&
           test == o.test &&
           simulcast_targets == o.simulcast_targets &&
-          max_continuous_duration == o.max_continuous_duration
+          max_continuous_duration == o.max_continuous_duration &&
+          meta == o.meta
     end
 
     # @see the `==` method
@@ -350,7 +359,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [playback_policy, playback_policies, advanced_playback_policies, new_asset_settings, reconnect_window, use_slate_for_standard_latency, reconnect_slate_url, passthrough, audio_only, embedded_subtitles, generated_subtitles, reduced_latency, low_latency, latency_mode, test, simulcast_targets, max_continuous_duration].hash
+      [playback_policy, playback_policies, advanced_playback_policies, new_asset_settings, reconnect_window, use_slate_for_standard_latency, reconnect_slate_url, passthrough, audio_only, embedded_subtitles, generated_subtitles, reduced_latency, low_latency, latency_mode, test, simulcast_targets, max_continuous_duration, meta].hash
     end
 
     # Builds the object from hash

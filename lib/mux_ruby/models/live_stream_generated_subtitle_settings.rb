@@ -126,7 +126,7 @@ module MuxRuby
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      language_code_validator = EnumAttributeValidator.new('String', ["en", "en-US"])
+      language_code_validator = EnumAttributeValidator.new('String', ["en", "en-US", "es", "fr", "de", "pt", "it"])
       return false unless language_code_validator.valid?(@language_code)
       true
     end
@@ -134,7 +134,7 @@ module MuxRuby
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] language_code Object to be assigned
     def language_code=(language_code)
-      validator = EnumAttributeValidator.new('String', ["en", "en-US"])
+      validator = EnumAttributeValidator.new('String', ["en", "en-US", "es", "fr", "de", "pt", "it"])
       unless validator.valid?(language_code)
         fail ArgumentError, "invalid value for \"language_code\", must be one of #{validator.allowable_values}."
       end

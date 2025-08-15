@@ -21,6 +21,7 @@
 | **test** | **Boolean** | Marks the live stream as a test live stream when the value is set to true. A test live stream can help evaluate the Mux Video APIs without incurring any cost. There is no limit on number of test live streams created. Test live streams are watermarked with the Mux logo and limited to 5 minutes. The test live stream is disabled after the stream is active for 5 mins and the recorded asset also deleted after 24 hours. | [optional] |
 | **simulcast_targets** | [**Array&lt;CreateSimulcastTargetRequest&gt;**](CreateSimulcastTargetRequest.md) |  | [optional] |
 | **max_continuous_duration** | **Integer** | The time in seconds a live stream may be continuously active before being disconnected. Defaults to 12 hours. | [optional][default to 43200] |
+| **meta** | [**LiveStreamMetadata**](LiveStreamMetadata.md) |  | [optional] |
 
 ## Example
 
@@ -44,7 +45,8 @@ instance = MuxRuby::CreateLiveStreamRequest.new(
   latency_mode: null,
   test: null,
   simulcast_targets: null,
-  max_continuous_duration: null
+  max_continuous_duration: null,
+  meta: null
 )
 ```
 

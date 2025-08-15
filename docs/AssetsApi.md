@@ -525,7 +525,7 @@ nil (empty response body)
 
 Delete an asset track
 
-Removes a text track from an asset. Audio and video tracks on assets cannot be removed.
+Removes a text or additional audio track from an asset. Neither video nor the primary audio track can be removed.
 
 ### Examples
 
@@ -900,6 +900,7 @@ api_instance = MuxRuby::AssetsApi.new
 opts = {
   limit: 56, # Integer | Number of items to include in the response
   page: 56, # Integer | Offset by this many pages, of the size of `limit`
+  cursor: 'cursor_example', # String | This parameter is used to request pages beyond the first. You can find the cursor value in the `next_cursor` field of paginated responses.
   live_stream_id: 'live_stream_id_example', # String | Filter response to return all the assets for this live stream only
   upload_id: 'upload_id_example' # String | Filter response to return an asset created from this direct upload only
 }
@@ -937,6 +938,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **limit** | **Integer** | Number of items to include in the response | [optional][default to 25] |
 | **page** | **Integer** | Offset by this many pages, of the size of &#x60;limit&#x60; | [optional][default to 1] |
+| **cursor** | **String** | This parameter is used to request pages beyond the first. You can find the cursor value in the &#x60;next_cursor&#x60; field of paginated responses. | [optional] |
 | **live_stream_id** | **String** | Filter response to return all the assets for this live stream only | [optional] |
 | **upload_id** | **String** | Filter response to return an asset created from this direct upload only | [optional] |
 

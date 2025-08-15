@@ -34,6 +34,7 @@
 | **test** | **Boolean** | True means this live stream is a test asset. A test asset can help evaluate the Mux Video APIs without incurring any cost. There is no limit on number of test assets created. Test assets are watermarked with the Mux logo, limited to 10 seconds, and deleted after 24 hrs. | [optional] |
 | **ingest_type** | **String** | The type of ingest used to create the asset. | [optional] |
 | **meta** | [**AssetMetadata**](AssetMetadata.md) |  | [optional] |
+| **progress** | [**AssetProgress**](AssetProgress.md) |  | [optional] |
 
 ## Example
 
@@ -70,7 +71,8 @@ instance = MuxRuby::Asset.new(
   non_standard_input_reasons: null,
   test: null,
   ingest_type: null,
-  meta: null
+  meta: null,
+  progress: null
 )
 ```
 

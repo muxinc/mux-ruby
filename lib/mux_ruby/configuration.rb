@@ -237,6 +237,12 @@ module MuxRuby
 
     def operation_server_settings
       {
+        "DimensionsApi.list_dimension_elements": [
+          {
+          url: "https://api.mux.com",
+          description: "No description provided",
+          }
+        ],
       }
     end
 

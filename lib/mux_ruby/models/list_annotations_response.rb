@@ -14,17 +14,21 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class ListAssetsResponse
-    # If there are more pages of data, this field will contain a string that can be used with the `cursor` querystring parameter to fetch the next page of data.
-    attr_accessor :next_cursor
-
+  class ListAnnotationsResponse
     attr_accessor :data
+
+    # Total number of annotations available
+    attr_accessor :total_row_count
+
+    # Start and end unix timestamps for the data range
+    attr_accessor :timeframe
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'next_cursor' => :'next_cursor',
-        :'data' => :'data'
+        :'data' => :'data',
+        :'total_row_count' => :'total_row_count',
+        :'timeframe' => :'timeframe'
       }
     end
 
@@ -36,15 +40,15 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'next_cursor' => :'String',
-        :'data' => :'Array<Asset>'
+        :'data' => :'Array<Annotation>',
+        :'total_row_count' => :'Integer',
+        :'timeframe' => :'Array<Integer>'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'next_cursor',
       ])
     end
 
@@ -52,24 +56,30 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::ListAssetsResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::ListAnnotationsResponse` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::ListAssetsResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::ListAnnotationsResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'next_cursor')
-        self.next_cursor = attributes[:'next_cursor']
-      end
-
       if attributes.key?(:'data')
         if (value = attributes[:'data']).is_a?(Array)
           self.data = value
+        end
+      end
+
+      if attributes.key?(:'total_row_count')
+        self.total_row_count = attributes[:'total_row_count']
+      end
+
+      if attributes.key?(:'timeframe')
+        if (value = attributes[:'timeframe']).is_a?(Array)
+          self.timeframe = value
         end
       end
     end
@@ -78,13 +88,37 @@ module MuxRuby
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@timeframe.nil? && @timeframe.length > 2
+        invalid_properties.push('invalid value for "timeframe", number of items must be less than or equal to 2.')
+      end
+
+      if !@timeframe.nil? && @timeframe.length < 2
+        invalid_properties.push('invalid value for "timeframe", number of items must be greater than or equal to 2.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@timeframe.nil? && @timeframe.length > 2
+      return false if !@timeframe.nil? && @timeframe.length < 2
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] timeframe Value to be assigned
+    def timeframe=(timeframe)
+      if !timeframe.nil? && timeframe.length > 2
+        fail ArgumentError, 'invalid value for "timeframe", number of items must be less than or equal to 2.'
+      end
+
+      if !timeframe.nil? && timeframe.length < 2
+        fail ArgumentError, 'invalid value for "timeframe", number of items must be greater than or equal to 2.'
+      end
+
+      @timeframe = timeframe
     end
 
     # Checks equality by comparing each attribute.
@@ -92,8 +126,9 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          next_cursor == o.next_cursor &&
-          data == o.data
+          data == o.data &&
+          total_row_count == o.total_row_count &&
+          timeframe == o.timeframe
     end
 
     # @see the `==` method
@@ -105,7 +140,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [next_cursor, data].hash
+      [data, total_row_count, timeframe].hash
     end
 
     # Builds the object from hash

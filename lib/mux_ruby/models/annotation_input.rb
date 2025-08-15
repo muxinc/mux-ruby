@@ -14,17 +14,22 @@ require 'date'
 require 'time'
 
 module MuxRuby
-  class ListAssetsResponse
-    # If there are more pages of data, this field will contain a string that can be used with the `cursor` querystring parameter to fetch the next page of data.
-    attr_accessor :next_cursor
+  class AnnotationInput
+    # The annotation note content
+    attr_accessor :note
 
-    attr_accessor :data
+    # Datetime when the annotation applies (Unix timestamp)
+    attr_accessor :date
+
+    # Customer-defined sub-property identifier
+    attr_accessor :sub_property_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'next_cursor' => :'next_cursor',
-        :'data' => :'data'
+        :'note' => :'note',
+        :'date' => :'date',
+        :'sub_property_id' => :'sub_property_id'
       }
     end
 
@@ -36,15 +41,15 @@ module MuxRuby
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'next_cursor' => :'String',
-        :'data' => :'Array<Asset>'
+        :'note' => :'String',
+        :'date' => :'Integer',
+        :'sub_property_id' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'next_cursor',
       ])
     end
 
@@ -52,25 +57,27 @@ module MuxRuby
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::ListAssetsResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `MuxRuby::AnnotationInput` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::ListAssetsResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `MuxRuby::AnnotationInput`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'next_cursor')
-        self.next_cursor = attributes[:'next_cursor']
+      if attributes.key?(:'note')
+        self.note = attributes[:'note']
       end
 
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
-        end
+      if attributes.key?(:'date')
+        self.date = attributes[:'date']
+      end
+
+      if attributes.key?(:'sub_property_id')
+        self.sub_property_id = attributes[:'sub_property_id']
       end
     end
 
@@ -92,8 +99,9 @@ module MuxRuby
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          next_cursor == o.next_cursor &&
-          data == o.data
+          note == o.note &&
+          date == o.date &&
+          sub_property_id == o.sub_property_id
     end
 
     # @see the `==` method
@@ -105,7 +113,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [next_cursor, data].hash
+      [note, date, sub_property_id].hash
     end
 
     # Builds the object from hash

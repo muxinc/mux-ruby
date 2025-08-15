@@ -97,6 +97,8 @@ module MuxRuby
 
     attr_accessor :meta
 
+    attr_accessor :progress
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -151,7 +153,8 @@ module MuxRuby
         :'non_standard_input_reasons' => :'non_standard_input_reasons',
         :'test' => :'test',
         :'ingest_type' => :'ingest_type',
-        :'meta' => :'meta'
+        :'meta' => :'meta',
+        :'progress' => :'progress'
       }
     end
 
@@ -192,7 +195,8 @@ module MuxRuby
         :'non_standard_input_reasons' => :'AssetNonStandardInputReasons',
         :'test' => :'Boolean',
         :'ingest_type' => :'String',
-        :'meta' => :'AssetMetadata'
+        :'meta' => :'AssetMetadata',
+        :'progress' => :'AssetProgress'
       }
     end
 
@@ -347,6 +351,10 @@ module MuxRuby
 
       if attributes.key?(:'meta')
         self.meta = attributes[:'meta']
+      end
+
+      if attributes.key?(:'progress')
+        self.progress = attributes[:'progress']
       end
     end
 
@@ -505,7 +513,8 @@ module MuxRuby
           non_standard_input_reasons == o.non_standard_input_reasons &&
           test == o.test &&
           ingest_type == o.ingest_type &&
-          meta == o.meta
+          meta == o.meta &&
+          progress == o.progress
     end
 
     # @see the `==` method
@@ -517,7 +526,7 @@ module MuxRuby
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, status, duration, max_stored_resolution, resolution_tier, max_resolution_tier, encoding_tier, video_quality, max_stored_frame_rate, aspect_ratio, playback_ids, tracks, errors, per_title_encode, upload_id, is_live, passthrough, live_stream_id, master, master_access, mp4_support, source_asset_id, normalize_audio, static_renditions, recording_times, non_standard_input_reasons, test, ingest_type, meta].hash
+      [id, created_at, status, duration, max_stored_resolution, resolution_tier, max_resolution_tier, encoding_tier, video_quality, max_stored_frame_rate, aspect_ratio, playback_ids, tracks, errors, per_title_encode, upload_id, is_live, passthrough, live_stream_id, master, master_access, mp4_support, source_asset_id, normalize_audio, static_renditions, recording_times, non_standard_input_reasons, test, ingest_type, meta, progress].hash
     end
 
     # Builds the object from hash
