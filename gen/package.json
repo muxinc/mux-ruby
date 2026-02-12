@@ -10,8 +10,8 @@
         "build": ""
     },
     "dependencies": {
-        "@openapitools/openapi-generator-cli": "2.4.5",
-        "node-jq": "1.12.0",
+        "@openapitools/openapi-generator-cli": "2.6.0",
+        "node-jq": "2.3.5",
         "semver": "7.3.4"
     }
 }
