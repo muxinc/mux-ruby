@@ -131,36 +131,6 @@ module MuxRuby
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] mp4_support Object to be assigned
-    def mp4_support=(mp4_support)
-      validator = EnumAttributeValidator.new('String', ["none", "standard", "capped-1080p", "audio-only", "audio-only,capped-1080p"])
-      unless validator.valid?(mp4_support)
-        fail ArgumentError, "invalid value for \"mp4_support\", must be one of #{validator.allowable_values}."
-      end
-      @mp4_support = mp4_support
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] master_access Object to be assigned
-    def master_access=(master_access)
-      validator = EnumAttributeValidator.new('String', ["temporary", "none"])
-      unless validator.valid?(master_access)
-        fail ArgumentError, "invalid value for \"master_access\", must be one of #{validator.allowable_values}."
-      end
-      @master_access = master_access
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] video_quality Object to be assigned
-    def video_quality=(video_quality)
-      validator = EnumAttributeValidator.new('String', ["plus", "premium"])
-      unless validator.valid?(video_quality)
-        fail ArgumentError, "invalid value for \"video_quality\", must be one of #{validator.allowable_values}."
-      end
-      @video_quality = video_quality
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)

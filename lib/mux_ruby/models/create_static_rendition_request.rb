@@ -108,16 +108,6 @@ module MuxRuby
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] resolution Object to be assigned
-    def resolution=(resolution)
-      validator = EnumAttributeValidator.new('String', ["highest", "audio-only", "2160p", "1440p", "1080p", "720p", "540p", "480p", "360p", "270p"])
-      unless validator.valid?(resolution)
-        fail ArgumentError, "invalid value for \"resolution\", must be one of #{validator.allowable_values}."
-      end
-      @resolution = resolution
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)

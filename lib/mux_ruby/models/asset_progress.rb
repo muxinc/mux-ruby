@@ -120,16 +120,6 @@ module MuxRuby
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] state Object to be assigned
-    def state=(state)
-      validator = EnumAttributeValidator.new('String', ["ingesting", "transcoding", "completed", "live", "errored"])
-      unless validator.valid?(state)
-        fail ArgumentError, "invalid value for \"state\", must be one of #{validator.allowable_values}."
-      end
-      @state = state
-    end
-
     # Custom attribute writer method with validation
     # @param [Object] progress Value to be assigned
     def progress=(progress)

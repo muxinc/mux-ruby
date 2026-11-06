@@ -236,49 +236,9 @@ module MuxRuby
       return false unless text_type_validator.valid?(@text_type)
       text_source_validator = EnumAttributeValidator.new('String', ["uploaded", "embedded", "generated_live", "generated_live_final", "generated_vod"])
       return false unless text_source_validator.valid?(@text_source)
-      status_validator = EnumAttributeValidator.new('String', ["preparing", "ready", "errored", "deleted"])
+      status_validator = EnumAttributeValidator.new('String', ["preparing", "ready", "errored", "deleted", "skipped"])
       return false unless status_validator.valid?(@status)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["video", "audio", "text"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] text_type Object to be assigned
-    def text_type=(text_type)
-      validator = EnumAttributeValidator.new('String', ["subtitles"])
-      unless validator.valid?(text_type)
-        fail ArgumentError, "invalid value for \"text_type\", must be one of #{validator.allowable_values}."
-      end
-      @text_type = text_type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] text_source Object to be assigned
-    def text_source=(text_source)
-      validator = EnumAttributeValidator.new('String', ["uploaded", "embedded", "generated_live", "generated_live_final", "generated_vod"])
-      unless validator.valid?(text_source)
-        fail ArgumentError, "invalid value for \"text_source\", must be one of #{validator.allowable_values}."
-      end
-      @text_source = text_source
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["preparing", "ready", "errored", "deleted"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
     end
 
     # Checks equality by comparing each attribute.

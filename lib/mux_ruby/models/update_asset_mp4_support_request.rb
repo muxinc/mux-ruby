@@ -100,16 +100,6 @@ module MuxRuby
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] mp4_support Object to be assigned
-    def mp4_support=(mp4_support)
-      validator = EnumAttributeValidator.new('String', ["standard", "none", "capped-1080p", "audio-only", "audio-only,capped-1080p"])
-      unless validator.valid?(mp4_support)
-        fail ArgumentError, "invalid value for \"mp4_support\", must be one of #{validator.allowable_values}."
-      end
-      @mp4_support = mp4_support
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)

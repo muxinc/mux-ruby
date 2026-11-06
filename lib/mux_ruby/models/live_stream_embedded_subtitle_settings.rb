@@ -131,16 +131,6 @@ module MuxRuby
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] language_channel Object to be assigned
-    def language_channel=(language_channel)
-      validator = EnumAttributeValidator.new('String', ["cc1", "cc2", "cc3", "cc4"])
-      unless validator.valid?(language_channel)
-        fail ArgumentError, "invalid value for \"language_channel\", must be one of #{validator.allowable_values}."
-      end
-      @language_channel = language_channel
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)

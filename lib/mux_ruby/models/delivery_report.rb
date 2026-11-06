@@ -204,46 +204,6 @@ module MuxRuby
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] asset_state Object to be assigned
-    def asset_state=(asset_state)
-      validator = EnumAttributeValidator.new('String', ["ready", "errored", "deleted"])
-      unless validator.valid?(asset_state)
-        fail ArgumentError, "invalid value for \"asset_state\", must be one of #{validator.allowable_values}."
-      end
-      @asset_state = asset_state
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] asset_resolution_tier Object to be assigned
-    def asset_resolution_tier=(asset_resolution_tier)
-      validator = EnumAttributeValidator.new('String', ["audio-only", "720p", "1080p", "1440p", "2160p"])
-      unless validator.valid?(asset_resolution_tier)
-        fail ArgumentError, "invalid value for \"asset_resolution_tier\", must be one of #{validator.allowable_values}."
-      end
-      @asset_resolution_tier = asset_resolution_tier
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] asset_encoding_tier Object to be assigned
-    def asset_encoding_tier=(asset_encoding_tier)
-      validator = EnumAttributeValidator.new('String', ["smart", "baseline", "premium"])
-      unless validator.valid?(asset_encoding_tier)
-        fail ArgumentError, "invalid value for \"asset_encoding_tier\", must be one of #{validator.allowable_values}."
-      end
-      @asset_encoding_tier = asset_encoding_tier
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] asset_video_quality Object to be assigned
-    def asset_video_quality=(asset_video_quality)
-      validator = EnumAttributeValidator.new('String', ["basic", "plus", "premium"])
-      unless validator.valid?(asset_video_quality)
-        fail ArgumentError, "invalid value for \"asset_video_quality\", must be one of #{validator.allowable_values}."
-      end
-      @asset_video_quality = asset_video_quality
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)

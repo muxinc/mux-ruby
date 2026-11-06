@@ -209,66 +209,6 @@ module MuxRuby
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] name Object to be assigned
-    def name=(name)
-      validator = EnumAttributeValidator.new('String', ["low.mp4", "medium.mp4", "high.mp4", "highest.mp4", "audio.m4a", "capped-1080p.mp4", "2160p.mp4", "1440p.mp4", "1080p.mp4", "720p.mp4", "540p.mp4", "480p.mp4", "360p.mp4", "270p.mp4"])
-      unless validator.valid?(name)
-        fail ArgumentError, "invalid value for \"name\", must be one of #{validator.allowable_values}."
-      end
-      @name = name
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] ext Object to be assigned
-    def ext=(ext)
-      validator = EnumAttributeValidator.new('String', ["mp4", "m4a"])
-      unless validator.valid?(ext)
-        fail ArgumentError, "invalid value for \"ext\", must be one of #{validator.allowable_values}."
-      end
-      @ext = ext
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["standard", "advanced"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["ready", "preparing", "skipped", "errored"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] resolution_tier Object to be assigned
-    def resolution_tier=(resolution_tier)
-      validator = EnumAttributeValidator.new('String', ["2160p", "1440p", "1080p", "720p", "audio-only"])
-      unless validator.valid?(resolution_tier)
-        fail ArgumentError, "invalid value for \"resolution_tier\", must be one of #{validator.allowable_values}."
-      end
-      @resolution_tier = resolution_tier
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] resolution Object to be assigned
-    def resolution=(resolution)
-      validator = EnumAttributeValidator.new('String', ["highest", "audio-only", "2160p", "1440p", "1080p", "720p", "540p", "480p", "360p", "270p"])
-      unless validator.valid?(resolution)
-        fail ArgumentError, "invalid value for \"resolution\", must be one of #{validator.allowable_values}."
-      end
-      @resolution = resolution
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)

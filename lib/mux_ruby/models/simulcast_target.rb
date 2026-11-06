@@ -147,26 +147,6 @@ module MuxRuby
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["idle", "starting", "broadcasting", "errored"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] error_severity Object to be assigned
-    def error_severity=(error_severity)
-      validator = EnumAttributeValidator.new('String', ["normal", "fatal"])
-      unless validator.valid?(error_severity)
-        fail ArgumentError, "invalid value for \"error_severity\", must be one of #{validator.allowable_values}."
-      end
-      @error_severity = error_severity
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)

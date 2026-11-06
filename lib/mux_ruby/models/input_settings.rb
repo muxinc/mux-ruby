@@ -194,26 +194,6 @@ module MuxRuby
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["video", "audio", "text"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] text_type Object to be assigned
-    def text_type=(text_type)
-      validator = EnumAttributeValidator.new('String', ["subtitles"])
-      unless validator.valid?(text_type)
-        fail ArgumentError, "invalid value for \"text_type\", must be one of #{validator.allowable_values}."
-      end
-      @text_type = text_type
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)

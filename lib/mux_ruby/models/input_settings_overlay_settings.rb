@@ -157,26 +157,6 @@ module MuxRuby
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] vertical_align Object to be assigned
-    def vertical_align=(vertical_align)
-      validator = EnumAttributeValidator.new('String', ["top", "middle", "bottom"])
-      unless validator.valid?(vertical_align)
-        fail ArgumentError, "invalid value for \"vertical_align\", must be one of #{validator.allowable_values}."
-      end
-      @vertical_align = vertical_align
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] horizontal_align Object to be assigned
-    def horizontal_align=(horizontal_align)
-      validator = EnumAttributeValidator.new('String', ["left", "center", "right"])
-      unless validator.valid?(horizontal_align)
-        fail ArgumentError, "invalid value for \"horizontal_align\", must be one of #{validator.allowable_values}."
-      end
-      @horizontal_align = horizontal_align
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)

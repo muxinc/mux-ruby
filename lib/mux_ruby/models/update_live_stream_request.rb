@@ -187,16 +187,6 @@ module MuxRuby
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] latency_mode Object to be assigned
-    def latency_mode=(latency_mode)
-      validator = EnumAttributeValidator.new('String', ["low", "reduced", "standard"])
-      unless validator.valid?(latency_mode)
-        fail ArgumentError, "invalid value for \"latency_mode\", must be one of #{validator.allowable_values}."
-      end
-      @latency_mode = latency_mode
-    end
-
     # Custom attribute writer method with validation
     # @param [Object] reconnect_window Value to be assigned
     def reconnect_window=(reconnect_window)

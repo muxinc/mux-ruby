@@ -100,16 +100,6 @@ module MuxRuby
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] master_access Object to be assigned
-    def master_access=(master_access)
-      validator = EnumAttributeValidator.new('String', ["temporary", "none"])
-      unless validator.valid?(master_access)
-        fail ArgumentError, "invalid value for \"master_access\", must be one of #{validator.allowable_values}."
-      end
-      @master_access = master_access
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)

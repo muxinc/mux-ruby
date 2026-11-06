@@ -199,56 +199,6 @@ module MuxRuby
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] video_gop_size Object to be assigned
-    def video_gop_size=(video_gop_size)
-      validator = EnumAttributeValidator.new('String', ["high"])
-      unless validator.valid?(video_gop_size)
-        fail ArgumentError, "invalid value for \"video_gop_size\", must be one of #{validator.allowable_values}."
-      end
-      @video_gop_size = video_gop_size
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] video_bitrate Object to be assigned
-    def video_bitrate=(video_bitrate)
-      validator = EnumAttributeValidator.new('String', ["high"])
-      unless validator.valid?(video_bitrate)
-        fail ArgumentError, "invalid value for \"video_bitrate\", must be one of #{validator.allowable_values}."
-      end
-      @video_bitrate = video_bitrate
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] video_edit_list Object to be assigned
-    def video_edit_list=(video_edit_list)
-      validator = EnumAttributeValidator.new('String', ["non-standard"])
-      unless validator.valid?(video_edit_list)
-        fail ArgumentError, "invalid value for \"video_edit_list\", must be one of #{validator.allowable_values}."
-      end
-      @video_edit_list = video_edit_list
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] audio_edit_list Object to be assigned
-    def audio_edit_list=(audio_edit_list)
-      validator = EnumAttributeValidator.new('String', ["non-standard"])
-      unless validator.valid?(audio_edit_list)
-        fail ArgumentError, "invalid value for \"audio_edit_list\", must be one of #{validator.allowable_values}."
-      end
-      @audio_edit_list = audio_edit_list
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] unexpected_media_file_parameters Object to be assigned
-    def unexpected_media_file_parameters=(unexpected_media_file_parameters)
-      validator = EnumAttributeValidator.new('String', ["non-standard"])
-      unless validator.valid?(unexpected_media_file_parameters)
-        fail ArgumentError, "invalid value for \"unexpected_media_file_parameters\", must be one of #{validator.allowable_values}."
-      end
-      @unexpected_media_file_parameters = unexpected_media_file_parameters
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)

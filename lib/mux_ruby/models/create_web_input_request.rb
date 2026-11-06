@@ -184,26 +184,6 @@ module MuxRuby
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["idle", "launching", "streaming"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] resolution Object to be assigned
-    def resolution=(resolution)
-      validator = EnumAttributeValidator.new('String', ["1920x1080", "1280x720", "1080x1920", "720x1280", "1080x1080", "720x720"])
-      unless validator.valid?(resolution)
-        fail ArgumentError, "invalid value for \"resolution\", must be one of #{validator.allowable_values}."
-      end
-      @resolution = resolution
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)

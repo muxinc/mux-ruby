@@ -301,16 +301,6 @@ module MuxRuby
       @reconnect_window = reconnect_window
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] latency_mode Object to be assigned
-    def latency_mode=(latency_mode)
-      validator = EnumAttributeValidator.new('String', ["low", "reduced", "standard"])
-      unless validator.valid?(latency_mode)
-        fail ArgumentError, "invalid value for \"latency_mode\", must be one of #{validator.allowable_values}."
-      end
-      @latency_mode = latency_mode
-    end
-
     # Custom attribute writer method with validation
     # @param [Object] max_continuous_duration Value to be assigned
     def max_continuous_duration=(max_continuous_duration)
