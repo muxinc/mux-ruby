@@ -27,7 +27,6 @@ jobs:
           bundler-cache: true   # runs 'bundle install' and caches
       - name: Install gems
         run: |
-          gem install ffi -v 1.17.4
           gem install typhoeus
           gem install solid_assert
       - name: Run tests
