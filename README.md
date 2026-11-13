@@ -144,7 +144,7 @@ All errors inherit from `ApiError`, you can catch it or you can catch one of the
 
 ### ServiceError
 
-`ServiceError` is thrown when Mux returns a HTTP 5XX Status Code. If you encounter this reproducibly, please get in touch with [support@mux.com](mailto:support@mux.com).
+`ServiceError` is thrown when Mux returns a HTTP 5XX Status Code. If you encounter this reproducibly, please get in touch with us at [mux.com/support](https://www.mux.com/support).
 
 ## Documentation
 
