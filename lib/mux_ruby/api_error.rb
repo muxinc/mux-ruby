@@ -32,6 +32,7 @@ module MuxRuby
         end
       else
         super arg
+        @message = arg
       end
     end
 
